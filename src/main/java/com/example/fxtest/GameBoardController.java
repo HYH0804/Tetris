@@ -14,14 +14,16 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+//시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoardController implements Initializable {
     Brick currentBrick;
     Brick nextBrick;
 
+    BrickController brickController = new BrickController();
+
     boolean turnEnd = true;
     GameBoard gameBoard = new GameBoard();
-
+    Timeline timeline;
 
     @FXML
     private GridPane boardView; //컨트롤View 매핑
@@ -33,19 +35,24 @@ public class GameBoardController implements Initializable {
 
     //타임라인 시간 설정 메서드
     void setTime(float x){
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
-            if(x==1) {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
+            if(x==1.0f) {
                 minute10();
             }// 1초마다 호출될 함수
-            else if(x==0.8){
-                minute8();
+            else if(x==0.8f){
+                //minute8();
             }
             else{
-                minute5();
+                //minute5();
             }
         }));
     }
 
+    //더 이상 못내려갈때 Brick 행렬에 고정
+    void fixed(){
+        for(Block block : currentBrick.getBlockList())
+        GameBoard.board[block.getX()][block.getY()]=1;
+    }
 
 
     //@FXML로 게임 시작 버튼 만들어서 이거 누르면 다시 매 1초마다 호출되는 함수 호출하여 게임 재시작
@@ -53,7 +60,7 @@ public class GameBoardController implements Initializable {
 
     public void colorErase(){
         for (Block block : currentBrick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
-            int x = block.getX();
+            /*int x = block.getX();
             int y = block.getY();
 
             // GridPane에서 특정 위치의 Rectangle을 찾아 제거
@@ -68,7 +75,8 @@ public class GameBoardController implements Initializable {
 
             if (toRemove != null) {
                 boardView.getChildren().remove(toRemove); // 해당 Node 제거
-            }
+            }*/
+
         }
     }
 
@@ -82,18 +90,18 @@ public class GameBoardController implements Initializable {
             rectangle.setFill(Color.BLUE); // 색상 설정, 필요에 따라 변경 가능
 
             // GridPane에 Rectangle 추가
-            boardView.add(rectangle, x, y);
+            boardView.add(rectangle, y, x);
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
-        //nextBrick 랜덤에서 뽑아오기
+        currentBrick=new BrickZ(1,4);
+        //nextBrick 랜덤에서 뽑아오기(임시로)
+        nextBrick=new BrickZ(1,4);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            minute10(); // 1초마다 호출될 함수
-        }));
+        setTime(1.0f);
         timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
         timeline.play(); // Timeline 시작
     }
@@ -101,10 +109,7 @@ public class GameBoardController implements Initializable {
 
     //Score 컨트롤 혹은 deleteLine 컨트롤이 일정 int값 이상이면 속도 빨라짐(1초 > 0.8초 > 0.5초). 속성감시 이벤트 리스너
     //이 이벤트 리스너는 값에 맞게 현재 호출되는 정기 실행 함수를 멈추고 매 0.8 혹은 0.5마다 호출되는 함수를 여기서 호출한다.
-    //이쪽에서 timeline.stop() 후
-    //  Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.8), event -> {
-    //        minute8(); // 1초마다 호출될 함수
-    //    }));
+
 
 
 
@@ -118,22 +123,37 @@ public class GameBoardController implements Initializable {
     //줄 꽉차면 없애고 그 윗줄 내리고
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     private void minute10(){
-        if(/*턴 종료*/){
-            /*
-            nextBrick을 currentBrick으로 옮기면서 중심 위치 초기화
-            nextBrick 랜덤 뽑아와서 세팅
-            currentBrick 색칠하고 이벤트 장착
-            flag=false 로 초기화
+        if(turnEnd){
 
-            */
+            //nextBrick을 currentBrick으로 옮김.
+            currentBrick=nextBrick;
+
+            //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
+            nextBrick=new BrickZ(1, 4);
+
+            //currentBrick 색칠하고
+            colorFill();
+
+            //이벤트 장착
+
+
+            //다시 turn시작
+            turnEnd=false;
+
         }
         else{
-            if(/*!canMoveDown()*/){
-                //flag를 true로 하고
+            if(!currentBrick.canMoveDown()/*!canMoveDown()*/){
+                //턴 종료
+                turnEnd=true;
                 //그 위치에 색칠
+                colorFill();
+                fixed();
             }
             else {
-                //moveD() 호출하고 색칠하기
+                //지우고 moveD() 호출하고 색칠하기
+                colorErase();
+                currentBrick.moveD();
+                colorFill();
             }
         }
     }
@@ -142,18 +162,18 @@ public class GameBoardController implements Initializable {
 
     //매 0.8초마다 호출되는 함수
     //더 이상 내려갈 수 없는지 확인 + 없다면 거기 위치에 Brick 박고 nextBrick을 currentBrick으로 넘기고 nextBrick 랜덤으로 뽑아오고
-    private void minute8(){
-        if(/*턴 종료*/){
-            /*
+/*    private void minute8(){
+        if(*//*턴 종료*//*){
+            *//*
             nextBrick을 currentBrick으로 옮기면서 중심 위치 초기화
             nextBrick 랜덤 뽑아와서 세팅
             currentBrick 색칠하고 이벤트 장착
             flag=false 로 초기화
 
-            */
+            *//*
         }
         else{
-            if(/*!canMoveDown()*/){
+            if(*//*!canMoveDown()*//*){
                 //flag를 true로 하고
                 //그 위치에 색칠
             }
@@ -161,22 +181,22 @@ public class GameBoardController implements Initializable {
                 //moveD() 호출하고 색칠하기
             }
         }
-    }
+    }*/
 
     //0.5초마다 호출되는 함수
     //더 이상 내려갈 수 없는지 확인 + 없다면 거기 위치에 Brick 박고 nextBrick을 currentBrick으로 넘기고 nextBrick 랜덤으로 뽑아오고
-    private void minute5(){
-        if(/*턴 종료*/){
-            /*
+/*    private void minute5(){
+        if(*//*턴 종료*//*){
+            *//*
             nextBrick을 currentBrick으로 옮기면서 중심 위치 초기화
             nextBrick 랜덤 뽑아와서 세팅
             currentBrick 색칠하고 이벤트 장착
             flag=false 로 초기화
 
-            */
+            *//*
         }
         else{
-            if(/*!canMoveDown()*/){
+            if(*//*!canMoveDown()*//*){
                 //flag를 true로 하고
                 //그 위치에 색칠
             }
@@ -184,6 +204,6 @@ public class GameBoardController implements Initializable {
                 //moveD() 호출하고 색칠하기
             }
         }
-    }
+    }*/
 
 }

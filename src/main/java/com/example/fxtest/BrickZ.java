@@ -175,7 +175,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(x < GameBoard.HEIGHT && x >= 0 && y<GameBoard.WIDTH && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -186,7 +186,7 @@ public class BrickZ implements Brick {
     @Override
     public void rotate() {
         //돌리기 전 현재 위치 0 세팅
-        preChange();
+        //preChange();
 
 
         //회전 후 a b c d 좌표 변경 + (shape+1)%4
@@ -230,7 +230,7 @@ public class BrickZ implements Brick {
             d.setY(d.getY()-2);
         }
         //돌린 후 1 세팅
-        postChange();
+        //postChange();
     }
 
     @Override
@@ -254,7 +254,7 @@ public class BrickZ implements Brick {
 
     @Override
     public void moveR() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()+1);
@@ -262,12 +262,12 @@ public class BrickZ implements Brick {
         c.setY(c.getY()+1);
         d.setY(d.getY()+1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
     public void moveL() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()-1);
@@ -275,12 +275,12 @@ public class BrickZ implements Brick {
         c.setY(c.getY()-1);
         d.setY(d.getY()-1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
     public void moveD() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setX(a.getX()+1);
@@ -288,7 +288,7 @@ public class BrickZ implements Brick {
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
 
-        postChange();
+        //postChange();
     }
 
     //Getter Setter
