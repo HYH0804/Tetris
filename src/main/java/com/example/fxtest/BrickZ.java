@@ -87,7 +87,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -97,17 +97,89 @@ public class BrickZ implements Brick {
     //구현 해야됨 24-03-22
     @Override
     public boolean canMoveRight() {
-        return false;
+
+        List<Block> temp = new ArrayList<>();
+
+        //회전 후 a,b,c,d 임시 저장 및 세팅
+        Block moveR_a;
+        Block moveR_b;
+        Block moveR_c;
+        Block moveR_d;
+        moveR_a = new Block(a.getX(), a.getY()+1);
+        moveR_b = new Block(b.getX(), b.getY()+1);
+        moveR_c = new Block(c.getX(), c.getY() + 1);
+        moveR_d = new Block(d.getX(), d.getY() + 1);
+        temp.add(moveR_a);
+        temp.add(moveR_b);
+        temp.add(moveR_c);
+        temp.add(moveR_d);
+
+        for (Block block : temp) {
+            int x = block.getX();
+            int y = block.getY();
+            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
+            }
+        }
+        return true; //이동 가능
     }
 
     @Override
     public boolean canMoveLeft() {
-        return false;
+
+        List<Block> temp = new ArrayList<>();
+
+        //회전 후 a,b,c,d 임시 저장 및 세팅
+        Block moveL_a;
+        Block moveL_b;
+        Block moveL_c;
+        Block moveL_d;
+        moveL_a = new Block(a.getX(), a.getY()-1);
+        moveL_b = new Block(b.getX(), b.getY()-1);
+        moveL_c = new Block(c.getX(), c.getY() - 1);
+        moveL_d = new Block(d.getX(), d.getY() - 1);
+        temp.add(moveL_a);
+        temp.add(moveL_b);
+        temp.add(moveL_c);
+        temp.add(moveL_d);
+
+        for (Block block : temp) {
+            int x = block.getX();
+            int y = block.getY();
+            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
+            }
+        }
+        return true; //이동 가능
+
     }
 
     @Override
     public boolean canMoveDown() {
-        return false;
+        List<Block> temp = new ArrayList<>();
+
+        //회전 후 a,b,c,d 임시 저장 및 세팅
+        Block moveD_a;
+        Block moveD_b;
+        Block moveD_c;
+        Block moveD_d;
+        moveD_a = new Block(a.getX()+1, a.getY());
+        moveD_b = new Block(b.getX()+1, b.getY());
+        moveD_c = new Block(c.getX()+1, c.getY());
+        moveD_d = new Block(d.getX()+1, d.getY());
+        temp.add(moveD_a);
+        temp.add(moveD_b);
+        temp.add(moveD_c);
+        temp.add(moveD_d);
+
+        for (Block block : temp) {
+            int x = block.getX();
+            int y = block.getY();
+            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
+            }
+        }
+        return true; //이동 가능
     }
     //구현 해야됨 24-03-22
 
@@ -115,6 +187,7 @@ public class BrickZ implements Brick {
     public void rotate() {
         //돌리기 전 현재 위치 0 세팅
         preChange();
+
 
         //회전 후 a b c d 좌표 변경 + (shape+1)%4
         this.shape = (this.shape+1)%4; //다음 회전모양
@@ -136,7 +209,7 @@ public class BrickZ implements Brick {
             c.setX(c.getX()-1);
             c.setY(c.getY()-1);
             d.setX(d.getX());
-            d.setX(d.getY()-2);
+            d.setY(d.getY()-2);
         }
         else if (shape==2) { //1 > 2 회전
             a.setX(a.getX()+1);
@@ -145,7 +218,7 @@ public class BrickZ implements Brick {
             c.setX(c.getX()-1);
             c.setY(c.getY()+1);
             d.setX(d.getX()-2);
-            d.setX(d.getY());
+            d.setY(d.getY());
         }
         else{ //2 > 3 회전
             a.setX(a.getX()+1);
@@ -154,7 +227,7 @@ public class BrickZ implements Brick {
             c.setX(c.getX()-1);
             c.setY(c.getY()-1);
             d.setX(d.getX());
-            d.setX(d.getY()-2);
+            d.setY(d.getY()-2);
         }
         //돌린 후 1 세팅
         postChange();
@@ -166,6 +239,7 @@ public class BrickZ implements Brick {
         for(Block block : blockList){
             GameBoard.board[block.getX()][block.getY()]=0;
         }
+        //색 지우고
     }
 
     @Override
@@ -174,6 +248,7 @@ public class BrickZ implements Brick {
         for(Block block : blockList){
             GameBoard.board[block.getX()][block.getY()]=1;
         }
+        //색 채우고
     }
 
 
