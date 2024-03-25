@@ -1,5 +1,6 @@
 package com.example.fxtest;
 
+import com.example.fxtest.brick.Brick;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 
