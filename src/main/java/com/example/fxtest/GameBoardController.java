@@ -19,7 +19,7 @@ public class GameBoardController {
     //이 이벤트 리스너는 값에 맞게 현재 호출되는 정기 실행 함수를 멈추고 매 0.8 혹은 0.5마다 호출되는 함수를 여기서 호출한다.
 
 
-    //어느 한계 선 이상이 되면 끝인 리스너, GameOverFlag=true로
+    //어느 한계 선 이상이 되면 끝인 리스너, GameOverFlag=true로 
 
 
 
