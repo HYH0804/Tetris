@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrickZ implements Brick {
-    private int center_x; //회전 기준 및 canMove 와 canRotate에 대한 기준점 (배열 Index 기준)
+    private int center_x; //회전 기준 및 canMove 와 canRotate에 대한 기준점 (배열 Index 기준) [1][4] 기준
     private int center_y;
 
     private int shape; //회전
@@ -346,6 +346,11 @@ public class BrickZ implements Brick {
 
     public void setShape(int shape) {
         this.shape = shape;
+    }
+
+    @Override
+    public List<Block> getBlockList() {
+        return blockList;
     }
 }
 
