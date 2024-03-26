@@ -78,8 +78,8 @@ public class BrickZ implements Brick {
         } else if (nextShape == 3) {
             Rotate_a = new Block(a.getX() + 1, a.getY() - 1);
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(c.getX() - 1, c.getY() - 1);
-            Rotate_d = new Block(d.getX(), d.getY() - 2);
+            Rotate_c = new Block(c.getX() + 1, c.getY() + 1);
+            Rotate_d = new Block(d.getX(), d.getY() + 2);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
