@@ -41,11 +41,23 @@ public class Drawing {
     }
 
     public static void BoardDrawing(int[][] board) {
+        //first removing
+        ObservableList<Node> board_node = gridPane.getChildren();
+        Iterator<Node> iterator = board_node.iterator();
+        while(iterator.hasNext()) {
+            Node node = iterator.next();
+            if(GridPane.getColumnIndex(node) == null || GridPane.getRowIndex(node) == null) {
+                continue;
+            }
+            iterator.remove();
+        }
+
+        //then drawing
         Rectangle rect;
         for(int y = 0; y < 20; y++) {
             for (int x = 0; x < 10; x++) {
                 if(board[y][x] != 0) {
-                    rect = new Rectangle(20,20,Color.BLUE);
+                    rect = new Rectangle(20,20,Color.RED);
                     gridPane.add(rect,x,y);
                 }
             }

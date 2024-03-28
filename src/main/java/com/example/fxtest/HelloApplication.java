@@ -33,10 +33,10 @@ public class HelloApplication extends Application {
         gridPane = (GridPane)children.get(0);
 
         //BrickZ Z = new BrickZ(5,2);
-        //GameBoard.board[1][2] = 1;
+        //GameBoard.board[2][5] = 1;
+        //Drawing.BoardDrawing(GameBoard.board);
         //Drawing.BrickDrawing(Z);
         //Drawing.BrickRemoving(Z);
-        //Drawing.BoardDrawing(GameBoard.board);
 
         Scene scene = new Scene(root,300, 400);
         stage.setTitle("Tetris");
