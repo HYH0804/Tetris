@@ -148,6 +148,8 @@ public class GameBoardController implements Initializable {
                 //그 위치에 색칠
                 colorFill();
                 fixed();
+                //1인지 확인하고
+                //줄 지우기
             }
             else {
                 //지우고 moveD() 호출하고 색칠하기
