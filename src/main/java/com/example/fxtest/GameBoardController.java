@@ -90,6 +90,7 @@ public class GameBoardController implements Initializable {
         }
     }
 
+    //현재 GameBoard위 움직이는 Brick의 각 Rectangle 가져오기
     private Rectangle getRectangleAt(GridPane gridPane, int columnIndex, int rowIndex) {
         for (javafx.scene.Node node : gridPane.getChildren()) {
             Integer nodeColumnIndex = GridPane.getColumnIndex(node);
@@ -189,6 +190,9 @@ public class GameBoardController implements Initializable {
             //다시 turn시작
             turnEnd=false;
 
+            //테스트
+            printMatrix();
+
         }
         else{
             if(!currentBrick.canMoveDown()/*!canMoveDown()*/){
@@ -199,16 +203,32 @@ public class GameBoardController implements Initializable {
                 fixed();
                 //1인지 확인하고
                 //줄 지우기
+
+                //테스트
+                printMatrix();
             }
             else {
                 //지우고 moveD() 호출하고 색칠하기
                 colorErase();
                 currentBrick.moveD();
                 colorFill();
+
+                //테스트
+                printMatrix();
             }
         }
     }
 
+    //2차원배열 출력 테스트함수
+    public void printMatrix(){
+        for(int i=0; i<GameBoard.HEIGHT; i++){
+            for(int j=0; j<GameBoard.WIDTH; j++){
+                System.out.printf("%d ",GameBoard.board[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("--------END-------");
+    }
 
 
     //매 0.8초마다 호출되는 함수
