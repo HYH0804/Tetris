@@ -42,6 +42,7 @@
         </rowConstraints>
       </GridPane>
       <TextField fx:id="textField" layoutX="200.0" layoutY="50.0" prefHeight="22.0" prefWidth="94.0" />
-      <Button layoutX="221.0" layoutY="255.0" mnemonicParsing="false" text="Start" fx:id="StartButton" />
+      <Button fx:id="StartButton" layoutX="226.0" layoutY="241.0" mnemonicParsing="false" text="Start" />
+       <Button fx:id="ExitButton" layoutX="229.0" layoutY="281.0" mnemonicParsing="false" text="Exit" />
    </children>
 </AnchorPane>

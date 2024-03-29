@@ -3,15 +3,20 @@ package com.example.fxtest;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
@@ -31,6 +36,8 @@ public class GameBoardController implements Initializable {
     private TextField textField;
     @FXML
     private Button StartButton;
+    @FXML
+    private Button ExitButton;
 
 
     //타임라인 시간 설정 메서드
@@ -117,6 +124,31 @@ public class GameBoardController implements Initializable {
         currentBrick=new BrickZ(1,4);
         //nextBrick 랜덤에서 뽑아오기(임시로)
         nextBrick=new BrickZ(1,4);
+
+        // startButton의 클릭 이벤트 핸들러 등록
+        StartButton.setOnAction(event -> {
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            // 새로운 Scene을 로드합니다.
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("GameBoard.fxml"));
+                Scene scene = new Scene(root);
+
+                // Stage에 새로운 Scene을 설정합니다.
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
+        ExitButton.setOnAction(event -> {
+            // 현재 스테이지를 가져옴
+            Stage stage = (Stage) ExitButton.getScene().getWindow();
+            // 어플리케이션 종료
+            stage.close();
+        });
 
         setTime(1.0f);
         timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
