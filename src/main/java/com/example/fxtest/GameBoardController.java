@@ -58,9 +58,9 @@ public class GameBoardController implements Initializable {
     //@FXML로 게임 시작 버튼 만들어서 이거 누르면 다시 매 1초마다 호출되는 함수 호출하여 게임 재시작
     //여기서 initialize 함수 호출
 
-    public void colorErase(){
-        for (Block block : currentBrick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
-            /*int x = block.getX();
+    public void colorErase() {
+        /*for (Block block : currentBrick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
+            int x = block.getX();
             int y = block.getY();
 
             // GridPane에서 특정 위치의 Rectangle을 찾아 제거
@@ -77,7 +77,24 @@ public class GameBoardController implements Initializable {
                 boardView.getChildren().remove(toRemove); // 해당 Node 제거
             }*/
 
+        for(Block block : currentBrick.getBlockList()) {
+            Rectangle rectangleAt = getRectangleAt(boardView,block.getY(),block.getX());
+            boardView.getChildren().remove(rectangleAt);
         }
+    }
+
+    private Rectangle getRectangleAt(GridPane gridPane, int columnIndex, int rowIndex) {
+        for (javafx.scene.Node node : gridPane.getChildren()) {
+            Integer nodeColumnIndex = GridPane.getColumnIndex(node);
+            Integer nodeRowIndex = GridPane.getRowIndex(node);
+
+            if (nodeColumnIndex != null && nodeRowIndex != null && nodeColumnIndex == columnIndex && nodeRowIndex == rowIndex) {
+                if (node instanceof Rectangle) {
+                    return (Rectangle) node;
+                }
+            }
+        }
+        return null;
     }
 
     public void colorFill(){
