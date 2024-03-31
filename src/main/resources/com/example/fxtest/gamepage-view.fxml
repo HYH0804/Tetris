@@ -21,8 +21,14 @@
             </Pane>
          </children>
          <Button layoutX="14.0" layoutY="964.0" onAction="#onStartButtonClick" text="GoHome" />
-         <Button layoutX="525.0" layoutY="964.0" onAction="#onScoreboardButtonClick" text="GoScore" />
+        <!-- <Button layoutX="525.0" layoutY="964.0" onAction="#onScoreboardButtonClick" text="GoScore" />-->
       </Pane>
 
    </center>
 </BorderPane>
+
+<!--
+UI 담당
+이 레이아웃만 그대로 GameBord.fxml 에 통합 후 이 파일 지우기
+fxml 안의 요소들은 위치 혹은 스타일만 변경 가능, 기능구현들은 냅둘것
+ -->

@@ -9,6 +9,8 @@ import javafx.scene.shape.Rectangle;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//테스트용
+
 public class test implements Initializable {
 
     @FXML

@@ -18,6 +18,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoardController implements Initializable {
@@ -40,6 +41,18 @@ public class GameBoardController implements Initializable {
     private Button ExitButton;
 
 
+    //주기함수 종료하고 다시 처음 페이지로
+    @FXML
+    public void onStartButtonClick() throws IOException{
+        Stage st = StageSaver.pStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
+        Scene mainpage = new Scene(fxmlLoader.load(), 320, 240);
+        timeline.stop(); //주기함수 종료
+        initBoard(); //board 0 초기화
+        st.setScene(mainpage);
+        st.show();
+    }
+
     //타임라인 시간 설정 메서드
     void setTime(float x){
         timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
@@ -59,6 +72,12 @@ public class GameBoardController implements Initializable {
     void fixed(){
         for(Block block : currentBrick.getBlockList())
         GameBoard.board[block.getX()][block.getY()]=1;
+    }
+
+    void initBoard(){
+        for (int[] row : GameBoard.board) {
+            Arrays.fill(row, 0);
+        }
     }
 
 
@@ -134,9 +153,10 @@ public class GameBoardController implements Initializable {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("GameBoard.fxml"));
                 Scene scene = new Scene(root);
-
+                timeline.stop(); //주기함수 종료
                 // Stage에 새로운 Scene을 설정합니다.
                 stage.setScene(scene);
+                initBoard(); //새로 시작 전 board 0으로 초기화
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
