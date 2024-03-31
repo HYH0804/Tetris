@@ -27,16 +27,25 @@ public class HelloApplication extends Application {
         StageSaver.setStage(stage);
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("GameBoard.fxml"));
+
+        //save griddPane / fx:id를 사용해서 처리해도 무방
         Parent root = fxmlLoader.load();
         AnchorPane anchorPane = (AnchorPane) root;
         ObservableList<Node> children = anchorPane.getChildren();
         gridPane = (GridPane)children.get(0);
 
         //BrickZ Z = new BrickZ(5,2);
-        //GameBoard.board[2][5] = 1;
-        //Drawing.BoardDrawing(GameBoard.board);
         //Drawing.BrickDrawing(Z);
         //Drawing.BrickRemoving(Z);
+
+        //GameBoard.board[10][1] = 1;
+        //GameBoard.board[10][2] = 2;
+        //GameBoard.board[10][3] = 3;
+        //GameBoard.board[10][4] = 4;
+        //GameBoard.board[10][5] = 5;
+        //GameBoard.board[10][6] = 6;
+        //GameBoard.board[10][7] = 7;
+        //Drawing.BoardDrawing(GameBoard.board);
 
         Scene scene = new Scene(root,300, 400);
         stage.setTitle("Tetris");
