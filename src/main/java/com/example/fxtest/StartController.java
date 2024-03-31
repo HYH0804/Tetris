@@ -25,7 +25,7 @@ public class StartController extends Application {
         GameStart.setText("TETRIS");
         Stage st = StageSaver.pStage; //null 값 st에 넣고
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("GameBoard.fxml"));
-        Scene mainpage = new Scene(fxmlLoader.load(), 300, 400);
+        Scene mainpage = new Scene(fxmlLoader.load(), 300, 440);
         st.setScene(mainpage); //Scene 바꿀려고
         st.show();
 
@@ -37,7 +37,7 @@ public class StartController extends Application {
         StageSaver.setStage(stage);
 
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),300, 400);
+        Scene scene = new Scene(fxmlLoader.load(),300, 440);
         stage.setTitle("Tetris");
         stage.setScene(scene);
         stage.show();

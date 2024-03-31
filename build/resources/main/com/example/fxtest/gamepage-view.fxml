@@ -21,7 +21,7 @@
             </Pane>
          </children>
          <Button layoutX="14.0" layoutY="964.0" onAction="#onStartButtonClick" text="GoHome" />
-         <Button layoutX="525.0" layoutY="964.0" onAction="#onScoreboardButtonClick" text="GoScore" />
+        <!-- <Button layoutX="525.0" layoutY="964.0" onAction="#onScoreboardButtonClick" text="GoScore" />-->
       </Pane>
 
    </center>

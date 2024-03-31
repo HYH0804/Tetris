@@ -12,7 +12,6 @@ import com.example.fxtest.brick.Brick;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,8 +33,8 @@ public class GameBoardController implements Initializable {
 
     BrickController brickController = new BrickController();
 
-    boolean turnEnd = true;
     GameBoard gameBoard = new GameBoard();
+
     Timeline timeline;
 
     @FXML
@@ -56,12 +55,14 @@ public class GameBoardController implements Initializable {
         Scene mainpage = new Scene(fxmlLoader.load(), 320, 240);
         timeline.stop(); //주기함수 종료
         initBoard(); //board 0 초기화
+        GameBoard.whileGame =false;
         st.setScene(mainpage);
         st.show();
     }
 
     //타임라인 시간 설정 메서드
     void setTime(float x){
+
         timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
             if(x==1.0f) {
                 minute10();
@@ -73,6 +74,8 @@ public class GameBoardController implements Initializable {
                 //minute5();
             }
         }));
+
+
     }
 
     //더 이상 못내려갈때 Brick 행렬에 고정
@@ -81,6 +84,16 @@ public class GameBoardController implements Initializable {
         GameBoard.board[block.getX()][block.getY()]=1;
     }
 
+    //게임 (재)시작때 초기화
+    void init(){
+        initBoard();
+        GameBoard.score=0;
+        GameBoard.deleteLine=0;
+        GameBoard.whileGame =false;
+        timeline.stop();
+        System.out.println("초기화완료");
+    }
+    
     void initBoard(){
         for (int[] row : GameBoard.board) {
             Arrays.fill(row, 0);
@@ -148,9 +161,9 @@ public class GameBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
-        currentBrick=new BrickZ(1,4);
+        currentBrick=new BrickZ(0,4);
         //nextBrick 랜덤에서 뽑아오기(임시로)
-        nextBrick=new BrickZ(1,4);
+        nextBrick=new BrickZ(0,4);
 
         // startButton의 클릭 이벤트 핸들러 등록
         StartButton.setOnAction(event -> {
@@ -163,7 +176,7 @@ public class GameBoardController implements Initializable {
                 timeline.stop(); //주기함수 종료
                 // Stage에 새로운 Scene을 설정합니다.
                 stage.setScene(scene);
-                initBoard(); //새로 시작 전 board 0으로 초기화
+                init(); //새로 시작 전 board 0으로 초기화
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -190,7 +203,7 @@ public class GameBoardController implements Initializable {
 
 
 
-    //어느 한계 선 이상이 되면 끝인 리스너, GameOverFlag=true로
+    //어느 한계 선 이상(1번째 행에 1이 하나라도 들어오면) 이 되면 끝인 리스너, GameOverFlag=true로
 
 
 
@@ -200,22 +213,14 @@ public class GameBoardController implements Initializable {
     //줄 꽉차면 없애고 그 윗줄 내리고
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     private void minute10(){
-        if(turnEnd){
+        if(!GameBoard.whileGame){
 
-            //nextBrick을 currentBrick으로 옮김.
-            currentBrick=nextBrick;
+            //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+            sponBrick();
 
-            //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
-            nextBrick=new BrickZ(1, 4);
+            //게임 중으로 바꿈
+            GameBoard.whileGame =true;
 
-            //currentBrick 색칠하고
-            colorFill();
-
-            //이벤트 장착
-
-
-            //다시 turn시작
-            turnEnd=false;
 
             //테스트
             printMatrix();
@@ -223,16 +228,33 @@ public class GameBoardController implements Initializable {
         }
         else{
             if(!currentBrick.canMoveDown()/*!canMoveDown()*/){
-                //턴 종료
-                turnEnd=true;
                 //그 위치에 색칠
                 colorFill();
                 fixed();
+
                 //1인지 확인하고
                 //줄 지우기
 
-                //테스트
-                printMatrix();
+
+                //겜 끝났는지 확인
+                if(isGameOver()){
+                    //스코어보드 처리
+
+                    System.out.println("게임종료");
+                    //전부 초기화
+                    init();
+
+                    //테스트
+                    printMatrix();
+                }
+                else{
+                    //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                    sponBrick();
+
+                    //테스트
+                    printMatrix();
+                }
+
             }
             else {
                 //지우고 moveD() 호출하고 색칠하기
@@ -244,6 +266,29 @@ public class GameBoardController implements Initializable {
                 printMatrix();
             }
         }
+    }
+
+    private void sponBrick() {
+        //nextBrick을 currentBrick으로 옮김.
+        currentBrick=nextBrick;
+
+        //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
+        nextBrick=new BrickZ(0, 4);
+
+        //currentBrick 색칠하고
+        colorFill();
+
+        //이벤트 장착
+    }
+
+    public boolean isGameOver() {
+        for(int i=0;i<GameBoard.WIDTH;i++){
+            if(GameBoard.board[1][i]==1){
+                GameBoard.whileGame =true;
+                return true;
+            }
+        }
+        return false;
     }
 
     //2차원배열 출력 테스트함수
