@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class GameBoard {
     //이거 조심
-    final static int WIDTH =10; //일단 크기로... Index는 9까지
-    final static int HEIGHT=20; //일단 크기로... Index는 19까지
+    public final static int WIDTH =10; //일단 크기로... Index는 9까지
+    public final static int HEIGHT=20; //일단 크기로... Index는 19까지
 
     //Board 2차원 배열 , 있으면 1 없으면 0
-    static int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
+    public static int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
     static int score=0; //점수
     static int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
     static boolean gameOverFlag=false; //Flag가 True로 되면 게임 끝나는 속성 이벤트 리스너

@@ -1,7 +1,14 @@
 package com.example.fxtest;
 
+
+import com.example.fxtest.brick.Block;
+
+//얜 임시로, 랜덤 구현하면 필요 없
+import com.example.fxtest.brick.BrickZ;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import com.example.fxtest.brick.Brick;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

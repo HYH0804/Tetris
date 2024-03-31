@@ -1,4 +1,4 @@
-package com.example.fxtest;
+package com.example.fxtest.brick;
 
 public class Block {
 
