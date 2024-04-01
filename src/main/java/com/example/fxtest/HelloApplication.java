@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
         StageSaver.setStage(stage);
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("GameBoard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),300, 400);
+        Scene scene = new Scene(fxmlLoader.load(),900, 400);
         stage.setTitle("Tetris");
         stage.setScene(scene);
         stage.show();
