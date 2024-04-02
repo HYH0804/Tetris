@@ -184,6 +184,7 @@ public class SettingController implements Initializable {
     private final Properties properties = new Properties();
     private final String propertiesFileName = "resolution.properties";
 
+    //해상도 판단 후 적용하는 함수
     @FXML
     private void applyResolution() {
         String resolution = "";
@@ -195,10 +196,11 @@ public class SettingController implements Initializable {
             resolution = "1280x1024";
         }
 
-        saveResolution(resolution);
+        saveResolution(resolution); //프로퍼티에 저장
         changeResolution(resolution); // 선택된 해상도로 변경
     }
 
+    //프로퍼티에 저장
     private void saveResolution(String resolution) {
         properties.setProperty("resolution", resolution);
         try (FileOutputStream out = new FileOutputStream(propertiesFileName)) {
@@ -208,6 +210,7 @@ public class SettingController implements Initializable {
         }
     }
 
+    //해상도 바꿔주는 함수
     private void changeResolution(String resolution) {
         Stage stage = (Stage) smallSize.getScene().getWindow();
 

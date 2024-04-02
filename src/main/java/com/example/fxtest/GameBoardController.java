@@ -368,7 +368,7 @@ public class GameBoardController implements Initializable {
         return properties;
     }
 
-    //보드 크기 change함수
+    //보드 해상도 change함수
     public void change() throws IOException {
         // 해상도에 따라 칸의 크기를 동적으로 조정
         Properties properties = loadProperties();
@@ -380,6 +380,7 @@ public class GameBoardController implements Initializable {
         int numRows = 20; // 행의 수
         int numCols = 10; // 열의 수
 
+        //해상도 바꾸고 싶으면 여기를 바꾼다.
         double cellWidth = height / 30;
         double cellHeight = height / 30;
 
