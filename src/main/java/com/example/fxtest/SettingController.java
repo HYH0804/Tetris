@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -19,6 +20,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.prefs.Preferences;
+
+import static com.example.fxtest.Main.loadProperties;
+
 public class SettingController implements Initializable {
 //확인 버튼 누르면 Scene 다시 띄우는걸로
 
@@ -172,11 +176,16 @@ public class SettingController implements Initializable {
         // 현재 스테이지를 가져옵니다.
         Stage stage = (Stage) backButton.getScene().getWindow();
 
-        // Start.fxml을 로드합니다.
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/fxtest/Start.fxml"));
-        // 새로운 Scene을 생성합니다.
-        Scene scene = new Scene(fxmlLoader.load());
-        // 스테이지에 Scene을 설정하여 화면을 전환합니다.
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+        // 세팅 페이지 로드
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
         stage.show();
     }

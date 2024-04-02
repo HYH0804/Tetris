@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import static com.example.fxtest.Main.loadProperties;
+
 public class StartController implements Initializable {
 
     @FXML
@@ -107,13 +109,7 @@ public class StartController implements Initializable {
         stage.setTitle("Settings Page");
         stage.show();
     }
-    private Properties loadProperties() throws IOException {
-        Properties properties = new Properties();
-        try (FileInputStream in = new FileInputStream(PROPERTIES_FILE)) {
-            properties.load(in);
-        }
-        return properties;
-    }
+
     // 스코어보드 화면 열기 이벤트 핸들러
     @FXML
     private void openScoreboard() {

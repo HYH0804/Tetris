@@ -34,7 +34,7 @@ public class Main extends Application {
     }
 
     //properties에서 값가져오는 함수
-    private Properties loadProperties() throws IOException {
+    public static Properties loadProperties() throws IOException {
         Properties properties = new Properties();
         try (FileInputStream in = new FileInputStream(PROPERTIES_FILE)) {
             properties.load(in);

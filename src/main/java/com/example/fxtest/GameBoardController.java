@@ -1,5 +1,5 @@
 package com.example.fxtest;
-
+import static com.example.fxtest.Main.loadProperties;
 
 import com.example.fxtest.brick.Block;
 
@@ -374,14 +374,6 @@ public class GameBoardController implements Initializable {
 
     private static final String PROPERTIES_FILE = "resolution.properties";
 
-    private Properties loadProperties() throws IOException {
-        Properties properties = new Properties();
-        try (FileInputStream in = new FileInputStream(PROPERTIES_FILE)) {
-            properties.load(in);
-        }
-        return properties;
-    }
-
     //보드 해상도 change함수
     public void change() throws IOException {
         // 해상도에 따라 칸의 크기를 동적으로 조정
@@ -417,5 +409,4 @@ public class GameBoardController implements Initializable {
             boardView.getRowConstraints().add(rowConstraints);
         }
     }
-
 }
