@@ -391,7 +391,7 @@ public class GameBoardController implements Initializable {
         double width = Double.parseDouble(dimensions[0]);
         double height = Double.parseDouble(dimensions[1]);
 
-        int numRows = 20; // 행의 수
+        int numRows = 22; // 행의 수
         int numCols = 10; // 열의 수
 
         //해상도 바꾸고 싶으면 여기를 바꾼다.
