@@ -83,7 +83,7 @@ public class StartController implements Initializable {
         Scene scene = new Scene(root, width, height);
 
         stage.setScene(scene);
-        stage.setTitle("Settings Page");
+        stage.setTitle("GameBoard Page");
         stage.show();
     }
 

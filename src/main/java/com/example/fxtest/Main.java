@@ -29,7 +29,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, width, height);
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Settings Page");
+        primaryStage.setTitle("Start Page");
         primaryStage.show();
     }
 
