@@ -50,6 +50,8 @@ public class GameBoardController implements Initializable {
     @FXML
     private Button ExitButton;
 
+    public static double cellWidth = 20;
+    public double cellHeight = 20;
 
 
     //주기함수 종료하고 다시 처음 페이지로
@@ -155,7 +157,7 @@ public class GameBoardController implements Initializable {
             int y = block.getY();
 
             // 20x20 픽셀 크기의 Rectangle 생성
-            Rectangle rectangle = new Rectangle(20, 20);
+            Rectangle rectangle = new Rectangle(cellWidth, cellHeight);
             rectangle.setFill(Color.BLUE); // 색상 설정, 필요에 따라 변경 가능
 
             // GridPane에 Rectangle 추가
@@ -381,8 +383,8 @@ public class GameBoardController implements Initializable {
         int numCols = 10; // 열의 수
 
         //해상도 바꾸고 싶으면 여기를 바꾼다.
-        double cellWidth = height / 30;
-        double cellHeight = height / 30;
+        cellWidth = height / 30;
+        cellHeight = height / 30;
 
         boardView.getColumnConstraints().clear();
         boardView.getRowConstraints().clear();
