@@ -171,19 +171,31 @@ public class GameBoardController implements Initializable {
         currentBrick=new BrickZ(0,4);
         //nextBrick 랜덤에서 뽑아오기(임시로)
         nextBrick=new BrickZ(0,4);
+        
+        //change()함수 실행
         try {
             change();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        
         // startButton의 클릭 이벤트 핸들러 등록
         StartButton.setOnAction(event -> {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
             // 새로운 Scene을 로드합니다.
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("GameBoard.fxml"));
-                Scene scene = new Scene(root);
+                Properties properties = loadProperties();
+                String resolution = properties.getProperty("resolution", "800x600");
+                String[] dimensions = resolution.split("x");
+                double width = Double.parseDouble(dimensions[0]);
+                double height = Double.parseDouble(dimensions[1]);
+
+                // 세팅 페이지 로드
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, width, height);
+
                 timeline.stop(); //주기함수 종료
                 // Stage에 새로운 Scene을 설정합니다.
                 stage.setScene(scene);
