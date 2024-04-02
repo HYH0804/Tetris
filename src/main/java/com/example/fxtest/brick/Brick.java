@@ -4,6 +4,8 @@ import com.example.fxtest.brick.Block;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface Brick {
     public boolean canRotate();
 
@@ -26,4 +28,6 @@ public interface Brick {
     public void postChange();
 
     public List<Block> getBlockList();
+
 }
+
