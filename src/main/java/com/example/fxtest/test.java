@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -43,11 +44,12 @@ public class test extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("keysetting-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Scene scene = new Scene(root,800, 800);
-        scene.setOnKeyPressed(event->
-                System.out.println((event.getCode())));
         stage.setTitle("Tetris");
+        KeySettingController key = new KeySettingController();
+        key.initPageHandler(scene, root);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {

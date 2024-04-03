@@ -4,12 +4,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.KeySettingController">
+<?import javafx.scene.layout.VBox?>
+<AnchorPane fx:id="keySettingPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.KeySettingController">
+   <children>
+      <VBox fx:id="keySettingVBox">
    <children>
       <Label fx:id="rotate" alignment="CENTER" layoutX="414.0" layoutY="92.0" prefHeight="45.0" prefWidth="111.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="rotate" />
       <Label fx:id="moveLeft" alignment="CENTER" layoutX="414.0" layoutY="137.0" prefHeight="45.0" prefWidth="111.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveLeft" />
       <Label fx:id="moveRight" alignment="CENTER" layoutX="414.0" layoutY="182.0" prefHeight="45.0" prefWidth="111.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveRight" />
       <Label fx:id="moveDown" alignment="CENTER" layoutX="414.0" layoutY="227.0" prefHeight="45.0" prefWidth="111.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveDown" />
       <Label fx:id="hardDrop" alignment="CENTER" layoutX="414.0" layoutY="272.0" prefHeight="45.0" prefWidth="111.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="hardDrop" />
+   </children>
+      </VBox>
    </children>
 </AnchorPane>

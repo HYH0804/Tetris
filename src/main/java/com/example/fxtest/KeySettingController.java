@@ -1,42 +1,58 @@
 package com.example.fxtest;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.security.Key;
 import java.util.*;
 
 public class KeySettingController implements Initializable {
     @FXML
-    private Label rotate;
-    @FXML
-    private Label moveLeft;
-    @FXML
-    private Label moveRight;
-    @FXML
-    private Label moveDown;
-    @FXML
-    private Label hardDrop;
+    private VBox keySettingVBox;
+
 
     private Map<Label,String> keyMap = new HashMap<>();
-    private Boolean[] buttonClicked = {false,false,false,false,false};
+    private static Boolean[] buttonClicked = {false,false,false,false,false};
+    private Label[] labelSet = new Label[5];
     private final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Node> children = keySettingVBox.getChildren();
+        int idx = 0;
+        for(Node child : children){
+            Label label = (Label) child;
+            labelSet[idx] = label;
+            idx++;
+            System.out.println(child);
+        }
+
         getKey(); //기존 키 startKey list로 가져오기 및 값 표시
         // 핸들러
-        initHandler(rotate,0);
-        initHandler(moveLeft,1);
-        initHandler(moveRight,2);
-        initHandler(moveDown,3);
-        initHandler(hardDrop,4);
+        for(int i = 0; i < 5; i++) {
+            initHandler(labelSet[i],i);
+        }
+
+        //initPageHandler();
     }
 
     private void getKey() {
@@ -63,11 +79,11 @@ public class KeySettingController implements Initializable {
             System.out.println("hardDrop: " + hardDropV);
 
             // startKey에 값 입력
-            rotate.setText(rotateV);
-            moveLeft.setText(moveLeftV);
-            moveRight.setText(moveRightV);
-            moveDown.setText(moveDownV);
-            hardDrop.setText(hardDropV);
+            labelSet[0].setText(rotateV);
+            labelSet[1].setText(moveLeftV);
+            labelSet[2].setText(moveRightV);
+            labelSet[3].setText(moveDownV);
+            labelSet[4].setText(hardDropV);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,11 +91,9 @@ public class KeySettingController implements Initializable {
     }
 
     public void setKeyMap(){
-        keyMap.put(moveDown,moveDown.getText());
-        keyMap.put(moveLeft,moveLeft.getText());
-        keyMap.put(moveRight,moveRight.getText());
-        keyMap.put(rotate,rotate.getText());
-        keyMap.put(hardDrop,hardDrop.getText());
+        for(int i = 0; i < 5; i++){
+            keyMap.put(labelSet[i],labelSet[i].getText());
+        }
     }
 
     public void initHandler(Label label, int idx){
@@ -101,26 +115,106 @@ public class KeySettingController implements Initializable {
             } else {
                 style = "-fx-border-color: black; -fx-border-width: 2px;";
             }
-            switch (i) {
-                case 0:
-                    rotate.setStyle(style);
-                    break;
-                case 1:
-                    moveLeft.setStyle(style);
-                    break;
-                case 2:
-                    moveRight.setStyle(style);
-                    break;
-                case 3:
-                    moveDown.setStyle(style);
-                    break;
-                case 4:
-                    hardDrop.setStyle(style);
-                    break;
-                default:
-                    break;
+            labelSet[i].setStyle(style);
+        }
+    }
+
+    public void initPageHandler(Scene pScene, Parent root) {
+        AnchorPane anchorPane = (AnchorPane) root;
+        Node A = anchorPane.getChildren().get(0);
+        VBox prevVBox = (VBox)A;
+        ObservableList<Node> children = prevVBox.getChildren();
+        int idx = 0;
+        for(Node child : children){
+            Label label = (Label) child;
+            labelSet[idx] = label;
+            idx++;
+            System.out.println(child);
+        }
+
+        // key event
+        pScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            System.out.println("!@#");
+            KeyCode keyCode = event.getCode();
+            int change=-1;
+            for(int i = 0; i < 5; i++) {
+                    System.out.println(buttonClicked[i]);
+                if(buttonClicked[i]){
+                    change = i;
+                }
+            }
+            if(change == -1) {
+                if(keyCode == KeyCode.ESCAPE){
+                    // properties
+                    boolean update = true;
+                    for(Label label: labelSet){
+                        if(label.getTextFill() == Color.RED) {
+                            update = false;
+                        }
+                    }
+                    if (update){
+                        setKeyMap();
+                        Properties prop = new Properties();
+                        keyMap.forEach((key,value)->{
+                            prop.setProperty(key.getId(),value);
+                        });
+
+                        FileOutputStream fos = null;
+                        try {
+                            fos = new FileOutputStream("src/main/resources/setting.properties");
+
+                            prop.store(fos,null);
+                            System.out.println("propeties update done");
+
+                        } catch (IOException e) {}
+                        finally {
+                            try {
+                                fos.close();
+                            } catch (IOException e) {}
+                        }
+                    }
+
+                    // go back to setting page
+                    FXMLLoader loader = new FXMLLoader(test.class.getResource("setting-view.fxml"));
+                    Scene scene = null;
+                    try {
+                        scene = new Scene(loader.load());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    StageSaver.pStage.setScene(scene);
+                }
+                return;
             }
 
+            if(keyCode == KeyCode.UNDEFINED || keyCode == KeyCode.WINDOWS){
+                return;
+            }
+            else if(!(keyCode == KeyCode.ESCAPE)) {
+                labelSet[change].setText(keyCode.toString());
+            }
+
+            buttonClicked[change] = false;
+            buttonDrawing();
+            colorSame();
+        });
+
+        // mouse control??
+
+    }
+
+    private void colorSame() {
+        for(Label label : labelSet){
+            label.setTextFill(Color.BLACK);
+        }
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5; j++) {
+                if(j<=i) continue;
+                if(labelSet[i].getText().equals(labelSet[j].getText())){
+                    labelSet[i].setTextFill(Color.RED);
+                    labelSet[j].setTextFill(Color.RED);
+                }
+            }
         }
     }
 }
