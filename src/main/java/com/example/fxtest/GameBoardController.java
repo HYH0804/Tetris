@@ -100,7 +100,7 @@ public class GameBoardController implements Initializable {
         currentBrick=new BrickZ(0,4);
         //nextBrick 랜덤에서 뽑아오기(임시로)
         nextBrick=new BrickZ(0,4);
-        brickController = new BrickController(); //키 값 전부 field에 세팅
+        brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
         // GridPane에 키 이벤트 핸들러 등록
         regiBrickEvent();
         Drawing.setBoardView(boardView);
@@ -165,7 +165,7 @@ public class GameBoardController implements Initializable {
 
 
             //테스트
-            printMatrix();
+            //printMatrix();
 
         }
         else{
@@ -193,14 +193,14 @@ public class GameBoardController implements Initializable {
                     init();
 
                     //테스트
-                    printMatrix();
+                    //printMatrix();
                 }
                 else{
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                     sponBrick();
 
                     //테스트
-                    printMatrix();
+                    //printMatrix();
                 }
 
             }
@@ -211,7 +211,7 @@ public class GameBoardController implements Initializable {
                 Drawing.colorFill(currentBrick);
 
                 //테스트
-                printMatrix();
+                //printMatrix();
             }
         }
     }
@@ -250,25 +250,41 @@ public class GameBoardController implements Initializable {
         System.out.println("--------END-------");
     }
 
+    public void printBlock(){
+        for(Block block : currentBrick.getBlockList()){
+            System.out.println("x값: " + block.getX() + " y 값: "+block.getY());
+        }
+    }
+
     private void regiBrickEvent() {
         boardView.setOnKeyPressed(event -> {
+            Drawing.colorErase(currentBrick);
             String keyValue = event.getCode().toString();
             if (keyValue.equals(brickController.getMOVER()) || keyValue.toUpperCase().equals(brickController.getMOVER())) {
                 // 오른쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("R key pressed");
+                System.out.println("Right key pressed");
+                brickController.moveR(currentBrick);
+                printBlock();
             } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toUpperCase().equals(brickController.getMOVEL())) {
                 // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("L key pressed");
+                System.out.println("Left key pressed");
+                brickController.moveL(currentBrick);
+                printBlock();
             } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toUpperCase().equals(brickController.getMOVED())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("D key pressed");
+                // 아래 이동 키가 눌렸을 때의 동작
+                brickController.moveD(currentBrick);
+                printBlock();
             } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toUpperCase().equals(brickController.getROTATE())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("R key pressed");
+                // 회전 키가 눌렸을 때의 동작
+                System.out.println("Rotate key pressed");
+                brickController.rotate(currentBrick);
+                printBlock();
             } /*else if(){
                 //여기는 수직떨구기
                 System.out.println("수직떨구기");
             }*/
+            event.consume();
+            Drawing.colorFill(currentBrick); //색칠하고
         });
     }
 
