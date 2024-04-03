@@ -182,7 +182,8 @@ public class KeySettingController implements Initializable {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    StageSaver.pStage.setScene(scene);
+                    Stage stage = (Stage) root.getScene().getWindow();
+                    stage.setScene(scene);
                 }
                 return;
             }

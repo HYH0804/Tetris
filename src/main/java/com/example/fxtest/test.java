@@ -1,12 +1,12 @@
 package com.example.fxtest;
 
 import javafx.application.Application;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-=======
+//=======
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
->>>>>>> 5e5d8ff191f6362534413ee21d9f5f891ad6cd61
+//>>>>>>> 5e5d8ff191f6362534413ee21d9f5f891ad6cd61
 import javafx.stage.Stage;
 
 import java.io.IOException;

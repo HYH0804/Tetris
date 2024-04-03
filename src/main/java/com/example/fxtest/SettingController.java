@@ -1,5 +1,6 @@
 package com.example.fxtest;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +42,8 @@ public class SettingController implements Initializable {
     private RadioButton largeSize;
 
     @FXML
+    private Button setKeyButton;
+    @FXML
     private TextField moveDown;
 
     @FXML
@@ -49,6 +52,8 @@ public class SettingController implements Initializable {
     private TextField moveLeft;
     @FXML
     private TextField rotate;
+    @FXML
+    private TextField hardDrop;
 
     private List<String> startKey = new ArrayList<>();
 
@@ -76,9 +81,26 @@ public class SettingController implements Initializable {
         initHandler(moveRight);
         initHandler(moveLeft);
         initHandler(rotate);
+        initHandler(hardDrop);
         smallSize.setToggleGroup(sizeToggleGroup);
         mediumSize.setToggleGroup(sizeToggleGroup);
         largeSize.setToggleGroup(sizeToggleGroup);
+        setKeyButton.setOnAction(event-> {
+            Stage stage = (Stage) setKeyButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("keysetting-view.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Scene scene = new Scene(root, 800, 800);
+            KeySettingController key = new KeySettingController();
+            key.initPageHandler(scene, root);
+            stage.setScene(scene);
+            stage.setTitle("GameBoard Page");
+            stage.show();
+        });
 
     }
 
@@ -97,17 +119,20 @@ public class SettingController implements Initializable {
             String moveLeft = prop.getProperty("moveLeft");
             String moveRight = prop.getProperty("moveRight");
             String rotate = prop.getProperty("rotate");
+            String hardDrop = prop.getProperty("hardDrop");
 
             // 읽어온 값 출력
             System.out.println("moveDown: " + moveDown);
             System.out.println("moveLeft: " + moveLeft);
             System.out.println("moveRight: " + moveRight);
             System.out.println("rotate: " + rotate);
+            System.out.println("hardDrop: " + hardDrop);
 
             startKey.add(moveDown);
             startKey.add(moveLeft);
             startKey.add(moveRight);
             startKey.add(rotate);
+            startKey.add(hardDrop);
 
 
         } catch (IOException e) {
@@ -120,6 +145,7 @@ public class SettingController implements Initializable {
         moveRight.setText(startKey.get(1));
         moveLeft.setText(startKey.get(2));
         rotate.setText(startKey.get(3));
+        hardDrop.setText(startKey.get(4));
     }
 
     public void setKeyMap(){
@@ -127,7 +153,7 @@ public class SettingController implements Initializable {
         keyMap.put(moveLeft,moveLeft.getText());
         keyMap.put(moveRight,moveRight.getText());
         keyMap.put(rotate,rotate.getText());
-
+        keyMap.put(hardDrop,hardDrop.getText());
     }
 
     private void initHandler(TextField textField){
