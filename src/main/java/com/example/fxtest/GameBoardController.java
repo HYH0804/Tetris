@@ -91,6 +91,7 @@ public class GameBoardController implements Initializable {
         GameBoard.deleteLine=0;
         GameBoard.whileGame =false;
         timeline.stop();
+        regiBrickEvent();
         System.out.println("초기화완료");
     }
     
@@ -165,31 +166,8 @@ public class GameBoardController implements Initializable {
         //nextBrick 랜덤에서 뽑아오기(임시로)
         nextBrick=new BrickZ(0,4);
         brickController = new BrickController(); //키 값 전부 field에 세팅
-
-
         // GridPane에 키 이벤트 핸들러 등록
-        boardView.setOnKeyPressed(event -> {
-            String keyValue = event.getCode().toString();
-            if (keyValue.equals(brickController.getMOVER()) || keyValue.toUpperCase().equals(brickController.getMOVER())) {
-                // 오른쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("R key pressed");
-            } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toUpperCase().equals(brickController.getMOVEL())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("L key pressed");
-            } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toUpperCase().equals(brickController.getMOVED())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("D key pressed");
-            } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toUpperCase().equals(brickController.getROTATE())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("R key pressed");
-            } /*else if(){
-                //여기는 수직떨구기
-                System.out.println("수직떨구기");
-            }*/
-        });
-
-
-
+        regiBrickEvent();
 
 
         // startButton의 클릭 이벤트 핸들러 등록
@@ -221,6 +199,28 @@ public class GameBoardController implements Initializable {
         setTime(1.0f);
         timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
         timeline.play(); // Timeline 시작
+    }
+
+    private void regiBrickEvent() {
+        boardView.setOnKeyPressed(event -> {
+            String keyValue = event.getCode().toString();
+            if (keyValue.equals(brickController.getMOVER()) || keyValue.toUpperCase().equals(brickController.getMOVER())) {
+                // 오른쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("R key pressed");
+            } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toUpperCase().equals(brickController.getMOVEL())) {
+                // 왼쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("L key pressed");
+            } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toUpperCase().equals(brickController.getMOVED())) {
+                // 왼쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("D key pressed");
+            } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toUpperCase().equals(brickController.getROTATE())) {
+                // 왼쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("R key pressed");
+            } /*else if(){
+                //여기는 수직떨구기
+                System.out.println("수직떨구기");
+            }*/
+        });
     }
 
 
