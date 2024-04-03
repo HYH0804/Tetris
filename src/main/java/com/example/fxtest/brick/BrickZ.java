@@ -26,7 +26,7 @@ public class BrickZ implements Brick {
         this.center_x = center_x;
         this.center_y = center_y;
         this.a= new Block(center_x,center_y-1);
-        this.b=new Block(center_x, center_y);
+        this.b=new Block(center_x, center_y); //b가 센터
         this.c=new Block(center_x+1, center_y);
         this.d=new Block(center_x+1,center_y+1);
         this.shape=0;
@@ -121,7 +121,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -150,7 +150,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -179,7 +179,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.HEIGHT && x >= 0 && y<GameBoard.WIDTH && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -229,10 +229,10 @@ public class BrickZ implements Brick {
             a.setX(a.getX()+1);
             a.setY(a.getY()-1);
             //b는 중심점이라 그대로
-            c.setX(c.getX()-1);
-            c.setY(c.getY()-1);
+            c.setX(c.getX()+1);
+            c.setY(c.getY()+1);
             d.setX(d.getX());
-            d.setY(d.getY()-2);
+            d.setY(d.getY()+2);
         }
         //돌린 후 1 세팅
         //postChange();
@@ -266,7 +266,7 @@ public class BrickZ implements Brick {
         b.setY(b.getY()+1);
         c.setY(c.getY()+1);
         d.setY(d.getY()+1);
-
+        System.out.println("제대로 Brick 각 위치 이동함");
         //postChange();
     }
 
