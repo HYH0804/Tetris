@@ -54,6 +54,7 @@ public class GameBoardController implements Initializable {
     public double cellHeight = 20;
 
 
+
     //주기함수 종료하고 다시 처음 페이지로
     @FXML
     public void onStartButtonClick() throws IOException{

@@ -12,6 +12,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 
 import java.io.FileInputStream;
@@ -125,6 +127,7 @@ public class SettingController implements Initializable {
         keyMap.put(moveLeft,moveLeft.getText());
         keyMap.put(moveRight,moveRight.getText());
         keyMap.put(rotate,rotate.getText());
+
     }
 
     private void initHandler(TextField textField){
@@ -147,8 +150,6 @@ public class SettingController implements Initializable {
         });
     }
 
-
-
     private void updateProperty(Map<TextField,String> keyMap) {
         Properties prop = new Properties();
         keyMap.forEach((key,value)->{
@@ -156,13 +157,11 @@ public class SettingController implements Initializable {
         });
 
         FileOutputStream fos = null;
-
         try {
             fos = new FileOutputStream("src/main/resources/setting.properties");
 
             prop.store(fos,null);
             System.out.println("property 업뎃 완료");
-
         } catch (IOException e) {
 
         } finally {
@@ -222,7 +221,7 @@ public class SettingController implements Initializable {
 
     //해상도 바꿔주는 함수
     private void changeResolution(String resolution) {
-        Stage stage = (Stage) smallSize.getScene().getWindow();
+        Stage stage = (Stage)smallSize.getScene().getWindow();
 
         String[] dimensions = resolution.split("x");
         double width = Double.parseDouble(dimensions[0]);

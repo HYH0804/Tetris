@@ -4,11 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.SettingController">
+<BorderPane fx:id="settingPage" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.SettingController">
     <center>
         <VBox alignment="CENTER_LEFT" spacing="10">
             <padding>
-                <Insets bottom="20" left="20" right="20" top="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
             <Label style="-fx-text-fill: black;" text="화면 크기 설정" />
             <HBox HBox.hgrow="ALWAYS">
