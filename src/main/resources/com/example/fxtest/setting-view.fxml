@@ -17,7 +17,6 @@
                     <RadioButton fx:id="smallSize" text="800x600" style="-fx-text-fill: black;" selected="true"/>
                     <RadioButton fx:id="mediumSize" text="1024x768" style="-fx-text-fill: black;" />
                     <RadioButton fx:id="largeSize" text="1280x1024" style="-fx-text-fill: black;" />
-                    <Button text="확인" onAction="#applyResolution"/>
                 </VBox>
             </HBox>
             <Button fx:id="setKeyButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="조작키 설정" />

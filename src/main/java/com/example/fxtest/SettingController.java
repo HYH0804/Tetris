@@ -60,6 +60,7 @@ public class SettingController implements Initializable {
         System.out.println("버튼 메서드 실행");
         setKeyMap();
         updateProperty(keyMap); // Properties 파일 업데이트
+        applyResolution(); //해상도 변경
     }
 
     //각각 TextField에 이벤트 달아서 해당 텍스트를 가져와서 properties 파일에 저장
