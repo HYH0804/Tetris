@@ -43,6 +43,7 @@ public class GameBoard {
         for (int row = 0; row < HEIGHT; row++) {
             if (isRowFull(row)) {
                 removeRow(row);
+                row--
                 rowsRemoved++;
             }
         }
@@ -61,6 +62,17 @@ public class GameBoard {
         return true; // 모든 칸이 채워져 있으면 true 반환
     }
 
+
+    public List<Integer> getRemovedRows() {
+        List<Integer> removedRows = new ArrayList<>();
+        for (int row = 0; row < HEIGHT; row++) {
+            if (isRowFull(row)) {
+                removedRows.add(row);
+            }
+        }
+        return removedRows;
+    }
+    
     // 삭제된 줄의 수에 따라 점수를 업데이트
     private void updateScoreLine(int rowsRemoved) {
         switch (rowsRemoved) {
