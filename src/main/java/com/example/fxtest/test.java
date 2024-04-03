@@ -1,10 +1,14 @@
 package com.example.fxtest;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,8 +40,11 @@ public class test extends Application {
     public void start(Stage stage) throws IOException {
         StageSaver.setStage(stage);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("setting-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),300, 440);
+        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("keysetting-view.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Scene scene = new Scene(root,800, 800);
+        scene.setOnKeyPressed(event->
+                System.out.println((event.getCode())));
         stage.setTitle("Tetris");
         stage.setScene(scene);
         stage.show();

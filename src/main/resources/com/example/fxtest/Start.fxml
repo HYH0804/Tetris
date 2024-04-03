@@ -21,6 +21,6 @@
    <children>
    
        <Label fx:id="GameStart" prefHeight="15.0" prefWidth="0.0" text="..." />
-       <Button onAction="#OepnGameBoard" text="GameStart" />
+       <Button onAction="#OepnGameBoard"/>
    </children>
 </VBox>
