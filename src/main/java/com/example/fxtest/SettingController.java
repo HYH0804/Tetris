@@ -28,7 +28,7 @@ public class SettingController implements Initializable {
     @FXML
     private TextField rotate;
 
-    private List<String> startKey = new ArrayList<>();
+    public static List<String> startKey = new ArrayList<>();
 
     private Map<TextField,String> keyMap = new HashMap<>();
 
@@ -52,7 +52,7 @@ public class SettingController implements Initializable {
         initHandler(rotate);
     }
 
-    private void getKey() {
+    public static void getKey() {
         // Properties 객체 생성
         Properties prop = new Properties();
 
@@ -64,19 +64,19 @@ public class SettingController implements Initializable {
 
             // 각 키에 해당하는 값 읽어오기
             String moveDown = prop.getProperty("moveDown");
-            String moveLeft = prop.getProperty("moveLeft");
-            String moveRight = prop.getProperty("moveRight");
+            String moveLeft = prop.getProperty("moveRight");
+            String moveRight = prop.getProperty("moveLeft");
             String rotate = prop.getProperty("rotate");
 
             // 읽어온 값 출력
             System.out.println("moveDown: " + moveDown);
-            System.out.println("moveLeft: " + moveLeft);
-            System.out.println("moveRight: " + moveRight);
+            System.out.println("moveLeft: " + moveRight);
+            System.out.println("moveRight: " + moveLeft);
             System.out.println("rotate: " + rotate);
 
             startKey.add(moveDown);
-            startKey.add(moveLeft);
             startKey.add(moveRight);
+            startKey.add(moveLeft);
             startKey.add(rotate);
 
 
@@ -130,7 +130,7 @@ public class SettingController implements Initializable {
         FileOutputStream fos = null;
 
         try {
-            fos = new FileOutputStream("src/main/resources/setting.properties");
+            fos = new FileOutputStream("src/main/resources/setting.properties"); //빌드 시 경로 바꿔야함
 
             prop.store(fos,null);
             System.out.println("property 업뎃 완료");
