@@ -15,10 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -38,14 +41,12 @@ public class GameBoardController implements Initializable {
     Timeline timeline;
 
     @FXML
-    private GridPane boardView; //컨트롤View 매핑
+    public GridPane boardView; //컨트롤View 매핑
 
     @FXML
     private Button StartButton;
     @FXML
     private Button ExitButton;
-
-
 
     //주기함수 종료하고 다시 처음 페이지로
     @FXML
@@ -53,26 +54,15 @@ public class GameBoardController implements Initializable {
         Stage st = StageSaver.pStage;
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
         Scene mainpage = new Scene(fxmlLoader.load(), 320, 240);
-        timeline.stop(); //주기함수 종료
-        initBoard(); //board 0 초기화
-        GameBoard.whileGame =false;
         st.setScene(mainpage);
         st.show();
     }
 
     //타임라인 시간 설정 메서드
-    void setTime(float x){
+    void setTime(double x){
 
         timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
-            if(x==1.0f) {
-                minute10();
-            }// 1초마다 호출될 함수
-            else if(x==0.8f){
-                //minute8();
-            }
-            else{
-                //minute5();
-            }
+            minute10(); //x초만큼의 속도
         }));
 
 
@@ -104,61 +94,6 @@ public class GameBoardController implements Initializable {
 
     //@FXML로 게임 시작 버튼 만들어서 이거 누르면 다시 매 1초마다 호출되는 함수 호출하여 게임 재시작
     //여기서 initialize 함수 호출
-
-    public void colorErase() {
-        /*for (Block block : currentBrick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
-            int x = block.getX();
-            int y = block.getY();
-
-            // GridPane에서 특정 위치의 Rectangle을 찾아 제거
-            Node toRemove = null; // 제거할 Node 초기화
-            for (Node child : boardView.getChildren()) {
-                // GridPane에서의 Node 위치가 Block의 위치와 일치하는지 확인
-                if (GridPane.getColumnIndex(child) == x && GridPane.getRowIndex(child) == y && child instanceof Rectangle) {
-                    toRemove = child; // 일치하는 경우, 제거할 Node로 설정
-                    break; // 찾았으므로 루프 종료
-                }
-            }
-
-            if (toRemove != null) {
-                boardView.getChildren().remove(toRemove); // 해당 Node 제거
-            }*/
-
-        for(Block block : currentBrick.getBlockList()) {
-            Rectangle rectangleAt = getRectangleAt(boardView,block.getY(),block.getX());
-            boardView.getChildren().remove(rectangleAt);
-        }
-    }
-
-    //현재 GameBoard위 움직이는 Brick의 각 Rectangle 가져오기
-    private Rectangle getRectangleAt(GridPane gridPane, int columnIndex, int rowIndex) {
-        for (javafx.scene.Node node : gridPane.getChildren()) {
-            Integer nodeColumnIndex = GridPane.getColumnIndex(node);
-            Integer nodeRowIndex = GridPane.getRowIndex(node);
-
-            if (nodeColumnIndex != null && nodeRowIndex != null && nodeColumnIndex == columnIndex && nodeRowIndex == rowIndex) {
-                if (node instanceof Rectangle) {
-                    return (Rectangle) node;
-                }
-            }
-        }
-        return null;
-    }
-
-    public void colorFill(){
-        for (Block block : currentBrick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
-            int x = block.getX();
-            int y = block.getY();
-
-            // 20x20 픽셀 크기의 Rectangle 생성
-            Rectangle rectangle = new Rectangle(20, 20);
-            rectangle.setFill(Color.BLUE); // 색상 설정, 필요에 따라 변경 가능
-
-            // GridPane에 Rectangle 추가
-            boardView.add(rectangle, y, x);
-        }
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
@@ -168,6 +103,7 @@ public class GameBoardController implements Initializable {
         brickController = new BrickController(); //키 값 전부 field에 세팅
         // GridPane에 키 이벤트 핸들러 등록
         regiBrickEvent();
+        Drawing.setBoardView(boardView);
 
 
         // startButton의 클릭 이벤트 핸들러 등록
@@ -196,31 +132,9 @@ public class GameBoardController implements Initializable {
             stage.close();
         });
 
-        setTime(1.0f);
+        setTime(1.0);
         timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
         timeline.play(); // Timeline 시작
-    }
-
-    private void regiBrickEvent() {
-        boardView.setOnKeyPressed(event -> {
-            String keyValue = event.getCode().toString();
-            if (keyValue.equals(brickController.getMOVER()) || keyValue.toUpperCase().equals(brickController.getMOVER())) {
-                // 오른쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("R key pressed");
-            } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toUpperCase().equals(brickController.getMOVEL())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("L key pressed");
-            } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toUpperCase().equals(brickController.getMOVED())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("D key pressed");
-            } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toUpperCase().equals(brickController.getROTATE())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("R key pressed");
-            } /*else if(){
-                //여기는 수직떨구기
-                System.out.println("수직떨구기");
-            }*/
-        });
     }
 
 
@@ -239,6 +153,7 @@ public class GameBoardController implements Initializable {
     //키 입력 시 위치 변경
     //줄 꽉차면 없애고 그 윗줄 내리고
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
+    //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
         if(!GameBoard.whileGame){
 
@@ -256,10 +171,16 @@ public class GameBoardController implements Initializable {
         else{
             if(!currentBrick.canMoveDown()/*!canMoveDown()*/){ //더 못내려가면
                 //그 위치에 색칠
-                colorFill();
+                //colorFill();
+                Drawing.colorFill(currentBrick);
                 fixed();
 
-                //1인지 확인하고
+                /*if(currentBrick.isItem?) {
+                    //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
+                }*/
+
+                //gravity로 1인지 확인해서 board 업데이트하고
+                Drawing.updateBoardView();
                 //줄 지우기
 
 
@@ -285,9 +206,9 @@ public class GameBoardController implements Initializable {
             }
             else {
                 //지우고 moveD() 호출하고 색칠하기
-                colorErase();
+                Drawing.colorErase(currentBrick);
                 currentBrick.moveD();
-                colorFill();
+                Drawing.colorFill(currentBrick);
 
                 //테스트
                 printMatrix();
@@ -303,7 +224,7 @@ public class GameBoardController implements Initializable {
         nextBrick=new BrickZ(0, 4);
 
         //currentBrick 색칠하고
-        colorFill();
+        Drawing.colorFill(currentBrick);
 
         //이벤트 장착
     }
@@ -329,54 +250,28 @@ public class GameBoardController implements Initializable {
         System.out.println("--------END-------");
     }
 
+    private void regiBrickEvent() {
+        boardView.setOnKeyPressed(event -> {
+            String keyValue = event.getCode().toString();
+            if (keyValue.equals(brickController.getMOVER()) || keyValue.toUpperCase().equals(brickController.getMOVER())) {
+                // 오른쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("R key pressed");
+            } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toUpperCase().equals(brickController.getMOVEL())) {
+                // 왼쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("L key pressed");
+            } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toUpperCase().equals(brickController.getMOVED())) {
+                // 왼쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("D key pressed");
+            } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toUpperCase().equals(brickController.getROTATE())) {
+                // 왼쪽 이동 키가 눌렸을 때의 동작
+                System.out.println("R key pressed");
+            } /*else if(){
+                //여기는 수직떨구기
+                System.out.println("수직떨구기");
+            }*/
+        });
+    }
 
 
-
-
-    //매 0.8초마다 호출되는 함수
-    //더 이상 내려갈 수 없는지 확인 + 없다면 거기 위치에 Brick 박고 nextBrick을 currentBrick으로 넘기고 nextBrick 랜덤으로 뽑아오고
-/*    private void minute8(){
-        if(*//*턴 종료*//*){
-            *//*
-            nextBrick을 currentBrick으로 옮기면서 중심 위치 초기화
-            nextBrick 랜덤 뽑아와서 세팅
-            currentBrick 색칠하고 이벤트 장착
-            flag=false 로 초기화
-
-            *//*
-        }
-        else{
-            if(*//*!canMoveDown()*//*){
-                //flag를 true로 하고
-                //그 위치에 색칠
-            }
-            else {
-                //moveD() 호출하고 색칠하기
-            }
-        }
-    }*/
-
-    //0.5초마다 호출되는 함수
-    //더 이상 내려갈 수 없는지 확인 + 없다면 거기 위치에 Brick 박고 nextBrick을 currentBrick으로 넘기고 nextBrick 랜덤으로 뽑아오고
-/*    private void minute5(){
-        if(*//*턴 종료*//*){
-            *//*
-            nextBrick을 currentBrick으로 옮기면서 중심 위치 초기화
-            nextBrick 랜덤 뽑아와서 세팅
-            currentBrick 색칠하고 이벤트 장착
-            flag=false 로 초기화
-
-            *//*
-        }
-        else{
-            if(*//*!canMoveDown()*//*){
-                //flag를 true로 하고
-                //그 위치에 색칠
-            }
-            else {
-                //moveD() 호출하고 색칠하기
-            }
-        }
-    }*/
 
 }
