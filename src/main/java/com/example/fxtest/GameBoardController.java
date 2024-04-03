@@ -372,7 +372,7 @@ public class GameBoardController implements Initializable {
         }
     }*/
 
-    private static final String PROPERTIES_FILE = "resolution.properties";
+    private static final String PROPERTIES_FILE = "src/main/resources/resolution.properties";
 
     //보드 해상도 change함수
     public void change() throws IOException {

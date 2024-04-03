@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.prefs.Preferences;
 
 public class Main extends Application {
-    private static final String PROPERTIES_FILE = "resolution.properties";
+    private static final String PROPERTIES_FILE = "src/main/resources/resolution.properties";
 
     @Override
     public void start(Stage primaryStage) throws IOException {

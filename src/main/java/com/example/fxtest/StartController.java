@@ -34,7 +34,7 @@ public class StartController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private Label infoLabel;
-    private static final String PROPERTIES_FILE = "resolution.properties";
+    private static final String PROPERTIES_FILE = "src/main/resources/resolution.properties";
     // 이 메서드는 FXML 파일 로딩이 완료된 후 자동으로 호출됩니다.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
