@@ -293,6 +293,17 @@ public class BrickJ implements Brick {
         postChange();
     }
 
+    @Override
+    public void straightD() {
+        while(canMoveDown()){
+            //이동 후 a b c d 좌표 변경
+            a.setX(a.getX()+1);
+            b.setX(b.getX()+1);
+            c.setX(c.getX()+1);
+            d.setX(d.getX()+1);
+        }
+    }
+
     //Getter Setter
     public Block getA() {
         return a;

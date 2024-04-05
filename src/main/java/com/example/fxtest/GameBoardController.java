@@ -256,33 +256,37 @@ public class GameBoardController implements Initializable {
         }
     }
 
+
+
+    //무게추 같은 경우에는 로테이트 함수 구현은 해놔야됨. 바디는 냅두고
     private void regiBrickEvent() {
         boardView.setOnKeyPressed(event -> {
             Drawing.colorErase(currentBrick);
             String keyValue = event.getCode().toString();
-            if (keyValue.equals(brickController.getMOVER()) || keyValue.toUpperCase().equals(brickController.getMOVER())) {
+            if (keyValue.equals(brickController.getMOVER()) || keyValue.toLowerCase().equals(brickController.getMOVER())) {
                 // 오른쪽 이동 키가 눌렸을 때의 동작
                 System.out.println("Right key pressed");
                 brickController.moveR(currentBrick);
                 printBlock();
-            } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toUpperCase().equals(brickController.getMOVEL())) {
+            } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
                 // 왼쪽 이동 키가 눌렸을 때의 동작
                 System.out.println("Left key pressed");
                 brickController.moveL(currentBrick);
                 printBlock();
-            } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toUpperCase().equals(brickController.getMOVED())) {
+            } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
                 // 아래 이동 키가 눌렸을 때의 동작
                 brickController.moveD(currentBrick);
                 printBlock();
-            } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toUpperCase().equals(brickController.getROTATE())) {
+            } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                 // 회전 키가 눌렸을 때의 동작
                 System.out.println("Rotate key pressed");
                 brickController.rotate(currentBrick);
                 printBlock();
-            } /*else if(){
+            } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())){
                 //여기는 수직떨구기
+                brickController.straightD(currentBrick);
                 System.out.println("수직떨구기");
-            }*/
+            }
             event.consume();
             Drawing.colorFill(currentBrick); //색칠하고
         });

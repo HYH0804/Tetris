@@ -11,6 +11,7 @@ public class BrickController{
     private String ROTATE;
 
     //수직떨어지기 추가해야됨
+    private String STRAIGHT;
 
 
     //싱글톤
@@ -26,7 +27,7 @@ public class BrickController{
         MOVEL=SettingController.startKey.get(1);
         MOVER=SettingController.startKey.get(2);
         ROTATE=SettingController.startKey.get(3);
-        //수직떨어지기 추가해야됨
+        STRAIGHT=SettingController.startKey.get(4);
     }
     //싱글톤
 
@@ -71,6 +72,10 @@ public class BrickController{
         System.out.println("이동불가능");
     }
 
+    public void straightD(Brick brick){
+        brick.straightD();
+    }
+
     public String getMOVED() {
         return MOVED;
     }
@@ -85,6 +90,9 @@ public class BrickController{
 
     public String getROTATE() {
         return ROTATE;
+    }
+    public String getSTRAIGHT(){
+        return STRAIGHT;
     }
 
 }

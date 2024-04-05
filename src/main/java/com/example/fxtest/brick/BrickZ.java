@@ -48,38 +48,38 @@ public class BrickZ implements Brick {
         Block Rotate_d;
 
         if (nextShape == 0) {
-            Rotate_a = new Block(a.getX() - 1, a.getY() - 1);
+            Rotate_a = new Block(b.getX(), b.getY() - 1);
             Rotate_b = new Block(b.getX(), b.getY()); // b 중심점이라 변환 X
-            Rotate_c = new Block(c.getX() + 1, c.getY() - 1);
-            Rotate_d = new Block(d.getX(), d.getY() + 2);
+            Rotate_c = new Block(b.getX() + 1, b.getY());
+            Rotate_d = new Block(b.getX()+1, b.getY() + 1);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
 
         } else if (nextShape == 1) {
-            Rotate_a = new Block(a.getX() - 1, a.getY() - 1);
+            Rotate_a = new Block(b.getX() - 1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(c.getX() - 1, c.getY() - 1);
-            Rotate_d = new Block(d.getX(), d.getY() - 2);
+            Rotate_c = new Block(b.getX(), b.getY() - 1);
+            Rotate_d = new Block(b.getX()+1, b.getY() - 1);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
         } else if (nextShape == 2) {
-            Rotate_a = new Block(a.getX() + 1, a.getY() + 1);
+            Rotate_a = new Block(b.getX(), b.getY() + 1);
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(c.getX() - 1, c.getY() + 1);
-            Rotate_d = new Block(d.getX() - 2, d.getY());
+            Rotate_c = new Block(b.getX() - 1, b.getY());
+            Rotate_d = new Block(b.getX()-1, b.getY()-1);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
         } else if (nextShape == 3) {
-            Rotate_a = new Block(a.getX() + 1, a.getY() - 1);
+            Rotate_a = new Block(b.getX()+1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(c.getX() + 1, c.getY() + 1);
-            Rotate_d = new Block(d.getX(), d.getY() + 2);
+            Rotate_c = new Block(b.getX(), b.getY()+1);
+            Rotate_d = new Block(b.getX()-1, b.getY()+1);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
@@ -91,7 +91,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -199,40 +199,40 @@ public class BrickZ implements Brick {
         int x=b.getX(); // 회전 중심 x
         int y=b.getY(); // 회전 중심 y
         if(shape==0){ //3 > 0 회전
-            a.setX(a.getX()-1);
-            a.setY(a.getY()-1);
+            a.setX(b.getX());
+            a.setY(b.getY() - 1);
             //b는 중심점이라 그대로
-            c.setX(c.getX()+1);
-            c.setY(c.getY()-1);
-            d.setX(d.getX());
-            d.setY(d.getY()+2);
+            c.setX(b.getX() + 1);
+            c.setY(b.getY());
+            d.setX(b.getX()+1);
+            d.setY(b.getY() + 1);
         }
         else if (shape==1) { //0 > 1 회전
-            a.setX(a.getX()-1);
-            a.setY(a.getY()+1);
+            a.setX(b.getX() - 1);
+            a.setY(b.getY());
             //b는 중심점이라 그대로
-            c.setX(c.getX()-1);
-            c.setY(c.getY()-1);
-            d.setX(d.getX());
-            d.setY(d.getY()-2);
+            c.setX(b.getX());
+            c.setY(b.getY() - 1);
+            d.setX(b.getX()+1);
+            d.setY(b.getY() - 1);
         }
         else if (shape==2) { //1 > 2 회전
-            a.setX(a.getX()+1);
-            a.setY(a.getY()+1);
+            a.setX(b.getX());
+            a.setY(b.getY() + 1);
             //b는 중심점이라 그대로
-            c.setX(c.getX()-1);
-            c.setY(c.getY()+1);
-            d.setX(d.getX()-2);
-            d.setY(d.getY());
+            c.setX(b.getX() - 1);
+            c.setY(b.getY());
+            d.setX(b.getX()-1);
+            d.setY(b.getY()-1);
         }
         else{ //2 > 3 회전
-            a.setX(a.getX()+1);
-            a.setY(a.getY()-1);
+            a.setX(b.getX()+1);
+            a.setY(b.getY());
             //b는 중심점이라 그대로
-            c.setX(c.getX()+1);
-            c.setY(c.getY()+1);
-            d.setX(d.getX());
-            d.setY(d.getY()+2);
+            c.setX(b.getX());
+            c.setY(b.getY()+1);
+            d.setX(b.getX()-1);
+            d.setY(b.getY()+1);
         }
         //돌린 후 1 세팅
         //postChange();
@@ -294,6 +294,17 @@ public class BrickZ implements Brick {
         d.setX(d.getX()+1);
 
         //postChange();
+    }
+
+    @Override
+    public void straightD() {
+        while(canMoveDown()){
+            //이동 후 a b c d 좌표 변경
+            a.setX(a.getX()+1);
+            b.setX(b.getX()+1);
+            c.setX(c.getX()+1);
+            d.setX(d.getX()+1);
+        }
     }
 
     //Getter Setter

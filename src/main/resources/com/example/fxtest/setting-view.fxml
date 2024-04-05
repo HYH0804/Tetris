@@ -19,6 +19,7 @@
             <TextField fx:id="moveRight" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="moveRight" />
             <TextField fx:id="moveLeft" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="moveLeft" />
             <TextField fx:id="rotate" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="rotate" />
+            <TextField fx:id="straight" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="straight" />
         </VBox>
     </center>
     <bottom>
