@@ -60,6 +60,7 @@ public class Drawing {
         return null;
     }
 
+    //줄 지웠을때 Gridpane만 냅두고 위에 객체들 새로 그리기
     public static void updateBoardView(){
         // GridPane에서 제거할 Label 객체들을 담을 리스트 생성
         List<Node> labelsToRemove = new ArrayList<>();

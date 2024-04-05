@@ -156,7 +156,7 @@ public class GameBoardController implements Initializable {
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
         if(!GameBoard.whileGame){
-
+            System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
             sponBrick();
 
@@ -174,7 +174,7 @@ public class GameBoardController implements Initializable {
                 //colorFill();
                 Drawing.colorFill(currentBrick);
                 fixed();
-
+                System.out.println("!currentBrick.canMoveDown()");
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
@@ -198,7 +198,7 @@ public class GameBoardController implements Initializable {
                 else{
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                     sponBrick();
-
+                    System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰");
                     //테스트
                     //printMatrix();
                 }
@@ -207,6 +207,7 @@ public class GameBoardController implements Initializable {
             else {
                 //지우고 moveD() 호출하고 색칠하기
                 Drawing.colorErase(currentBrick);
+                System.out.println("겜은 안끝났고 내려갈 곳도 있고");
                 currentBrick.moveD();
                 Drawing.colorFill(currentBrick);
 
@@ -284,7 +285,16 @@ public class GameBoardController implements Initializable {
                 printBlock();
             } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())){
                 //여기는 수직떨구기
+                System.out.println("---------------------------------수직 떨구기 누름");
                 brickController.straightD(currentBrick);
+                //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
+                timeline.stop();
+                System.out.println("---------------------------------정지");
+                //떨구고 바로 블록 뽑아옴
+                minute10();
+                timeline.play();
+                Drawing.colorErase(currentBrick);
+                System.out.println("---------------------------------재게");
                 System.out.println("수직떨구기");
             }
             event.consume();
