@@ -1,6 +1,8 @@
 package com.example.fxtest;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameBoard {
     //이거 조심
