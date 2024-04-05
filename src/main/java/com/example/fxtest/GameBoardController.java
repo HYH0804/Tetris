@@ -50,13 +50,29 @@ public class GameBoardController implements Initializable {
 
     //주기함수 종료하고 다시 처음 페이지로
     @FXML
-    public void onStartButtonClick() throws IOException{
+    public void goHomeButtonClick() throws IOException{
         Stage st = StageSaver.pStage;
+        timeline.stop(); //주기함수 종료
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
         Scene mainpage = new Scene(fxmlLoader.load(), 320, 240);
         st.setScene(mainpage);
         st.show();
     }
+
+    @FXML
+    public void pauseButtonClick() throws IOException{
+        if(GameBoard.pause) {
+            GameBoard.pause=false;
+            regiBrickEvent();
+            timeline.play();
+
+        }
+        else{
+            GameBoard.pause=true;
+            timeline.stop();
+        }
+    }
+
 
     //타임라인 시간 설정 메서드
     void setTime(double x){
@@ -82,6 +98,16 @@ public class GameBoardController implements Initializable {
         GameBoard.whileGame =false;
         timeline.stop();
         regiBrickEvent();
+        System.out.println("초기화완료");
+    }
+
+    void destroy(){
+        initBoard();
+        GameBoard.score=0;
+        GameBoard.deleteLine=0;
+        GameBoard.whileGame =false;
+        timeline.stop();
+        boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
     }
     
@@ -129,6 +155,7 @@ public class GameBoardController implements Initializable {
             // 현재 스테이지를 가져옴
             Stage stage = (Stage) ExitButton.getScene().getWindow();
             // 어플리케이션 종료
+            timeline.stop();
             stage.close();
         });
 
@@ -155,6 +182,7 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
+        Drawing.colorErase(currentBrick);
         if(!GameBoard.whileGame){
             System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
@@ -178,9 +206,15 @@ public class GameBoardController implements Initializable {
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
-
+                System.out.println("완성 줄 삭제 전---------------");
+                printMatrix();
+                gameBoard.removeFullRows();
+                System.out.println("완성 줄 삭제 후---------------");
+                printMatrix();
                 //gravity로 1인지 확인해서 board 업데이트하고
+
                 Drawing.updateBoardView();
+                printMatrix();
                 //줄 지우기
 
 
@@ -190,7 +224,7 @@ public class GameBoardController implements Initializable {
 
                     System.out.println("게임종료");
                     //전부 초기화
-                    init();
+                    destroy();
 
                     //테스트
                     //printMatrix();
@@ -298,7 +332,9 @@ public class GameBoardController implements Initializable {
                 System.out.println("수직떨구기");
             }
             event.consume();
-            Drawing.colorFill(currentBrick); //색칠하고
+            if(GameBoard.whileGame==true) {
+                Drawing.colorFill(currentBrick);
+            }//색칠하고
         });
     }
 

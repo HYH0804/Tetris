@@ -44,8 +44,9 @@
             <RowConstraints />
         </rowConstraints>
       </GridPane>
-       <Button layoutX="226.0" layoutY="211.0" onAction="#onStartButtonClick" text="GoHome" />
+       <Button layoutX="226.0" layoutY="211.0" onAction="#goHomeButtonClick" text="GoHome" />
       <Button fx:id="StartButton" layoutX="226.0" layoutY="241.0" mnemonicParsing="false" text="Start" />
-       <Button fx:id="ExitButton" layoutX="226.0" layoutY="281.0" mnemonicParsing="false" text="Exit" />
+      <Button layoutX="226.0" layoutY="301.0" onAction="#pauseButtonClick" mnemonicParsing="false" text="Pause" />
+       <Button fx:id="ExitButton" layoutX="226.0" layoutY="271.0" mnemonicParsing="false" text="Exit" />
    </children>
 </AnchorPane>
