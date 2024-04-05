@@ -23,6 +23,8 @@ public interface Brick {
 
     public void moveD();
 
+    public void straightD();
+
     public void preChange();
 
     public void postChange();
