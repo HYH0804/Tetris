@@ -28,6 +28,9 @@ public class SettingController implements Initializable {
     @FXML
     private TextField rotate;
 
+    @FXML
+    private TextField straight;
+
     public static List<String> startKey = new ArrayList<>();
 
     private Map<TextField,String> keyMap = new HashMap<>();
@@ -50,6 +53,7 @@ public class SettingController implements Initializable {
         initHandler(moveRight);
         initHandler(moveLeft);
         initHandler(rotate);
+        initHandler(straight);
     }
 
     public static void getKey() {
@@ -67,17 +71,20 @@ public class SettingController implements Initializable {
             String moveLeft = prop.getProperty("moveRight");
             String moveRight = prop.getProperty("moveLeft");
             String rotate = prop.getProperty("rotate");
+            String straight= prop.getProperty("straight");
 
             // 읽어온 값 출력
             System.out.println("moveDown: " + moveDown);
-            System.out.println("moveLeft: " + moveRight);
-            System.out.println("moveRight: " + moveLeft);
+            System.out.println("moveRight: " + moveRight);
+            System.out.println("moveLeft: " + moveLeft);
             System.out.println("rotate: " + rotate);
+            System.out.println("straight: " + straight);
 
             startKey.add(moveDown);
             startKey.add(moveRight);
             startKey.add(moveLeft);
             startKey.add(rotate);
+            startKey.add(straight);
 
 
         } catch (IOException e) {
@@ -90,13 +97,15 @@ public class SettingController implements Initializable {
         moveRight.setText(startKey.get(1));
         moveLeft.setText(startKey.get(2));
         rotate.setText(startKey.get(3));
+        straight.setText(startKey.get(4));
     }
 
     public void setKeyMap(){
         keyMap.put(moveDown,moveDown.getText());
-        keyMap.put(moveLeft,moveLeft.getText());
         keyMap.put(moveRight,moveRight.getText());
+        keyMap.put(moveLeft,moveLeft.getText());
         keyMap.put(rotate,rotate.getText());
+        keyMap.put(straight, straight.getText());
     }
 
     private void initHandler(TextField textField){
@@ -108,6 +117,7 @@ public class SettingController implements Initializable {
                 case DOWN:
                 case LEFT:
                 case RIGHT:
+                case SPACE:
                     // 방향키가 눌렸을 때만 KeyCode의 이름을 Text 컨트롤에 표시
                     String keyCodeName = event.getCode().toString();
                     textField.setText(keyCodeName);
