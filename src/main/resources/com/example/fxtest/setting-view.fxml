@@ -20,7 +20,7 @@
             <Button fx:id="setKeyButton" style="-fx-text-fill: black; -fx-border-width: 0;" text="조작키 설정" onAction="#onSetKeyButtonClick"/>
             <Button fx:id="resetScoreButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="스코어 보드 초기화" />
             <Button fx:id="toggleColorBlindModeButton" style="-fx-text-fill: black; -fx-border-width: 0;" text="색맹 모드 전환" onAction = "#onToggleColorBlindModeButton"/>
-            <Button fx:id="resetSettingsButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="설정 초기화" />
+            <Button fx:id="resetSettingsButton" style=" -fx-text-fill: black; -fx-border-width: 0;" text="설정 초기화" onAction = "#onResetSettingsButton"/>
         </VBox>
     </center>
     <bottom>

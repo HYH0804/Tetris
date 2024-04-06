@@ -58,7 +58,7 @@ public class SettingController implements Initializable {
         mediumSize.setToggleGroup(sizeToggleGroup);
         largeSize.setToggleGroup(sizeToggleGroup);
         try {
-            ColorBlindness.propColorBlindness();
+            ColorBlindness.propLoad();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -84,10 +84,37 @@ public class SettingController implements Initializable {
     }
 
     @FXML
+    public void onResetSettingsButton(){
+        System.out.println("Reset Properties Execute");
+
+        // resolution.properties
+        Properties properties1 = new Properties();
+        properties1.setProperty("resolution", "800x600");
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/resolution.properties")) {
+            properties1.store(out, "Application Configuration");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // setting.properties
+        Properties properties2 = new Properties();
+        String[][] propResetValue = {{"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop", "colorBlindness"},{"UP","LEFT","RIGHT","DOWN","SPACE","0"}};
+        for(int i = 0; i < 6; i++) {
+            properties2.setProperty(propResetValue[0][i], propResetValue[1][i]);
+        }
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/setting.properties")) {
+            properties2.store(out, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
     public void onConfirmButtonClick() throws IOException {
         System.out.println("Button Method Execute");
         applyResolution(); //해상도 변경
-        saveColorBlindness(); // 색맹 저장
+        ColorBlindness.propSave(); // 색맹 저장
     }
 
     @FXML
@@ -156,28 +183,6 @@ public class SettingController implements Initializable {
         }
         else{
             toggleColorBlindModeButton.setText("색맹모드: OFF");
-        }
-    }
-
-    private void saveColorBlindness(){
-        Properties prop = new Properties();
-        if (ColorBlindness.colorBlindness){
-            prop.setProperty("colorBlindness","1");
-        }
-        else {
-            prop.setProperty("colorBlindness","0");
-        }
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream("src/main/resources/setting.properties");
-
-            prop.store(fos,null);
-            System.out.println("propeties update done");
-        } catch (IOException e) {}
-        finally {
-            try {
-                fos.close();
-            } catch (IOException e) {}
         }
     }
 }

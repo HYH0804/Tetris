@@ -4,6 +4,7 @@ import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -13,11 +14,11 @@ public class ColorBlindness {
             Color.GREEN, Color.RED, Color.BLUE, Color.ORANGE}; //0: default, from 1 to 7: IOTSZJL
     private static final Color[] color1 = {Color.BLACK,Color.SKYBLUE,Color.YELLOW, Color.PALEVIOLETRED,
             Color.color(0,158/255.0,87/255.0), Color.color(213/255.0,94/255.0,0), Color.BLUE, Color.color(231/255.0,160/255.0,0)};
+    private static Properties properties = new Properties();
 
     public static Color getColor(int index) throws IOException {
-        if(colorBlindness == null){
-            propColorBlindness();
-        }
+            propLoad();
+
         if(colorBlindness){
             return color1[index];
         }
@@ -26,15 +27,11 @@ public class ColorBlindness {
         }
     }
 
-    public static void changeColorBlindness() throws IOException {
-        if(colorBlindness == null){
-            propColorBlindness();
-        }
+    public static void changeColorBlindness() {
         colorBlindness = !colorBlindness;
     }
 
-    public static void propColorBlindness() throws IOException {
-        Properties properties = new Properties();
+    public static void propLoad() throws IOException {
         FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
         properties.load(in);
         in.close();
@@ -45,6 +42,21 @@ public class ColorBlindness {
         }
         else {
             colorBlindness = false;
+        }
+    }
+
+    public static void propSave() {
+        if(colorBlindness){
+            properties.setProperty("colorBlindness", "1");
+        }
+        else {
+            properties.setProperty("colorBlindness", "0");
+        }
+
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/setting.properties")) {
+            properties.store(out, null);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
