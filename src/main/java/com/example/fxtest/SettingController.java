@@ -11,6 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -29,7 +30,6 @@ import static com.example.fxtest.Main.loadProperties;
 public class SettingController implements Initializable {
 //확인 버튼 누르면 Scene 다시 띄우는걸로
 
-
     @FXML
     private Button confirmButton;
     @FXML
@@ -42,6 +42,8 @@ public class SettingController implements Initializable {
     private RadioButton largeSize;
     @FXML
     private Button setKeyButton;
+    @FXML
+    private Button toggleColorBlindModeButton;
 
 
     private ToggleGroup sizeToggleGroup = new ToggleGroup();
@@ -55,6 +57,12 @@ public class SettingController implements Initializable {
         smallSize.setToggleGroup(sizeToggleGroup);
         mediumSize.setToggleGroup(sizeToggleGroup);
         largeSize.setToggleGroup(sizeToggleGroup);
+        try {
+            ColorBlindness.propColorBlindness();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        changeColorBlindnessText();
     }
 
     @FXML
@@ -69,9 +77,17 @@ public class SettingController implements Initializable {
     }
 
     @FXML
+    public void onToggleColorBlindModeButton() throws IOException {
+        System.out.println("Color mode Changed");
+        ColorBlindness.changeColorBlindness();
+        changeColorBlindnessText();
+    }
+
+    @FXML
     public void onConfirmButtonClick() throws IOException {
         System.out.println("Button Method Execute");
         applyResolution(); //해상도 변경
+        saveColorBlindness(); // 색맹 저장
     }
 
     @FXML
@@ -132,5 +148,36 @@ public class SettingController implements Initializable {
 
         stage.setWidth(width);
         stage.setHeight(height);
+    }
+
+    private void changeColorBlindnessText() {
+        if(ColorBlindness.colorBlindness){
+            toggleColorBlindModeButton.setText("색맹모드: ON");
+        }
+        else{
+            toggleColorBlindModeButton.setText("색맹모드: OFF");
+        }
+    }
+
+    private void saveColorBlindness(){
+        Properties prop = new Properties();
+        if (ColorBlindness.colorBlindness){
+            prop.setProperty("colorBlindness","1");
+        }
+        else {
+            prop.setProperty("colorBlindness","0");
+        }
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("src/main/resources/setting.properties");
+
+            prop.store(fos,null);
+            System.out.println("propeties update done");
+        } catch (IOException e) {}
+        finally {
+            try {
+                fos.close();
+            } catch (IOException e) {}
+        }
     }
 }
