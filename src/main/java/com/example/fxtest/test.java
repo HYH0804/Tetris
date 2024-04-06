@@ -54,7 +54,8 @@ public class test extends Application {
         stage.setTitle("Tetris");
         KeySettingController key = new KeySettingController();
         key.initPageHandler(scene, root);
-        stage.setScene(scene);
+        //stage.setScene(scene);
+        stage.setScene(KeySettingController.KeySettingScene());
         stage.show();
 
 
