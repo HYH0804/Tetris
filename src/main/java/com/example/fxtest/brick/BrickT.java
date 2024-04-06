@@ -47,8 +47,8 @@ public class BrickT implements Brick{
         if (nextShape == 0) {
             Rotate_a = new Block(b.getX() - 1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); // b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() + 1, b.getY());
-            Rotate_d = new Block(b.getX() + 1, b.getY() - 1);
+            Rotate_c = new Block(b.getX(), b.getY() +1);
+            Rotate_d = new Block(b.getX(), b.getY() - 1);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
@@ -57,8 +57,8 @@ public class BrickT implements Brick{
         } else if (nextShape == 1) {
             Rotate_a = new Block(b.getX(), b.getY() + 1);
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX(), b.getY() - 1);
-            Rotate_d = new Block(b.getX() - 1, b.getY() - 1);
+            Rotate_c = new Block(b.getX() + 1, b.getY());
+            Rotate_d = new Block(b.getX() - 1, b.getY());
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
@@ -66,8 +66,8 @@ public class BrickT implements Brick{
         } else if (nextShape == 2) {
             Rotate_a = new Block(b.getX() + 1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() - 1, b.getY());
-            Rotate_d = new Block(b.getX() - 1, b.getY() + 1);
+            Rotate_c = new Block(b.getX(), b.getY() - 1);
+            Rotate_d = new Block(b.getX(), b.getY() + 1);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
@@ -75,8 +75,8 @@ public class BrickT implements Brick{
         } else if (nextShape == 3) {
             Rotate_a = new Block(b.getX(), b.getY() - 1);
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX(), b.getY() + 1);
-            Rotate_d = new Block(b.getX() + 1, b.getY() + 1);
+            Rotate_c = new Block(b.getX() - 1, b.getY());
+            Rotate_d = new Block(b.getX() + 1, b.getY());
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
@@ -197,37 +197,37 @@ public class BrickT implements Brick{
             a.setX(b.getX() - 1);
             a.setY(b.getY());
             //b는 중심점이라 그대로
-            c.setX(b.getX() + 1);
-            c.setY(b.getY());
-            d.setX(b.getX() + 1);
+            c.setX(b.getX());
+            c.setY(b.getY() + 1);
+            d.setX(b.getX() );
             d.setY(b.getY() - 1);
         }
         else if (shape==1) { //0 > 1 회전
             a.setX(b.getX());
             a.setY(b.getY() + 1);
             //b는 중심점이라 그대로
-            c.setX(b.getX());
-            c.setY(b.getY() - 1);
+            c.setX(b.getX() + 1);
+            c.setY(b.getY());
             d.setX(b.getX() - 1);
-            d.setY(b.getY() - 1);
+            d.setY(b.getY());
         }
         else if (shape==2) { //1 > 2 회전
             a.setX(b.getX() + 1);
             a.setY(b.getY());
             //b는 중심점이라 그대로
-            c.setX(b.getX() - 1);
-            c.setY(b.getY());
-            d.setX(b.getX() - 1);
+            c.setX(b.getX());
+            c.setY(b.getY() - 1);
+            d.setX(b.getX());
             d.setY(b.getY() + 1);
         }
         else{ //2 > 3 회전
             a.setX(b.getX());
             a.setY(b.getY() - 1);
             //b는 중심점이라 그대로
-            c.setX(b.getX());
-            c.setY(b.getY() + 1);
+            c.setX(b.getX() - 1);
+            c.setY(b.getY());
             d.setX(b.getX() + 1);
-            d.setY(b.getY() + 1);
+            d.setY(b.getY());
         }
         //돌린 후 1 세팅
         //postChange();
