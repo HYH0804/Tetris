@@ -33,7 +33,10 @@ public class KeySettingController implements Initializable {
     private Map<Label,String> keyMap = new HashMap<>();
     private static Boolean[] buttonClicked = {false,false,false,false,false};
     private Label[] labelSet = new Label[LABELNUM];
+
     private final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "straight"};
+    private static Properties settingProperties;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -103,16 +106,15 @@ public class KeySettingController implements Initializable {
                         for(int i = 0; i < LABELNUM; i++){
                             keyMap.put(labelSet[i],labelSet[i].getText());
                         }
-                        Properties prop = new Properties();
                         keyMap.forEach((key,value)->{
-                            prop.setProperty(key.getId(),value);
+                            settingProperties.setProperty(key.getId(),value);
                         });
 
                         FileOutputStream fos = null;
                         try {
                             fos = new FileOutputStream("src/main/resources/setting.properties");
 
-                            prop.store(fos,null);
+                            settingProperties.store(fos,null);
                             System.out.println("propeties update done");
                         } catch (IOException e) {}
                         finally {
@@ -177,11 +179,11 @@ public class KeySettingController implements Initializable {
 
     private void getKey() {
         // Properties 객체 생성
-        Properties prop = new Properties();
+        settingProperties = new Properties();
         try {
             // setting.properties 파일 로드
             FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
-            prop.load(in);
+            settingProperties.load(in);
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -189,7 +191,7 @@ public class KeySettingController implements Initializable {
 
         // 기존 properties 값 받아오기
         for(int i = 0; i < LABELNUM; i++){
-            labelSet[i].setText(prop.getProperty(buttonName[i]));
+            labelSet[i].setText(settingProperties.getProperty(buttonName[i]));
             System.out.println(buttonName[i]+ ": " + labelSet[i].getText());
         }
     }

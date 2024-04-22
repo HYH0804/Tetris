@@ -11,6 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -29,7 +30,6 @@ import static com.example.fxtest.Main.loadProperties;
 public class SettingController implements Initializable {
 //확인 버튼 누르면 Scene 다시 띄우는걸로
 
-
     @FXML
     private Button confirmButton;
     @FXML
@@ -43,6 +43,8 @@ public class SettingController implements Initializable {
 
     @FXML
     private Button setKeyButton;
+    @FXML
+    private Button toggleColorBlindModeButton;
 
     public static List<String> startKey = new ArrayList<>();
 
@@ -57,6 +59,12 @@ public class SettingController implements Initializable {
         smallSize.setToggleGroup(sizeToggleGroup);
         mediumSize.setToggleGroup(sizeToggleGroup);
         largeSize.setToggleGroup(sizeToggleGroup);
+        try {
+            ColorBlindness.propLoad();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        changeColorBlindnessText();
     }
 
     @FXML
@@ -71,9 +79,44 @@ public class SettingController implements Initializable {
     }
 
     @FXML
+    public void onToggleColorBlindModeButton() throws IOException {
+        System.out.println("Color mode Changed");
+        ColorBlindness.changeColorBlindness();
+        changeColorBlindnessText();
+    }
+
+    @FXML
+    public void onResetSettingsButton(){
+        System.out.println("Reset Properties Execute");
+
+        // resolution.properties
+        Properties properties1 = new Properties();
+        properties1.setProperty("resolution", "800x600");
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/resolution.properties")) {
+            properties1.store(out, "Application Configuration");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // setting.properties
+        Properties properties2 = new Properties();
+        String[][] propResetValue = {{"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop", "colorBlindness"},{"UP","LEFT","RIGHT","DOWN","SPACE","0"}};
+        for(int i = 0; i < 6; i++) {
+            properties2.setProperty(propResetValue[0][i], propResetValue[1][i]);
+        }
+        try (FileOutputStream out = new FileOutputStream("src/main/resources/setting.properties")) {
+            properties2.store(out, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
     public void onConfirmButtonClick() throws IOException {
         System.out.println("Button Method Execute");
         applyResolution(); //해상도 변경
+        ColorBlindness.propSave(); // 색맹 저장
     }
 
     public static void getKey() {
@@ -172,6 +215,16 @@ public class SettingController implements Initializable {
 
         stage.setWidth(width);
         stage.setHeight(height);
+    }
+
+
+    private void changeColorBlindnessText() {
+        if(ColorBlindness.colorBlindness){
+            toggleColorBlindModeButton.setText("색맹모드: ON");
+        }
+        else{
+            toggleColorBlindModeButton.setText("색맹모드: OFF");
+        }
     }
 
 }
