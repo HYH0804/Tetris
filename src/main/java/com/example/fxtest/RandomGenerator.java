@@ -1,11 +1,35 @@
 package com.example.fxtest;
 
+import com.example.fxtest.brick.*;
+
+import java.util.Random;
 public class RandomGenerator {
+
     //여기서 색상 주입 >> 색맹이냐 아니냐 나눠야될듯
 
     //일반블록: 아이템 자체 블록 제외하고 블록 모양 택
         //a b c d 만들고 각각 색상, 폰트 주입
+    public Brick genarateNormal(int difficulty, boolean color){
+        Random rand = new Random(); // Random 객체 생성
+        int upperBound = 7; // 상한 설정
+        int randomNumber = rand.nextInt(upperBound) + 1; 
+        if(randomNumber==1){
+            new BrickZ(0, 4);
+        } else if (randomNumber==2) {
+        //블록만들기
+        } else if (randomNumber==3) {
 
+        } else if (randomNumber==4) {
+
+        } else if (randomNumber==5) {
+
+        } else if (randomNumber==6) {
+
+        } else {
+
+        }
+
+    }
 
 
     //아이템일때: 블록 모양 먼저 택
@@ -13,6 +37,26 @@ public class RandomGenerator {
         //아니면
             //랜덤으로 a,b,c,d 중 하나만 랜덤으로 아이템 기능 가져와서 + a b c d 각각 폰트 주입
             //블록 모양대로 만듦
+    public Brick generateItem(int difficulty,boolean color){
+        Random rand = new Random(); // Random 객체 생성
+        int upperBound=5; //0 ~ 4까지
+        int item = rand.nextInt(upperBound) + 2; //2 부터 6까지
+        upperBound =
+        upperBound = 4; //0~3까지
+        int block = rand.nextInt(upperBound); //0 ~ 3까지 , 0이면 a에 Item, 1이면 b에 Item, 2이면 c에 Item, 3이면 d에 Item
+        if(item==2){
+            return new BrickW(1, 4);
+        } else{
+            Brick brick = genarateNormal(difficulty, color);
+
+            if(block==0){
+                brick.get
+            }
+
+
+        }
+
+    }
 
 
     //아이템 블록인지 (브릭 자체가 아이템인지 , 블록 안에 아이템이 있는지) 확인 어케? + 아이템이면 배열에 어케 표시할건지 + 아이템 기능 구현을 어디 메서드 안에 할건지

@@ -25,10 +25,10 @@ public class BrickZ implements Brick {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅
         this.center_x = center_x;
         this.center_y = center_y;
-        this.a= new Block(center_x,center_y-1);
-        this.b=new Block(center_x, center_y); //b가 센터
-        this.c=new Block(center_x+1, center_y);
-        this.d=new Block(center_x+1,center_y+1);
+        this.a= new Block(center_x,center_y-1,Item.NORMAL);
+        this.b=new Block(center_x, center_y,Item.NORMAL); //b가 센터
+        this.c=new Block(center_x+1, center_y,Item.NORMAL);
+        this.d=new Block(center_x+1,center_y+1,Item.NORMAL);
         this.shape=0;
         blockList.add(a);
         blockList.add(b);
@@ -48,38 +48,38 @@ public class BrickZ implements Brick {
         Block Rotate_d;
 
         if (nextShape == 0) {
-            Rotate_a = new Block(b.getX(), b.getY() - 1);
-            Rotate_b = new Block(b.getX(), b.getY()); // b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() + 1, b.getY());
-            Rotate_d = new Block(b.getX()+1, b.getY() + 1);
+            Rotate_a = new Block(b.getX(), b.getY() - 1,Item.NORMAL);
+            Rotate_b = new Block(b.getX(), b.getY(),Item.NORMAL); // b 중심점이라 변환 X
+            Rotate_c = new Block(b.getX() + 1, b.getY(),Item.NORMAL);
+            Rotate_d = new Block(b.getX()+1, b.getY() + 1,Item.NORMAL);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
 
         } else if (nextShape == 1) {
-            Rotate_a = new Block(b.getX() - 1, b.getY());
-            Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX(), b.getY() - 1);
-            Rotate_d = new Block(b.getX()+1, b.getY() - 1);
+            Rotate_a = new Block(b.getX() - 1, b.getY(),Item.NORMAL);
+            Rotate_b = new Block(b.getX(), b.getY(),Item.NORMAL); //b 중심점이라 변환 X
+            Rotate_c = new Block(b.getX(), b.getY() - 1,Item.NORMAL);
+            Rotate_d = new Block(b.getX()+1, b.getY() - 1,Item.NORMAL);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
         } else if (nextShape == 2) {
-            Rotate_a = new Block(b.getX(), b.getY() + 1);
-            Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() - 1, b.getY());
-            Rotate_d = new Block(b.getX()-1, b.getY()-1);
+            Rotate_a = new Block(b.getX(), b.getY() + 1,Item.NORMAL);
+            Rotate_b = new Block(b.getX(), b.getY(),Item.NORMAL); //b 중심점이라 변환 X
+            Rotate_c = new Block(b.getX() - 1, b.getY(),Item.NORMAL);
+            Rotate_d = new Block(b.getX()-1, b.getY()-1,Item.NORMAL);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
         } else if (nextShape == 3) {
-            Rotate_a = new Block(b.getX()+1, b.getY());
-            Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX(), b.getY()+1);
-            Rotate_d = new Block(b.getX()-1, b.getY()+1);
+            Rotate_a = new Block(b.getX()+1, b.getY(),Item.NORMAL);
+            Rotate_b = new Block(b.getX(), b.getY(),Item.NORMAL); //b 중심점이라 변환 X
+            Rotate_c = new Block(b.getX(), b.getY()+1,Item.NORMAL);
+            Rotate_d = new Block(b.getX()-1, b.getY()+1,Item.NORMAL);
             temp.add(Rotate_a);
             temp.add(Rotate_b);
             temp.add(Rotate_c);
@@ -109,10 +109,10 @@ public class BrickZ implements Brick {
         Block moveR_b;
         Block moveR_c;
         Block moveR_d;
-        moveR_a = new Block(a.getX(), a.getY()+1);
-        moveR_b = new Block(b.getX(), b.getY()+1);
-        moveR_c = new Block(c.getX(), c.getY() + 1);
-        moveR_d = new Block(d.getX(), d.getY() + 1);
+        moveR_a = new Block(a.getX(), a.getY()+1,Item.NORMAL);
+        moveR_b = new Block(b.getX(), b.getY()+1,Item.NORMAL);
+        moveR_c = new Block(c.getX(), c.getY() + 1,Item.NORMAL);
+        moveR_d = new Block(d.getX(), d.getY() + 1,Item.NORMAL);
         temp.add(moveR_a);
         temp.add(moveR_b);
         temp.add(moveR_c);
@@ -138,10 +138,10 @@ public class BrickZ implements Brick {
         Block moveL_b;
         Block moveL_c;
         Block moveL_d;
-        moveL_a = new Block(a.getX(), a.getY()-1);
-        moveL_b = new Block(b.getX(), b.getY()-1);
-        moveL_c = new Block(c.getX(), c.getY() - 1);
-        moveL_d = new Block(d.getX(), d.getY() - 1);
+        moveL_a = new Block(a.getX(), a.getY()-1,Item.NORMAL);
+        moveL_b = new Block(b.getX(), b.getY()-1,Item.NORMAL);
+        moveL_c = new Block(c.getX(), c.getY() - 1,Item.NORMAL);
+        moveL_d = new Block(d.getX(), d.getY() - 1,Item.NORMAL);
         temp.add(moveL_a);
         temp.add(moveL_b);
         temp.add(moveL_c);
@@ -167,10 +167,10 @@ public class BrickZ implements Brick {
         Block moveD_b;
         Block moveD_c;
         Block moveD_d;
-        moveD_a = new Block(a.getX()+1, a.getY());
-        moveD_b = new Block(b.getX()+1, b.getY());
-        moveD_c = new Block(c.getX()+1, c.getY());
-        moveD_d = new Block(d.getX()+1, d.getY());
+        moveD_a = new Block(a.getX()+1, a.getY(),Item.NORMAL);
+        moveD_b = new Block(b.getX()+1, b.getY(),Item.NORMAL);
+        moveD_c = new Block(c.getX()+1, c.getY(),Item.NORMAL);
+        moveD_d = new Block(d.getX()+1, d.getY(),Item.NORMAL);
         temp.add(moveD_a);
         temp.add(moveD_b);
         temp.add(moveD_c);

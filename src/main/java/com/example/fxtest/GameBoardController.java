@@ -93,10 +93,10 @@ public class GameBoardController implements Initializable {
 
     }
 
-    //더 이상 못내려갈때 Brick 행렬에 고정
+    //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
     void fixed(){
         for(Block block : currentBrick.getBlockList())
-        GameBoard.board[block.getX()][block.getY()]=1;
+        GameBoard.board[block.getX()][block.getY()]=block.getItem().getNum();
     }
 
     //게임 (재)시작때 초기화
@@ -287,7 +287,7 @@ public class GameBoardController implements Initializable {
 
     public boolean isGameOver() {
         for(int i=0;i<GameBoard.WIDTH;i++){
-            if(GameBoard.board[1][i]==1){
+            if(GameBoard.board[1][i]>=1){
                 GameBoard.whileGame =true;
                 return true;
             }

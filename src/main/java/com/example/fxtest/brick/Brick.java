@@ -32,4 +32,3 @@ public interface Brick {
     public List<Block> getBlockList();
 
 }
-

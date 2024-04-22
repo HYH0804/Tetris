@@ -11,7 +11,7 @@ public class BrickController{
     private String ROTATE;
 
     //수직떨어지기 추가해야됨
-    private String STRAIGHT;
+    private String HARDDROP;
 
 
 
@@ -28,7 +28,7 @@ public class BrickController{
         MOVEL=SettingController.startKey.get(1);
         MOVER=SettingController.startKey.get(2);
         ROTATE=SettingController.startKey.get(3);
-        STRAIGHT=SettingController.startKey.get(4);
+        HARDDROP=SettingController.startKey.get(4);
     }
     //싱글톤
 
@@ -93,7 +93,7 @@ public class BrickController{
         return ROTATE;
     }
     public String getSTRAIGHT(){
-        return STRAIGHT;
+        return HARDDROP;
     }
 
 }
