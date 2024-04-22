@@ -28,9 +28,9 @@ public class Drawing {
             int y = block.getY();
 
 
-            Label label = new Label("O");
+            Label label = new Label("O"); //여기서 아이템들 폰트 바꾸고
             label.setFont(Font.font("Arial", FontWeight.BOLD, 20)); //set size
-            label.setTextFill(Color.BLUE);
+            label.setTextFill(Color.BLUE); //색깔도 바꾸고
             GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
             GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
 

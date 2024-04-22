@@ -102,10 +102,10 @@ public class GameBoardController implements Initializable {
     }
 
     void destroy(){
-        initBoard();
+/*        initBoard();
         GameBoard.score=0;
         GameBoard.deleteLine=0;
-        GameBoard.whileGame =false;
+        GameBoard.whileGame =false;*/
         timeline.stop();
         boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
