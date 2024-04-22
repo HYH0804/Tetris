@@ -1,5 +1,5 @@
 package com.example.fxtest;
-
+import static com.example.fxtest.Main.loadProperties;
 
 import com.example.fxtest.brick.Block;
 
@@ -17,7 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -25,9 +27,11 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.ResourceBundle;
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoardController implements Initializable {
@@ -48,13 +52,18 @@ public class GameBoardController implements Initializable {
     @FXML
     private Button ExitButton;
 
-    //주기함수 종료하고 다시 처음 페이지로
+
+    public static double cellWidth = 20;
+    public static double cellHeight = 20;
+
+
+
     @FXML
     public void goHomeButtonClick() throws IOException{
         Stage st = StageSaver.pStage;
         timeline.stop(); //주기함수 종료
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
-        Scene mainpage = new Scene(fxmlLoader.load(), 320, 240);
+        Scene mainpage = new Scene(fxmlLoader.load(),st.getWidth() , st.getHeight());
         st.setScene(mainpage);
         st.show();
     }
@@ -117,9 +126,6 @@ public class GameBoardController implements Initializable {
         }
     }
 
-
-    //@FXML로 게임 시작 버튼 만들어서 이거 누르면 다시 매 1초마다 호출되는 함수 호출하여 게임 재시작
-    //여기서 initialize 함수 호출
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
@@ -130,7 +136,13 @@ public class GameBoardController implements Initializable {
         // GridPane에 키 이벤트 핸들러 등록
         regiBrickEvent();
         Drawing.setBoardView(boardView);
-
+        
+        //change()함수 실행
+        try {
+            change();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // startButton의 클릭 이벤트 핸들러 등록
         StartButton.setOnAction(event -> {
@@ -138,8 +150,17 @@ public class GameBoardController implements Initializable {
 
             // 새로운 Scene을 로드합니다.
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("GameBoard.fxml"));
-                Scene scene = new Scene(root);
+                Properties properties = loadProperties();
+                String resolution = properties.getProperty("resolution", "800x600");
+                String[] dimensions = resolution.split("x");
+                double width = Double.parseDouble(dimensions[0]);
+                double height = Double.parseDouble(dimensions[1]);
+
+                // 세팅 페이지 로드
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, width, height);
+
                 timeline.stop(); //주기함수 종료
                 // Stage에 새로운 Scene을 설정합니다.
                 stage.setScene(scene);
@@ -340,4 +361,41 @@ public class GameBoardController implements Initializable {
 
 
 
+    private static final String PROPERTIES_FILE = "src/main/resources/resolution.properties";
+
+    //보드 해상도 change함수
+    public void change() throws IOException {
+        // 해상도에 따라 칸의 크기를 동적으로 조정
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+        int numRows = 22; // 행의 수
+        int numCols = 10; // 열의 수
+
+        //해상도 바꾸고 싶으면 여기를 바꾼다.
+        cellWidth = height / 30;
+        cellHeight = height / 30;
+
+        boardView.getColumnConstraints().clear();
+        boardView.getRowConstraints().clear();
+
+        for (int i = 0; i < numCols; i++) {
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setMinWidth(cellWidth);
+            colConstraints.setPrefWidth(cellWidth);
+            colConstraints.setMaxWidth(cellWidth);
+            boardView.getColumnConstraints().add(colConstraints);
+        }
+
+        for (int i = 0; i < numRows; i++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setMinHeight(cellHeight);
+            rowConstraints.setPrefHeight(cellHeight);
+            rowConstraints.setMaxHeight(cellHeight);
+            boardView.getRowConstraints().add(rowConstraints);
+        }
+    }
 }

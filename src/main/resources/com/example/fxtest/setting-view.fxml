@@ -4,22 +4,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.SettingController">
+<BorderPane fx:id="settingPage" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.SettingController">
     <center>
-        <VBox alignment="CENTER" spacing="10">
+        <VBox alignment="CENTER_LEFT" spacing="10">
             <padding>
                 <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
-            <Button fx:id="resizeGameButton" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-width: 0;" text="게임 화면 크기 조절" />
-            <Button fx:id="setKeyButton" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-width: 0;" text="게임 조작키 설정" />
-            <Button fx:id="resetScoreButton" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-width: 0;" text="스코어 보드 초기화" />
-            <Button fx:id="toggleColorBlindModeButton" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-width: 0;" text="색맹 모드 전환" />
-            <Button fx:id="resetSettingsButton" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-width: 0;" text="설정 초기화" />
-         <TextField fx:id="moveDown" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="moveDown" />
-            <TextField fx:id="moveRight" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="moveRight" />
-            <TextField fx:id="moveLeft" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="moveLeft" />
-            <TextField fx:id="rotate" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="rotate" />
-            <TextField fx:id="straight" maxWidth="-Infinity" prefHeight="22.0" prefWidth="30.0" text="straight" />
+            <Label style="-fx-text-fill: black;" text="화면 크기 설정" />
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <RadioButton fx:id="smallSize" text="800x600" style="-fx-text-fill: black;" selected="true"/>
+                <RadioButton fx:id="mediumSize" text="1024x768" style="-fx-text-fill: black;" />
+                <RadioButton fx:id="largeSize" text="1280x1024" style="-fx-text-fill: black;" />
+            </HBox>
+
+            <Button fx:id="setKeyButton" style="-fx-text-fill: black; -fx-border-width: 0;" text="조작키 설정" onAction="#onSetKeyButtonClick"/>
+            <Button fx:id="resetScoreButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="스코어 보드 초기화" />
+            <Button fx:id="toggleColorBlindModeButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="색맹 모드 전환" />
+            <Button fx:id="resetSettingsButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="설정 초기화" />
+
         </VBox>
     </center>
     <bottom>
@@ -27,8 +29,8 @@
             <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
-            <Button fx:id="backButton" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-width: 0;" text="뒤로" />
-         <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="확인" />
+            <Button fx:id="backButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="뒤로" onAction="#onBackButtonClick" />
+            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirmButtonClick" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="확인" />
         </HBox>
     </bottom>
 </BorderPane>

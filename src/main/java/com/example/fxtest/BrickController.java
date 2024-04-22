@@ -14,6 +14,7 @@ public class BrickController{
     private String STRAIGHT;
 
 
+
     //싱글톤
     private static BrickController brickController = new BrickController();
 

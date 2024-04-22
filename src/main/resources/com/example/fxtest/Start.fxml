@@ -1,26 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
+<AnchorPane fx:id="rootPane" prefHeight="440.0" prefWidth="300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.StartController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0">
+            <children>
+                <Label fx:id="infoLabel" layoutX="50" layoutY="400" prefWidth="200" prefHeight="30" textAlignment="CENTER" />
+                <Label alignment="CENTER" style="-fx-font-size: 27pt; -fx-text-fill: black;" text="Tetris" wrapText="true" />
+                <Button fx:id="startButton" text="Start Game" onAction="#startGame" focusTraversable="true"/>
+                <Button fx:id="settingsButton" text="Settings" onAction="#openSettings" focusTraversable="true"/>
+                <Button fx:id="scoreboardButton" text="Scoreboard" onAction="#openScoreboard" focusTraversable="true"/>
+                <Button fx:id="exitButton" text="Exit Game" onAction="#exitGame" focusTraversable="true"/>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
 
-<!--시작 페이지
-세팅 및 게임시작
--->
-
-
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.example.fxtest.StartController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <children>
-   
-       <Label fx:id="GameStart" prefHeight="15.0" prefWidth="0.0" text="..." />
-       <Button onAction="#OepnGameBoard" text="GameStart" />
-   </children>
-</VBox>

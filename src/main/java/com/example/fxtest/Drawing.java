@@ -29,7 +29,7 @@ public class Drawing {
 
 
             Label label = new Label("O"); //여기서 아이템들 폰트 바꾸고
-            label.setFont(Font.font("Arial", FontWeight.BOLD, 20)); //set size
+            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
             label.setTextFill(Color.BLUE); //색깔도 바꾸고
             GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
             GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
@@ -81,7 +81,7 @@ public class Drawing {
                 // board에서 1이면 Label 생성 후 GridPane에 추가
                 if (GameBoard.board[y][x] == 1) {
                     Label label = new Label("O"); //이거 아이템 들어가면 고민 좀 해야될듯
-                    label.setFont(Font.font("Arial", FontWeight.BOLD, 20)); //set size
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
                     label.setTextFill(Color.BLUE);
                     GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
                     GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
