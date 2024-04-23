@@ -141,13 +141,13 @@ public class GameBoardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
 
-        //currentBrick=rg.genarateNormal(0,false); //일단 이지로, 여기서 모드 받아와야됨.
+        currentBrick=rg.genarateNormal(0,false); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick= new BrickZ(0,4,Color.GREEN );
-        currentBrick = new BrickO(0,4,Color.SKYBLUE);
+        //currentBrick = new BrickO(0,4,Color.SKYBLUE);
 
-        //nextBrick=rg.genarateNormal(0,false);
+        nextBrick=rg.genarateNormal(0,false);
         //nextBrick=new BrickZ(0,4,Color.GREEN );
-        currentBrick = new BrickO(0,4,Color.SKYBLUE);
+        //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
         // GridPane에 키 이벤트 핸들러 등록
@@ -264,7 +264,7 @@ public class GameBoardController implements Initializable {
                 if(isGameOver()){
                     //스코어보드 처리
 
-                    System.out.println("게임종료");
+                    System.out.println("GameOver");
                     //전부 초기화
                     destroy();
 
@@ -298,9 +298,9 @@ public class GameBoardController implements Initializable {
         currentBrick=nextBrick;
 
         //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
-        //nextBrick=rg.genarateNormal(0, false);
+        nextBrick=rg.genarateNormal(0, false);
         //nextBrick=new BrickZ(0,4,Color.GREEN );
-        nextBrick = new BrickO(0,4,Color.SKYBLUE);
+        //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
         //currentBrick 색칠하고
         Drawing.colorFill(currentBrick);

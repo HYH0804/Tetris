@@ -56,7 +56,7 @@ public class BrickO implements Brick{
             temp.add(Rotate_d);
 
         } else if (nextShape == 1) {
-            Rotate_a = new Block(b.getX() + 1, b.getY());
+            Rotate_a = new Block(b.getX() - 1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
             Rotate_c = new Block(b.getX() - 1, b.getY() - 1);
             Rotate_d = new Block(b.getX(), b.getY() - 1);
@@ -74,7 +74,7 @@ public class BrickO implements Brick{
             temp.add(Rotate_c);
             temp.add(Rotate_d);
         } else if (nextShape == 3) {
-            Rotate_a = new Block(b.getX() -1, b.getY());
+            Rotate_a = new Block(b.getX() +1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
             Rotate_c = new Block(b.getX() + 1, b.getY() + 1);
             Rotate_d = new Block(b.getX(), b.getY() + 1);
@@ -89,7 +89,7 @@ public class BrickO implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -118,7 +118,7 @@ public class BrickO implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -147,7 +147,7 @@ public class BrickO implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -179,8 +179,8 @@ public class BrickO implements Brick{
 /*            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }*/
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)){
-                return false;
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
             }
         }
         return true; //이동 가능
@@ -207,7 +207,7 @@ public class BrickO implements Brick{
             d.setY(b.getY());
         }
         else if (shape==1) { //0 > 1 회전
-            a.setX(b.getX() + 1);
+            a.setX(b.getX() - 1);
             a.setY(b.getY());
             //b는 중심점이라 그대로
             c.setX(b.getX() - 1);
@@ -258,7 +258,7 @@ public class BrickO implements Brick{
 
     @Override
     public void moveR() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()+1);
@@ -266,12 +266,12 @@ public class BrickO implements Brick{
         c.setY(c.getY()+1);
         d.setY(d.getY()+1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
     public void moveL() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()-1);
@@ -279,12 +279,12 @@ public class BrickO implements Brick{
         c.setY(c.getY()-1);
         d.setY(d.getY()-1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
     public void moveD() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setX(a.getX()+1);
@@ -292,7 +292,7 @@ public class BrickO implements Brick{
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
