@@ -110,7 +110,7 @@ public class RandomGenerator {
         }
         else if(point>=20 && point<30){
             if (colorBlindness==true)
-                return new BrickO(0,4,Color.SKYBLUE );
+                return new BrickO(0,4,Color.SKYBLUE);
             else
                 return new BrickO(0,4,Color.SKYBLUE);
         }

@@ -4,6 +4,7 @@ import static com.example.fxtest.Main.loadProperties;
 import com.example.fxtest.brick.Block;
 
 //얜 임시로, 랜덤 구현하면 필요 없
+import com.example.fxtest.brick.BrickO;
 import com.example.fxtest.brick.BrickZ;
 
 import javafx.animation.KeyFrame;
@@ -44,6 +45,9 @@ public class GameBoardController implements Initializable {
     GameBoard gameBoard = new GameBoard();
 
     Timeline timeline;
+
+    RandomGenerator rg = new RandomGenerator();
+
 
     @FXML
     public GridPane boardView; //컨트롤View 매핑
@@ -96,6 +100,12 @@ public class GameBoardController implements Initializable {
 
     //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
     void fixed(){
+        if(currentBrick.getBlockList()==null){
+            System.out.println("getBlockList가 null임");
+        }
+        else{
+            System.out.println("null 아님");
+        }
         for(Block block : currentBrick.getBlockList())
         GameBoard.board[block.getX()][block.getY()]=block.getItem().getNum();
     }
@@ -114,8 +124,8 @@ public class GameBoardController implements Initializable {
     void destroy(){
 /*        initBoard();
         GameBoard.score=0;
-        GameBoard.deleteLine=0;
-        GameBoard.whileGame =false;*/
+        GameBoard.deleteLine=0; */
+        GameBoard.whileGame =false;
         timeline.stop();
         boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
@@ -130,9 +140,15 @@ public class GameBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
-        currentBrick=new BrickZ(0,4);
-        //nextBrick 랜덤에서 뽑아오기(임시로)
-        nextBrick=new BrickZ(0,4);
+
+        //currentBrick=rg.genarateNormal(0,false); //일단 이지로, 여기서 모드 받아와야됨.
+        //currentBrick= new BrickZ(0,4,Color.GREEN );
+        currentBrick = new BrickO(0,4,Color.SKYBLUE);
+
+        //nextBrick=rg.genarateNormal(0,false);
+        //nextBrick=new BrickZ(0,4,Color.GREEN );
+        currentBrick = new BrickO(0,4,Color.SKYBLUE);
+
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
         // GridPane에 키 이벤트 핸들러 등록
         regiBrickEvent();
@@ -205,6 +221,7 @@ public class GameBoardController implements Initializable {
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
         Drawing.colorErase(currentBrick);
+        printBlock();
         if(!GameBoard.whileGame){
             System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
@@ -228,18 +245,18 @@ public class GameBoardController implements Initializable {
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
-                System.out.println("완성 줄 삭제 전---------------");
-                printMatrix();
+                //System.out.println("완성 줄 삭제 전---------------");
+                //printMatrix();
 
                 List<Integer> removedRows = gameBoard.getRemovedRows();
                 Drawing.updateBoardView(removedRows);
                 gameBoard.removeFullRows();
-                System.out.println("완성 줄 삭제 후---------------");
-                printMatrix();
+                //System.out.println("완성 줄 삭제 후---------------");
+                //printMatrix();
                 //gravity로 1인지 확인해서 board 업데이트하고
 
                 //Drawing.updateBoardView(removeLineList);
-                printMatrix();
+                //printMatrix();
                 //줄 지우기
 
 
@@ -281,7 +298,9 @@ public class GameBoardController implements Initializable {
         currentBrick=nextBrick;
 
         //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
-        nextBrick=new BrickZ(0, 4);
+        //nextBrick=rg.genarateNormal(0, false);
+        //nextBrick=new BrickZ(0,4,Color.GREEN );
+        nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
         //currentBrick 색칠하고
         Drawing.colorFill(currentBrick);
@@ -290,13 +309,28 @@ public class GameBoardController implements Initializable {
     }
 
     public boolean isGameOver() {
-        for(int i=0;i<GameBoard.WIDTH;i++){
+/*        for(int i=0;i<GameBoard.WIDTH;i++){
             if(GameBoard.board[1][i]>=1){
                 GameBoard.whileGame =true;
                 return true;
             }
         }
-        return false;
+        return false;*/
+        for (int i = 1; i < GameBoard.HEIGHT; i++) {
+            boolean found = false;  // 각 행마다 검사를 시작할 때 'found'를 'false'로 설정
+            for (int j = 0; j < GameBoard.WIDTH; j++) {
+                if (GameBoard.board[i][j] > 0) {
+                    found = true;  // 0보다 큰 값을 찾으면 'found'를 'true'로 설정
+                    break;  // 더 이상 검사할 필요 없음
+                }
+            }
+            if (!found) {  // 만약 이 행에서 0보다 큰 값이 없다면
+                return false;  // 즉시 false 반환
+            }
+        }
+        return true;  // 모든 행에 0보다 큰 값이 하나 이상 있다면 true 반환
+
+
     }
 
     //2차원배열 출력 테스트함수

@@ -8,7 +8,7 @@ public class Block {
     int x;
     int y;
 
-    Item item; //그 블록이 Item 인지
+    Item item=Item.NORMAL; //그 블록이 Item 인지
     //BrickW에서만 생성과 동시에 Item 부여, 나머지 일반 블록들은 RandomGenerator에서 미리 만든 후 Setter로 부여
 
     Color color;
@@ -58,5 +58,13 @@ public class Block {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

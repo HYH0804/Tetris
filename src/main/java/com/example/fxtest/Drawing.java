@@ -34,7 +34,7 @@ public class Drawing {
 
             Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
             label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
-            label.setTextFill(Color.BLUE); //색깔도 바꾸고
+            label.setTextFill(block.getColor()); //색깔도 바꾸고
             GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
             GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
 
