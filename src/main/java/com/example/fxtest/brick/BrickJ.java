@@ -3,6 +3,7 @@ package com.example.fxtest.brick;
 import com.example.fxtest.GameBoard;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,14 @@ public class BrickJ implements Brick {
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
     List<Block> afterList = new ArrayList<>();
 
-    public BrickJ(int center_x, int center_y) {
+    public BrickJ(int center_x, int center_y, Color color) {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅
         this.center_x = center_x;
         this.center_y = center_y;
-        this.a= new Block(center_x-1,center_y);
-        this.b=new Block(center_x, center_y);
-        this.c=new Block(center_x+1, center_y);
-        this.d=new Block(center_x+1,center_y-1);
+        this.a= new Block(center_x-1,center_y,color);
+        this.b=new Block(center_x, center_y,color);
+        this.c=new Block(center_x+1, center_y,color);
+        this.d=new Block(center_x+1,center_y-1,color);
         this.shape=0;
         blockList.add(a);
         blockList.add(b);

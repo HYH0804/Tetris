@@ -1,6 +1,7 @@
 package com.example.fxtest;
 
 import com.example.fxtest.brick.*;
+import javafx.scene.paint.Color;
 
 import java.util.Random;
 public class RandomGenerator {
@@ -15,11 +16,11 @@ public class RandomGenerator {
     public Brick genarateNormal(int difficulty, boolean colorBlindness){ //아이템블록 제외 랜덤생성
         switch (difficulty){
             case 0: //이지모드
-                return generateBlock(UPPER_EASY);
+                return generateBlock(UPPER_EASY,colorBlindness);
             case 1: //노말모드
-                return generateBlock(UPPER_NOMAL);
+                return generateBlock(UPPER_NOMAL,colorBlindness);
             default: //하드모드
-                return generateBlock(UPPER_HARD);
+                return generateBlock(UPPER_HARD,colorBlindness);
         }
     }
 
@@ -36,7 +37,10 @@ public class RandomGenerator {
         upperBound = 4; //0~3까지
         int block = rand.nextInt(upperBound); //0 ~ 3까지 , 0이면 a에 Item, 1이면 b에 Item, 2이면 c에 Item, 3이면 d에 Item
         if(item==2){
-            return new BrickW(1, 4);
+            if(colorBlindness==true)
+                return new BrickW(1, 4,Color.GRAY); //색맹때 해야됨
+            else
+                return new BrickW(1,4, Color.GRAY);
         }
         else{
             Brick brick = genarateNormal(difficulty, colorBlindness);
@@ -89,29 +93,50 @@ public class RandomGenerator {
     //canMoveDown 에 대한 else에서 한번 호출(안착)
     //gravity 쪽에서 그 줄에 대해 하나씩 호출(줄 제거)
 
-    public Brick generateBlock(int upperBound){
+    public Brick generateBlock(int upperBound,boolean colorBlindness){
         Random rand = new Random();
         int point = rand.nextInt(upperBound)+1; //1~upperBound까지
         if(point>=1 && point<10) {
-            return new BrickJ(, );
+            if(colorBlindness==true)
+                return new BrickJ(0,4, Color.color(213/255.0,94/255.0,0));
+            else
+                return new BrickJ(0,4,Color.RED);
         }
         else if(point>=10 && point<20){
-            return new BrickL(, );
+            if(colorBlindness==true)
+                return new BrickL(0,3,Color.BLUE);
+            else
+                return new BrickL(0,3,Color.BLUE);
         }
         else if(point>=20 && point<30){
-            return new BrickO(, );
+            if (colorBlindness==true)
+                return new BrickO(0,4,Color.SKYBLUE );
+            else
+                return new BrickO(0,4,Color.SKYBLUE);
         }
         else if(point>=30 && point<40){
-            return new BrickS(, );
+            if(colorBlindness==true)
+                return new BrickS(0, 4,Color.PALEVIOLETRED);
+            else
+                return new BrickS(0,4,Color.PURPLE );
         }
         else if(point>=40 && point<50){
-            return new BrickT(, );
+            if(colorBlindness==true)
+                return new BrickT(1,4, Color.YELLOW);
+            else
+                return new BrickT(1,4, Color.YELLOW);
         }
         else if(point>=50 && point<60){
-            return new BrickZ(, );
+            if (colorBlindness==true)
+                return new BrickZ(0,4, Color.color(0,158/255.0,87/255.0));
+            else
+                return new BrickZ(0,4,Color.GREEN );
         }
         else { //I블록
-            return new BrickI();
+            if (colorBlindness==true)
+                return new BrickI(1,4,Color.BLACK);
+            else
+                return new BrickI(1,4, Color.BLACK);
         }
     }
 }
