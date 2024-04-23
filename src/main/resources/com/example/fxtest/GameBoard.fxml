@@ -5,48 +5,64 @@
 <?import javafx.scene.control.Button?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.GameBoardController">
     <children>
-      <GridPane fx:id="boardView" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="200.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-          <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-          <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-          <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-          <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-            <RowConstraints />
-        </rowConstraints>
-      </GridPane>
-       <Button layoutX="226.0" layoutY="211.0" onAction="#goHomeButtonClick" text="GoHome" />
-      <Button fx:id="StartButton" layoutX="226.0" layoutY="241.0" mnemonicParsing="false" text="Start" />
-      <Button layoutX="226.0" layoutY="301.0" onAction="#pauseButtonClick" mnemonicParsing="false" text="Pause" />
-       <Button fx:id="ExitButton" layoutX="226.0" layoutY="271.0" mnemonicParsing="false" text="Exit" />
-   </children>
+        <GridPane fx:id="boardView" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="200.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+        <Label text="Next Block" layoutY="20.0" AnchorPane.rightAnchor="20.0"/>
+        <GridPane fx:id="nextBrickView" gridLinesVisible="false" layoutY="50.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="20.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
+                <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
+                <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
+                <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="20.0" prefHeight="20.0" />
+                <RowConstraints minHeight="20.0" prefHeight="20.0" />
+                <RowConstraints minHeight="20.0" prefHeight="20.0" />
+                <RowConstraints minHeight="20.0" prefHeight="20.0" />
+            </rowConstraints>
+        </GridPane>
+        <Label fx:id="scoreLabel" layoutY="150.0" text="Score: 0" AnchorPane.rightAnchor="40.0"/>
+        <Button AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="100.0" onAction="#goHomeButtonClick" text="GoHome" />
+        <Button fx:id="StartButton" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="70.0" mnemonicParsing="false" text="Start" />
+        <Button AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="40.0" onAction="#pauseButtonClick" mnemonicParsing="false" text="Pause" />
+        <Button fx:id="ExitButton" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="10.0" mnemonicParsing="false" text="Exit" />
+    </children>
 </AnchorPane>

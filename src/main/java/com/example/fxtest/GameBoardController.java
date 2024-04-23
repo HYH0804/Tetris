@@ -56,10 +56,15 @@ public class GameBoardController implements Initializable {
     private Button StartButton;
     @FXML
     private Button ExitButton;
+    @FXML
+    private Label scoreLabel;
+    @FXML
+    private GridPane nextBrickView;
 
 
     public static double cellWidth = 20;
     public static double cellHeight = 20;
+    public static int downScore=0; //속도마다 다르게 변경
 
 
 
@@ -113,7 +118,7 @@ public class GameBoardController implements Initializable {
     //게임 (재)시작때 초기화
     void init(){
         initBoard();
-        GameBoard.score=0;
+        GameBoard.setScore(0);
         GameBoard.deleteLine=0;
         GameBoard.whileGame =false;
         timeline.stop();
@@ -153,6 +158,12 @@ public class GameBoardController implements Initializable {
         // GridPane에 키 이벤트 핸들러 등록
         regiBrickEvent();
         Drawing.setBoardView(boardView);
+
+        GameBoard.scoreProperty().addListener((obs, oldScore, newScore) -> {
+            if (newScore.intValue() > oldScore.intValue()) {
+                updateScoreLabel(scoreLabel);
+            }
+        });
         
         //change()함수 실행
         try {
@@ -220,6 +231,7 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
+        downScore=1;
         Drawing.colorErase(currentBrick);
         printBlock();
         if(!GameBoard.whileGame){
@@ -435,5 +447,9 @@ public class GameBoardController implements Initializable {
             rowConstraints.setMaxHeight(cellHeight);
             boardView.getRowConstraints().add(rowConstraints);
         }
+    }
+
+    public void updateScoreLabel(Label scoreLabel) {
+        this.scoreLabel.setText("Score: " +Integer.toString(GameBoard.getScore()));
     }
 }
