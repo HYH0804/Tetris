@@ -1,4 +1,5 @@
 package com.example.fxtest;
+import static com.example.fxtest.Drawing.displayNextBrick;
 import static com.example.fxtest.Main.loadProperties;
 
 import com.example.fxtest.brick.Block;
@@ -164,7 +165,9 @@ public class GameBoardController implements Initializable {
                 updateScoreLabel(scoreLabel);
             }
         });
-        
+
+        displayNextBrick(nextBrick,nextBrickView);
+
         //change()함수 실행
         try {
             change();
@@ -316,7 +319,7 @@ public class GameBoardController implements Initializable {
 
         //currentBrick 색칠하고
         Drawing.colorFill(currentBrick);
-
+        displayNextBrick(nextBrick,nextBrickView);
         //이벤트 장착
     }
 
