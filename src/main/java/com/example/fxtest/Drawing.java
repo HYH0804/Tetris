@@ -3,6 +3,7 @@ package com.example.fxtest;
 
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
+import com.example.fxtest.brick.Item;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -23,12 +24,14 @@ public class Drawing {
     }
 
     public static void colorFill(Brick brick){
+
         for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
             int x = block.getX();
             int y = block.getY();
 
+            String string = returnItemSymbol(block);
 
-            Label label = new Label("O"); //여기서 아이템들 폰트 바꾸고
+            Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
             label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
             label.setTextFill(Color.BLUE); //색깔도 바꾸고
             GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
@@ -79,8 +82,10 @@ public class Drawing {
         for (int y = 0; y < GameBoard.HEIGHT; y++) {
             for (int x = 0; x < GameBoard.WIDTH; x++) {
                 // board에서 1이면 Label 생성 후 GridPane에 추가
-                if (GameBoard.board[y][x] == 1) {
-                    Label label = new Label("O"); //이거 아이템 들어가면 고민 좀 해야될듯
+                if (GameBoard.board[y][x] >= 1) {
+                    String string = returnItemSymbol(GameBoard.board[y][x]);
+                    Label label = new Label(string);
+
                     label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
                     label.setTextFill(Color.BLUE);
                     GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
@@ -95,5 +100,45 @@ public class Drawing {
     }
 
 
-
+    public static String returnItemSymbol(Block block){
+        Item item = block.getItem();
+        if(item==Item.NORMAL){
+            return "O";
+        }
+        else if (item==Item.WEIGHT) {
+            return "W";
+        }
+        else if(item==Item.ROWDELETE){
+            return "R";
+        }
+        else if (item==Item.COLUMNDELETE) {
+            return "C";
+        }
+        else if (item==Item.BLIND) {
+            return "B";
+        }
+        else{
+            return "N";
+        }
+    }
+    public static String returnItemSymbol(int num){
+        if(num==1){
+            return "O";
+        }
+        else if (num==2) {
+            return "W";
+        }
+        else if(num==3){
+            return "R";
+        }
+        else if (num==4) {
+            return "C";
+        }
+        else if (num==5) {
+            return "B";
+        }
+        else{
+            return "N";
+        }
+    }
 }

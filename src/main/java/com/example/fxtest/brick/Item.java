@@ -6,7 +6,7 @@ public enum Item {
     ROWDELETE(3),
     COLUMNDELETE(4),
     BLIND(5),
-    BOMB(6);
+    NUCLEAR(6);
 
 
     private final int num;

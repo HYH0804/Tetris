@@ -306,58 +306,73 @@ public class BrickS implements Brick {
     }
 
     //Getter Setter
+    //Getter Setter
+    @Override
     public Block getA() {
         return a;
     }
 
+    @Override
     public void setA(Block a) {
         this.a = a;
     }
 
+    @Override
     public Block getB() {
         return b;
     }
 
+    @Override
     public void setB(Block b) {
         this.b = b;
     }
 
+    @Override
     public Block getC() {
         return c;
     }
 
+    @Override
     public void setC(Block c) {
         this.c = c;
     }
 
+    @Override
     public Block getD() {
         return d;
     }
 
+    @Override
     public void setD(Block d) {
         this.d = d;
     }
 
+    @Override
     public int getCenter_x() {
         return center_x;
     }
 
+    @Override
     public void setCenter_x(int center_x) {
         this.center_x = center_x;
     }
 
+    @Override
     public int getCenter_y() {
         return center_y;
     }
 
+    @Override
     public void setCenter_y(int center_y) {
         this.center_y = center_y;
     }
 
+    @Override
     public int getShape() {
         return shape;
     }
 
+    @Override
     public void setShape(int shape) {
         this.shape = shape;
     }

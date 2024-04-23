@@ -4,31 +4,23 @@ import com.example.fxtest.brick.*;
 
 import java.util.Random;
 public class RandomGenerator {
+    private final int UPPER_EASY = 72;
+    private final int UPPER_NOMAL = 70;
+    private final int UPPER_HARD = 68;
 
     //여기서 색상 주입 >> 색맹이냐 아니냐 나눠야될듯
 
     //일반블록: 아이템 자체 블록 제외하고 블록 모양 택
         //a b c d 만들고 각각 색상, 폰트 주입
-    public Brick genarateNormal(int difficulty, boolean color){
-        Random rand = new Random(); // Random 객체 생성
-        int upperBound = 7; // 상한 설정
-        int randomNumber = rand.nextInt(upperBound) + 1; 
-        if(randomNumber==1){
-            new BrickZ(0, 4);
-        } else if (randomNumber==2) {
-        //블록만들기
-        } else if (randomNumber==3) {
-
-        } else if (randomNumber==4) {
-
-        } else if (randomNumber==5) {
-
-        } else if (randomNumber==6) {
-
-        } else {
-
+    public Brick genarateNormal(int difficulty, boolean colorBlindness){ //아이템블록 제외 랜덤생성
+        switch (difficulty){
+            case 0: //이지모드
+                return generateBlock(UPPER_EASY);
+            case 1: //노말모드
+                return generateBlock(UPPER_NOMAL);
+            default: //하드모드
+                return generateBlock(UPPER_HARD);
         }
-
     }
 
 
@@ -37,22 +29,36 @@ public class RandomGenerator {
         //아니면
             //랜덤으로 a,b,c,d 중 하나만 랜덤으로 아이템 기능 가져와서 + a b c d 각각 폰트 주입
             //블록 모양대로 만듦
-    public Brick generateItem(int difficulty,boolean color){
+    public Brick generateItem(int difficulty,boolean colorBlindness){
         Random rand = new Random(); // Random 객체 생성
         int upperBound=5; //0 ~ 4까지
-        int item = rand.nextInt(upperBound) + 2; //2 부터 6까지
-        upperBound =
+        int item = rand.nextInt(upperBound) + 2; //2 부터 6까지 , Item 랜덤선택
         upperBound = 4; //0~3까지
         int block = rand.nextInt(upperBound); //0 ~ 3까지 , 0이면 a에 Item, 1이면 b에 Item, 2이면 c에 Item, 3이면 d에 Item
         if(item==2){
             return new BrickW(1, 4);
-        } else{
-            Brick brick = genarateNormal(difficulty, color);
+        }
+        else{
+            Brick brick = genarateNormal(difficulty, colorBlindness);
 
+            //각 블록에 아이템 장착
             if(block==0){
-                brick.get
+                Block a = brick.getA();
+                a.setItem(Item.fromNum(item));
             }
-
+            else if(block==1){
+                Block b = brick.getB();
+                b.setItem(Item.fromNum(item));
+            }
+            else if(block==2){
+                Block c = brick.getC();
+                c.setItem(Item.fromNum(item));
+            }
+            else if(block==3){
+                Block d = brick.getD();
+                d.setItem(Item.fromNum(item));
+            }
+            return brick;
 
         }
 
@@ -83,4 +89,29 @@ public class RandomGenerator {
     //canMoveDown 에 대한 else에서 한번 호출(안착)
     //gravity 쪽에서 그 줄에 대해 하나씩 호출(줄 제거)
 
+    public Brick generateBlock(int upperBound){
+        Random rand = new Random();
+        int point = rand.nextInt(upperBound)+1; //1~upperBound까지
+        if(point>=1 && point<10) {
+            return new BrickJ(, );
+        }
+        else if(point>=10 && point<20){
+            return new BrickL(, );
+        }
+        else if(point>=20 && point<30){
+            return new BrickO(, );
+        }
+        else if(point>=30 && point<40){
+            return new BrickS(, );
+        }
+        else if(point>=40 && point<50){
+            return new BrickT(, );
+        }
+        else if(point>=50 && point<60){
+            return new BrickZ(, );
+        }
+        else { //I블록
+            return new BrickI();
+        }
+    }
 }

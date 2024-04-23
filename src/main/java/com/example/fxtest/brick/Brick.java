@@ -31,4 +31,35 @@ public interface Brick {
 
     public List<Block> getBlockList();
 
+    //Getter Setter
+    public Block getA();
+
+    public void setA(Block a);
+
+    public Block getB();
+
+    public void setB(Block b);
+
+    public Block getC();
+
+    public void setC(Block c);
+
+    public Block getD();
+
+    public void setD(Block d);
+
+    public int getCenter_x();
+
+    public void setCenter_x(int center_x);
+
+    public int getCenter_y();
+
+    public void setCenter_y(int center_y);
+
+    public int getShape();
+
+    public void setShape(int shape);
+
+
+
 }
