@@ -39,6 +39,7 @@ public class GameBoard {
         if (rowsRemoved > 0) {
             updateScoreLine(rowsRemoved); // 삭제된 줄의 수에 따라 점수 업데이트
         }
+
     }
 
 
