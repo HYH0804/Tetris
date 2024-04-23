@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Drawing {
@@ -46,6 +47,7 @@ public class Drawing {
         }
     }
 
+    //특정 GridPane의 인덱스에 있는 Lable 객체 반환
     public static Label getLableAt(GridPane gridPane, int columnIndex, int rowIndex) {
         for (javafx.scene.Node node : gridPane.getChildren()) {
             Integer nodeColumnIndex = GridPane.getColumnIndex(node);
@@ -90,8 +92,60 @@ public class Drawing {
             }
         }
         System.out.println("보드 업데이트 완료");
+    }
+
+/*    public static void updateBoardView(List<Integer> removeLineList){
+        for(int line : removeLineList){ //삭제해야 될 라인수만큼 반복
+
+            for(int coloumn=0; coloumn<GameBoard.WIDTH; coloumn++){
+                for(int row=line-1; row>1 ; row--){
+                    if(GameBoard.board[row][coloumn]!=0) {
+                        System.out.println("없어질 라인 " + line+ " coloumn 값 " +coloumn + " row 값 "+ row);
+                        Label lableAt = getLableAt(boardView, coloumn, row);
+                        String text = lableAt.getText();
+                        Color textColor = (Color) lableAt.getTextFill();
+                        boardView.getChildren().remove(lableAt);
+                        Label label = newLabel(text, textColor);
+                        boardView.add(label, coloumn, row); //가로세로
+                    }
+                    else{
+                        continue;
+                    }
 
 
+                }
+            }
+        }
+    }*/
+    public static void updateBoardView(List<Integer> removeLineList){
+        Collections.sort(removeLineList, Collections.reverseOrder()); // 내림차순으로 정렬
+        for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
+            removeRow(boardView, line);
+            for (int column = 0; column < GameBoard.WIDTH; column++) {
+                for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
+                    Label labelAbove = getLableAt(boardView, column, row);
+                    if (labelAbove != null) {
+                        GridPane.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
+                    }
+                }
+            }
+        }
+    }
+
+    public static void removeRow(GridPane gridPane, int rowIndex) {
+        // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
+        gridPane.getChildren().removeIf(node ->
+                GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == rowIndex
+        );
+    }
+
+    public static Label newLabel(String text , Color color){
+        Label label = new Label(text); //이거 아이템 들어가면 고민 좀 해야될듯
+        label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+        label.setTextFill(color);
+        GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+        GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+        return label;
     }
 
 

@@ -31,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
@@ -229,12 +230,15 @@ public class GameBoardController implements Initializable {
                 }*/
                 System.out.println("완성 줄 삭제 전---------------");
                 printMatrix();
+
+                List<Integer> removedRows = gameBoard.getRemovedRows();
+                Drawing.updateBoardView(removedRows);
                 gameBoard.removeFullRows();
                 System.out.println("완성 줄 삭제 후---------------");
                 printMatrix();
                 //gravity로 1인지 확인해서 board 업데이트하고
 
-                Drawing.updateBoardView();
+                //Drawing.updateBoardView(removeLineList);
                 printMatrix();
                 //줄 지우기
 
