@@ -28,4 +28,9 @@ public enum Item {
         }
         throw new IllegalArgumentException("Invalid Item number: " + num);
     }
+
+    public void doItem(){
+        //3번이면 구현
+        //4번이면 구현
+    }
 }

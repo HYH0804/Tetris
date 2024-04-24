@@ -141,11 +141,11 @@ public class GameBoardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
 
-        currentBrick=rg.genarateNormal(0,false); //일단 이지로, 여기서 모드 받아와야됨.
+        currentBrick=rg.generateItem(0,false); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick= new BrickZ(0,4,Color.GREEN );
         //currentBrick = new BrickO(0,4,Color.SKYBLUE);
 
-        nextBrick=rg.genarateNormal(0,false);
+        nextBrick=rg.generateItem(0,false);
         //nextBrick=new BrickZ(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
@@ -241,12 +241,14 @@ public class GameBoardController implements Initializable {
                 //colorFill();
                 Drawing.colorFill(currentBrick);
                 fixed();
+                //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
+                //Block Item
                 System.out.println("!currentBrick.canMoveDown()");
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
                 //System.out.println("완성 줄 삭제 전---------------");
-                //printMatrix();
+                printMatrix();
 
                 List<Integer> removedRows = gameBoard.getRemovedRows();
                 Drawing.updateBoardView(removedRows);
@@ -298,7 +300,7 @@ public class GameBoardController implements Initializable {
         currentBrick=nextBrick;
 
         //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
-        nextBrick=rg.genarateNormal(0, false);
+        nextBrick=rg.generateItem(0, false);
         //nextBrick=new BrickZ(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 

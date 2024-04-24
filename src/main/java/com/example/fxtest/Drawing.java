@@ -43,11 +43,18 @@ public class Drawing {
         }
     }
 
+    //Brick 색 삭제
     public static void colorErase(Brick brick) {
         for(Block block : brick.getBlockList()) {
             Label LabelAt = getLableAt(boardView,block.getY(),block.getX());
             boardView.getChildren().remove(LabelAt);
         }
+    }
+
+    //블록 색 삭제
+    public static void colorErase(int x,int y){
+        Label lableAt = getLableAt(boardView, x, y);
+        boardView.getChildren().remove(lableAt);
     }
 
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
@@ -136,6 +143,8 @@ public class Drawing {
             }
         }
     }
+
+
 
     public static void removeRow(GridPane gridPane, int rowIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
