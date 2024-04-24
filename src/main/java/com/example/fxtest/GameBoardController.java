@@ -1,15 +1,14 @@
 package com.example.fxtest;
+import static com.example.fxtest.Drawing.displayNextBrick;
 import static com.example.fxtest.Main.loadProperties;
 
-import com.example.fxtest.brick.Block;
+import com.example.fxtest.brick.*;
 
 //얜 임시로, 랜덤 구현하면 필요 없
-import com.example.fxtest.brick.BrickO;
-import com.example.fxtest.brick.BrickZ;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import com.example.fxtest.brick.Brick;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -48,6 +47,10 @@ public class GameBoardController implements Initializable {
 
     RandomGenerator rg = new RandomGenerator();
 
+    boolean turnEnd =false;
+
+
+
 
     @FXML
     public GridPane boardView; //컨트롤View 매핑
@@ -56,6 +59,14 @@ public class GameBoardController implements Initializable {
     private Button StartButton;
     @FXML
     private Button ExitButton;
+    @FXML
+    private Button goHomeButton;
+    @FXML
+    private Label scoreLabel;
+    @FXML
+    private GridPane nextBrickView;
+
+    public static int downScore=0; //속도마다 다르게 변경
 
 
     public static double cellWidth = 20;
@@ -63,14 +74,24 @@ public class GameBoardController implements Initializable {
 
 
 
-    @FXML
-    public void goHomeButtonClick() throws IOException{
-        Stage st = StageSaver.pStage;
-        timeline.stop(); //주기함수 종료
-        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
-        Scene mainpage = new Scene(fxmlLoader.load(),st.getWidth() , st.getHeight());
-        st.setScene(mainpage);
-        st.show();
+
+    public void goHomeButtonClick() throws IOException {
+        Stage stage = (Stage) goHomeButton.getScene().getWindow();
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
+        Parent root = loader.load();
+        Scene scene = goHomeButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("Start Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
+        timeline.stop(); // 타임라인 애니메이션을 정지합니다.
+        stage.show();
     }
 
     @FXML
@@ -113,7 +134,7 @@ public class GameBoardController implements Initializable {
     //게임 (재)시작때 초기화
     void init(){
         initBoard();
-        GameBoard.score=0;
+        GameBoard.setScore(0);
         GameBoard.deleteLine=0;
         GameBoard.whileGame =false;
         timeline.stop();
@@ -129,6 +150,7 @@ public class GameBoardController implements Initializable {
         timeline.stop();
         boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
+        turnEnd=false;
     }
 
     void initBoard(){
@@ -154,6 +176,15 @@ public class GameBoardController implements Initializable {
         regiBrickEvent();
         Drawing.setBoardView(boardView);
 
+
+        GameBoard.scoreProperty().addListener((obs, oldScore, newScore) -> {
+            if (newScore.intValue() > oldScore.intValue()) {
+                updateScoreLabel(scoreLabel);
+            }
+        });
+
+        displayNextBrick(nextBrick,nextBrickView);
+
         //change()함수 실행
         try {
             change();
@@ -163,7 +194,7 @@ public class GameBoardController implements Initializable {
 
         // startButton의 클릭 이벤트 핸들러 등록
         StartButton.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) StartButton.getScene().getWindow();
 
             // 새로운 Scene을 로드합니다.
             try {
@@ -176,11 +207,14 @@ public class GameBoardController implements Initializable {
                 // 세팅 페이지 로드
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard.fxml"));
                 Parent root = loader.load();
-                Scene scene = new Scene(root, width, height);
+                Scene scene = StartButton.getScene();
+                scene.setRoot(root);
 
                 timeline.stop(); //주기함수 종료
                 // Stage에 새로운 Scene을 설정합니다.
                 stage.setScene(scene);
+                stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+                stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
                 init(); //새로 시작 전 board 0으로 초기화
                 stage.show();
             } catch (IOException e) {
@@ -220,6 +254,7 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
+        downScore=1;
         Drawing.colorErase(currentBrick);
         printBlock();
         if(!GameBoard.whileGame){
@@ -230,27 +265,48 @@ public class GameBoardController implements Initializable {
             //게임 중으로 바꿈
             GameBoard.whileGame =true;
 
-
             //테스트
             //printMatrix();
 
         }
         else{
+            //착지시(아이템)
+ /*           if(turnEnd==true){
+
+                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
+                turnEnd=false;
+            }*/
             if(!currentBrick.canMoveDown()/*!canMoveDown()*/){ //더 못내려가면
                 //그 위치에 색칠
                 //colorFill();
+
+                turnEnd=true;
+                nextBrickView.setVisible(true);
+
                 Drawing.colorFill(currentBrick);
                 fixed();
+                //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
+                //Block Item
                 System.out.println("!currentBrick.canMoveDown()");
+
+                //착지시(아이템) , 살포시 안착했을때
+                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템
+
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
                 //System.out.println("완성 줄 삭제 전---------------");
-                //printMatrix();
+                printMatrix();
 
-                List<Integer> removedRows = gameBoard.getRemovedRows();
-                Drawing.updateBoardView(removedRows);
-                gameBoard.removeFullRows();
+
+                //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
+                List<Integer> removedRows = gameBoard.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
+                //보드 전부 0
+                checkAndDoItem6(removedRows);
+
+                //NPE조심
+                Drawing.updateBoardView(removedRows); //gui 여기서 삭제
+                gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
                 //System.out.println("완성 줄 삭제 후---------------");
                 //printMatrix();
                 //gravity로 1인지 확인해서 board 업데이트하고
@@ -272,8 +328,15 @@ public class GameBoardController implements Initializable {
                     //printMatrix();
                 }
                 else{
+                    Item.sponDoItem(currentBrick, gameBoard, nextBrickView);
+
+                    turnEnd=false;
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                     sponBrick();
+
+                    //스폰되자마자 블록 아이템 수행
+                    //Item.sponDoItem(currentBrick, gameBoard, boardView);
+
                     System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰");
                     //테스트
                     //printMatrix();
@@ -290,6 +353,33 @@ public class GameBoardController implements Initializable {
                 //테스트
                 //printMatrix();
             }
+            if(turnEnd==true){
+
+                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
+                turnEnd=false;
+            }
+        }
+    }
+
+
+    //아이템6 실행
+    private void checkAndDoItem6(List<Integer> removedRows) {
+        boolean flag=false;
+        for(int fullRow : removedRows){
+            for(int i=0; i<GameBoard.WIDTH; i++){
+                if(gameBoard.board[fullRow][i]==6){
+                    flag=true;
+                }
+            }
+            if(flag==true){
+                break;
+            }
+        }
+        if(flag==true){
+            for (int[] row : gameBoard.board) {
+                Arrays.fill(row, 0);
+            }
+            Drawing.updateBoardView();
         }
     }
 
@@ -304,7 +394,7 @@ public class GameBoardController implements Initializable {
 
         //currentBrick 색칠하고
         Drawing.colorFill(currentBrick);
-
+        displayNextBrick(nextBrick,nextBrickView);
         //이벤트 장착
     }
 
@@ -383,6 +473,7 @@ public class GameBoardController implements Initializable {
                 //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
                 timeline.stop();
                 System.out.println("---------------------------------정지");
+                turnEnd=true;
                 //떨구고 바로 블록 뽑아옴
                 minute10();
                 timeline.play();
@@ -436,4 +527,10 @@ public class GameBoardController implements Initializable {
             boardView.getRowConstraints().add(rowConstraints);
         }
     }
+
+
+    public void updateScoreLabel(Label scoreLabel) {
+        this.scoreLabel.setText("Score: " +Integer.toString(GameBoard.getScore()));
+    }
 }
+

@@ -1,6 +1,7 @@
 package com.example.fxtest.brick;
 
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoardController;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -92,8 +93,10 @@ public class BrickL implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
+
             if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -121,8 +124,10 @@ public class BrickL implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
+
             if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -150,8 +155,10 @@ public class BrickL implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
+
             if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0 )) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -182,6 +189,7 @@ public class BrickL implements Brick{
 /*            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }*/
+
             if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0)){
                 return false;
             }
@@ -294,6 +302,7 @@ public class BrickL implements Brick{
         b.setX(b.getX()+1);
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
+        GameBoard.updateScore(GameBoardController.downScore);
 
         //postChange();
     }
@@ -306,6 +315,7 @@ public class BrickL implements Brick{
             b.setX(b.getX()+1);
             c.setX(c.getX()+1);
             d.setX(d.getX()+1);
+            GameBoard.updateScore(GameBoardController.downScore);
         }
     }
 

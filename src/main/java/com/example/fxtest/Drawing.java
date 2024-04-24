@@ -24,6 +24,7 @@ public class Drawing {
         Drawing.boardView = boardView;
     }
 
+    //그리드페인에 현재블록 그리기
     public static void colorFill(Brick brick){
 
         for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
@@ -43,11 +44,18 @@ public class Drawing {
         }
     }
 
+    //Brick 색 삭제
     public static void colorErase(Brick brick) {
         for(Block block : brick.getBlockList()) {
             Label LabelAt = getLableAt(boardView,block.getY(),block.getX());
             boardView.getChildren().remove(LabelAt);
         }
+    }
+
+    //블록 색 삭제
+    public static void colorErase(int x,int y){
+        Label lableAt = getLableAt(boardView, x, y);
+        boardView.getChildren().remove(lableAt);
     }
 
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
@@ -137,6 +145,7 @@ public class Drawing {
         }
     }
 
+
     //가로줄 삭제 후 업데이트
     public static void updateBoardView(int line){
             removeRow(boardView, line);
@@ -150,24 +159,13 @@ public class Drawing {
             }
     }
 
-    public static void updateBoardViewColumn(int column) {
-        removeColumn(boardView, column); // 특정 열을 삭제
-        for (int row = 0; row < GameBoard.HEIGHT; row++) { // 각 행에 대해 반복
-            for (int col = column - 1; col >= 0; col--) { // 삭제된 열의 왼쪽에서 시작
-                Label labelLeft = getLableAt(boardView, col, row);
-                if (labelLeft != null) {
-                    GridPane.setColumnIndex(labelLeft, col + 1); // 기존 라벨을 한 칸 오른쪽으로 이동
-                }
-            }
-        }
-    }
-
 
     //세로줄 삭제 후 업데이트
     public static void updateBoardColumnView(int column){
         removeColumn(boardView,column);
 
     }
+
 
     public static void removeRow(GridPane gridPane, int rowIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
@@ -200,7 +198,7 @@ public class Drawing {
             return "O";
         }
         else if (item==Item.WEIGHT) {
-            return "W";
+            return "M";
         }
         else if(item==Item.ROWDELETE){
             return "R";
@@ -220,7 +218,7 @@ public class Drawing {
             return "O";
         }
         else if (num==2) {
-            return "W";
+            return "M";
         }
         else if(num==3){
             return "R";
@@ -233,6 +231,26 @@ public class Drawing {
         }
         else{
             return "N";
+        }
+    }
+
+    public static void displayNextBrick(Brick brick, GridPane nextBrickView) {
+        nextBrickView.getChildren().clear(); // 이전에 표시된 블록 제거
+
+        for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
+            int x = block.getX();
+            int y = block.getY();
+
+            String string = returnItemSymbol(block);
+
+            Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
+            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+            label.setTextFill(block.getColor()); //색깔도 바꾸고
+            GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+
+            // GridPane에 Rectangle 추가
+            nextBrickView.add(label, y, x);
         }
     }
 }

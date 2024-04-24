@@ -1,5 +1,8 @@
 package com.example.fxtest;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +14,9 @@ public class GameBoard {
 
     //Board 2차원 배열 , 있으면 1 없으면 0
     public static int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
-    static int score=0; //점수
+
+    private static IntegerProperty score = new SimpleIntegerProperty(0); //점수
+
     static int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
     static boolean whileGame =false; //Flag가 True로 되면 게임 끝나는 속성 이벤트 리스너
 
@@ -23,6 +28,18 @@ public class GameBoard {
         for (int[] row : board) {
             Arrays.fill(row, 0);
         }
+    }
+
+    public static IntegerProperty scoreProperty() {
+        return score;
+    }
+
+    public static int getScore() {
+        return score.get();
+    }
+
+    public static void setScore(int newScore) {
+        score.set(newScore);
     }
 
 
@@ -39,7 +56,6 @@ public class GameBoard {
         if (rowsRemoved > 0) {
             updateScoreLine(rowsRemoved); // 삭제된 줄의 수에 따라 점수 업데이트
         }
-
     }
 
 
@@ -67,16 +83,16 @@ public class GameBoard {
     private void updateScoreLine(int rowsRemoved) {
         switch (rowsRemoved) {
             case 1:
-                score += 100;
+                updateScore(100);
                 break;
             case 2:
-                score += 300;
+                updateScore(300);
                 break;
             case 3:
-                score += 500;
+                updateScore(500);
                 break;
             case 4:
-                score += 800;
+                updateScore(800);
                 break;
             default:
                 break;
@@ -93,5 +109,18 @@ public class GameBoard {
         }
         return removedRows;
     }
+
+
+    public void removeFullColumn(int column) {
+        for(int i=0; i<GameBoard.HEIGHT; i++){
+            GameBoard.board[i][column]=0;
+        }
+    }
+
+
+    public static void updateScore(int value) {
+        score.set(getScore() + value);
+    }
+
 
 }

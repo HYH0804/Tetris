@@ -28,6 +28,8 @@ import java.util.*;
 public class KeySettingController implements Initializable {
     @FXML
     private AnchorPane keySettingPage;
+    @FXML
+    private VBox keySettingVbox;
 
     private final static int LABELNUM = 5;
     private Map<Label,String> keyMap = new HashMap<>();
@@ -40,12 +42,14 @@ public class KeySettingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Node> children = keySettingPage.getChildren();
+        ObservableList<Node> children = keySettingVbox.getChildren();
         int idx = 0;
         for(Node child : children){
-            Label label = (Label) child;
-            labelSet[idx] = label;
-            idx++;
+            if (child instanceof Label) {
+                Label label = (Label) child;
+                labelSet[idx] = label;
+                idx++;
+            }
         }
 
         getKey(); // 기존 값을 list로 가져오기 및 표시하기
@@ -73,14 +77,19 @@ public class KeySettingController implements Initializable {
     }
 
     public void initPageHandler(Scene pScene, Parent root){
-        AnchorPane anchorPane = (AnchorPane) root;
-        ObservableList<Node> children = anchorPane.getChildren();
-        int idx = 0;
-        for(Node child : children){
-            Label label = (Label) child;
-            labelSet[idx] = label;
-            idx++;
+        VBox vbox = (VBox) root.lookup("#keySettingVbox");
+        if (vbox != null) {
+            ObservableList<Node> children = vbox.getChildren();
+            int idx = 0;
+            for (Node child : children) {
+                if (child instanceof Label) { // 정확한 타입 확인
+                    Label label = (Label) child;
+                    labelSet[idx] = label;
+                    idx++;
+                }
+            }
         }
+
         // key event for scene
         pScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             KeyCode keyCode = event.getCode();
@@ -144,9 +153,13 @@ public class KeySettingController implements Initializable {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    Scene scene = new Scene(root1, width, height);
 
-                    Stage stage = (Stage) root.getScene().getWindow();
+                    Stage stage = (Stage) pScene.getWindow();
+                    Scene scene = pScene;
+                    scene.setRoot(root1); // 현재 Scene의 root를 새로운 root로 설정합니다.
+                    stage.setTitle("Settings Page");
+                    stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+                    stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
                     stage.setScene(scene);
                 }
                 return;
