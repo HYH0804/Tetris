@@ -7,7 +7,6 @@ public class Block {
     //블록 중심좌표
     int x;
     int y;
-
     Item item=Item.NORMAL; //그 블록이 Item 인지
     //BrickW에서만 생성과 동시에 Item 부여, 나머지 일반 블록들은 RandomGenerator에서 미리 만든 후 Setter로 부여
 

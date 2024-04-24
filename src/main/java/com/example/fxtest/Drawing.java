@@ -44,6 +44,7 @@ public class Drawing {
         }
     }
 
+    //Brick 색 삭제
     public static void colorErase(Brick brick) {
         for(Block block : brick.getBlockList()) {
             Label LabelAt = getLableAt(boardView,block.getY(),block.getX());
@@ -144,6 +145,7 @@ public class Drawing {
         }
     }
 
+
     //가로줄 삭제 후 업데이트
     public static void updateBoardView(int line){
             removeRow(boardView, line);
@@ -163,6 +165,7 @@ public class Drawing {
         removeColumn(boardView,column);
 
     }
+
 
     public static void removeRow(GridPane gridPane, int rowIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
@@ -228,6 +231,26 @@ public class Drawing {
         }
         else{
             return "N";
+        }
+    }
+
+    public static void displayNextBrick(Brick brick, GridPane nextBrickView) {
+        nextBrickView.getChildren().clear(); // 이전에 표시된 블록 제거
+
+        for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
+            int x = block.getX();
+            int y = block.getY();
+
+            String string = returnItemSymbol(block);
+
+            Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
+            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+            label.setTextFill(block.getColor()); //색깔도 바꾸고
+            GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+
+            // GridPane에 Rectangle 추가
+            nextBrickView.add(label, y, x);
         }
     }
 }

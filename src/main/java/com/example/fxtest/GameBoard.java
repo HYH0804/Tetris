@@ -56,7 +56,6 @@ public class GameBoard {
         if (rowsRemoved > 0) {
             updateScoreLine(rowsRemoved); // 삭제된 줄의 수에 따라 점수 업데이트
         }
-
     }
 
 
@@ -111,16 +110,17 @@ public class GameBoard {
         return removedRows;
     }
 
+
     public void removeFullColumn(int column) {
         for(int i=0; i<GameBoard.HEIGHT; i++){
             GameBoard.board[i][column]=0;
         }
     }
 
+
     public static void updateScore(int value) {
         score.set(getScore() + value);
     }
-
 
 
 }

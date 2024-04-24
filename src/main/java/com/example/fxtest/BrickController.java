@@ -1,6 +1,7 @@
 package com.example.fxtest;
 
 import com.example.fxtest.brick.Brick;
+import com.example.fxtest.brick.BrickW;
 
 //키 입력 시 발생되는 이벤트 처리
 public class BrickController{

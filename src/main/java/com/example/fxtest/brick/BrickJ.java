@@ -1,6 +1,7 @@
 package com.example.fxtest.brick;
 
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoardController;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
 import javafx.scene.paint.Color;
@@ -96,6 +97,7 @@ public class BrickJ implements Brick {
             int y = block.getY();
             if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -123,8 +125,10 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
+
             if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -152,8 +156,10 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
+
             if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -296,6 +302,7 @@ public class BrickJ implements Brick {
         b.setX(b.getX()+1);
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
+        GameBoard.updateScore(GameBoardController.downScore);
 
         //postChange();
     }
@@ -308,6 +315,7 @@ public class BrickJ implements Brick {
             b.setX(b.getX()+1);
             c.setX(c.getX()+1);
             d.setX(d.getX()+1);
+            GameBoard.updateScore(GameBoardController.downScore);
         }
     }
 

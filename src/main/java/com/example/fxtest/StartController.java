@@ -82,10 +82,11 @@ public class StartController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root, width, height);
-
-        stage.setScene(scene);
-        stage.setTitle("GameBoard Page");
+        Scene scene = startButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("Settings Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         stage.show();
     }
 
@@ -103,10 +104,11 @@ public class StartController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("setting-view.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root, width, height);
-
-        stage.setScene(scene);
+        Scene scene = settingsButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
         stage.setTitle("Settings Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         stage.show();
     }
 
