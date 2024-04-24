@@ -1,6 +1,7 @@
 package com.example.fxtest.brick;
 
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoardController;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
 import javafx.scene.paint.Color;
@@ -293,7 +294,7 @@ public class BrickZ implements Brick {
         b.setX(b.getX()+1);
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
-
+        GameBoard.updateScore(GameBoardController.downScore);
         //postChange();
     }
 
@@ -305,6 +306,7 @@ public class BrickZ implements Brick {
             b.setX(b.getX()+1);
             c.setX(c.getX()+1);
             d.setX(d.getX()+1);
+            GameBoard.updateScore(GameBoardController.downScore);
         }
     }
 

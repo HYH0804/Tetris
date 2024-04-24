@@ -204,4 +204,24 @@ public class Drawing {
             return "N";
         }
     }
+
+    public static void displayNextBrick(Brick brick, GridPane nextBrickView) {
+        nextBrickView.getChildren().clear(); // 이전에 표시된 블록 제거
+
+        for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
+            int x = block.getX();
+            int y = block.getY();
+
+            String string = returnItemSymbol(block);
+
+            Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
+            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+            label.setTextFill(block.getColor()); //색깔도 바꾸고
+            GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+
+            // GridPane에 Rectangle 추가
+            nextBrickView.add(label, y, x);
+        }
+    }
 }

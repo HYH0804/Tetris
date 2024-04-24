@@ -2,6 +2,7 @@ package com.example.fxtest.brick;
 
 import com.example.fxtest.Drawing;
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoardController;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -269,6 +270,7 @@ public class BrickW implements Brick{
             d.setX(d.getX()+1);
             e.setX(e.getX()+1);
             f.setX(f.getX()+1);
+            GameBoard.updateScore(GameBoardController.downScore);
         }
         //이동 후 a b c d 좌표 변경
 
