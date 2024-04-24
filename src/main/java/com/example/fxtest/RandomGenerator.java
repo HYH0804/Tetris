@@ -1,11 +1,28 @@
 package com.example.fxtest;
 
+import com.example.fxtest.brick.*;
+import javafx.scene.paint.Color;
+
+import java.util.Random;
 public class RandomGenerator {
+    private final int UPPER_EASY = 72;
+    private final int UPPER_NOMAL = 70;
+    private final int UPPER_HARD = 68;
+
     //여기서 색상 주입 >> 색맹이냐 아니냐 나눠야될듯
 
     //일반블록: 아이템 자체 블록 제외하고 블록 모양 택
         //a b c d 만들고 각각 색상, 폰트 주입
-
+    public Brick genarateNormal(int difficulty, boolean colorBlindness){ //아이템블록 제외 랜덤생성
+        switch (difficulty){
+            case 0: //이지모드
+                return generateBlock(UPPER_EASY,colorBlindness);
+            case 1: //노말모드
+                return generateBlock(UPPER_NOMAL,colorBlindness);
+            default: //하드모드
+                return generateBlock(UPPER_HARD,colorBlindness);
+        }
+    }
 
 
     //아이템일때: 블록 모양 먼저 택
@@ -13,6 +30,47 @@ public class RandomGenerator {
         //아니면
             //랜덤으로 a,b,c,d 중 하나만 랜덤으로 아이템 기능 가져와서 + a b c d 각각 폰트 주입
             //블록 모양대로 만듦
+    public Brick generateItem(int difficulty,boolean colorBlindness){
+        Random rand = new Random(); // Random 객체 생성
+        int upperBound=5; //0 ~ 4까지
+        int item = rand.nextInt(upperBound) + 2; //2 부터 6까지 , Item 랜덤선택
+        upperBound = 4; //0~3까지
+        int block = rand.nextInt(upperBound); //0 ~ 3까지 , 0이면 a에 Item, 1이면 b에 Item, 2이면 c에 Item, 3이면 d에 Item
+        if(item==2){
+            if(colorBlindness==true)
+                return new BrickW(1, 4,Color.GRAY); //색맹때 해야됨
+            else
+                return new BrickW(1,4, Color.GRAY);
+        }
+        else{
+            Brick brick = genarateNormal(difficulty, colorBlindness);
+
+            //각 블록에 아이템 장착
+            if(block==0){
+                Block a = brick.getA();
+                a.setItem(Item.fromNum(item));
+                brick.setItem(a);
+            }
+            else if(block==1){
+                Block b = brick.getB();
+                b.setItem(Item.fromNum(item));
+                brick.setItem(b);
+            }
+            else if(block==2){
+                Block c = brick.getC();
+                c.setItem(Item.fromNum(item));
+                brick.setItem(c);
+            }
+            else if(block==3){
+                Block d = brick.getD();
+                d.setItem(Item.fromNum(item));
+                brick.setItem(d);
+            }
+            return brick;
+
+        }
+
+    }
 
 
     //아이템 블록인지 (브릭 자체가 아이템인지 , 블록 안에 아이템이 있는지) 확인 어케? + 아이템이면 배열에 어케 표시할건지 + 아이템 기능 구현을 어디 메서드 안에 할건지
@@ -39,4 +97,50 @@ public class RandomGenerator {
     //canMoveDown 에 대한 else에서 한번 호출(안착)
     //gravity 쪽에서 그 줄에 대해 하나씩 호출(줄 제거)
 
+    public Brick generateBlock(int upperBound,boolean colorBlindness){
+        Random rand = new Random();
+        int point = rand.nextInt(upperBound)+1; //1~upperBound까지
+        if(point>=1 && point<10) {
+            if(colorBlindness==true)
+                return new BrickJ(0,4, Color.color(213/255.0,94/255.0,0));
+            else
+                return new BrickJ(0,4,Color.RED);
+        }
+        else if(point>=10 && point<20){
+            if(colorBlindness==true)
+                return new BrickL(0,3,Color.BLUE);
+            else
+                return new BrickL(0,3,Color.BLUE);
+        }
+        else if(point>=20 && point<30){
+            if (colorBlindness==true)
+                return new BrickO(0,4,Color.SKYBLUE);
+            else
+                return new BrickO(0,4,Color.SKYBLUE);
+        }
+        else if(point>=30 && point<40){
+            if(colorBlindness==true)
+                return new BrickS(0, 4,Color.PALEVIOLETRED);
+            else
+                return new BrickS(0,4,Color.PURPLE );
+        }
+        else if(point>=40 && point<50){
+            if(colorBlindness==true)
+                return new BrickT(1,4, Color.YELLOW);
+            else
+                return new BrickT(1,4, Color.YELLOW);
+        }
+        else if(point>=50 && point<60){
+            if (colorBlindness==true)
+                return new BrickZ(0,4, Color.color(0,158/255.0,87/255.0));
+            else
+                return new BrickZ(0,4,Color.GREEN );
+        }
+        else { //I블록
+            if (colorBlindness==true)
+                return new BrickI(1,4,Color.BLACK);
+            else
+                return new BrickI(1,4, Color.BLACK);
+        }
+    }
 }

@@ -34,7 +34,7 @@ public class KeySettingController implements Initializable {
     private static Boolean[] buttonClicked = {false,false,false,false,false};
     private Label[] labelSet = new Label[LABELNUM];
 
-    private final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "straight"};
+    private final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop"};
     private static Properties settingProperties;
 
 

@@ -3,6 +3,7 @@ package com.example.fxtest.brick;
 import com.example.fxtest.GameBoard;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,8 @@ public class BrickJ implements Brick {
 
     private int shape; //회전
 
+    private Block item; //Item 해당 블록
+
     Block a;
     Block b;
     Block c;
@@ -22,14 +25,14 @@ public class BrickJ implements Brick {
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
     List<Block> afterList = new ArrayList<>();
 
-    public BrickJ(int center_x, int center_y) {
+    public BrickJ(int center_x, int center_y, Color color) {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅
         this.center_x = center_x;
         this.center_y = center_y;
-        this.a= new Block(center_x-1,center_y);
-        this.b=new Block(center_x, center_y);
-        this.c=new Block(center_x+1, center_y);
-        this.d=new Block(center_x+1,center_y-1);
+        this.a= new Block(center_x,center_y-1,color);
+        this.b=new Block(center_x, center_y,color);
+        this.c=new Block(center_x, center_y+1,color);
+        this.d=new Block(center_x+1,center_y+1,color);
         this.shape=0;
         blockList.add(a);
         blockList.add(b);
@@ -47,7 +50,7 @@ public class BrickJ implements Brick {
         Block Rotate_c;
         Block Rotate_d;
 
-        if (nextShape == 0) {
+        if (nextShape == 1) {
             Rotate_a = new Block(b.getX() - 1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); // b 중심점이라 변환 X
             Rotate_c = new Block(b.getX() + 1, b.getY());
@@ -57,7 +60,7 @@ public class BrickJ implements Brick {
             temp.add(Rotate_c);
             temp.add(Rotate_d);
 
-        } else if (nextShape == 1) {
+        } else if (nextShape == 2) {
             Rotate_a = new Block(b.getX(), b.getY() + 1);
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
             Rotate_c = new Block(b.getX(), b.getY() - 1);
@@ -66,7 +69,7 @@ public class BrickJ implements Brick {
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
-        } else if (nextShape == 2) {
+        } else if (nextShape == 3) {
             Rotate_a = new Block(b.getX() + 1, b.getY());
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
             Rotate_c = new Block(b.getX() - 1, b.getY());
@@ -75,7 +78,7 @@ public class BrickJ implements Brick {
             temp.add(Rotate_b);
             temp.add(Rotate_c);
             temp.add(Rotate_d);
-        } else if (nextShape == 3) {
+        } else if (nextShape == 0) {
             Rotate_a = new Block(b.getX(), b.getY() - 1);
             Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
             Rotate_c = new Block(b.getX(), b.getY() + 1);
@@ -91,7 +94,7 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -120,7 +123,7 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -149,7 +152,7 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -178,8 +181,11 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+/*            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+            }*/
+            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
+                return false;
             }
         }
         return true; //이동 가능
@@ -196,7 +202,7 @@ public class BrickJ implements Brick {
         this.shape = (this.shape+1)%4; //다음 회전모양
         int x=b.getX(); // 회전 중심 x
         int y=b.getY(); // 회전 중심 y
-        if(shape==0){ //3 > 0 회전
+        if(shape==1){ //3 > 0 회전
             a.setX(b.getX() - 1);
             a.setY(b.getY());
             //b는 중심점이라 그대로
@@ -205,7 +211,7 @@ public class BrickJ implements Brick {
             d.setX(b.getX() + 1);
             d.setY(b.getY() - 1);
         }
-        else if (shape==1) { //0 > 1 회전
+        else if (shape==2) { //0 > 1 회전
             a.setX(b.getX());
             a.setY(b.getY() + 1);
             //b는 중심점이라 그대로
@@ -214,7 +220,7 @@ public class BrickJ implements Brick {
             d.setX(b.getX() - 1);
             d.setY(b.getY() - 1);
         }
-        else if (shape==2) { //1 > 2 회전
+        else if (shape==3) { //1 > 2 회전
             a.setX(b.getX() + 1);
             a.setY(b.getY());
             //b는 중심점이라 그대로
@@ -257,7 +263,7 @@ public class BrickJ implements Brick {
 
     @Override
     public void moveR() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()+1);
@@ -265,12 +271,12 @@ public class BrickJ implements Brick {
         c.setY(c.getY()+1);
         d.setY(d.getY()+1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
     public void moveL() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()-1);
@@ -278,12 +284,12 @@ public class BrickJ implements Brick {
         c.setY(c.getY()-1);
         d.setY(d.getY()-1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
     public void moveD() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setX(a.getX()+1);
@@ -291,7 +297,7 @@ public class BrickJ implements Brick {
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
@@ -306,58 +312,73 @@ public class BrickJ implements Brick {
     }
 
     //Getter Setter
+    //Getter Setter
+    @Override
     public Block getA() {
         return a;
     }
 
+    @Override
     public void setA(Block a) {
         this.a = a;
     }
 
+    @Override
     public Block getB() {
         return b;
     }
 
+    @Override
     public void setB(Block b) {
         this.b = b;
     }
 
+    @Override
     public Block getC() {
         return c;
     }
 
+    @Override
     public void setC(Block c) {
         this.c = c;
     }
 
+    @Override
     public Block getD() {
         return d;
     }
 
+    @Override
     public void setD(Block d) {
         this.d = d;
     }
 
+    @Override
     public int getCenter_x() {
         return center_x;
     }
 
+    @Override
     public void setCenter_x(int center_x) {
         this.center_x = center_x;
     }
 
+    @Override
     public int getCenter_y() {
         return center_y;
     }
 
+    @Override
     public void setCenter_y(int center_y) {
         this.center_y = center_y;
     }
 
+    @Override
     public int getShape() {
         return shape;
     }
 
+    @Override
     public void setShape(int shape) {
         this.shape = shape;
     }
@@ -365,5 +386,17 @@ public class BrickJ implements Brick {
     @Override
     public List<Block> getBlockList() {
         return blockList;
+    }
+
+
+    @Override
+    public Block getItem() {
+        return item;
+    }
+
+
+    @Override
+    public void setItem(Block item) {
+        this.item = item;
     }
 }

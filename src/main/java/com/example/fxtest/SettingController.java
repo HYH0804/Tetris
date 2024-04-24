@@ -134,14 +134,14 @@ public class SettingController implements Initializable {
             String moveLeft = prop.getProperty("moveRight");
             String moveRight = prop.getProperty("moveLeft");
             String rotate = prop.getProperty("rotate");
-            String straight= prop.getProperty("straight");
+            String straight= prop.getProperty("hardDrop");
 
             // 읽어온 값 출력
             System.out.println("moveDown: " + moveDown);
             System.out.println("moveRight: " + moveRight);
             System.out.println("moveLeft: " + moveLeft);
             System.out.println("rotate: " + rotate);
-            System.out.println("straight: " + straight);
+            System.out.println("hardDrop: " + straight);
 
             startKey.add(moveDown);
             startKey.add(moveRight);

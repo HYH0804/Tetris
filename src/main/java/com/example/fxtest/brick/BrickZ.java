@@ -3,6 +3,7 @@ package com.example.fxtest.brick;
 import com.example.fxtest.GameBoard;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ public class BrickZ implements Brick {
 
     private int shape; //회전
 
+    private Block item; //Item 해당 블록
+
     Block a;
     Block b;
     Block c;
@@ -21,14 +24,14 @@ public class BrickZ implements Brick {
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
     List<Block> afterList = new ArrayList<>();
 
-    public BrickZ(int center_x, int center_y) {
+    public BrickZ(int center_x, int center_y, Color color) {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅
         this.center_x = center_x;
         this.center_y = center_y;
-        this.a= new Block(center_x,center_y-1);
-        this.b=new Block(center_x, center_y); //b가 센터
-        this.c=new Block(center_x+1, center_y);
-        this.d=new Block(center_x+1,center_y+1);
+        this.a= new Block(center_x,center_y-1,color);
+        this.b=new Block(center_x, center_y,color); //b가 센터
+        this.c=new Block(center_x+1, center_y,color);
+        this.d=new Block(center_x+1,center_y+1,color);
         this.shape=0;
         blockList.add(a);
         blockList.add(b);
@@ -91,7 +94,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -121,7 +124,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -150,7 +153,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -179,7 +182,7 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
         }
@@ -308,58 +311,72 @@ public class BrickZ implements Brick {
     }
 
     //Getter Setter
+    @Override
     public Block getA() {
         return a;
     }
 
+    @Override
     public void setA(Block a) {
         this.a = a;
     }
 
+    @Override
     public Block getB() {
         return b;
     }
 
+    @Override
     public void setB(Block b) {
         this.b = b;
     }
 
+    @Override
     public Block getC() {
         return c;
     }
 
+    @Override
     public void setC(Block c) {
         this.c = c;
     }
 
+    @Override
     public Block getD() {
         return d;
     }
 
+    @Override
     public void setD(Block d) {
         this.d = d;
     }
 
+    @Override
     public int getCenter_x() {
         return center_x;
     }
 
+    @Override
     public void setCenter_x(int center_x) {
         this.center_x = center_x;
     }
 
+    @Override
     public int getCenter_y() {
         return center_y;
     }
 
+    @Override
     public void setCenter_y(int center_y) {
         this.center_y = center_y;
     }
 
+    @Override
     public int getShape() {
         return shape;
     }
 
+    @Override
     public void setShape(int shape) {
         this.shape = shape;
     }
@@ -367,6 +384,17 @@ public class BrickZ implements Brick {
     @Override
     public List<Block> getBlockList() {
         return blockList;
+    }
+
+    @Override
+    public Block getItem() {
+        return item;
+    }
+
+
+    @Override
+    public void setItem(Block item) {
+        this.item = item;
     }
 }
 
