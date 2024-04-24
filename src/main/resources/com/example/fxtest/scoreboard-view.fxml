@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.ScoreboardController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="97.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="selected" alignment="CENTER" layoutX="174.0" layoutY="10.0" prefHeight="85.0" prefWidth="164.0" text="Label" />
+            <HBox alignment="CENTER" prefHeight="192.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="easyBtn" text="Easy" />
+                  <Button fx:id="normalBtn" text="Normal" />
+                  <Button fx:id="hardBtn" text="Hard" />
+               </children></HBox>
+            <Button fx:id="itemModeBtn" text="itemMode" />
+         </children></VBox>
+      <VBox fx:id="ranking" alignment="CENTER" layoutX="250.0" layoutY="136.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="10" prefWidth="20.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text=": " />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+               </children></HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="199.0" layoutY="348.0" prefHeight="22.0" prefWidth="216.0">
+         <Button fx:id="GoHomeButton" prefHeight="22.0" prefWidth="94.0" text="Go Home" onAction="#goHomeButtonClick"/>
+         <Button fx:id="ExitButton" prefHeight="22.0" prefWidth="94.0" text="Exit" />
+      </HBox>
+   </children>
+</AnchorPane>

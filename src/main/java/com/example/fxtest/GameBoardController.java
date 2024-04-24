@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoardController implements Initializable {
     Brick currentBrick;
@@ -254,6 +255,7 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
+        updateScoreAndUserName();
         downScore=1;
         Drawing.colorErase(currentBrick);
         printBlock();
@@ -531,6 +533,14 @@ public class GameBoardController implements Initializable {
 
     public void updateScoreLabel(Label scoreLabel) {
         this.scoreLabel.setText("Score: " +Integer.toString(GameBoard.getScore()));
+    }
+
+    //스코어랑 유저네임 들어가는 함수
+    public void updateScoreAndUserName(){
+        //if(isGameOver()){}//일경우 확인한다
+        //오픈 스코어 뷰
+        int result = GameBoard.getScore();
+        ScoreboardController.openScoreboard(result ,1/*난이도 int*/,true /*아이템전 확인 bool*/);
     }
 }
 

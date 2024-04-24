@@ -114,9 +114,26 @@ public class StartController implements Initializable {
 
     // 스코어보드 화면 열기 이벤트 핸들러
     @FXML
-    private void openScoreboard() {
+    private void openScoreboard() throws IOException{
         System.out.println("스코어보드 버튼이 클릭되었습니다. 스코어보드를 보여줍니다.");
         // 여기에 스코어보드 화면을 보여주는 로직 추가
+        Stage stage = (Stage) startButton.getScene().getWindow();
+
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("scoreboard-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = startButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("Score Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
+        stage.show();
     }
 
     // 애플리케이션 종료 이벤트 핸들러
