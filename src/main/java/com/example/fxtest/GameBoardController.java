@@ -58,6 +58,8 @@ public class GameBoardController implements Initializable {
     @FXML
     private Button ExitButton;
     @FXML
+    private Button goHomeButton;
+    @FXML
     private Label scoreLabel;
     @FXML
     private GridPane nextBrickView;
@@ -69,14 +71,23 @@ public class GameBoardController implements Initializable {
 
 
 
-    @FXML
-    public void goHomeButtonClick() throws IOException{
-        Stage st = StageSaver.pStage;
-        timeline.stop(); //주기함수 종료
-        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
-        Scene mainpage = new Scene(fxmlLoader.load(),st.getWidth() , st.getHeight());
-        st.setScene(mainpage);
-        st.show();
+    public void goHomeButtonClick() throws IOException {
+        Stage stage = (Stage) goHomeButton.getScene().getWindow();
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
+        Parent root = loader.load();
+        Scene scene = goHomeButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("Start Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
+        timeline.stop(); // 타임라인 애니메이션을 정지합니다.
+        stage.show();
     }
 
     @FXML
@@ -177,7 +188,7 @@ public class GameBoardController implements Initializable {
 
         // startButton의 클릭 이벤트 핸들러 등록
         StartButton.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) StartButton.getScene().getWindow();
 
             // 새로운 Scene을 로드합니다.
             try {
@@ -190,11 +201,14 @@ public class GameBoardController implements Initializable {
                 // 세팅 페이지 로드
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard.fxml"));
                 Parent root = loader.load();
-                Scene scene = new Scene(root, width, height);
+                Scene scene = StartButton.getScene();
+                scene.setRoot(root);
 
                 timeline.stop(); //주기함수 종료
                 // Stage에 새로운 Scene을 설정합니다.
                 stage.setScene(scene);
+                stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+                stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
                 init(); //새로 시작 전 board 0으로 초기화
                 stage.show();
             } catch (IOException e) {

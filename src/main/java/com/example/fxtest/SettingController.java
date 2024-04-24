@@ -68,14 +68,26 @@ public class SettingController implements Initializable {
     }
 
     @FXML
-    private void onSetKeyButtonClick() {
+    private void onSetKeyButtonClick() throws IOException {
             Stage stage = (Stage) setKeyButton.getScene().getWindow();
-            try {
-                stage.setScene(KeySettingController.KeySettingScene());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
+            Properties properties = loadProperties();
+            String resolution = properties.getProperty("resolution", "800x600");
+            String[] dimensions = resolution.split("x");
+            double width = Double.parseDouble(dimensions[0]);
+            double height = Double.parseDouble(dimensions[1]);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("keysetting-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = setKeyButton.getScene();
+            scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+            stage.setTitle("Key Settings Page");
+            stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+            stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
+            KeySettingController key = new KeySettingController();
+            key.initPageHandler(scene, root);
             stage.show();
+
     }
 
     @FXML
@@ -170,8 +182,11 @@ public class SettingController implements Initializable {
         // 세팅 페이지 로드
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root, width, height);
-        stage.setScene(scene);
+        Scene scene = backButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("Start Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         stage.show();
     }
 
