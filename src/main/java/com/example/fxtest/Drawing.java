@@ -137,12 +137,52 @@ public class Drawing {
         }
     }
 
+    //가로줄 삭제 후 업데이트
+    public static void updateBoardView(int line){
+            removeRow(boardView, line);
+            for (int column = 0; column < GameBoard.WIDTH; column++) {
+                for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
+                    Label labelAbove = getLableAt(boardView, column, row);
+                    if (labelAbove != null) {
+                        GridPane.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
+                    }
+                }
+            }
+    }
+
+    public static void updateBoardViewColumn(int column) {
+        removeColumn(boardView, column); // 특정 열을 삭제
+        for (int row = 0; row < GameBoard.HEIGHT; row++) { // 각 행에 대해 반복
+            for (int col = column - 1; col >= 0; col--) { // 삭제된 열의 왼쪽에서 시작
+                Label labelLeft = getLableAt(boardView, col, row);
+                if (labelLeft != null) {
+                    GridPane.setColumnIndex(labelLeft, col + 1); // 기존 라벨을 한 칸 오른쪽으로 이동
+                }
+            }
+        }
+    }
+
+
+    //세로줄 삭제 후 업데이트
+    public static void updateBoardColumnView(int column){
+        removeColumn(boardView,column);
+
+    }
+
     public static void removeRow(GridPane gridPane, int rowIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
         gridPane.getChildren().removeIf(node ->
                 GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == rowIndex
         );
     }
+
+    public static void removeColumn(GridPane gridPane, int columnIndex) {
+        // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
+        gridPane.getChildren().removeIf(node ->
+                GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == columnIndex
+        );
+    }
+
 
     public static Label newLabel(String text , Color color){
         Label label = new Label(text); //이거 아이템 들어가면 고민 좀 해야될듯

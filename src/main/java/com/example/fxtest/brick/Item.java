@@ -1,5 +1,11 @@
 package com.example.fxtest.brick;
 
+import com.example.fxtest.Drawing;
+import com.example.fxtest.GameBoard;
+import javafx.scene.layout.GridPane;
+
+import java.util.List;
+
 public enum Item {
     NORMAL(1),
     WEIGHT(2),
@@ -28,4 +34,30 @@ public enum Item {
         }
         throw new IllegalArgumentException("Invalid Item number: " + num);
     }
+
+    public static void doItem(Brick currentBrick,GameBoard gameBoard, GridPane gridPane){
+        Block itemBlock = currentBrick.getItem();
+        Item item = itemBlock.getItem();
+
+        if(item==ROWDELETE){
+            int deleteRow = itemBlock.getX();
+            Drawing.updateBoardView(deleteRow);
+            gameBoard.removeFullRows();
+        }
+        else if (item==COLUMNDELETE) {
+            int deleteColumn = itemBlock.getY();
+            Drawing.updateBoardColumnView(deleteColumn);
+        }
+        else if(item==BLIND){
+
+        }
+        else if(item==NUCLEAR){
+
+        }
+        else{
+            System.out.println("Item 클래스 : 아이템 숫자 없음");
+        }
+
+    }
+
 }

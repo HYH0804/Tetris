@@ -49,18 +49,22 @@ public class RandomGenerator {
             if(block==0){
                 Block a = brick.getA();
                 a.setItem(Item.fromNum(item));
+                brick.setItem(a);
             }
             else if(block==1){
                 Block b = brick.getB();
                 b.setItem(Item.fromNum(item));
+                brick.setItem(b);
             }
             else if(block==2){
                 Block c = brick.getC();
                 c.setItem(Item.fromNum(item));
+                brick.setItem(c);
             }
             else if(block==3){
                 Block d = brick.getD();
                 d.setItem(Item.fromNum(item));
+                brick.setItem(d);
             }
             return brick;
 

@@ -60,6 +60,10 @@ public interface Brick {
 
     public void setShape(int shape);
 
+    public Block getItem();
+
+
+    public void setItem(Block item);
 
 
 }

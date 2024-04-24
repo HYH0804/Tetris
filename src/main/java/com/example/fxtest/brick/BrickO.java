@@ -12,6 +12,9 @@ public class BrickO implements Brick{
 
     private int shape; //회전
 
+
+    private Block item; //Item 해당 블록
+
     Block a;
     Block b;
     Block c;
@@ -381,5 +384,16 @@ public class BrickO implements Brick{
     @Override
     public List<Block> getBlockList() {
         return blockList;
+    }
+
+    @Override
+    public Block getItem() {
+        return item;
+    }
+
+
+    @Override
+    public void setItem(Block item) {
+        this.item = item;
     }
 }
