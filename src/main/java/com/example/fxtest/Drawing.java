@@ -169,7 +169,7 @@ public class Drawing {
             return "O";
         }
         else if (item==Item.WEIGHT) {
-            return "W";
+            return "M";
         }
         else if(item==Item.ROWDELETE){
             return "R";
@@ -189,7 +189,7 @@ public class Drawing {
             return "O";
         }
         else if (num==2) {
-            return "W";
+            return "M";
         }
         else if(num==3){
             return "R";
