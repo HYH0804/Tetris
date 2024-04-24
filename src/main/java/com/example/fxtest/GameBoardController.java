@@ -281,7 +281,7 @@ public class GameBoardController implements Initializable {
                 //colorFill();
 
                 turnEnd=true;
-                boardView.setVisible(true);
+                nextBrickView.setVisible(true);
 
                 Drawing.colorFill(currentBrick);
                 fixed();
@@ -328,7 +328,7 @@ public class GameBoardController implements Initializable {
                     //printMatrix();
                 }
                 else{
-                    Item.sponDoItem(currentBrick, gameBoard, boardView);
+                    Item.sponDoItem(currentBrick, gameBoard, nextBrickView);
 
                     turnEnd=false;
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착

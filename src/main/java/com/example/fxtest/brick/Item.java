@@ -56,7 +56,7 @@ public enum Item {
             System.out.println("Col 실행----------------------");
         }
         else if(item==BLIND){
-            //gridPane.setVisible(false);
+            gridPane.setVisible(false);
             System.out.println("Blind 처리");
         }
         else if(item==NUCLEAR){
