@@ -24,6 +24,7 @@ public class Drawing {
         Drawing.boardView = boardView;
     }
 
+    //그리드페인에 현재블록 그리기
     public static void colorFill(Brick brick){
 
         for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
@@ -48,6 +49,12 @@ public class Drawing {
             Label LabelAt = getLableAt(boardView,block.getY(),block.getX());
             boardView.getChildren().remove(LabelAt);
         }
+    }
+
+    //블록 색 삭제
+    public static void colorErase(int x,int y){
+        Label lableAt = getLableAt(boardView, x, y);
+        boardView.getChildren().remove(lableAt);
     }
 
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
@@ -148,18 +155,6 @@ public class Drawing {
                     }
                 }
             }
-    }
-
-    public static void updateBoardViewColumn(int column) {
-        removeColumn(boardView, column); // 특정 열을 삭제
-        for (int row = 0; row < GameBoard.HEIGHT; row++) { // 각 행에 대해 반복
-            for (int col = column - 1; col >= 0; col--) { // 삭제된 열의 왼쪽에서 시작
-                Label labelLeft = getLableAt(boardView, col, row);
-                if (labelLeft != null) {
-                    GridPane.setColumnIndex(labelLeft, col + 1); // 기존 라벨을 한 칸 오른쪽으로 이동
-                }
-            }
-        }
     }
 
 

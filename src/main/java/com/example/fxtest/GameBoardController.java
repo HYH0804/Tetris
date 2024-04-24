@@ -1,15 +1,13 @@
 package com.example.fxtest;
 import static com.example.fxtest.Main.loadProperties;
 
-import com.example.fxtest.brick.Block;
+import com.example.fxtest.brick.*;
 
 //얜 임시로, 랜덤 구현하면 필요 없
-import com.example.fxtest.brick.BrickO;
-import com.example.fxtest.brick.BrickZ;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import com.example.fxtest.brick.Brick;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -48,6 +46,10 @@ public class GameBoardController implements Initializable {
 
     RandomGenerator rg = new RandomGenerator();
 
+    boolean turnEnd =false;
+
+
+
 
     @FXML
     public GridPane boardView; //컨트롤View 매핑
@@ -56,6 +58,8 @@ public class GameBoardController implements Initializable {
     private Button StartButton;
     @FXML
     private Button ExitButton;
+
+    public static int downScore=0; //속도마다 다르게 변경
 
 
     public static double cellWidth = 20;
@@ -113,7 +117,7 @@ public class GameBoardController implements Initializable {
     //게임 (재)시작때 초기화
     void init(){
         initBoard();
-        GameBoard.score=0;
+        GameBoard.updateScore(0);
         GameBoard.deleteLine=0;
         GameBoard.whileGame =false;
         timeline.stop();
@@ -129,6 +133,7 @@ public class GameBoardController implements Initializable {
         timeline.stop();
         boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
+        turnEnd=false;
     }
 
     void initBoard(){
@@ -230,27 +235,44 @@ public class GameBoardController implements Initializable {
             //게임 중으로 바꿈
             GameBoard.whileGame =true;
 
-
             //테스트
             //printMatrix();
 
         }
         else{
+            //착지시(아이템)
+            if(turnEnd==true){
+
+                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
+            }
             if(!currentBrick.canMoveDown()/*!canMoveDown()*/){ //더 못내려가면
                 //그 위치에 색칠
                 //colorFill();
+
+                boardView.setVisible(true);
+
                 Drawing.colorFill(currentBrick);
                 fixed();
                 System.out.println("!currentBrick.canMoveDown()");
+
+                //착지시(아이템) , 살포시 안착했을때
+                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템
+
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
                 //System.out.println("완성 줄 삭제 전---------------");
                 //printMatrix();
 
-                List<Integer> removedRows = gameBoard.getRemovedRows();
-                Drawing.updateBoardView(removedRows);
-                gameBoard.removeFullRows();
+
+                //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
+                List<Integer> removedRows = gameBoard.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
+                //보드 전부 0
+                checkAndDoItem6(removedRows);
+
+                //NPE조심
+                Drawing.updateBoardView(removedRows); //gui 여기서 삭제
+                gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
                 //System.out.println("완성 줄 삭제 후---------------");
                 //printMatrix();
                 //gravity로 1인지 확인해서 board 업데이트하고
@@ -272,8 +294,15 @@ public class GameBoardController implements Initializable {
                     //printMatrix();
                 }
                 else{
+                    Item.sponDoItem(currentBrick, gameBoard, boardView);
+
+
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                     sponBrick();
+
+                    //스폰되자마자 블록 아이템 수행
+                    //Item.sponDoItem(currentBrick, gameBoard, boardView);
+
                     System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰");
                     //테스트
                     //printMatrix();
@@ -290,6 +319,28 @@ public class GameBoardController implements Initializable {
                 //테스트
                 //printMatrix();
             }
+        }
+    }
+
+
+    //아이템6 실행
+    private void checkAndDoItem6(List<Integer> removedRows) {
+        boolean flag=false;
+        for(int fullRow : removedRows){
+            for(int i=0; i<GameBoard.WIDTH; i++){
+                if(gameBoard.board[fullRow][i]==6){
+                    flag=true;
+                }
+            }
+            if(flag==true){
+                break;
+            }
+        }
+        if(flag==true){
+            for (int[] row : gameBoard.board) {
+                Arrays.fill(row, 0);
+            }
+            Drawing.updateBoardView();
         }
     }
 
@@ -383,6 +434,7 @@ public class GameBoardController implements Initializable {
                 //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
                 timeline.stop();
                 System.out.println("---------------------------------정지");
+                turnEnd=true;
                 //떨구고 바로 블록 뽑아옴
                 minute10();
                 timeline.play();

@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.GameBoardController">
     <children>
       <GridPane fx:id="boardView" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="200.0">
@@ -17,6 +17,7 @@
             <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
             <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
           <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
@@ -41,12 +42,14 @@
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
             <RowConstraints />
         </rowConstraints>
       </GridPane>
-       <Button layoutX="226.0" layoutY="211.0" onAction="#goHomeButtonClick" text="GoHome" />
+       <Button layoutX="226.0" layoutY="211.0" onAction="#goHomeButtonClick" text="GoHome" disable="true" />
       <Button fx:id="StartButton" layoutX="226.0" layoutY="241.0" mnemonicParsing="false" text="Start" />
-      <Button layoutX="226.0" layoutY="301.0" onAction="#pauseButtonClick" mnemonicParsing="false" text="Pause" />
+      <Button layoutX="226.0" layoutY="301.0" mnemonicParsing="false" onAction="#pauseButtonClick" text="Pause" />
        <Button fx:id="ExitButton" layoutX="226.0" layoutY="271.0" mnemonicParsing="false" text="Exit" />
    </children>
 </AnchorPane>

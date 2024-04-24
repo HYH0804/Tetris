@@ -1,10 +1,14 @@
 package com.example.fxtest.brick;
 
+import com.example.fxtest.Drawing;
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoardController;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.fxtest.Drawing.*;
 
 public class BrickW implements Brick{
     private int center_x; //회전 기준 및 canMove 와 canRotate에 대한 기준점 (배열 Index 기준) [1][4] 기준
@@ -13,7 +17,7 @@ public class BrickW implements Brick{
     private boolean blockCrashed= false; //무게추로 블록 깨지면 true로...
 
     private int shape; //회전
-
+    public boolean possible = true;
     Block a;
     Block b;
     Block c;
@@ -51,7 +55,7 @@ public class BrickW implements Brick{
     public boolean canMoveRight() {
 
         List<Block> temp = new ArrayList<>();
-
+        List<Block> temp2 = new ArrayList<>();
         //회전 후 a,b,c,d 임시 저장 및 세팅
         Block moveR_a;
         Block moveR_b;
@@ -71,15 +75,27 @@ public class BrickW implements Brick{
         temp.add(moveR_d);
         temp.add(moveR_e);
         temp.add(moveR_f);
+        temp2.add(moveR_a);
+        temp2.add(moveR_b);
+        temp2.add(moveR_c);
+        temp2.add(moveR_d);
 
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0) || blockCrashed==true) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
-                return false;  //이동 불가
+            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
+                return false;
             }
-            if(GameBoard.board[x][y] != 1){
-                blockCrashed=true; //무게추가 다른 블럭에 닿기 시작
+            if(possible==false){
+                return false;
+            }
+        }
+        for (Block block2 : temp2) {
+            int x = block2.getX()+1;
+            int y = block2.getY()-1;
+            if (GameBoard.board[x][y] != 0) {
+                possible = false;//이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)//이동 불가
+                return false;
             }
         }
         return true; //이동 가능
@@ -89,7 +105,7 @@ public class BrickW implements Brick{
     public boolean canMoveLeft() {
 
         List<Block> temp = new ArrayList<>();
-
+        List<Block> temp2 = new ArrayList<>();
         //회전 후 a,b,c,d 임시 저장 및 세팅
         Block moveL_a;
         Block moveL_b;
@@ -109,15 +125,26 @@ public class BrickW implements Brick{
         temp.add(moveL_d);
         temp.add(moveL_e);
         temp.add(moveL_f);
-
+        temp2.add(moveL_a);
+        temp2.add(moveL_b);
+        temp2.add(moveL_c);
+        temp2.add(moveL_d);
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0) || blockCrashed==true) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
-                return false;  //이동 불가
+            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
+                return false;
             }
-            if(GameBoard.board[x][y] != 1){
-                blockCrashed=true; //무게추가 다른 블럭에 닿기 시작
+            if(possible==false){
+                return false;
+            }
+        }
+        for (Block block2 : temp2) {
+            int x = block2.getX()+1;
+            int y = block2.getY()+1;
+            if (GameBoard.board[x][y] != 0) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                possible = false;  //이동 불가
+                return false;
             }
         }
         return true; //이동 가능
@@ -151,8 +178,11 @@ public class BrickW implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
+            }
+            if(GameBoard.board[x][y] != 0){
+                possible=false;
             }
         }
         return true; //이동 가능
@@ -183,7 +213,7 @@ public class BrickW implements Brick{
 
     @Override
     public void moveR() {
-        preChange();
+        // preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()+1);
@@ -193,12 +223,12 @@ public class BrickW implements Brick{
         e.setY(e.getY()+1);
         f.setY(f.getY()+1);
 
-        postChange();
+        // postChange();
     }
 
     @Override
     public void moveL() {
-        preChange();
+        //preChange();
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()-1);
@@ -208,34 +238,75 @@ public class BrickW implements Brick{
         e.setY(e.getY()-1);
         f.setY(f.getY()-1);
 
-        postChange();
+        //postChange();
     }
 
     @Override
     public void moveD() {
-        preChange();
-
-        //이동 후 a b c d 좌표 변경
-        a.setX(a.getX()+1);
-        b.setX(b.getX()+1);
-        c.setX(c.getX()+1);
-        d.setX(d.getX()+1);
-        e.setX(e.getX()+1);
-        f.setX(f.getX()+1);
-
-        postChange();
-    }
-
-    @Override
-    public void straightD() {
-        while(canMoveDown()){
-            //이동 후 a b c d 좌표 변경
+        List<Block> temp = new ArrayList<>();
+        //preChange();
+        if(canMoveDown()){
+            Block moveD_a;
+            Block moveD_b;
+            Block moveD_c;
+            Block moveD_d;
+            moveD_a = new Block(a.getX()+1, a.getY());
+            moveD_b = new Block(b.getX()+1, b.getY());
+            moveD_c = new Block(c.getX()+1, c.getY());
+            moveD_d = new Block(d.getX()+1, d.getY());
+            temp.add(moveD_a);
+            temp.add(moveD_b);
+            temp.add(moveD_c);
+            temp.add(moveD_d);
+            for (Block block : temp) {
+                int x = block.getX();
+                int y = block.getY();
+                GameBoard.board[x][y] = 0;
+                colorErase(y,x);
+            }
             a.setX(a.getX()+1);
             b.setX(b.getX()+1);
             c.setX(c.getX()+1);
             d.setX(d.getX()+1);
             e.setX(e.getX()+1);
             f.setX(f.getX()+1);
+            GameBoard.updateScore(GameBoardController.downScore);
+        }
+        //이동 후 a b c d 좌표 변경
+
+        //postChange();
+    }
+
+    @Override
+    public void straightD() {
+        List<Block> temp = new ArrayList<>();
+        while(canMoveDown()){
+            //이동 후 a b c d 좌표 변경
+            Block moveD_a;
+            Block moveD_b;
+            Block moveD_c;
+            Block moveD_d;
+            moveD_a = new Block(a.getX()+1, a.getY());
+            moveD_b = new Block(b.getX()+1, b.getY());
+            moveD_c = new Block(c.getX()+1, c.getY());
+            moveD_d = new Block(d.getX()+1, d.getY());
+            temp.add(moveD_a);
+            temp.add(moveD_b);
+            temp.add(moveD_c);
+            temp.add(moveD_d);
+            for (Block block : temp) {
+                int x = block.getX();
+                int y = block.getY();
+                GameBoard.board[x][y] = 0;
+                colorErase(y,x);
+            }
+            a.setX(a.getX()+1);
+            b.setX(b.getX()+1);
+            c.setX(c.getX()+1);
+            d.setX(d.getX()+1);
+            e.setX(e.getX()+1);
+            f.setX(f.getX()+1);
+
         }
     }
 
@@ -316,5 +387,14 @@ public class BrickW implements Brick{
     @Override
     public List<Block> getBlockList() {
         return blockList;
+    }
+
+    @Override
+    public Block getItem() {
+        return null;
+    }
+
+    @Override
+    public void setItem(Block item) {
     }
 }
