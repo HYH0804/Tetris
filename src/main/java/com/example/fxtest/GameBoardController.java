@@ -49,6 +49,8 @@ public class GameBoardController implements Initializable {
 
     boolean turnEnd =false;
 
+    boolean itemMode=true; //이거 setter로 받아야됨
+
     double speed=1;
 
     int blockSpon=0; //스폰블록
@@ -186,11 +188,11 @@ public class GameBoardController implements Initializable {
 
 
 
-        currentBrick=rg.generateItem(0,false); //일단 이지로, 여기서 모드 받아와야됨.
+        currentBrick=rg.genarateNormal(0,false); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick= new BrickZ(0,4,Color.GREEN );
         //currentBrick = new BrickO(0,4,Color.SKYBLUE);
 
-        nextBrick=rg.generateItem(0,false);
+        nextBrick=rg.genarateNormal(0,false);
         //nextBrick=new BrickZ(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
@@ -420,8 +422,13 @@ public class GameBoardController implements Initializable {
         //nextBrick을 currentBrick으로 옮김.
         currentBrick=nextBrick;
 
-        //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
-        nextBrick=rg.generateItem(0, false);
+        //nextBrick 랜덤 뽑아와서 세팅
+        if(GameBoard.deleteLine%2==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
+            nextBrick = rg.generateItem(0, false);
+        }
+        else{
+            nextBrick=rg.genarateNormal(0, false);
+        }
         blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
@@ -433,14 +440,15 @@ public class GameBoardController implements Initializable {
     }
 
     public boolean isGameOver() {
-/*        for(int i=0;i<GameBoard.WIDTH;i++){
+        for(int i=0;i<GameBoard.WIDTH;i++){
             if(GameBoard.board[1][i]>=1){
-                GameBoard.whileGame =true;
+                //GameBoard.whileGame =true;
+                GameBoard.whileGame =false;
                 return true;
             }
         }
-        return false;*/
-        for (int i = 1; i < GameBoard.HEIGHT; i++) {
+        return false;
+        /*for (int i = 1; i < GameBoard.HEIGHT; i++) {
             boolean found = false;  // 각 행마다 검사를 시작할 때 'found'를 'false'로 설정
             for (int j = 0; j < GameBoard.WIDTH; j++) {
                 if (GameBoard.board[i][j] > 0) {
@@ -453,7 +461,7 @@ public class GameBoardController implements Initializable {
             }
         }
         return true;  // 모든 행에 0보다 큰 값이 하나 이상 있다면 true 반환
-
+        */
 
     }
 
@@ -505,16 +513,25 @@ public class GameBoardController implements Initializable {
                 //여기는 수직떨구기
                 System.out.println("---------------------------------수직 떨구기 누름");
                 brickController.straightD(currentBrick);
-                //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
-                timeline.stop();
-                System.out.println("---------------------------------정지");
-                turnEnd=true;
-                //떨구고 바로 블록 뽑아옴
-                minute10();
-                timeline.play();
-                Drawing.colorErase(currentBrick);
-                System.out.println("---------------------------------재게");
-                System.out.println("수직떨구기");
+                //
+                if(isHardDropGameOver()){
+                    Drawing.colorFill(currentBrick);
+                    fixed();
+                    System.out.println("수직떨구기");
+                    destroy();
+                }
+                else {
+                    //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
+                    timeline.stop();
+                    System.out.println("---------------------------------정지");
+                    turnEnd = true;
+                    //떨구고 바로 블록 뽑아옴
+                    minute10();
+                    timeline.play();
+                    Drawing.colorErase(currentBrick);
+                    System.out.println("---------------------------------재게");
+                    System.out.println("수직떨구기");
+                }
             }
             event.consume();
             if(GameBoard.whileGame==true) {
@@ -581,6 +598,18 @@ public class GameBoardController implements Initializable {
             speed= speed*0.88;
             return speed;
         }
+    }
+
+    //hardDrop 시에 게임오버 판단
+    public boolean isHardDropGameOver(){
+        boolean flag= false;
+        List<Block> blockList = currentBrick.getBlockList();
+        for(Block block : blockList){
+            if(block.getX()<2){
+                flag= true;
+            }
+        }
+        return flag;
     }
 }
 
