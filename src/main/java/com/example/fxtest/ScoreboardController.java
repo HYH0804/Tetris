@@ -44,8 +44,9 @@ public class ScoreboardController implements Initializable {
     VBox ranking;
     @FXML
     private Button StartButton;
+
     @FXML
-    private Button ExitButton;
+    private Button GoHomeButton;
 
 
     private static String[] name = new String[10];
@@ -74,20 +75,26 @@ public class ScoreboardController implements Initializable {
         initButton(normalBtn);
         initButton(hardBtn);
 
-        ExitButton.setOnAction(event -> {
-            // 현재 스테이지를 가져옴
-            Stage stage = (Stage) ExitButton.getScene().getWindow();
-            // 어플리케이션 종료
-            stage.close();
-        });
     }
     @FXML
     public void goHomeButtonClick() throws IOException{
-        Stage st = StageSaver.pStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("Start.fxml"));
-        Scene mainpage = new Scene(fxmlLoader.load(),st.getWidth() , st.getHeight());
-        st.setScene(mainpage);
-        st.show();
+        Stage stage = (Stage) GoHomeButton.getScene().getWindow();
+
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
+        Parent root = loader.load();
+        Scene scene = GoHomeButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("Game Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
+        stage.show();
     }
 
     public void scoreboardView() {
@@ -256,8 +263,20 @@ public class ScoreboardController implements Initializable {
         writeRanking();
         Stage st = StageSaver.pStage;
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("scoreboard-view.fxml"));
-        Scene mainpage = new Scene(fxmlLoader.load(),st.getWidth() , st.getHeight());
+        Parent root = fxmlLoader.load();
+
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+        Scene mainpage = st.getScene();
+        mainpage.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
         st.setScene(mainpage);
+        st.setTitle("Score Page");
+        st.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        st.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         st.show();
     }
 }

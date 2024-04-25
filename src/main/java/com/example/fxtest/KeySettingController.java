@@ -58,8 +58,64 @@ public class KeySettingController implements Initializable {
         for(int i = 0; i < LABELNUM; i++) {
             initHandler(labelSet[i],i);
         }
+        for (Label label : labelSet) {
+            label.setFocusTraversable(true);
+        }
+        keySettingPage.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                focusSelectedLabel();
+                event.consume(); // 기본 엔터 이벤트를 처리하지 않도록 consume()
+            }
+        });
     }
 
+    // 포커스를 다음 라벨로 이동하는 메서드
+    private void focusNextLabel() {
+        int currentFocusedIndex = -1;  // 현재 포커스된 라벨의 인덱스를 추적
+
+        // 현재 포커스된 라벨을 찾아 다음 라벨로 포커스 이동
+        for (int i = 0; i < LABELNUM; i++) {
+            if (labelSet[i].isFocused()) {
+                currentFocusedIndex = i;
+                int nextIndex = (i + 1) % LABELNUM; // 다음 라벨의 인덱스 계산
+                labelSet[nextIndex].requestFocus(); // 다음 라벨로 포커스 이동
+                break;
+            }
+        }
+
+        // 만약 포커스를 설정하지 못했다면 모든 라벨이 포커스를 잃은 상태이므로 첫 번째 라벨에 포커스를 설정합니다.
+        if (currentFocusedIndex == -1) {
+            labelSet[0].requestFocus();
+        }
+
+        // 포커스된 라벨을 시각적으로 강조합니다.
+        highlightFocusedLabel();
+    }
+    private boolean isAnyButtonClicked() {
+        for (boolean clicked : buttonClicked) {
+            if (clicked) return true;
+        }
+        return false;
+    }
+
+    private void highlightFocusedLabel() {
+        for (int i = 0; i < LABELNUM; i++) {
+            if (labelSet[i].isFocused()) {
+                // 포커스된 라벨에 파란색 테두리를 적용
+                labelSet[i].setStyle("-fx-border-color: BLUE; -fx-border-width: 2px;");
+            } else {
+                // 포커스 되지 않은 라벨은 기본 테두리 색상을 적용
+                labelSet[i].setStyle("-fx-border-color: BLACK; -fx-border-width: 2px;");
+            }
+        }
+    }
+    private void focusSelectedLabel() {
+        for (int i = 0; i < LABELNUM; i++) {
+            if (buttonClicked[i]) {
+                labelSet[i].requestFocus();
+            }
+        }
+    }
     public static Scene KeySettingScene() throws IOException {
         Properties properties = Main.loadProperties();
         String resolution = properties.getProperty("resolution", "800x600");
@@ -98,6 +154,15 @@ public class KeySettingController implements Initializable {
                 event.consume(); // 이벤트 처리를 여기서 중단
                 return; // 아무런 작업도 수행하지 않음
             }
+            if(!isAnyButtonClicked()) {
+                if (event.getCode() == KeyCode.TAB) {
+                    focusNextLabel();
+                    event.consume(); // 기본 탭 이벤트를 처리하지 않도록 consume()
+                }else if(event.getCode() == KeyCode.DOWN||event.getCode() == KeyCode.UP||event.getCode() == KeyCode.LEFT||event.getCode() == KeyCode.RIGHT){
+                    event.consume();
+                }
+            }
+
 
             int change=-1; // 바뀔 키의 위치
             for(int i = 0; i < LABELNUM; i++) {
@@ -168,12 +233,26 @@ public class KeySettingController implements Initializable {
 
     private void initHandler(Label label, int idx){
         label.setOnMouseClicked(event ->{
-            for(int i = 0; i < LABELNUM; i++) {
-                if(i == idx) continue;
-                buttonClicked[i] = false;
+            if (!buttonClicked[idx]) {
+                for (int i = 0; i < LABELNUM; i++) {
+                    if (i == idx) continue;
+                    buttonClicked[i] = false;
+                }
+                buttonDrawing();
             }
-            buttonClicked[idx] = !buttonClicked[idx];
-            buttonDrawing();
+        });
+        label.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (!buttonClicked[idx]) {
+                    for (int i = 0; i < LABELNUM; i++) {
+                        if (i == idx) continue;
+                        buttonClicked[i] = false;
+                    }
+                    buttonClicked[idx] = true;
+                    buttonDrawing();
+                }
+                focusSelectedLabel();
+            }
         });
     }
 
