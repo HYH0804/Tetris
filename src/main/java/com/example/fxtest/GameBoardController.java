@@ -49,6 +49,12 @@ public class GameBoardController implements Initializable {
 
     boolean turnEnd =false;
 
+    double speed=1;
+
+    int blockSpon=0; //스폰블록
+
+    int difficulty; //난이도
+
 
 
 
@@ -109,6 +115,16 @@ public class GameBoardController implements Initializable {
     }
 
 
+    //타임라인 그 시간으로 시작
+    void startTimeLine(double x){
+        timeline.stop();
+        System.out.println("startTimeLine실행, double x : " + x);
+        setTime(x);
+        timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
+        timeline.play(); // Timeline 시작
+    }
+
+
     //타임라인 시간 설정 메서드
     void setTime(double x){
 
@@ -118,6 +134,8 @@ public class GameBoardController implements Initializable {
 
 
     }
+
+
 
     //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
     void fixed(){
@@ -162,6 +180,11 @@ public class GameBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
+
+
+        //difficulty, 색맹여부 받아오는 ,
+
+
 
         currentBrick=rg.generateItem(0,false); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick= new BrickZ(0,4,Color.GREEN );
@@ -254,10 +277,10 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
-        downScore=1;
         Drawing.colorErase(currentBrick);
-        printBlock();
+        //printBlock();
         if(!GameBoard.whileGame){
+            downScore=1;
             System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
             sponBrick();
@@ -307,6 +330,7 @@ public class GameBoardController implements Initializable {
                 //NPE조심
                 Drawing.updateBoardView(removedRows); //gui 여기서 삭제
                 gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
+
                 //System.out.println("완성 줄 삭제 후---------------");
                 //printMatrix();
                 //gravity로 1인지 확인해서 board 업데이트하고
@@ -333,11 +357,12 @@ public class GameBoardController implements Initializable {
                     turnEnd=false;
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                     sponBrick();
+                    chageTime();
 
                     //스폰되자마자 블록 아이템 수행
                     //Item.sponDoItem(currentBrick, gameBoard, boardView);
 
-                    System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰");
+                    System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰"+ blockSpon);
                     //테스트
                     //printMatrix();
                 }
@@ -358,6 +383,14 @@ public class GameBoardController implements Initializable {
                 Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
                 turnEnd=false;
             }
+        }
+    }
+
+    private void chageTime() {
+        if((GameBoard.deleteLine%10==0 && GameBoard.deleteLine!=0) || blockSpon%20 ==0) {
+            downScore++;
+            System.out.println("changeTime 실행");
+            startTimeLine(changeSpeed(difficulty, speed));
         }
     }
 
@@ -389,6 +422,7 @@ public class GameBoardController implements Initializable {
 
         //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
         nextBrick=rg.generateItem(0, false);
+        blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
@@ -434,6 +468,7 @@ public class GameBoardController implements Initializable {
         System.out.println("--------END-------");
     }
 
+    //현재 브릭 x , y 모든 좌표 출력
     public void printBlock(){
         for(Block block : currentBrick.getBlockList()){
             System.out.println("x값: " + block.getX() + " y 값: "+block.getY());
@@ -451,21 +486,21 @@ public class GameBoardController implements Initializable {
                 // 오른쪽 이동 키가 눌렸을 때의 동작
                 System.out.println("Right key pressed");
                 brickController.moveR(currentBrick);
-                printBlock();
+                //printBlock();
             } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
                 // 왼쪽 이동 키가 눌렸을 때의 동작
                 System.out.println("Left key pressed");
                 brickController.moveL(currentBrick);
-                printBlock();
+                //printBlock();
             } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
                 // 아래 이동 키가 눌렸을 때의 동작
                 brickController.moveD(currentBrick);
-                printBlock();
+                //printBlock();
             } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                 // 회전 키가 눌렸을 때의 동작
                 System.out.println("Rotate key pressed");
                 brickController.rotate(currentBrick);
-                printBlock();
+                //printBlock();
             } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())){
                 //여기는 수직떨구기
                 System.out.println("---------------------------------수직 떨구기 누름");
@@ -531,6 +566,21 @@ public class GameBoardController implements Initializable {
 
     public void updateScoreLabel(Label scoreLabel) {
         this.scoreLabel.setText("Score: " +Integer.toString(GameBoard.getScore()));
+    }
+
+    public double changeSpeed(int difficulty, double speed){
+        if(difficulty==0){ //이지
+            speed=speed*0.92;
+            return speed;
+        }
+        else if(difficulty==1){ //노말
+            speed= speed*0.9;
+            return speed;
+        }
+        else{ //하드
+            speed= speed*0.88;
+            return speed;
+        }
     }
 }
 
