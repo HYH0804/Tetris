@@ -4,10 +4,12 @@ package com.example.fxtest;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
 import com.example.fxtest.brick.Item;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -24,6 +26,7 @@ public class Drawing {
         Drawing.boardView = boardView;
     }
 
+    //그리드페인에 현재블록 그리기
     public static void colorFill(Brick brick){
 
         for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
@@ -145,6 +148,26 @@ public class Drawing {
     }
 
 
+    //가로줄 삭제 후 업데이트
+    public static void updateBoardView(int line){
+            removeRow(boardView, line);
+            for (int column = 0; column < GameBoard.WIDTH; column++) {
+                for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
+                    Label labelAbove = getLableAt(boardView, column, row);
+                    if (labelAbove != null) {
+                        GridPane.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
+                    }
+                }
+            }
+    }
+
+
+    //세로줄 삭제 후 업데이트
+    public static void updateBoardColumnView(int column){
+        removeColumn(boardView,column);
+
+    }
+
 
     public static void removeRow(GridPane gridPane, int rowIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
@@ -152,6 +175,14 @@ public class Drawing {
                 GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == rowIndex
         );
     }
+
+    public static void removeColumn(GridPane gridPane, int columnIndex) {
+        // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
+        gridPane.getChildren().removeIf(node ->
+                GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == columnIndex
+        );
+    }
+
 
     public static Label newLabel(String text , Color color){
         Label label = new Label(text); //이거 아이템 들어가면 고민 좀 해야될듯
@@ -223,5 +254,14 @@ public class Drawing {
             // GridPane에 Rectangle 추가
             nextBrickView.add(label, y, x);
         }
+    }
+    public static Rectangle getCell(int col, int row) {
+        ObservableList<Node> children = boardView.getChildren();
+        for (Node node : children) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return (Rectangle) node;
+            }
+        }
+        return null; // 해당 좌표에 셀이 없을 경우
     }
 }

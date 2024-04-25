@@ -15,6 +15,8 @@ public class BrickZ implements Brick {
 
     private int shape; //회전
 
+    private Block item; //Item 해당 블록
+
     Block a;
     Block b;
     Block c;
@@ -93,8 +95,10 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
-                return false;
+
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -123,8 +127,10 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
-                return false;
+
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -152,8 +158,9 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
-                return false;
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -181,8 +188,10 @@ public class BrickZ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
-                return false;
+
+            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+                return false;  //이동 불가
+
             }
         }
         return true; //이동 가능
@@ -384,6 +393,17 @@ public class BrickZ implements Brick {
     @Override
     public List<Block> getBlockList() {
         return blockList;
+    }
+
+    @Override
+    public Block getItem() {
+        return item;
+    }
+
+
+    @Override
+    public void setItem(Block item) {
+        this.item = item;
     }
 }
 

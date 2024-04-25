@@ -125,6 +125,7 @@ public class KeySettingController implements Initializable {
 
                             settingProperties.store(fos,null);
                             System.out.println("propeties update done");
+                            BrickController.getBrickController().updateBrickController();
                         } catch (IOException e) {}
                         finally {
                             try {
@@ -140,27 +141,8 @@ public class KeySettingController implements Initializable {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    String resolution = properties.getProperty("resolution", "800x600");
-                    String[] dimensions = resolution.split("x");
-                    double width = Double.parseDouble(dimensions[0]);
-                    double height = Double.parseDouble(dimensions[1]);
-
-                    // 세팅 페이지 로드
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("setting-view.fxml"));;
-                    Parent root1 = null;
-                    try {
-                        root1 = loader.load();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    Stage stage = (Stage) pScene.getWindow();
-                    Scene scene = pScene;
-                    scene.setRoot(root1); // 현재 Scene의 root를 새로운 root로 설정합니다.
-                    stage.setTitle("Settings Page");
-                    stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
-                    stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
-                    stage.setScene(scene);
+                    Stage stage = (Stage) pScene.getWindow(); // 현재 창(Stage) 가져오기
+                    stage.close(); // 창 닫기
                 }
                 return;
             }

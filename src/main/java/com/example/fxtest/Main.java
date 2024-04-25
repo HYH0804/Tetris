@@ -34,7 +34,7 @@ public class Main extends Application {
         primaryStage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
         primaryStage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         primaryStage.show();
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
     }
 
     //properties에서 값가져오는 함수

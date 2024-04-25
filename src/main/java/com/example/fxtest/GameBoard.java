@@ -16,6 +16,7 @@ public class GameBoard {
     public static int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
 
     private static IntegerProperty score = new SimpleIntegerProperty(0); //점수
+
     static int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
     static boolean whileGame =false; //Flag가 True로 되면 게임 끝나는 속성 이벤트 리스너
 
@@ -40,6 +41,7 @@ public class GameBoard {
     public static void setScore(int newScore) {
         score.set(newScore);
     }
+
 
     // 보드를 순회하여 완전히 채워진 줄을 삭제하고 점수를 업데이트
     public void removeFullRows() {
@@ -108,8 +110,17 @@ public class GameBoard {
         return removedRows;
     }
 
+
+    public void removeFullColumn(int column) {
+        for(int i=0; i<GameBoard.HEIGHT; i++){
+            GameBoard.board[i][column]=0;
+        }
+    }
+
+
     public static void updateScore(int value) {
         score.set(getScore() + value);
     }
+
 
 }

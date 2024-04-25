@@ -213,7 +213,8 @@ public class BrickW implements Brick{
 
     @Override
     public void moveR() {
-       // preChange();
+        // preChange();
+
 
         //이동 후 a b c d 좌표 변경
         a.setY(a.getY()+1);
@@ -223,7 +224,9 @@ public class BrickW implements Brick{
         e.setY(e.getY()+1);
         f.setY(f.getY()+1);
 
-       // postChange();
+
+        // postChange();
+
     }
 
     @Override
@@ -390,4 +393,14 @@ public class BrickW implements Brick{
     }
 
 
+    @Override
+    public Block getItem() {
+        return null;
+    }
+
+    @Override
+    public void setItem(Block item) {
+    }
 }
+
+
