@@ -57,6 +57,8 @@ public class GameBoardController implements Initializable {
 
     int difficulty; //난이도
 
+    boolean colorBlindness=true; //색맹모드
+
 
 
 
@@ -188,12 +190,12 @@ public class GameBoardController implements Initializable {
 
 
 
-        currentBrick=rg.genarateNormal(0,false); //일단 이지로, 여기서 모드 받아와야됨.
-        //currentBrick= new BrickZ(0,4,Color.GREEN );
+        currentBrick=rg.genarateNormal(0,colorBlindness); //일단 이지로, 여기서 모드 받아와야됨.
+        //currentBrick= new BrickI(0,4,Color.GREEN );
         //currentBrick = new BrickO(0,4,Color.SKYBLUE);
 
-        nextBrick=rg.genarateNormal(0,false);
-        //nextBrick=new BrickZ(0,4,Color.GREEN );
+        nextBrick=rg.genarateNormal(0,colorBlindness);
+        //nextBrick=new BrickI(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
@@ -423,11 +425,13 @@ public class GameBoardController implements Initializable {
         currentBrick=nextBrick;
 
         //nextBrick 랜덤 뽑아와서 세팅
-        if(GameBoard.deleteLine%2==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
-            nextBrick = rg.generateItem(0, false);
+        if(GameBoard.deleteLine%10==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
+            nextBrick = rg.generateItem(0, colorBlindness);
+            GameBoard.deleteLine=0;
         }
         else{
-            nextBrick=rg.genarateNormal(0, false);
+            nextBrick=rg.genarateNormal(0, colorBlindness);
+            //nextBrick=new BrickI(0,4,Color.GREEN );
         }
         blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );

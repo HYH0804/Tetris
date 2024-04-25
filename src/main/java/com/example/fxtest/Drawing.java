@@ -131,7 +131,7 @@ public class Drawing {
         }
     }*/
     public static void updateBoardView(List<Integer> removeLineList){
-        Collections.sort(removeLineList, Collections.reverseOrder()); // 내림차순으로 정렬
+        Collections.sort(removeLineList); // 내림차순으로 정렬
         for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
             removeRow(boardView, line);
             for (int column = 0; column < GameBoard.WIDTH; column++) {

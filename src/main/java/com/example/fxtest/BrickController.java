@@ -3,6 +3,10 @@ package com.example.fxtest;
 import com.example.fxtest.brick.Brick;
 import com.example.fxtest.brick.BrickW;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 //키 입력 시 발생되는 이벤트 처리
 public class BrickController{
 
@@ -32,6 +36,26 @@ public class BrickController{
         HARDDROP=SettingController.startKey.get(4);
     }
     //싱글톤
+
+    public void updateBrickController(){
+        //setting.properties에서 값 가져와서 MOVE에 넣기
+        // Properties 객체 생성
+        Properties settingProperties = new Properties();
+        try {
+            // setting.properties 파일 로드
+            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
+            settingProperties.load(in);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ROTATE=settingProperties.getProperty("rotate");
+        MOVER=settingProperties.getProperty("moveRight");
+        MOVEL=settingProperties.getProperty("moveLeft");
+        HARDDROP=settingProperties.getProperty("hardDrop");
+        MOVED=settingProperties.getProperty("moveDown");
+    }
+
 
 
     //moveR 이벤트
