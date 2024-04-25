@@ -486,7 +486,6 @@ public class GameBoardController implements Initializable {
         boardView.setOnKeyPressed(event -> {
             Drawing.colorErase(currentBrick);
             String keyValue = event.getCode().toString();
-
             if (event.getCode() == KeyCode.ESCAPE) {
                 GameBoard.pause = !GameBoard.pause;
                 if(GameBoard.pause) {
@@ -546,12 +545,12 @@ public class GameBoardController implements Initializable {
                         System.out.println("---------------------------------재게");
                         System.out.println("수직떨구기");
                     }
+                }
                     event.consume();
                     if (GameBoard.whileGame == true) {
                         Drawing.colorFill(currentBrick);
                     }//색칠하고
                 }
-            }
         });
     }
 
