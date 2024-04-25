@@ -251,23 +251,6 @@ public class BrickS implements Brick {
         //postChange();
     }
 
-    @Override
-    //돌리기 전 블록 위치 0 세팅
-    public void preChange() {
-        for(Block block : blockList){
-            GameBoard.board[block.getX()][block.getY()]=0;
-        }
-        //색 지우고
-    }
-
-    @Override
-    //돌린 후 1 세팅
-    public void postChange() {
-        for(Block block : blockList){
-            GameBoard.board[block.getX()][block.getY()]=1;
-        }
-        //색 채우고
-    }
 
 
     @Override
