@@ -202,44 +202,6 @@ public class GameBoardController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        // startButton의 클릭 이벤트 핸들러 등록
-        StartButton.setOnAction(event -> {
-            Stage stage = (Stage) StartButton.getScene().getWindow();
-
-            // 새로운 Scene을 로드합니다.
-            try {
-                Properties properties = loadProperties();
-                String resolution = properties.getProperty("resolution", "800x600");
-                String[] dimensions = resolution.split("x");
-                double width = Double.parseDouble(dimensions[0]);
-                double height = Double.parseDouble(dimensions[1]);
-
-                // 세팅 페이지 로드
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard.fxml"));
-                Parent root = loader.load();
-                Scene scene = StartButton.getScene();
-                scene.setRoot(root);
-
-                timeline.stop(); //주기함수 종료
-                // Stage에 새로운 Scene을 설정합니다.
-                stage.setScene(scene);
-                stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
-                stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
-                init(); //새로 시작 전 board 0으로 초기화
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-
-        ExitButton.setOnAction(event -> {
-            // 현재 스테이지를 가져옴
-            Stage stage = (Stage) ExitButton.getScene().getWindow();
-            // 어플리케이션 종료
-            timeline.stop();
-            stage.close();
-        });
 
         setTime(1.0);
         timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
@@ -468,6 +430,11 @@ public class GameBoardController implements Initializable {
                     nextBrickView.setOpacity(1);
                     timeline.play();
                 }
+            } else if (event.getCode() == KeyCode.BACK_SPACE) {
+                // 백스페이스 키가 눌렸을 때의 동작 (게임 종료)
+                Stage stage = (Stage) boardView.getScene().getWindow();
+                timeline.stop(); // 타임라인 애니메이션을 정지합니다.
+                stage.close(); // 현재 스테이지를 닫습니다.
             }
             if (!GameBoard.pause) {
                 if (keyValue.equals(brickController.getMOVER()) || keyValue.toLowerCase().equals(brickController.getMOVER())) {
