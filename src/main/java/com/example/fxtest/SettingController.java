@@ -20,9 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 import java.util.prefs.Preferences;
@@ -139,7 +137,69 @@ public class SettingController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        changeR("800x600");
+    }
+    private void changeR(String resolution) {
+        Stage stage = (Stage)smallSize.getScene().getWindow();
 
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+        stage.setWidth(width);
+        stage.setHeight(height);
+    }
+    @FXML
+    public void onResetScoreBButton(){
+        String[] difficulty = {"easy", "normal", "hard"};
+        for(String difficult : difficulty){
+            String path = "src/main/resources/score/" + difficult + ".txt";
+            try {
+                // FileWriter를 사용하여 파일 쓰기 스트림 열기
+                FileWriter fileWriter = new FileWriter(path);
+
+                // BufferedWriter를 사용하여 버퍼링을 추가하여 효율적으로 파일에 쓰기
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                // 배열의 각 줄을 파일에 쓰기
+                for (int i = 0; i < 10; i++) {
+                    bufferedWriter.write( " 0");
+                    bufferedWriter.newLine(); // 개행 문자 추가
+                }
+
+                // 버퍼 비우고 스트림 닫기
+                bufferedWriter.flush();
+                bufferedWriter.close();
+
+                System.out.println("파일에 여러 줄 쓰기 완료");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            path = "src/main/resources/score/" + difficult + "(item).txt";
+            try {
+                // FileWriter를 사용하여 파일 쓰기 스트림 열기
+                FileWriter fileWriter = new FileWriter(path);
+
+                // BufferedWriter를 사용하여 버퍼링을 추가하여 효율적으로 파일에 쓰기
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                // 배열의 각 줄을 파일에 쓰기
+                for (int i = 0; i < 10; i++) {
+                    bufferedWriter.write( " 0");
+                    bufferedWriter.newLine(); // 개행 문자 추가
+                }
+
+                // 버퍼 비우고 스트림 닫기
+                bufferedWriter.flush();
+                bufferedWriter.close();
+
+                System.out.println("파일에 여러 줄 쓰기 완료");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

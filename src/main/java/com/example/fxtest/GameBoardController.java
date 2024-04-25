@@ -9,6 +9,7 @@ import com.example.fxtest.brick.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,6 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoardController implements Initializable {
     Brick currentBrick;
@@ -51,6 +53,14 @@ public class GameBoardController implements Initializable {
     RandomGenerator rg = new RandomGenerator();
 
     boolean turnEnd =false;
+
+
+    double speed=1;
+
+    int blockSpon=0; //스폰블록
+
+
+    boolean colorBlindness=true; //색맹모드
 
 
 
@@ -75,7 +85,9 @@ public class GameBoardController implements Initializable {
     public static double cellWidth = 20;
     public static double cellHeight = 20;
 
-
+    //난이도, 아이템 모드 확인
+    private static int difficulty; //난이도
+    private static boolean itemMode; //이거 setter로 받아야됨
 
 
     public void goHomeButtonClick() throws IOException {
@@ -119,15 +131,27 @@ public class GameBoardController implements Initializable {
     }
 
 
+    //타임라인 그 시간으로 시작
+    void startTimeLine(double x){
+        timeline.stop();
+        System.out.println("startTimeLine실행, double x : " + x);
+        setTime(x);
+        timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
+        timeline.play(); // Timeline 시작
+    }
+
+
     //타임라인 시간 설정 메서드
     void setTime(double x){
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(x), event -> {
+
             minute10(); //x초만큼의 속도
         }));
-
-
     }
+
+
 
     //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
     void fixed(){
@@ -141,14 +165,15 @@ public class GameBoardController implements Initializable {
             GameBoard.board[block.getX()][block.getY()]=block.getItem().getNum();
     }
 
-    //게임 (재)시작때 초기화
+    //뷰 바꿔서 겜 시작이 아닌 그 뷰에서 그대로 게임 (재)시작때 초기화
     void init(){
         initBoard();
         GameBoard.setScore(0);
         GameBoard.deleteLine=0;
         GameBoard.whileGame =false;
-        timeline.stop();
+        //timeline.stop();
         regiBrickEvent();
+        colorBlindness=getColorBliness();
         System.out.println("초기화완료");
     }
 
@@ -158,10 +183,12 @@ public class GameBoardController implements Initializable {
         GameBoard.deleteLine=0; */
         GameBoard.whileGame =false;
         timeline.stop();
+        doScoreBoard();
         boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
         turnEnd=false;
     }
+
 
     void initBoard(){
         for (int[] row : GameBoard.board) {
@@ -172,13 +199,18 @@ public class GameBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
+        //difficulty, 색맹여부 받아오는 ,
 
-        currentBrick=rg.generateItem(0,false); //일단 이지로, 여기서 모드 받아와야됨.
-        //currentBrick= new BrickZ(0,4,Color.GREEN );
+
+        init();
+
+
+        currentBrick=rg.genarateNormal(0,colorBlindness); //일단 이지로, 여기서 모드 받아와야됨.
+        //currentBrick= new BrickI(0,4,Color.GREEN );
         //currentBrick = new BrickO(0,4,Color.SKYBLUE);
 
-        nextBrick=rg.generateItem(0,false);
-        //nextBrick=new BrickZ(0,4,Color.GREEN );
+        nextBrick=rg.genarateNormal(0,colorBlindness);
+        //nextBrick=new BrickI(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
@@ -226,16 +258,19 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
-        downScore=1;
         Drawing.colorErase(currentBrick);
-        printBlock();
+        System.out.println(difficulty+">> diff");
+        System.out.println(itemMode +">> itemMode");
+        //printBlock();
         if(!GameBoard.whileGame){
+            downScore=1;
             System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
             sponBrick();
 
             //게임 중으로 바꿈
             GameBoard.whileGame =true;
+
 
             //테스트
             //printMatrix();
@@ -280,6 +315,7 @@ public class GameBoardController implements Initializable {
                 //NPE조심
                 Drawing.updateBoardView(removedRows); //gui 여기서 삭제
                 gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
+
                 //System.out.println("완성 줄 삭제 후---------------");
                 //printMatrix();
                 //gravity로 1인지 확인해서 board 업데이트하고
@@ -306,11 +342,12 @@ public class GameBoardController implements Initializable {
                     turnEnd=false;
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                     sponBrick();
+                    chageTime();
 
                     //스폰되자마자 블록 아이템 수행
                     //Item.sponDoItem(currentBrick, gameBoard, boardView);
 
-                    System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰");
+                    System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰"+ blockSpon);
                     //테스트
                     //printMatrix();
                 }
@@ -331,6 +368,25 @@ public class GameBoardController implements Initializable {
                 Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
                 turnEnd=false;
             }
+        }
+    }
+
+    //겜 종료 후 ScoreBoard 띄우기
+    private void doScoreBoard() {
+        Platform.runLater(() -> {
+            try {
+                updateScoreAndUserName();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private void chageTime() {
+        if((GameBoard.deleteLine%10==0 && GameBoard.deleteLine!=0) || blockSpon%20 ==0) {
+            downScore++;
+            System.out.println("changeTime 실행");
+            startTimeLine(changeSpeed(difficulty, speed));
         }
     }
 
@@ -360,8 +416,16 @@ public class GameBoardController implements Initializable {
         //nextBrick을 currentBrick으로 옮김.
         currentBrick=nextBrick;
 
-        //nextBrick 랜덤 뽑아와서 세팅(일단 동일한 brick으로 세팅)
-        nextBrick=rg.generateItem(0, false);
+        //nextBrick 랜덤 뽑아와서 세팅
+        if(GameBoard.deleteLine%1==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
+            nextBrick = rg.generateItem(0, colorBlindness);
+            GameBoard.deleteLine=0;
+        }
+        else{
+            nextBrick=rg.genarateNormal(0, colorBlindness);
+            //nextBrick=new BrickI(0,4,Color.GREEN );
+        }
+        blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
@@ -372,14 +436,15 @@ public class GameBoardController implements Initializable {
     }
 
     public boolean isGameOver() {
-/*        for(int i=0;i<GameBoard.WIDTH;i++){
+        for(int i=0;i<GameBoard.WIDTH;i++){
             if(GameBoard.board[1][i]>=1){
-                GameBoard.whileGame =true;
+                //GameBoard.whileGame =true;
+                GameBoard.whileGame =false;
                 return true;
             }
         }
-        return false;*/
-        for (int i = 1; i < GameBoard.HEIGHT; i++) {
+        return false;
+        /*for (int i = 1; i < GameBoard.HEIGHT; i++) {
             boolean found = false;  // 각 행마다 검사를 시작할 때 'found'를 'false'로 설정
             for (int j = 0; j < GameBoard.WIDTH; j++) {
                 if (GameBoard.board[i][j] > 0) {
@@ -392,7 +457,7 @@ public class GameBoardController implements Initializable {
             }
         }
         return true;  // 모든 행에 0보다 큰 값이 하나 이상 있다면 true 반환
-
+        */
 
     }
 
@@ -407,6 +472,7 @@ public class GameBoardController implements Initializable {
         System.out.println("--------END-------");
     }
 
+    //현재 브릭 x , y 모든 좌표 출력
     public void printBlock(){
         for(Block block : currentBrick.getBlockList()){
             System.out.println("x값: " + block.getX() + " y 값: "+block.getY());
@@ -420,6 +486,7 @@ public class GameBoardController implements Initializable {
         boardView.setOnKeyPressed(event -> {
             Drawing.colorErase(currentBrick);
             String keyValue = event.getCode().toString();
+
             if (event.getCode() == KeyCode.ESCAPE) {
                 GameBoard.pause = !GameBoard.pause;
                 if(GameBoard.pause) {
@@ -457,25 +524,33 @@ public class GameBoardController implements Initializable {
                     System.out.println("Rotate key pressed");
                     brickController.rotate(currentBrick);
                     printBlock();
-                } else if (keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
+                } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
                     //여기는 수직떨구기
                     System.out.println("---------------------------------수직 떨구기 누름");
                     brickController.straightD(currentBrick);
-                    //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
-                    timeline.stop();
-                    System.out.println("---------------------------------정지");
-                    turnEnd = true;
-                    //떨구고 바로 블록 뽑아옴
-                    minute10();
-                    timeline.play();
-                    Drawing.colorErase(currentBrick);
-                    System.out.println("---------------------------------재게");
-                    System.out.println("수직떨구기");
+                    //
+                    if (isHardDropGameOver()) {
+                        Drawing.colorFill(currentBrick);
+                        fixed();
+                        System.out.println("수직떨구기");
+                        destroy();
+                    } else {
+                        //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
+                        timeline.stop();
+                        System.out.println("---------------------------------정지");
+                        turnEnd = true;
+                        //떨구고 바로 블록 뽑아옴
+                        minute10();
+                        timeline.play();
+                        Drawing.colorErase(currentBrick);
+                        System.out.println("---------------------------------재게");
+                        System.out.println("수직떨구기");
+                    }
+                    event.consume();
+                    if (GameBoard.whileGame == true) {
+                        Drawing.colorFill(currentBrick);
+                    }//색칠하고
                 }
-                event.consume();
-                if (GameBoard.whileGame == true) {
-                    Drawing.colorFill(currentBrick);
-                }//색칠하고
             }
         });
     }
@@ -523,6 +598,77 @@ public class GameBoardController implements Initializable {
 
     public void updateScoreLabel(Label scoreLabel) {
         this.scoreLabel.setText("Score: " +Integer.toString(GameBoard.getScore()));
+    }
+
+
+
+    public double changeSpeed(int difficulty, double speed){
+        if(difficulty==0){ //이지
+            speed=speed*0.92;
+            return speed;
+        }
+        else if(difficulty==1){ //노말
+            speed= speed*0.9;
+            return speed;
+        }
+        else{ //하드
+            speed= speed*0.88;
+            return speed;
+        }
+    }
+
+    //hardDrop 시에 게임오버 판단
+    public boolean isHardDropGameOver() {
+        boolean flag = false;
+        List<Block> blockList = currentBrick.getBlockList();
+        for (Block block : blockList) {
+            if (block.getX() < 2) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+
+    public static void setOptions(int difficulty, boolean itemMode) {
+        GameBoardController.difficulty = difficulty;
+        GameBoardController.itemMode = itemMode;
+        // 여기서부터 게임을 시작할 수 있음
+        System.out.println("난이도" + difficulty);
+        System.out.println("아이템모드" + itemMode);
+    }
+
+
+    //스코어랑 유저네임 들어가는 함수
+    public void updateScoreAndUserName() throws IOException {
+        //if(isGameOver()){}//일경우 확인한다
+        //오픈 스코어 뷰
+        int result = GameBoard.getScore();
+        ScoreboardController.openScoreboard(result ,difficulty,itemMode);
+
+    }
+
+    //프로퍼티에서 색맹모드 여부 가져오기
+    public boolean getColorBliness(){
+        //setting.properties에서 값 가져와서 MOVE에 넣기
+        // Properties 객체 생성
+        Properties settingProperties = new Properties();
+        try {
+            // setting.properties 파일 로드
+            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
+            settingProperties.load(in);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String temp = settingProperties.getProperty("colorBlindness");
+        int num = Integer.parseInt(temp);
+        if(num==0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }
 

@@ -37,6 +37,26 @@ public class BrickController{
     }
     //싱글톤
 
+    public void updateBrickController(){
+        //setting.properties에서 값 가져와서 MOVE에 넣기
+        // Properties 객체 생성
+        Properties settingProperties = new Properties();
+        try {
+            // setting.properties 파일 로드
+            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
+            settingProperties.load(in);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ROTATE=settingProperties.getProperty("rotate");
+        MOVER=settingProperties.getProperty("moveRight");
+        MOVEL=settingProperties.getProperty("moveLeft");
+        HARDDROP=settingProperties.getProperty("hardDrop");
+        MOVED=settingProperties.getProperty("moveDown");
+    }
+
+
 
     //moveR 이벤트
     public void moveR(Brick brick) {
@@ -100,22 +120,5 @@ public class BrickController{
     public String getSTRAIGHT(){
         return HARDDROP;
     }
-    public void updateBrickController(){
-        //setting.properties에서 값 가져와서 MOVE에 넣기
-        // Properties 객체 생성
-        Properties settingProperties = new Properties();
-        try {
-            // setting.properties 파일 로드
-            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
-            settingProperties.load(in);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ROTATE=settingProperties.getProperty("rotate");
-        MOVER=settingProperties.getProperty("moveRight");
-        MOVEL=settingProperties.getProperty("moveLeft");
-        HARDDROP=settingProperties.getProperty("hardDrop");
-        MOVED=settingProperties.getProperty("moveDown");
-    }
+
 }

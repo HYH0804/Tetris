@@ -1,7 +1,10 @@
 package com.example.fxtest;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
