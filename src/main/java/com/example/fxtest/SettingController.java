@@ -12,10 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.io.*;
@@ -67,25 +69,41 @@ public class SettingController implements Initializable {
 
     @FXML
     private void onSetKeyButtonClick() throws IOException {
-            Stage stage = (Stage) setKeyButton.getScene().getWindow();
+        // 현재 스테이지 창을 가져옵니다.
+        Stage currentStage = (Stage) setKeyButton.getScene().getWindow();
 
-            Properties properties = loadProperties();
-            String resolution = properties.getProperty("resolution", "800x600");
-            String[] dimensions = resolution.split("x");
-            double width = Double.parseDouble(dimensions[0]);
-            double height = Double.parseDouble(dimensions[1]);
+        // FXML 로더를 사용하여 새로운 Scene을 로드합니다.
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("keysetting-view.fxml"));
+        Parent root = loader.load();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("keysetting-view.fxml"));
-            Parent root = loader.load();
-            Scene scene = setKeyButton.getScene();
-            scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
-            stage.setTitle("Key Settings Page");
-            stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
-            stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
-            KeySettingController key = new KeySettingController();
-            key.initPageHandler(scene, root);
-            stage.show();
+        // 새 Scene을 설정하고 새로운 Stage를 생성합니다.
+        Scene newScene = new Scene(root);
+        Stage newStage = new Stage();
+        newStage.setScene(newScene);
 
+        // 모달 창 설정: 다른 창을 사용할 수 없도록 설정
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.initOwner(currentStage);
+        // 창의 타이틀 바 제거
+        newStage.initStyle(StageStyle.UNDECORATED);
+        // 스테이지 제목 설정
+        newStage.setTitle("Key Settings Page");
+        double centerX = currentStage.getX() + currentStage.getWidth() / 2;
+        double centerY = currentStage.getY() + currentStage.getHeight() / 2;
+        double width = 400; // 임시 값, 필요에 따라 조정 가능
+        double height = 550; // 임시 값, 필요에 따라 조정 가능
+        newStage.setWidth(width);
+        newStage.setHeight(height);
+        newStage.setX(centerX - width / 2); // 새 스테이지를 현재 스테이지의 중앙에 위치시키기
+        newStage.setY(centerY - height / 2);
+
+
+        // 키 설정 컨트롤러 가져오기 및 핸들러 초기화
+        KeySettingController keyController = loader.getController();
+        keyController.initPageHandler(newScene, root);
+
+        // 새로운 스테이지를 표시합니다.
+        newStage.show();
     }
 
     @FXML

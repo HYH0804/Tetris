@@ -63,10 +63,7 @@
             </rowConstraints>
         </GridPane>
         <Label fx:id="scoreLabel" layoutY="150.0" text="Score: 0" AnchorPane.rightAnchor="40.0"/>
-        <Button fx:id="goHomeButton" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="100.0" onAction="#goHomeButtonClick" text="GoHome" />
-        <Button fx:id="StartButton" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="70.0" mnemonicParsing="false" text="Start" />
-        <Button AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="40.0" onAction="#pauseButtonClick" mnemonicParsing="false" text="Pause" />
-        <Button fx:id="ExitButton" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="10.0" mnemonicParsing="false" text="Exit" />
+
     </children>
 
 </AnchorPane>

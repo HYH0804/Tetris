@@ -4,8 +4,12 @@ package com.example.fxtest;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
 import com.example.fxtest.brick.Item;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+
+import javafx.collections.ObservableList;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
