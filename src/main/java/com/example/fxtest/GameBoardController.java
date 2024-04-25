@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoardController implements Initializable {
     Brick currentBrick;
@@ -49,13 +50,11 @@ public class GameBoardController implements Initializable {
 
     boolean turnEnd =false;
 
-    boolean itemMode=true; //이거 setter로 받아야됨
 
     double speed=1;
 
     int blockSpon=0; //스폰블록
 
-    int difficulty; //난이도
 
     boolean colorBlindness=true; //색맹모드
 
@@ -82,7 +81,9 @@ public class GameBoardController implements Initializable {
     public static double cellWidth = 20;
     public static double cellHeight = 20;
 
-
+    //난이도, 아이템 모드 확인
+    private static int difficulty; //난이도
+    private static boolean itemMode; //이거 setter로 받아야됨
 
 
     public void goHomeButtonClick() throws IOException {
@@ -153,14 +154,15 @@ public class GameBoardController implements Initializable {
             GameBoard.board[block.getX()][block.getY()]=block.getItem().getNum();
     }
 
-    //게임 (재)시작때 초기화
+    //뷰 바꿔서 겜 시작이 아닌 그 뷰에서 그대로 게임 (재)시작때 초기화
     void init(){
         initBoard();
         GameBoard.setScore(0);
         GameBoard.deleteLine=0;
         GameBoard.whileGame =false;
-        timeline.stop();
+        //timeline.stop();
         regiBrickEvent();
+
         System.out.println("초기화완료");
     }
 
@@ -175,6 +177,7 @@ public class GameBoardController implements Initializable {
         turnEnd=false;
     }
 
+
     void initBoard(){
         for (int[] row : GameBoard.board) {
             Arrays.fill(row, 0);
@@ -184,10 +187,10 @@ public class GameBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boardView.setFocusTraversable(true);
-
-
         //difficulty, 색맹여부 받아오는 ,
 
+
+        init();
 
 
         currentBrick=rg.genarateNormal(0,colorBlindness); //일단 이지로, 여기서 모드 받아와야됨.
@@ -282,6 +285,8 @@ public class GameBoardController implements Initializable {
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
         Drawing.colorErase(currentBrick);
+        System.out.println(difficulty+">> diff");
+        System.out.println(itemMode +">> itemMode");
         //printBlock();
         if(!GameBoard.whileGame){
             downScore=1;
@@ -291,6 +296,7 @@ public class GameBoardController implements Initializable {
 
             //게임 중으로 바꿈
             GameBoard.whileGame =true;
+
 
             //테스트
             //printMatrix();
@@ -351,7 +357,6 @@ public class GameBoardController implements Initializable {
                     System.out.println("GameOver");
                     //전부 초기화
                     destroy();
-
                     //테스트
                     //printMatrix();
                 }
@@ -425,7 +430,7 @@ public class GameBoardController implements Initializable {
         currentBrick=nextBrick;
 
         //nextBrick 랜덤 뽑아와서 세팅
-        if(GameBoard.deleteLine%10==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
+        if(GameBoard.deleteLine%1==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
             nextBrick = rg.generateItem(0, colorBlindness);
             GameBoard.deleteLine=0;
         }
@@ -589,6 +594,7 @@ public class GameBoardController implements Initializable {
         this.scoreLabel.setText("Score: " +Integer.toString(GameBoard.getScore()));
     }
 
+
     public double changeSpeed(int difficulty, double speed){
         if(difficulty==0){ //이지
             speed=speed*0.92;
@@ -605,15 +611,25 @@ public class GameBoardController implements Initializable {
     }
 
     //hardDrop 시에 게임오버 판단
-    public boolean isHardDropGameOver(){
-        boolean flag= false;
+    public boolean isHardDropGameOver() {
+        boolean flag = false;
         List<Block> blockList = currentBrick.getBlockList();
-        for(Block block : blockList){
-            if(block.getX()<2){
-                flag= true;
+        for (Block block : blockList) {
+            if (block.getX() < 2) {
+                flag = true;
             }
         }
         return flag;
+    }
+
+
+    public static void setOptions(int difficulty, boolean itemMode) {
+        GameBoardController.difficulty = difficulty;
+        GameBoardController.itemMode = itemMode;
+        // 여기서부터 게임을 시작할 수 있음
+        System.out.println("난이도"+difficulty);
+        System.out.println("아이템모드"+itemMode);
+
     }
 }
 
