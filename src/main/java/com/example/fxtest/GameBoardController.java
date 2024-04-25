@@ -417,13 +417,13 @@ public class GameBoardController implements Initializable {
         currentBrick=nextBrick;
 
         //nextBrick 랜덤 뽑아와서 세팅
-        if(GameBoard.deleteLine%1==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
+        if(GameBoard.deleteLine%10==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
             nextBrick = rg.generateItem(0, colorBlindness);
             GameBoard.deleteLine=0;
         }
         else{
             nextBrick=rg.genarateNormal(0, colorBlindness);
-            //nextBrick=new BrickI(0,4,Color.GREEN );
+            //nextBrick=rg.generateItem(difficulty,colorBlindness);
         }
         blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
