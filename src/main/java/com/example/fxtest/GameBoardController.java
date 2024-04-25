@@ -545,12 +545,13 @@ public class GameBoardController implements Initializable {
                         System.out.println("---------------------------------재게");
                         System.out.println("수직떨구기");
                     }
+                }
                     event.consume();
                     if (GameBoard.whileGame == true) {
                         Drawing.colorFill(currentBrick);
                     }//색칠하고
                 }
-            }
+
         });
     }
 
