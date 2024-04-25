@@ -2,6 +2,7 @@ package fxtest;
 
 import com.example.fxtest.BrickController;
 import com.example.fxtest.brick.Brick;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -50,6 +51,20 @@ public class BrickControllerTest {
     }
 
     // Similarly, you can write tests for other methods like moveL, moveD, rotate, and straightD.
+
+    @Test
+    public void brickControllerKey(){
+        BrickController brickController = BrickController.getBrickController();
+        brickController.setMOVED("D");
+        brickController.setMOVEL("L");
+        brickController.setMOVER("R");
+        brickController.setHARDDROP("H");
+        Assertions.assertEquals(brickController.getMOVED(), "D");
+        Assertions.assertEquals(brickController.getMOVEL(), "L");
+        Assertions.assertEquals(brickController.getMOVER(), "R");
+        Assertions.assertEquals(brickController.getSTRAIGHT(), "H");
+
+    }
 
 
 }
