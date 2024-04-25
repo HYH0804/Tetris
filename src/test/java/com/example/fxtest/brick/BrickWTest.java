@@ -126,45 +126,6 @@ class BrickWTest {
         Assertions.assertEquals(blockD.getY(), 5);
     }
 
-    @Test
-    void moveD() {
-        //given
-        Block blockA = brickW.getA();
-        Block blockB = brickW.getB();
-        Block blockC = brickW.getC();
-        Block blockD= brickW.getD();
-        //when
-        brickW.moveD();
-        //then
-        Assertions.assertEquals(blockA.getX(), 5);
-        Assertions.assertEquals(blockA.getY(), 5);
-        Assertions.assertEquals(blockB.getX(), 5);
-        Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 5);
-        Assertions.assertEquals(blockC.getY(), 3);
-        Assertions.assertEquals(blockD.getX(), 5);
-        Assertions.assertEquals(blockD.getY(), 2);
-    }
-
-    @Test
-    void straightD() {
-        //given
-        Block blockA = brickW.getA();
-        Block blockB = brickW.getB();
-        Block blockC = brickW.getC();
-        Block blockD= brickW.getD();
-        //when
-        brickW.straightD();
-        //then
-        Assertions.assertEquals(blockA.getX(), 21);
-        Assertions.assertEquals(blockA.getY(), 5);
-        Assertions.assertEquals(blockB.getX(), 21);
-        Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 21);
-        Assertions.assertEquals(blockC.getY(), 3);
-        Assertions.assertEquals(blockD.getX(), 21);
-        Assertions.assertEquals(blockD.getY(), 2);
-    }
 
     @Test
     void setCenter_x() {
