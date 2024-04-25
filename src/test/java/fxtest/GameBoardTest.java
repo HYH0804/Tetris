@@ -21,10 +21,7 @@ class GameBoardTest {
     @BeforeEach
     public void set() {
         gameBoard = new GameBoard();
-        mockStatic(Drawing.class); // Drawing 클래스 메소드 모의화
-        doNothing().when(Drawing.class);
-        Drawing.animeRow(anyInt());
-        Drawing.animeCol(anyInt());
+
     }
 
 

@@ -25,9 +25,6 @@ public interface Brick {
 
     public void straightD();
 
-    public void preChange();
-
-    public void postChange();
 
     public List<Block> getBlockList();
 
