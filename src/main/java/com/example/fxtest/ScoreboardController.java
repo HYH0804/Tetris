@@ -218,7 +218,7 @@ public class ScoreboardController implements Initializable {
 
 
 
-    public static void openScoreboard(int boardScore, int difficult, boolean item){
+    public static void openScoreboard(int boardScore, int difficult, boolean item) throws IOException {
         difficulty = nowDifficulty = difficult;
         itemMode = nowItemMode = item;
         getRanking();
@@ -240,7 +240,10 @@ public class ScoreboardController implements Initializable {
             Optional<String> result = dialog.showAndWait();
 
             // 사용자가 입력한 문자열 출력
+            int saveIdx = nowIdx;
+            nowIdx = -1;
             result.ifPresent(input -> {
+                nowIdx = saveIdx;
                 for(int i = 8; i >= nowIdx; i--) {
                     score[i+1] = score[i];
                     name[i+1] = name[i];
@@ -251,5 +254,10 @@ public class ScoreboardController implements Initializable {
             });
         }
         writeRanking();
+        Stage st = StageSaver.pStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("scoreboard-view.fxml"));
+        Scene mainpage = new Scene(fxmlLoader.load(),st.getWidth() , st.getHeight());
+        st.setScene(mainpage);
+        st.show();
     }
 }

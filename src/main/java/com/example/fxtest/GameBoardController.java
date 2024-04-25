@@ -9,6 +9,7 @@ import com.example.fxtest.brick.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -113,11 +114,11 @@ public class GameBoardController implements Initializable {
     //타임라인 시간 설정 메서드
     void setTime(double x){
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(x), event -> {
+
             minute10(); //x초만큼의 속도
         }));
-
-
     }
 
     //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
@@ -149,6 +150,7 @@ public class GameBoardController implements Initializable {
         GameBoard.deleteLine=0; */
         GameBoard.whileGame =false;
         timeline.stop();
+
         boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
         turnEnd=false;
@@ -255,7 +257,7 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
-        updateScoreAndUserName();
+
         downScore=1;
         Drawing.colorErase(currentBrick);
         printBlock();
@@ -325,7 +327,13 @@ public class GameBoardController implements Initializable {
                     System.out.println("GameOver");
                     //전부 초기화
                     destroy();
-
+                    Platform.runLater(() -> {
+                        try {
+                            updateScoreAndUserName();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
                     //테스트
                     //printMatrix();
                 }
@@ -536,7 +544,7 @@ public class GameBoardController implements Initializable {
     }
 
     //스코어랑 유저네임 들어가는 함수
-    public void updateScoreAndUserName(){
+    public void updateScoreAndUserName() throws IOException {
         //if(isGameOver()){}//일경우 확인한다
         //오픈 스코어 뷰
         int result = GameBoard.getScore();
