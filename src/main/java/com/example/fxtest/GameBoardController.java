@@ -273,6 +273,7 @@ public class GameBoardController implements Initializable {
 
                 //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
                 List<Integer> removedRows = gameBoard.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
+
                 //보드 전부 0
                 checkAndDoItem6(removedRows);
 
