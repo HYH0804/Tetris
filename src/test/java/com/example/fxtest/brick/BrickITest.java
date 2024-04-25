@@ -173,6 +173,27 @@ class BrickITest {
     }
 
     @Test
+    void rotate5(){
+        brickI.setShape(0);
+        //given
+        Block blockA = brickI.getA();
+        Block blockB = brickI.getB();
+        Block blockC = brickI.getC();
+        Block blockD= brickI.getD();
+        //when
+        brickI.rotate();
+        //then
+        Assertions.assertEquals(blockA.getX(), 5);
+        Assertions.assertEquals(blockA.getY(), 4);
+        Assertions.assertEquals(blockB.getX(), 4);
+        Assertions.assertEquals(blockB.getY(), 4);
+        Assertions.assertEquals(blockC.getX(), 3);
+        Assertions.assertEquals(blockC.getY(), 4);
+        Assertions.assertEquals(blockD.getX(), 2);
+        Assertions.assertEquals(blockD.getY(), 4);
+    }
+
+    @Test
     void moveR() {
         //given
         Block blockA = brickI.getA();

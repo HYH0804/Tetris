@@ -23,7 +23,6 @@ public class BrickZ implements Brick {
     Block d;
 
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
-    List<Block> afterList = new ArrayList<>();
 
     public BrickZ(int center_x, int center_y, Color color) {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅

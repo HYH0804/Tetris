@@ -17,4 +17,24 @@ public class GameBoardControllerTest {
         Assertions.assertEquals(v2,0.9);
         Assertions.assertEquals(v3,0.88);
     }
+
+    @Test
+    void setOption(){
+        GameBoardController.setOptions(0,true);
+        Assertions.assertEquals(0, GameBoardController.difficulty);
+        Assertions.assertEquals(true, GameBoardController.itemMode);
+    }
+
+    @Test
+    void fixed(){
+        gameBoardController.fixed();
+    }
+
+    @Test
+    void isGameOver(){
+        boolean gameOver = gameBoardController.isGameOver();
+        Assertions.assertFalse(gameOver);
+    }
+
+
 }

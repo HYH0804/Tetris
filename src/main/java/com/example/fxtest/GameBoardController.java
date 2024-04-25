@@ -69,12 +69,6 @@ public class GameBoardController implements Initializable {
     public GridPane boardView; //컨트롤View 매핑
 
     @FXML
-    private Button StartButton;
-    @FXML
-    private Button ExitButton;
-    @FXML
-    private Button goHomeButton;
-    @FXML
     private Label scoreLabel;
     @FXML
     private GridPane nextBrickView;
@@ -86,49 +80,11 @@ public class GameBoardController implements Initializable {
     public static double cellHeight = 20;
 
     //난이도, 아이템 모드 확인
-    private static int difficulty; //난이도
-    private static boolean itemMode; //이거 setter로 받아야됨
+    public static int difficulty; //난이도
+    public static boolean itemMode; //이거 setter로 받아야됨
 
 
-    public void goHomeButtonClick() throws IOException {
-        Stage stage = (Stage) goHomeButton.getScene().getWindow();
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
-        boardView.setOpacity(0);
-        nextBrickView.setOpacity(0);
-        gameBoard.pause=false;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
-        Parent root = loader.load();
-        Scene scene = goHomeButton.getScene(); // 현재 Scene을 가져옵니다.
-        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
-        stage.setTitle("Start Page");
-        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
-        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
-        timeline.stop(); // 타임라인 애니메이션을 정지합니다.
-        stage.show();
-    }
-
-    @FXML
-    public void pauseButtonClick() throws IOException{
-        if(GameBoard.pause) {
-            GameBoard.pause=false;
-            boardView.setOpacity(1);
-            nextBrickView.setOpacity(1);
-            regiBrickEvent();
-            timeline.play();
-
-        }
-        else{
-            GameBoard.pause=true;
-            boardView.setOpacity(0);
-            nextBrickView.setOpacity(0);
-            timeline.stop();
-        }
-    }
 
 
     //타임라인 그 시간으로 시작
@@ -154,7 +110,10 @@ public class GameBoardController implements Initializable {
 
 
     //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
-    void fixed(){
+    public void fixed(){
+        if(currentBrick==null){
+            return;
+        }
         if(currentBrick.getBlockList()==null){
             System.out.println("getBlockList가 null임");
         }

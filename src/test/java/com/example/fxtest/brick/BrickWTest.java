@@ -27,7 +27,9 @@ class BrickWTest {
 
         //then
         Assertions.assertEquals(flag,false);
+
     }
+
 
     @Test
     void canMoveRight() {
@@ -59,7 +61,7 @@ class BrickWTest {
         boolean flag;
 
         //when
-        flag=brickW.canMoveRight();
+        flag=brickW.canMoveDown();
 
         //then
         Assertions.assertEquals(flag,true);

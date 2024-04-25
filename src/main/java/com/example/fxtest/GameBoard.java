@@ -20,7 +20,7 @@ public class GameBoard {
 
     private static IntegerProperty score = new SimpleIntegerProperty(0); //점수
 
-    static int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
+    public static int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
     static boolean whileGame =false; //Flag가 True로 되면 게임 끝나는 속성 이벤트 리스너
 
     static boolean pause = false;
@@ -84,7 +84,7 @@ public class GameBoard {
     }
 
     // 삭제된 줄의 수에 따라 점수를 업데이트
-    private void updateScoreLine(int rowsRemoved) {
+    public void updateScoreLine(int rowsRemoved) {
         switch (rowsRemoved) {
             case 1:
                 updateScore(100);

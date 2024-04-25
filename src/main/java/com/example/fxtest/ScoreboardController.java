@@ -42,8 +42,6 @@ public class ScoreboardController implements Initializable {
     Button itemModeBtn;
     @FXML
     VBox ranking;
-    @FXML
-    private Button StartButton;
 
     @FXML
     private Button GoHomeButton;
