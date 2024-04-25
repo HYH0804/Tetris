@@ -73,7 +73,9 @@ public class GameBoardController implements Initializable {
     public static double cellWidth = 20;
     public static double cellHeight = 20;
 
-
+    //난이도, 아이템 모드 확인
+    private static int difficulty;
+    private static boolean itemMode;
 
 
     public void goHomeButtonClick() throws IOException {
@@ -153,6 +155,7 @@ public class GameBoardController implements Initializable {
         System.out.println("초기화완료");
         turnEnd=false;
     }
+
 
     void initBoard(){
         for (int[] row : GameBoard.board) {
@@ -255,7 +258,7 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
-        updateScoreAndUserName();
+        //updateScoreAndUserName(); 스코어 처리 함수
         downScore=1;
         Drawing.colorErase(currentBrick);
         printBlock();
@@ -325,7 +328,7 @@ public class GameBoardController implements Initializable {
                     System.out.println("GameOver");
                     //전부 초기화
                     destroy();
-
+                    updateScoreAndUserName();
                     //테스트
                     //printMatrix();
                 }
@@ -540,7 +543,23 @@ public class GameBoardController implements Initializable {
         //if(isGameOver()){}//일경우 확인한다
         //오픈 스코어 뷰
         int result = GameBoard.getScore();
-        ScoreboardController.openScoreboard(result ,1/*난이도 int*/,true /*아이템전 확인 bool*/);
+        ScoreboardController.openScoreboard(result ,difficulty/*난이도 int*/,itemMode /*아이템전 확인 bool*/);
+    }
+
+    public static void setDifficulty(int difficulty) {
+        GameBoardController.difficulty = difficulty;
+        // 여기서부터 게임을 시작할 수 있음
+    }
+    public static void setItemMode(boolean itemMode) {
+        GameBoardController.itemMode = itemMode;
+        // 여기서부터 게임을 시작할 수 있음
+    }
+    public static void setOptions(int difficulty, boolean itemMode) {
+        GameBoardController.difficulty = difficulty;
+        GameBoardController.itemMode = itemMode;
+        // 여기서부터 게임을 시작할 수 있음
+        System.out.println("난이도"+difficulty);
+        System.out.println("아이템모드"+itemMode);
     }
 }
 

@@ -1,7 +1,10 @@
 package com.example.fxtest;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +63,8 @@ public class GameBoard {
 
 
     public void removeRow(int fullRow) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> Drawing.anime(fullRow)));
+        timeline.play();
         for (int row = fullRow; row > 0; row--) {
             for (int col = 0; col < WIDTH; col++) {
                 board[row][col] = board[row - 1][col]; // 위의 줄을 아래로 복사

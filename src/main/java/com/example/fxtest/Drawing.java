@@ -4,12 +4,16 @@ package com.example.fxtest;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
 import com.example.fxtest.brick.Item;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
