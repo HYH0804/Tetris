@@ -94,6 +94,11 @@ public class KeySettingController implements Initializable {
         pScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             KeyCode keyCode = event.getCode();
 
+            if (keyCode == KeyCode.BACK_SPACE) {
+                event.consume(); // 이벤트 처리를 여기서 중단
+                return; // 아무런 작업도 수행하지 않음
+            }
+
             int change=-1; // 바뀔 키의 위치
             for(int i = 0; i < LABELNUM; i++) {
                 System.out.println((buttonClicked[i]));

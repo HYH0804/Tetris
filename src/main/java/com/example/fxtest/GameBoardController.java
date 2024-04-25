@@ -25,7 +25,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -83,6 +85,9 @@ public class GameBoardController implements Initializable {
         String[] dimensions = resolution.split("x");
         double width = Double.parseDouble(dimensions[0]);
         double height = Double.parseDouble(dimensions[1]);
+        boardView.setOpacity(0);
+        nextBrickView.setOpacity(0);
+        gameBoard.pause=false;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
         Parent root = loader.load();
@@ -99,12 +104,16 @@ public class GameBoardController implements Initializable {
     public void pauseButtonClick() throws IOException{
         if(GameBoard.pause) {
             GameBoard.pause=false;
+            boardView.setOpacity(1);
+            nextBrickView.setOpacity(1);
             regiBrickEvent();
             timeline.play();
 
         }
         else{
             GameBoard.pause=true;
+            boardView.setOpacity(0);
+            nextBrickView.setOpacity(0);
             timeline.stop();
         }
     }
@@ -448,55 +457,58 @@ public class GameBoardController implements Initializable {
         boardView.setOnKeyPressed(event -> {
             Drawing.colorErase(currentBrick);
             String keyValue = event.getCode().toString();
-            if (keyValue.equals(brickController.getMOVER()) || keyValue.toLowerCase().equals(brickController.getMOVER())) {
-                // 오른쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("Right key pressed");
-                brickController.moveR(currentBrick);
-                printBlock();
-            } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
-                // 왼쪽 이동 키가 눌렸을 때의 동작
-                System.out.println("Left key pressed");
-                brickController.moveL(currentBrick);
-                printBlock();
-            } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
-                // 아래 이동 키가 눌렸을 때의 동작
-                brickController.moveD(currentBrick);
-                printBlock();
-            } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
-                // 회전 키가 눌렸을 때의 동작
-                System.out.println("Rotate key pressed");
-                brickController.rotate(currentBrick);
-                printBlock();
-            } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())){
-                //여기는 수직떨구기
-                System.out.println("---------------------------------수직 떨구기 누름");
-                brickController.straightD(currentBrick);
-                //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
-                timeline.stop();
-                System.out.println("---------------------------------정지");
-                turnEnd=true;
-                //떨구고 바로 블록 뽑아옴
-                minute10();
-                timeline.play();
-                Drawing.colorErase(currentBrick);
-                System.out.println("---------------------------------재게");
-                System.out.println("수직떨구기");
-            } else if(event.getCode() == KeyCode.ESCAPE){
+            if (event.getCode() == KeyCode.ESCAPE) {
+                GameBoard.pause = !GameBoard.pause;
                 if(GameBoard.pause) {
-                    GameBoard.pause=false;
-                    regiBrickEvent();
-                    timeline.play();
-
-                }
-                else{
-                    GameBoard.pause=true;
+                    boardView.setOpacity(0);
+                    nextBrickView.setOpacity(0);
                     timeline.stop();
+                } else {
+                    boardView.setOpacity(1);
+                    nextBrickView.setOpacity(1);
+                    timeline.play();
                 }
             }
-            event.consume();
-            if(GameBoard.whileGame==true) {
-                Drawing.colorFill(currentBrick);
-            }//색칠하고
+            if (!GameBoard.pause) {
+                if (keyValue.equals(brickController.getMOVER()) || keyValue.toLowerCase().equals(brickController.getMOVER())) {
+                    // 오른쪽 이동 키가 눌렸을 때의 동작
+                    System.out.println("Right key pressed");
+                    brickController.moveR(currentBrick);
+                    printBlock();
+                } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
+                    // 왼쪽 이동 키가 눌렸을 때의 동작
+                    System.out.println("Left key pressed");
+                    brickController.moveL(currentBrick);
+                    printBlock();
+                } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
+                    // 아래 이동 키가 눌렸을 때의 동작
+                    brickController.moveD(currentBrick);
+                    printBlock();
+                } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
+                    // 회전 키가 눌렸을 때의 동작
+                    System.out.println("Rotate key pressed");
+                    brickController.rotate(currentBrick);
+                    printBlock();
+                } else if (keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
+                    //여기는 수직떨구기
+                    System.out.println("---------------------------------수직 떨구기 누름");
+                    brickController.straightD(currentBrick);
+                    //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
+                    timeline.stop();
+                    System.out.println("---------------------------------정지");
+                    turnEnd = true;
+                    //떨구고 바로 블록 뽑아옴
+                    minute10();
+                    timeline.play();
+                    Drawing.colorErase(currentBrick);
+                    System.out.println("---------------------------------재게");
+                    System.out.println("수직떨구기");
+                }
+                event.consume();
+                if (GameBoard.whileGame == true) {
+                    Drawing.colorFill(currentBrick);
+                }//색칠하고
+            }
         });
     }
 
