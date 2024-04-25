@@ -145,7 +145,7 @@ public class SettingController implements Initializable {
 
                 // 배열의 각 줄을 파일에 쓰기
                 for (int i = 0; i < 10; i++) {
-                    bufferedWriter.write( "None 0");
+                    bufferedWriter.write( " 0");
                     bufferedWriter.newLine(); // 개행 문자 추가
                 }
 
@@ -168,7 +168,7 @@ public class SettingController implements Initializable {
 
                 // 배열의 각 줄을 파일에 쓰기
                 for (int i = 0; i < 10; i++) {
-                    bufferedWriter.write( "None 0");
+                    bufferedWriter.write( " 0");
                     bufferedWriter.newLine(); // 개행 문자 추가
                 }
 

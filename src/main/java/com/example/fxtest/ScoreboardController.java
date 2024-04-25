@@ -249,7 +249,7 @@ public class ScoreboardController implements Initializable {
                     name[i+1] = name[i];
                 }
                 score[nowIdx] = boardScore;
-                name[nowIdx] = input;
+                name[nowIdx] = input.replaceAll(" ","");
                 System.out.println("입력한 문자열: " + input);
             });
         }
