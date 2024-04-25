@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -480,6 +481,17 @@ public class GameBoardController implements Initializable {
                 Drawing.colorErase(currentBrick);
                 System.out.println("---------------------------------재게");
                 System.out.println("수직떨구기");
+            } else if(event.getCode() == KeyCode.ESCAPE){
+                if(GameBoard.pause) {
+                    GameBoard.pause=false;
+                    regiBrickEvent();
+                    timeline.play();
+
+                }
+                else{
+                    GameBoard.pause=true;
+                    timeline.stop();
+                }
             }
             event.consume();
             if(GameBoard.whileGame==true) {

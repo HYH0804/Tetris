@@ -255,13 +255,4 @@ public class Drawing {
             nextBrickView.add(label, y, x);
         }
     }
-    public static Rectangle getCell(int col, int row) {
-        ObservableList<Node> children = boardView.getChildren();
-        for (Node node : children) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return (Rectangle) node;
-            }
-        }
-        return null; // 해당 좌표에 셀이 없을 경우
-    }
 }
