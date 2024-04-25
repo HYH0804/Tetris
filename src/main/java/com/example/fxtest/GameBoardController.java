@@ -9,6 +9,7 @@ import com.example.fxtest.brick.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -133,11 +134,11 @@ public class GameBoardController implements Initializable {
     //타임라인 시간 설정 메서드
     void setTime(double x){
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(x), event -> {
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(x), event -> {
+
             minute10(); //x초만큼의 속도
         }));
-
-
     }
 
 
@@ -162,7 +163,7 @@ public class GameBoardController implements Initializable {
         GameBoard.whileGame =false;
         //timeline.stop();
         regiBrickEvent();
-
+        colorBlindness=getColorBliness();
         System.out.println("초기화완료");
     }
 
@@ -172,6 +173,7 @@ public class GameBoardController implements Initializable {
         GameBoard.deleteLine=0; */
         GameBoard.whileGame =false;
         timeline.stop();
+        doScoreBoard();
         boardView.setOnKeyPressed(null);
         System.out.println("초기화완료");
         turnEnd=false;
@@ -357,6 +359,7 @@ public class GameBoardController implements Initializable {
                     System.out.println("GameOver");
                     //전부 초기화
                     destroy();
+
                     //테스트
                     //printMatrix();
                 }
@@ -393,6 +396,17 @@ public class GameBoardController implements Initializable {
                 turnEnd=false;
             }
         }
+    }
+
+    //겜 종료 후 ScoreBoard 띄우기
+    private void doScoreBoard() {
+        Platform.runLater(() -> {
+            try {
+                updateScoreAndUserName();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void chageTime() {
@@ -595,6 +609,7 @@ public class GameBoardController implements Initializable {
     }
 
 
+
     public double changeSpeed(int difficulty, double speed){
         if(difficulty==0){ //이지
             speed=speed*0.92;
@@ -627,9 +642,41 @@ public class GameBoardController implements Initializable {
         GameBoardController.difficulty = difficulty;
         GameBoardController.itemMode = itemMode;
         // 여기서부터 게임을 시작할 수 있음
-        System.out.println("난이도"+difficulty);
-        System.out.println("아이템모드"+itemMode);
+        System.out.println("난이도" + difficulty);
+        System.out.println("아이템모드" + itemMode);
+    }
 
+
+    //스코어랑 유저네임 들어가는 함수
+    public void updateScoreAndUserName() throws IOException {
+        //if(isGameOver()){}//일경우 확인한다
+        //오픈 스코어 뷰
+        int result = GameBoard.getScore();
+        ScoreboardController.openScoreboard(result ,difficulty,itemMode);
+
+    }
+
+    //프로퍼티에서 색맹모드 여부 가져오기
+    public boolean getColorBliness(){
+        //setting.properties에서 값 가져와서 MOVE에 넣기
+        // Properties 객체 생성
+        Properties settingProperties = new Properties();
+        try {
+            // setting.properties 파일 로드
+            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
+            settingProperties.load(in);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String temp = settingProperties.getProperty("colorBlindness");
+        int num = Integer.parseInt(temp);
+        if(num==0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }
 
