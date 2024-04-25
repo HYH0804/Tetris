@@ -63,6 +63,7 @@ public class GameBoard {
 
 
     public void removeRow(int fullRow) {
+        Drawing.animeRow(fullRow);
         for (int row = fullRow; row > 0; row--) {
             for (int col = 0; col < WIDTH; col++) {
                 board[row][col] = board[row - 1][col]; // 위의 줄을 아래로 복사
@@ -115,6 +116,7 @@ public class GameBoard {
 
 
     public void removeFullColumn(int column) {
+        Drawing.animeCol(column);
         for(int i=0; i<GameBoard.HEIGHT; i++){
             GameBoard.board[i][column]=0;
         }
