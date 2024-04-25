@@ -5,6 +5,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.ScoreboardController">
    <children>
+      <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefWidth="300.0" prefHeight="300.0" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50">
       <VBox alignment="CENTER" prefHeight="97.0" prefWidth="600.0">
          <children>
             <Label fx:id="selected" alignment="CENTER" layoutX="174.0" layoutY="10.0" prefHeight="85.0" prefWidth="164.0" text="Label" />
@@ -82,7 +83,7 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="199.0" layoutY="348.0" prefHeight="22.0" prefWidth="216.0">
          <Button fx:id="GoHomeButton" prefHeight="22.0" prefWidth="94.0" text="Go Home" onAction="#goHomeButtonClick"/>
-         <Button fx:id="ExitButton" prefHeight="22.0" prefWidth="94.0" text="Exit" />
       </HBox>
+      </VBox>
    </children>
 </AnchorPane>

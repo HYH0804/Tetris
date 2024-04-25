@@ -31,8 +31,8 @@
             <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
-            <Button fx:id="backButton" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="뒤로" onAction="#onBackButtonClick" />
-            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirmButtonClick" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-border-width: 0;" text="확인" />
+            <Button fx:id="backButton" text="뒤로" onAction="#onBackButtonClick" />
+            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="확인" />
         </HBox>
     </bottom>
 </BorderPane>

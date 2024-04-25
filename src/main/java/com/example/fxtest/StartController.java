@@ -84,7 +84,7 @@ public class StartController implements Initializable {
         Parent root = loader.load();
         Scene scene = startButton.getScene(); // 현재 Scene을 가져옵니다.
         scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
-        stage.setTitle("Settings Page");
+        stage.setTitle("Difficulty Page");
         stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
         stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         stage.show();

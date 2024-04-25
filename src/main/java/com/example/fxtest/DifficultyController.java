@@ -31,6 +31,8 @@ public class DifficultyController {
     private Button itemButton;
     @FXML
     private Button normalButton;
+    @FXML
+    private Button backButton;
     boolean itemMode;
 
     @FXML
@@ -114,7 +116,27 @@ public class DifficultyController {
         Parent root = loader.load();
         Scene scene = normalButton.getScene(); // 현재 Scene을 가져옵니다.
         scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
-        stage.setTitle("Score Page");
+        stage.setTitle("Game Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
+        stage.show();
+    }
+    @FXML
+    private void goBack(ActionEvent event) throws IOException {
+        Stage stage = (Stage) backButton.getScene().getWindow();
+
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
+        Parent root = loader.load();
+        Scene scene = backButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("Start Page");
         stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
         stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         stage.show();
