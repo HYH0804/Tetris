@@ -1,11 +1,6 @@
 package fxtest;
-import static org.mockito.Mockito.*;
 
-import com.example.fxtest.Drawing;
-import com.example.fxtest.GameBoard;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import com.example.fxtest.GameBoard1;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -14,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameBoardTest {
 
-    GameBoard gameBoard;
+    GameBoard1 gameBoard;
     @BeforeEach
     public void set() {
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard1();
 
     }
 
@@ -28,7 +23,7 @@ class GameBoardTest {
         //given
         // 한 줄을 완전히 채우기
         for (int col = 0; col < 10; col++) {
-            GameBoard.board[0][col]=1;
+            GameBoard1.board[0][col]=1;
         }
         //when
         boolean full= gameBoard.isRowFull(0);
@@ -42,8 +37,8 @@ class GameBoardTest {
         //given
         int testScore = 0;
         //when
-        GameBoard.updateScore(0);
-        int result = GameBoard.getScore();
+        GameBoard1.updateScore(0);
+        int result = GameBoard1.getScore();
         //then
         assertEquals(testScore,result);
     }
@@ -54,7 +49,7 @@ class GameBoardTest {
 
         //given
         for (int col = 0; col < 10; col++) {
-            GameBoard.board[0][col]=1;
+            GameBoard1.board[0][col]=1;
         }
         List<Integer> test = gameBoard.getRemovedRows();
         int result = test.size();
@@ -65,16 +60,16 @@ class GameBoardTest {
     @Test
     public void testScore(){
         gameBoard.updateScoreLine(1);
-        Assertions.assertEquals(GameBoard.deleteLine, 1 );
+        Assertions.assertEquals(GameBoard1.deleteLine, 1 );
 
         gameBoard.updateScoreLine(2);
-        Assertions.assertEquals(GameBoard.deleteLine, 3 );
+        Assertions.assertEquals(GameBoard1.deleteLine, 3 );
 
         gameBoard.updateScoreLine(3);
-        Assertions.assertEquals(GameBoard.deleteLine, 6 );
+        Assertions.assertEquals(GameBoard1.deleteLine, 6 );
 
         gameBoard.updateScoreLine(4);
-        Assertions.assertEquals(GameBoard.deleteLine, 10 );
+        Assertions.assertEquals(GameBoard1.deleteLine, 10 );
     }
 
 

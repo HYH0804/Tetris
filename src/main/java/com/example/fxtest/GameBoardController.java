@@ -7,28 +7,16 @@ import com.example.fxtest.brick.*;
 //얜 임시로, 랜덤 구현하면 필요 없
 
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -38,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoardController implements Initializable {
     Brick currentBrick;
@@ -46,7 +34,7 @@ public class GameBoardController implements Initializable {
 
     BrickController brickController;
 
-    GameBoard gameBoard = new GameBoard();
+    GameBoard1 gameBoard = new GameBoard1();
 
     Timeline timeline;
 
@@ -121,15 +109,15 @@ public class GameBoardController implements Initializable {
             System.out.println("null 아님");
         }
         for(Block block : currentBrick.getBlockList())
-            GameBoard.board[block.getX()][block.getY()]=block.getItem().getNum();
+            GameBoard1.board[block.getX()][block.getY()]=block.getItem().getNum();
     }
 
     //뷰 바꿔서 겜 시작이 아닌 그 뷰에서 그대로 게임 (재)시작때 초기화
     void init(){
         initBoard();
-        GameBoard.setScore(0);
-        GameBoard.deleteLine=0;
-        GameBoard.whileGame =false;
+        GameBoard1.setScore(0);
+        GameBoard1.deleteLine=0;
+        GameBoard1.whileGame =false;
         //timeline.stop();
         regiBrickEvent();
         colorBlindness=getColorBliness();
@@ -140,7 +128,7 @@ public class GameBoardController implements Initializable {
 /*        initBoard();
         GameBoard.score=0;
         GameBoard.deleteLine=0; */
-        GameBoard.whileGame =false;
+        GameBoard1.whileGame =false;
         timeline.stop();
         doScoreBoard();
         boardView.setOnKeyPressed(null);
@@ -150,7 +138,7 @@ public class GameBoardController implements Initializable {
 
 
     void initBoard(){
-        for (int[] row : GameBoard.board) {
+        for (int[] row : GameBoard1.board) {
             Arrays.fill(row, 0);
         }
     }
@@ -164,11 +152,11 @@ public class GameBoardController implements Initializable {
         init();
 
 
-        currentBrick=rg.genarateNormal(0,colorBlindness); //일단 이지로, 여기서 모드 받아와야됨.
+        currentBrick=rg.genarateNormal(0,colorBlindness, gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick= new BrickI(0,4,Color.GREEN );
         //currentBrick = new BrickO(0,4,Color.SKYBLUE);
 
-        nextBrick=rg.genarateNormal(0,colorBlindness);
+        nextBrick=rg.genarateNormal(0,colorBlindness,gameBoard);
         //nextBrick=new BrickI(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
@@ -178,7 +166,7 @@ public class GameBoardController implements Initializable {
         Drawing.setBoardView(boardView);
 
 
-        GameBoard.scoreProperty().addListener((obs, oldScore, newScore) -> {
+        GameBoard1.scoreProperty().addListener((obs, oldScore, newScore) -> {
             if (newScore.intValue() > oldScore.intValue()) {
                 updateScoreLabel(scoreLabel);
             }
@@ -221,14 +209,14 @@ public class GameBoardController implements Initializable {
         System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");
         //printBlock();
-        if(!GameBoard.whileGame){
+        if(!GameBoard1.whileGame){
             downScore=1;
             System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
             sponBrick();
 
             //게임 중으로 바꿈
-            GameBoard.whileGame =true;
+            GameBoard1.whileGame =true;
 
 
             //테스트
@@ -342,7 +330,7 @@ public class GameBoardController implements Initializable {
     }
 
     private void chageTime() {
-        if((GameBoard.deleteLine%10==0 && GameBoard.deleteLine!=0) || blockSpon%20 ==0) {
+        if((GameBoard1.deleteLine%10==0 && GameBoard1.deleteLine!=0) || blockSpon%20 ==0) {
             downScore++;
             System.out.println("changeTime 실행");
             startTimeLine(changeSpeed(difficulty, speed));
@@ -354,7 +342,7 @@ public class GameBoardController implements Initializable {
     private void checkAndDoItem6(List<Integer> removedRows) {
         boolean flag=false;
         for(int fullRow : removedRows){
-            for(int i=0; i<GameBoard.WIDTH; i++){
+            for(int i = 0; i< GameBoard1.WIDTH; i++){
                 if(gameBoard.board[fullRow][i]==6){
                     flag=true;
                 }
@@ -376,12 +364,12 @@ public class GameBoardController implements Initializable {
         currentBrick=nextBrick;
 
         //nextBrick 랜덤 뽑아와서 세팅
-        if(GameBoard.deleteLine%10==0 && GameBoard.deleteLine!=0 && itemMode==true ) {
-            nextBrick = rg.generateItem(0, colorBlindness);
-            GameBoard.deleteLine=0;
+        if(GameBoard1.deleteLine%10==0 && GameBoard1.deleteLine!=0 && itemMode==true ) {
+            nextBrick = rg.generateItem(0, colorBlindness,gameBoard);
+            GameBoard1.deleteLine=0;
         }
         else{
-            nextBrick=rg.genarateNormal(0, colorBlindness);
+            nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
             //nextBrick=rg.generateItem(difficulty,colorBlindness);
         }
         blockSpon++;
@@ -395,10 +383,10 @@ public class GameBoardController implements Initializable {
     }
 
     public boolean isGameOver() {
-        for(int i=0;i<GameBoard.WIDTH;i++){
-            if(GameBoard.board[1][i]>=1){
+        for(int i = 0; i< GameBoard1.WIDTH; i++){
+            if(GameBoard1.board[1][i]>=1){
                 //GameBoard.whileGame =true;
-                GameBoard.whileGame =false;
+                GameBoard1.whileGame =false;
                 return true;
             }
         }
@@ -422,9 +410,9 @@ public class GameBoardController implements Initializable {
 
     //2차원배열 출력 테스트함수
     public void printMatrix(){
-        for(int i=0; i<GameBoard.HEIGHT; i++){
-            for(int j=0; j<GameBoard.WIDTH; j++){
-                System.out.printf("%d ",GameBoard.board[i][j]);
+        for(int i = 0; i< GameBoard1.HEIGHT; i++){
+            for(int j = 0; j< GameBoard1.WIDTH; j++){
+                System.out.printf("%d ", GameBoard1.board[i][j]);
             }
             System.out.println();
         }
@@ -446,8 +434,8 @@ public class GameBoardController implements Initializable {
             Drawing.colorErase(currentBrick);
             String keyValue = event.getCode().toString();
             if (event.getCode() == KeyCode.ESCAPE) {
-                GameBoard.pause = !GameBoard.pause;
-                if(GameBoard.pause) {
+                GameBoard1.pause = !GameBoard1.pause;
+                if(GameBoard1.pause) {
                     boardView.setOpacity(0);
                     nextBrickView.setOpacity(0);
                     timeline.stop();
@@ -462,7 +450,7 @@ public class GameBoardController implements Initializable {
                 timeline.stop(); // 타임라인 애니메이션을 정지합니다.
                 stage.close(); // 현재 스테이지를 닫습니다.
             }
-            if (!GameBoard.pause) {
+            if (!GameBoard1.pause) {
                 if (keyValue.equals(brickController.getMOVER()) || keyValue.toLowerCase().equals(brickController.getMOVER())) {
                     // 오른쪽 이동 키가 눌렸을 때의 동작
                     System.out.println("Right key pressed");
@@ -506,7 +494,7 @@ public class GameBoardController implements Initializable {
                     }
                 }
                     event.consume();
-                    if (GameBoard.whileGame == true) {
+                    if (GameBoard1.whileGame == true) {
                         Drawing.colorFill(currentBrick);
                     }//색칠하고
                 }
@@ -555,7 +543,7 @@ public class GameBoardController implements Initializable {
 
 
     public void updateScoreLabel(Label scoreLabel) {
-        this.scoreLabel.setText("Score: " +Integer.toString(GameBoard.getScore()));
+        this.scoreLabel.setText("Score: " +Integer.toString(GameBoard1.getScore()));
     }
 
 
@@ -601,7 +589,7 @@ public class GameBoardController implements Initializable {
     public void updateScoreAndUserName() throws IOException {
         //if(isGameOver()){}//일경우 확인한다
         //오픈 스코어 뷰
-        int result = GameBoard.getScore();
+        int result = GameBoard1.getScore();
         ScoreboardController.openScoreboard(result ,difficulty,itemMode);
 
     }

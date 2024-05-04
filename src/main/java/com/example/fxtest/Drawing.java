@@ -126,7 +126,7 @@ public class Drawing {
 
     public static void animeRow(int fullRow) {
         //가득찬 줄을 가져온다
-        for (int col = 0; col < GameBoard.WIDTH; col++) {
+        for (int col = 0; col < GameBoard1.WIDTH; col++) {
             Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
  /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
             GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
@@ -172,7 +172,7 @@ public class Drawing {
     }
     public static void animeCol(int col) {
         //가득찬 줄을 가져온다
-        for (int row = 0; row < GameBoard.HEIGHT; row++) {
+        for (int row = 0; row < GameBoard1.HEIGHT; row++) {
             Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
  /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
             GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
@@ -234,11 +234,11 @@ public class Drawing {
         boardView.getChildren().removeAll(labelsToRemove);
 
         // board 배열을 순회
-        for (int y = 0; y < GameBoard.HEIGHT; y++) {
-            for (int x = 0; x < GameBoard.WIDTH; x++) {
+        for (int y = 0; y < GameBoard1.HEIGHT; y++) {
+            for (int x = 0; x < GameBoard1.WIDTH; x++) {
                 // board에서 1이면 Label 생성 후 GridPane에 추가
-                if (GameBoard.board[y][x] >= 1) {
-                    String string = returnItemSymbol(GameBoard.board[y][x]);
+                if (GameBoard1.board[y][x] >= 1) {
+                    String string = returnItemSymbol(GameBoard1.board[y][x]);
                     Label label = new Label(string);
 
                     label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
@@ -267,11 +267,11 @@ public class Drawing {
         boardView2.getChildren().removeAll(labelsToRemove);
 
         // board 배열을 순회
-        for (int y = 0; y < GameBoard.HEIGHT; y++) {
-            for (int x = 0; x < GameBoard.WIDTH; x++) {
+        for (int y = 0; y < GameBoard1.HEIGHT; y++) {
+            for (int x = 0; x < GameBoard1.WIDTH; x++) {
                 // board에서 1이면 Label 생성 후 GridPane에 추가
-                if (GameBoard2.board2[y][x] >= 1) {
-                    String string = returnItemSymbol(GameBoard2.board2[y][x]);
+                if (GameBoard2.board[y][x] >= 1) {
+                    String string = returnItemSymbol(GameBoard2.board[y][x]);
                     Label label = new Label(string);
 
                     label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoard2Controller.cellWidth)); //set size
@@ -312,7 +312,7 @@ public class Drawing {
         Collections.sort(removeLineList); // 내림차순으로 정렬
         for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
             removeRow(boardView, line);
-            for (int column = 0; column < GameBoard.WIDTH; column++) {
+            for (int column = 0; column < GameBoard1.WIDTH; column++) {
                 for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
                     Label labelAbove = getLableAt(boardView, column, row);
                     if (labelAbove != null) {
@@ -326,7 +326,7 @@ public class Drawing {
         Collections.sort(removeLineList); // 내림차순으로 정렬
         for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
             removeRow(boardView2, line);
-            for (int column = 0; column < GameBoard.WIDTH; column++) {
+            for (int column = 0; column < GameBoard1.WIDTH; column++) {
                 for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
                     Label labelAbove = getLableAt(boardView2, column, row);
                     if (labelAbove != null) {
@@ -341,7 +341,7 @@ public class Drawing {
     //가로줄 삭제 후 업데이트
     public static void updateBoardView(int line){
             removeRow(boardView, line);
-            for (int column = 0; column < GameBoard.WIDTH; column++) {
+            for (int column = 0; column < GameBoard1.WIDTH; column++) {
                 for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
                     Label labelAbove = getLableAt(boardView, column, row);
                     if (labelAbove != null) {

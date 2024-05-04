@@ -13,14 +13,14 @@ public class RandomGenerator {
 
     //일반블록: 아이템 자체 블록 제외하고 블록 모양 택
         //a b c d 만들고 각각 색상, 폰트 주입
-    public Brick genarateNormal(int difficulty, boolean colorBlindness){ //아이템블록 제외 랜덤생성
+    public Brick genarateNormal(int difficulty, boolean colorBlindness, GameBoard gameBoard){ //아이템블록 제외 랜덤생성
         switch (difficulty){
             case 0: //이지모드
-                return generateBlock(UPPER_EASY,colorBlindness);
+                return generateBlock(UPPER_EASY,colorBlindness, gameBoard);
             case 1: //노말모드
-                return generateBlock(UPPER_NOMAL,colorBlindness);
+                return generateBlock(UPPER_NOMAL,colorBlindness, gameBoard);
             default: //하드모드
-                return generateBlock(UPPER_HARD,colorBlindness);
+                return generateBlock(UPPER_HARD,colorBlindness, gameBoard);
         }
     }
 
@@ -30,7 +30,7 @@ public class RandomGenerator {
         //아니면
             //랜덤으로 a,b,c,d 중 하나만 랜덤으로 아이템 기능 가져와서 + a b c d 각각 폰트 주입
             //블록 모양대로 만듦
-    public Brick generateItem(int difficulty,boolean colorBlindness){
+    public Brick generateItem(int difficulty,boolean colorBlindness, GameBoard gameBoard){
         Random rand = new Random(); // Random 객체 생성
         int upperBound=5; //0 ~ 4까지
         int item = rand.nextInt(upperBound) + 2; //2 부터 6까지 , Item 랜덤선택
@@ -43,7 +43,7 @@ public class RandomGenerator {
                 return new BrickW(1,4, Color.BLACK);
         }
         else{
-            Brick brick = genarateNormal(difficulty, colorBlindness);
+            Brick brick = genarateNormal(difficulty, colorBlindness ,gameBoard);
 
             //각 블록에 아이템 장착
             if(block==0){
@@ -97,50 +97,50 @@ public class RandomGenerator {
     //canMoveDown 에 대한 else에서 한번 호출(안착)
     //gravity 쪽에서 그 줄에 대해 하나씩 호출(줄 제거)
 
-    public Brick generateBlock(int upperBound,boolean colorBlindness){
+    public Brick generateBlock(int upperBound,boolean colorBlindness, GameBoard gameBoard){
         Random rand = new Random();
         int point = rand.nextInt(upperBound)+1; //1~upperBound까지
         if(point>=1 && point<10) {
             if(colorBlindness==true)
-                return new BrickJ(0,4, Color.ORANGE);
+                return new BrickJ(0,4, Color.ORANGE, gameBoard);
             else
-                return new BrickJ(0,4,Color.ORANGE);
+                return new BrickJ(0,4,Color.ORANGE, gameBoard);
         }
         else if(point>=10 && point<20){
             if(colorBlindness==true)
-                return new BrickL(0,3,Color.BLUE);
+                return new BrickL(0,3,Color.BLUE, gameBoard);
             else
-                return new BrickL(0,3,Color.BLUE);
+                return new BrickL(0,3,Color.BLUE, gameBoard);
         }
         else if(point>=20 && point<30){
             if (colorBlindness==true)
-                return new BrickO(0,4,Color.color(240/255.0,228/255.0,66/255.0));
+                return new BrickO(0,4,Color.color(240/255.0,228/255.0,66/255.0), gameBoard);
             else
-                return new BrickO(0,4,Color.color(240/255.0,228/255.0,66/255.0));
+                return new BrickO(0,4,Color.color(240/255.0,228/255.0,66/255.0), gameBoard);
         }
         else if(point>=30 && point<40){
             if(colorBlindness==true)
-                return new BrickS(0, 4,Color.color(0,158/255.0,87/255.0));
+                return new BrickS(0, 4,Color.color(0,158/255.0,87/255.0), gameBoard);
             else
-                return new BrickS(0,4,Color.GREEN );
+                return new BrickS(0,4,Color.GREEN , gameBoard);
         }
         else if(point>=40 && point<50){
             if(colorBlindness==true)
-                return new BrickT(1,4, Color.PALEVIOLETRED);
+                return new BrickT(1,4, Color.PALEVIOLETRED, gameBoard);
             else
-                return new BrickT(1,4, Color.PURPLE);
+                return new BrickT(1,4, Color.PURPLE, gameBoard);
         }
         else if(point>=50 && point<60){
             if (colorBlindness==true)
-                return new BrickZ(0,4, Color.color(213/255.0,94/255.0,0));
+                return new BrickZ(0,4, Color.color(213/255.0,94/255.0,0), gameBoard);
             else
-                return new BrickZ(0,4, Color.color(210/255.0,50/255.0,50/255.0));
+                return new BrickZ(0,4, Color.color(210/255.0,50/255.0,50/255.0), gameBoard);
         }
         else { //I블록
             if (colorBlindness==true)
-                return new BrickI(1,4, Color.color(86/255.0, 180/255.0, 232/255.0));
+                return new BrickI(1,4, Color.color(86/255.0, 180/255.0, 232/255.0), gameBoard);
             else
-                return new BrickI(1,4, Color.SKYBLUE);
+                return new BrickI(1,4, Color.SKYBLUE, gameBoard);
         }
     }
 }

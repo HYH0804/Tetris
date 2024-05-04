@@ -1,7 +1,7 @@
 package com.example.fxtest.brick;
 
-import com.example.fxtest.Drawing;
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoard1;
 import com.example.fxtest.GameBoardController;
 import javafx.scene.paint.Color;
 
@@ -24,6 +24,10 @@ public class BrickW implements Brick{
     Block d;
     Block e;
     Block f;
+    GameBoard gameBoard;
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
 
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
     List<Block> afterList = new ArrayList<>();
@@ -83,7 +87,8 @@ public class BrickW implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
+            int[][] board= gameBoard.getBoard();
+            if(!(y < gameBoard.WIDTH && y >= 0 && x< gameBoard.HEIGHT && x>=0 && board[x][y] == 0)){
                 return false;
             }
             if(possible==false){
@@ -93,7 +98,8 @@ public class BrickW implements Brick{
         for (Block block2 : temp2) {
             int x = block2.getX()+1;
             int y = block2.getY()-1;
-            if (GameBoard.board[x][y] != 0) {
+            int[][] board= gameBoard.getBoard();
+            if (board[x][y] != 0) {
                 possible = false;//이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)//이동 불가
                 return false;
             }
@@ -132,7 +138,8 @@ public class BrickW implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
+            int[][] board= gameBoard.getBoard();
+            if(!(y < gameBoard.WIDTH && y >= 0 && x< gameBoard.HEIGHT && x>=0 && board[x][y] == 0)){
                 return false;
             }
             if(possible==false){
@@ -142,7 +149,8 @@ public class BrickW implements Brick{
         for (Block block2 : temp2) {
             int x = block2.getX()+1;
             int y = block2.getY()+1;
-            if (GameBoard.board[x][y] != 0) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            int[][] board= gameBoard.getBoard();
+            if (board[x][y] != 0) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 possible = false;  //이동 불가
                 return false;
             }
@@ -178,10 +186,11 @@ public class BrickW implements Brick{
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            int[][] board= gameBoard.getBoard();
+            if (!(y < gameBoard.WIDTH && y >= 0 && x< gameBoard.HEIGHT && x>=0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
-            if(GameBoard.board[x][y] != 0){
+            if(board[x][y] != 0){
                 possible=false;
             }
         }
@@ -246,7 +255,7 @@ public class BrickW implements Brick{
             for (Block block : temp) {
                 int x = block.getX();
                 int y = block.getY();
-                GameBoard.board[x][y] = 0;
+                gameBoard.board[x][y] = 0;
                 colorErase(y,x);
             }
             a.setX(a.getX()+1);
@@ -255,7 +264,7 @@ public class BrickW implements Brick{
             d.setX(d.getX()+1);
             e.setX(e.getX()+1);
             f.setX(f.getX()+1);
-            GameBoard.updateScore(GameBoardController.downScore);
+            gameBoard.updateScore(GameBoardController.downScore);
         }
         //이동 후 a b c d 좌표 변경
 
@@ -282,7 +291,7 @@ public class BrickW implements Brick{
             for (Block block : temp) {
                 int x = block.getX();
                 int y = block.getY();
-                GameBoard.board[x][y] = 0;
+                GameBoard1.board[x][y] = 0;
                 colorErase(y,x);
             }
             a.setX(a.getX()+1);

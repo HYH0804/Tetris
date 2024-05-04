@@ -1,9 +1,8 @@
 package com.example.fxtest.brick;
 
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoard1;
 import com.example.fxtest.GameBoardController;
-import com.example.fxtest.brick.Block;
-import com.example.fxtest.brick.Brick;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -23,10 +22,15 @@ public class BrickJ implements Brick {
     Block c;
     Block d;
 
+    GameBoard gameBoard;
+
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
     List<Block> afterList = new ArrayList<>();
 
-    public BrickJ(int center_x, int center_y, Color color) {
+    public BrickJ(int center_x, int center_y, Color color, GameBoard gameBoard) {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅
         this.center_x = center_x;
         this.center_y = center_y;
@@ -39,6 +43,7 @@ public class BrickJ implements Brick {
         blockList.add(b);
         blockList.add(c);
         blockList.add(d);
+        this.gameBoard=gameBoard;
     }
     @Override
     public boolean canRotate() { // 0 > 1 > 2 > 3
@@ -95,7 +100,8 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            int[][] board= gameBoard.getBoard();
+            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
 
             }
@@ -125,8 +131,8 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            int[][] board= gameBoard.getBoard();
+            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
 
             }
@@ -156,8 +162,8 @@ public class BrickJ implements Brick {
         for (Block block : temp) {
             int x = block.getX();
             int y = block.getY();
-
-            if (!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            int[][] board= gameBoard.getBoard();
+            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
 
             }
@@ -190,7 +196,8 @@ public class BrickJ implements Brick {
 /*            if (!(x < GameBoard.WIDTH && x >= 0 && y<GameBoard.HEIGHT && y>=0 && GameBoard.board[x][y] != 1)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }*/
-            if(!(y < GameBoard.WIDTH && y >= 0 && x<GameBoard.HEIGHT && x>=0 && GameBoard.board[x][y] == 0)){
+            int[][] board= gameBoard.getBoard();
+            if(!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] == 0)){
                 return false;
             }
         }
@@ -286,7 +293,7 @@ public class BrickJ implements Brick {
         b.setX(b.getX()+1);
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
-        GameBoard.updateScore(GameBoardController.downScore);
+        gameBoard.updateScore(GameBoardController.downScore);
 
         //postChange();
     }
@@ -299,7 +306,7 @@ public class BrickJ implements Brick {
             b.setX(b.getX()+1);
             c.setX(c.getX()+1);
             d.setX(d.getX()+1);
-            GameBoard.updateScore(GameBoardController.downScore);
+            gameBoard.updateScore(GameBoardController.downScore);
         }
     }
 

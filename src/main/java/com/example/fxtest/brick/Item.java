@@ -2,11 +2,9 @@ package com.example.fxtest.brick;
 
 import com.example.fxtest.Drawing;
 import com.example.fxtest.GameBoard;
+import com.example.fxtest.GameBoard1;
 import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
-import javafx.util.Duration;
-
-import java.util.List;
 
 public enum Item {
     NORMAL(1),
@@ -40,7 +38,7 @@ public enum Item {
     }
 
 
-    public static void doItem(GameBoard gameBoard, GridPane gridPane,Block itemBlock){
+    public static void doItem(GameBoard gameBoard, GridPane gridPane, Block itemBlock){
         Item item = itemBlock.getItem();
 
         if(item==ROWDELETE){
@@ -74,7 +72,7 @@ public enum Item {
     }
 
     //GameBoardController minute10에서...
-    public static void turnEndDoItem(Brick currentBrick,GameBoard gameBoard, GridPane gridPane){
+    public static void turnEndDoItem(Brick currentBrick, GameBoard gameBoard, GridPane gridPane){
         Block itemBlock = currentBrick.getItem();
         if(itemBlock!=null) {
             Item item = itemBlock.getItem();
@@ -85,7 +83,7 @@ public enum Item {
 
     }
 
-    public static void sponDoItem(Brick currentBrick,GameBoard gameBoard, GridPane gridPane){
+    public static void sponDoItem(Brick currentBrick, GameBoard gameBoard, GridPane gridPane){
         Block itemBlock = currentBrick.getItem();
         if(itemBlock!=null) {
             Item item = itemBlock.getItem();
@@ -95,7 +93,7 @@ public enum Item {
         }
     }
 
-    public static void fullLineDoItem(Brick currentBrick,GameBoard gameBoard, GridPane gridPane){
+    public static void fullLineDoItem(Brick currentBrick, GameBoard gameBoard, GridPane gridPane){
         Block itemBlock = currentBrick.getItem();
         Item item = itemBlock.getItem();
         if(item==Item.NUCLEAR) {

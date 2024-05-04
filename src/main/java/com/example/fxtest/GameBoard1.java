@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GameBoard2 implements GameBoard {
+public class GameBoard1 implements GameBoard {
     //이거 조심
     public final static int WIDTH =10; //일단 크기로... Index는 9까지
     public final static int HEIGHT=22; //일단 크기로... 0~1 행은 블록 스폰, 2~21 행은 보드
@@ -23,7 +23,7 @@ public class GameBoard2 implements GameBoard {
     static boolean pause = false;
 
     //생성자 (추후 필드 추가시 다시 봐야됨)
-    public GameBoard2() {
+    public GameBoard1() {
         //board 배열 0으로 전부 초기화
         for (int[] row : board) {
             Arrays.fill(row, 0);
@@ -115,7 +115,6 @@ public class GameBoard2 implements GameBoard {
         }
         return removedRows;
     }
-
 
     @Override
     public void removeFullColumn(int column) {
