@@ -116,21 +116,6 @@ public class KeySettingController implements Initializable {
             }
         }
     }
-    public static Scene KeySettingScene() throws IOException {
-        Properties properties = Main.loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
-
-        FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("keysetting-view.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        KeySettingController key = new KeySettingController();
-        Scene scene = new Scene(root, width, height);
-        key.initPageHandler(scene, root);
-
-        return scene;
-    }
 
     public void initPageHandler(Scene pScene, Parent root){
         VBox vbox = (VBox) root.lookup("#keySettingVbox");

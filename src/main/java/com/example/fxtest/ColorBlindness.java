@@ -16,16 +16,6 @@ public class ColorBlindness {
             Color.color(0,158/255.0,87/255.0), Color.color(213/255.0,94/255.0,0), Color.BLUE, Color.color(231/255.0,160/255.0,0)};
     private static Properties properties = new Properties();
 
-    public static Color getColor(int index) throws IOException {
-            propLoad();
-
-        if(colorBlindness){
-            return color1[index];
-        }
-        else {
-            return color0[index];
-        }
-    }
 
     public static void changeColorBlindness() {
         colorBlindness = !colorBlindness;

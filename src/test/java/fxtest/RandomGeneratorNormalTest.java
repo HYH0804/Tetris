@@ -1,3 +1,7 @@
+package fxtest;
+
+
+
 import com.example.fxtest.RandomGenerator;
 import com.example.fxtest.brick.*;
 import org.junit.jupiter.api.Test;
@@ -5,14 +9,14 @@ import org.junit.jupiter.api.Assertions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RandomGeneratorTest {
+public class RandomGeneratorNormalTest {
 
     @Test
     public void testBlockDistribution() {
         RandomGenerator generator = new RandomGenerator();
         Map<Class<? extends Brick>, Integer> counts = new HashMap<>();
         int totalRuns = 1000;
-        int difficulty = 0; // Test for easy mode
+        int difficulty = 1; // Test for easy mode
         boolean colorBlindness = false; // Not color blind
 
         // Initialize counts
@@ -31,8 +35,8 @@ public class RandomGeneratorTest {
         }
 
         // Assert each count is within expected probability limits
-        double expectedPercentage = 10.0 / 72.0; // For non-I blocks
-        double expectedIPercentage = 12.0 / 72.0; // For I blocks
+        double expectedPercentage = 10.0 / 70.0; // For non-I blocks
+        double expectedIPercentage = 10.0 / 70.0; // For I blocks
         double errorMargin = 0.05; // 5%
 
         counts.forEach((key, value) -> {

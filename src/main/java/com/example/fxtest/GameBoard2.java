@@ -1,22 +1,19 @@
 package com.example.fxtest;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GameBoard {
+public class GameBoard2 {
     //이거 조심
     public final static int WIDTH =10; //일단 크기로... Index는 9까지
     public final static int HEIGHT=22; //일단 크기로... 0~1 행은 블록 스폰, 2~21 행은 보드
 
     //Board 2차원 배열 , 있으면 1 없으면 0
-    public static int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
+    public static int[][] board2 = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
 
     private static IntegerProperty score = new SimpleIntegerProperty(0); //점수
 
@@ -26,9 +23,9 @@ public class GameBoard {
     static boolean pause = false;
 
     //생성자 (추후 필드 추가시 다시 봐야됨)
-    public GameBoard() {
+    public GameBoard2() {
         //board 배열 0으로 전부 초기화
-        for (int[] row : board) {
+        for (int[] row : board2) {
             Arrays.fill(row, 0);
         }
     }
@@ -66,17 +63,17 @@ public class GameBoard {
         Drawing.animeRow(fullRow);
         for (int row = fullRow; row > 0; row--) {
             for (int col = 0; col < WIDTH; col++) {
-                board[row][col] = board[row - 1][col]; // 위의 줄을 아래로 복사
+                board2[row][col] = board2[row - 1][col]; // 위의 줄을 아래로 복사
             }
         }
-        Arrays.fill(board[0], 0); // 가장 윗 줄을 0으로 초기화
+        Arrays.fill(board2[0], 0); // 가장 윗 줄을 0으로 초기화
     }
 
 
     // 특정 줄이 완전히 채워졌는지 확인
     public boolean isRowFull(int row) {
         for (int col = 0; col < WIDTH; col++) {
-            if (board[row][col] == 0) {
+            if (board2[row][col] == 0) {
                 return false; // 하나라도 비어있으면 false 반환
             }
         }

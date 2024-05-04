@@ -31,6 +31,8 @@ public class StartController implements Initializable {
     @FXML
     private Button exitButton;
     @FXML
+    private Button twoplayerButton;
+    @FXML
     private AnchorPane rootPane;
     @FXML
     private Label infoLabel;
@@ -131,6 +133,26 @@ public class StartController implements Initializable {
         Scene scene = scoreboardButton.getScene(); // 현재 Scene을 가져옵니다.
         scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
         stage.setTitle("Score Page");
+        stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
+        stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
+        stage.show();
+    }
+
+    @FXML
+    private void twoPlayer() throws IOException {
+        Stage stage = (Stage) twoplayerButton.getScene().getWindow();
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard2.fxml"));
+        Parent root = loader.load();
+        Scene scene = twoplayerButton.getScene(); // 현재 Scene을 가져옵니다.
+        scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
+        stage.setTitle("2P Game");
         stage.setWidth(width); // 현재 Stage의 너비를 설정합니다.
         stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         stage.show();

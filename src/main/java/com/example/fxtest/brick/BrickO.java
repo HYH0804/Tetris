@@ -204,7 +204,7 @@ public class BrickO implements Brick{
         //preChange();
 
 
-
+/*
         //회전 후 a b c d 좌표 변경 + (shape+1)%4
         this.shape = (this.shape+1)%4; //다음 회전모양
         int x=b.getX(); // 회전 중심 x
@@ -245,26 +245,8 @@ public class BrickO implements Brick{
             d.setX(b.getX());
             d.setY(b.getY() + 1);
         }
-        //돌린 후 1 세팅
+        //돌린 후 1 세팅*/
         //postChange();
-    }
-
-    @Override
-    //돌리기 전 블록 위치 0 세팅
-    public void preChange() {
-        for(Block block : blockList){
-            GameBoard.board[block.getX()][block.getY()]=0;
-        }
-        //색 지우고
-    }
-
-    @Override
-    //돌린 후 1 세팅
-    public void postChange() {
-        for(Block block : blockList){
-            GameBoard.board[block.getX()][block.getY()]=1;
-        }
-        //색 채우고
     }
 
 

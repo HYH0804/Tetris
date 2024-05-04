@@ -8,8 +8,6 @@ import com.example.fxtest.brick.Item;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
-import javafx.collections.ObservableList;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -26,10 +24,14 @@ import java.util.List;
 public class Drawing {
 
     private static GridPane boardView;
+    private static GridPane boardView2;
 
     //GameBoard FXML이 생성되면서 GameBoardController가 initialize 될때 자동으로 GridPane 주입
     public static void setBoardView(GridPane boardView) {
         Drawing.boardView = boardView;
+    }
+    public static void setBoardView2(GridPane boardView) {
+        Drawing.boardView2 = boardView;
     }
 
     //그리드페인에 현재블록 그리기
@@ -52,6 +54,25 @@ public class Drawing {
         }
     }
 
+    public static void colorFill2(Brick brick){
+
+        for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
+            int x = block.getX();
+            int y = block.getY();
+
+            String string = returnItemSymbol(block);
+
+            Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
+            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+            label.setTextFill(block.getColor()); //색깔도 바꾸고
+            GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+
+            // GridPane에 Rectangle 추가
+            boardView2.add(label, y, x);
+        }
+    }
+
     //Brick 색 삭제
     public static void colorErase(Brick brick) {
         for(Block block : brick.getBlockList()) {
@@ -59,11 +80,21 @@ public class Drawing {
             boardView.getChildren().remove(LabelAt);
         }
     }
+    public static void colorErase2(Brick brick) {
+        for(Block block : brick.getBlockList()) {
+            Label LabelAt = getLableAt(boardView2,block.getY(),block.getX());
+            boardView2.getChildren().remove(LabelAt);
+        }
+    }
 
     //블록 색 삭제
     public static void colorErase(int x,int y){
         Label lableAt = getLableAt(boardView, x, y);
         boardView.getChildren().remove(lableAt);
+    }
+    public static void colorErase2(int x,int y){
+        Label lableAt = getLableAt(boardView2, x, y);
+        boardView2.getChildren().remove(lableAt);
     }
 
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
@@ -79,6 +110,112 @@ public class Drawing {
             }
         }
         return null;
+    }
+    public static void removeAnimeRow(GridPane gridPane, int rowIndex) {
+        // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
+        gridPane.getChildren().removeIf(node ->
+                GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == rowIndex && (node instanceof Rectangle)
+        );
+    }
+    public static void removeAnimeColumn(GridPane gridPane, int columnIndex) {
+        // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
+        gridPane.getChildren().removeIf(node ->
+                GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == columnIndex &&(node instanceof Rectangle)
+        );
+    }
+
+    public static void animeRow(int fullRow) {
+        //가득찬 줄을 가져온다
+        for (int col = 0; col < GameBoard.WIDTH; col++) {
+            Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
+ /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
+
+            // GridPane에 Rectangle 추가
+            boardView.add(rectangle, col, fullRow);
+        }
+        Timeline timeline = new Timeline(
+                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
+                new KeyFrame(Duration.seconds(0.3), event -> {
+                        removeAnimeRow(boardView,fullRow);
+                    // 아무 동작도 하지 않음
+                })
+        );
+        timeline.setCycleCount(1);
+        // 타임라인 실행
+        timeline.play();
+
+        //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
+    }
+    public static void animeRow2(int fullRow) {
+        //가득찬 줄을 가져온다
+        for (int col = 0; col < GameBoard2.WIDTH; col++) {
+            Rectangle rectangle = new Rectangle(GameBoard2Controller.cellWidth,GameBoard2Controller.cellWidth,Color.BLACK);
+ /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
+
+            // GridPane에 Rectangle 추가
+            boardView2.add(rectangle, col, fullRow);
+        }
+        Timeline timeline = new Timeline(
+                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
+                new KeyFrame(Duration.seconds(0.3), event -> {
+                    removeAnimeRow(boardView2,fullRow);
+                    // 아무 동작도 하지 않음
+                })
+        );
+        timeline.setCycleCount(1);
+        // 타임라인 실행
+        timeline.play();
+
+        //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
+    }
+    public static void animeCol(int col) {
+        //가득찬 줄을 가져온다
+        for (int row = 0; row < GameBoard.HEIGHT; row++) {
+            Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
+ /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
+
+            // GridPane에 Rectangle 추가
+            boardView.add(rectangle, col, row);
+        }
+        Timeline timeline = new Timeline(
+                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
+                new KeyFrame(Duration.seconds(0.3), event -> {
+                    removeAnimeColumn(boardView,col);
+                    // 아무 동작도 하지 않음
+                })
+        );
+        timeline.setCycleCount(1);
+        // 타임라인 실행
+        timeline.play();
+        //가득찬 줄의 boardview를 색칠해서 애니메이션 기능 만든다.
+        //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
+    }
+
+    public static void animeCol2(int col) {
+        //가득찬 줄을 가져온다
+        for (int row = 0; row < GameBoard2.HEIGHT; row++) {
+            Rectangle rectangle = new Rectangle(GameBoard2Controller.cellWidth,GameBoard2Controller.cellWidth,Color.BLACK);
+ /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
+
+            // GridPane에 Rectangle 추가
+            boardView2.add(rectangle, col, row);
+        }
+        Timeline timeline = new Timeline(
+                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
+                new KeyFrame(Duration.seconds(0.3), event -> {
+                    removeAnimeColumn(boardView2,col);
+                    // 아무 동작도 하지 않음
+                })
+        );
+        timeline.setCycleCount(1);
+        // 타임라인 실행
+        timeline.play();
+        //가득찬 줄의 boardview를 색칠해서 애니메이션 기능 만든다.
+        //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
 
     //줄 지웠을때 Gridpane만 냅두고 위에 객체들 새로 그리기
@@ -109,6 +246,39 @@ public class Drawing {
                     GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
                     GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
                     boardView.add(label, x, y);
+                }
+            }
+        }
+        System.out.println("보드 업데이트 완료");
+    }
+
+    public static void updateBoardView2(){
+        // GridPane에서 제거할 Label 객체들을 담을 리스트 생성
+        List<Node> labelsToRemove = new ArrayList<>();
+
+        // GridPane의 모든 자식 노드를 순회하며 Label 타입의 노드를 찾는다
+        for (Node child : boardView2.getChildren()) {
+            if (child instanceof Label) {
+                labelsToRemove.add(child);
+            }
+        }
+
+        // 찾은 Label 객체들을 GridPane에서 제거
+        boardView2.getChildren().removeAll(labelsToRemove);
+
+        // board 배열을 순회
+        for (int y = 0; y < GameBoard.HEIGHT; y++) {
+            for (int x = 0; x < GameBoard.WIDTH; x++) {
+                // board에서 1이면 Label 생성 후 GridPane에 추가
+                if (GameBoard2.board2[y][x] >= 1) {
+                    String string = returnItemSymbol(GameBoard2.board2[y][x]);
+                    Label label = new Label(string);
+
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoard2Controller.cellWidth)); //set size
+                    label.setTextFill(Color.BLUE);
+                    GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+                    GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+                    boardView2.add(label, x, y);
                 }
             }
         }
@@ -152,6 +322,20 @@ public class Drawing {
             }
         }
     }
+    public static void updateBoardView2(List<Integer> removeLineList){
+        Collections.sort(removeLineList); // 내림차순으로 정렬
+        for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
+            removeRow(boardView2, line);
+            for (int column = 0; column < GameBoard.WIDTH; column++) {
+                for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
+                    Label labelAbove = getLableAt(boardView2, column, row);
+                    if (labelAbove != null) {
+                        GridPane.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
+                    }
+                }
+            }
+        }
+    }
 
 
     //가로줄 삭제 후 업데이트
@@ -181,6 +365,7 @@ public class Drawing {
                 GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == rowIndex
         );
     }
+
 
     public static void removeColumn(GridPane gridPane, int columnIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회

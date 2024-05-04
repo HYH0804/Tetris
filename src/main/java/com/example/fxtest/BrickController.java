@@ -121,4 +121,23 @@ public class BrickController{
         return HARDDROP;
     }
 
+    public void setMOVED(String MOVED) {
+        this.MOVED = MOVED;
+    }
+
+    public void setMOVEL(String MOVEL) {
+        this.MOVEL = MOVEL;
+    }
+
+    public void setMOVER(String MOVER) {
+        this.MOVER = MOVER;
+    }
+
+    public void setROTATE(String ROTATE) {
+        this.ROTATE = ROTATE;
+    }
+
+    public void setHARDDROP(String HARDDROP) {
+        this.HARDDROP = HARDDROP;
+    }
 }

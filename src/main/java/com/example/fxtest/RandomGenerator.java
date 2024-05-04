@@ -38,9 +38,9 @@ public class RandomGenerator {
         int block = rand.nextInt(upperBound); //0 ~ 3까지 , 0이면 a에 Item, 1이면 b에 Item, 2이면 c에 Item, 3이면 d에 Item
         if(item==2){
             if(colorBlindness==true)
-                return new BrickW(1, 4,Color.GRAY); //색맹때 해야됨
+                return new BrickW(1, 4,Color.BLACK); //색맹때 해야됨
             else
-                return new BrickW(1,4, Color.GRAY);
+                return new BrickW(1,4, Color.BLACK);
         }
         else{
             Brick brick = genarateNormal(difficulty, colorBlindness);
@@ -102,9 +102,9 @@ public class RandomGenerator {
         int point = rand.nextInt(upperBound)+1; //1~upperBound까지
         if(point>=1 && point<10) {
             if(colorBlindness==true)
-                return new BrickJ(0,4, Color.color(213/255.0,94/255.0,0));
+                return new BrickJ(0,4, Color.ORANGE);
             else
-                return new BrickJ(0,4,Color.RED);
+                return new BrickJ(0,4,Color.ORANGE);
         }
         else if(point>=10 && point<20){
             if(colorBlindness==true)
@@ -114,33 +114,33 @@ public class RandomGenerator {
         }
         else if(point>=20 && point<30){
             if (colorBlindness==true)
-                return new BrickO(0,4,Color.SKYBLUE);
+                return new BrickO(0,4,Color.color(240/255.0,228/255.0,66/255.0));
             else
-                return new BrickO(0,4,Color.SKYBLUE);
+                return new BrickO(0,4,Color.color(240/255.0,228/255.0,66/255.0));
         }
         else if(point>=30 && point<40){
             if(colorBlindness==true)
-                return new BrickS(0, 4,Color.PALEVIOLETRED);
+                return new BrickS(0, 4,Color.color(0,158/255.0,87/255.0));
             else
-                return new BrickS(0,4,Color.PURPLE );
+                return new BrickS(0,4,Color.GREEN );
         }
         else if(point>=40 && point<50){
             if(colorBlindness==true)
-                return new BrickT(1,4, Color.YELLOW);
+                return new BrickT(1,4, Color.PALEVIOLETRED);
             else
-                return new BrickT(1,4, Color.YELLOW);
+                return new BrickT(1,4, Color.PURPLE);
         }
         else if(point>=50 && point<60){
             if (colorBlindness==true)
-                return new BrickZ(0,4, Color.color(0,158/255.0,87/255.0));
+                return new BrickZ(0,4, Color.color(213/255.0,94/255.0,0));
             else
-                return new BrickZ(0,4,Color.GREEN );
+                return new BrickZ(0,4, Color.color(210/255.0,50/255.0,50/255.0));
         }
         else { //I블록
             if (colorBlindness==true)
-                return new BrickI(1,4,Color.BLACK);
+                return new BrickI(1,4, Color.color(86/255.0, 180/255.0, 232/255.0));
             else
-                return new BrickI(1,4, Color.BLACK);
+                return new BrickI(1,4, Color.SKYBLUE);
         }
     }
 }
