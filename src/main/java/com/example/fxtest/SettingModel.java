@@ -8,7 +8,7 @@ import java.util.Properties;
 public class SettingModel {
     // you should change public statics
     public static String[] keyVal; // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
-    public static int[] resolutionVal;
+    public static int[] resolutionVal;  // index: "width", "height"
     public static int colorBlindnessVal = -1;
 
     private static final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop"};
@@ -65,4 +65,28 @@ public class SettingModel {
             e.printStackTrace();
         }
     }
+
+    // change colorBlindnessVal
+    public static void changeColorBlindness() {
+        init(); // init 실행하면 작성 안해도 됨
+
+        colorBlindnessVal = 1 - colorBlindnessVal;
+    }
+
+    // reset values and .properties
+    public static void resetSetting() {
+        init(); // init 실행하면 작성 안해도 됨
+
+        String[] keyReset = {"UP","LEFT","RIGHT","DOWN","SPACE"};
+        for(int i = 0; i < 5; i++) {
+            keyVal[i] = keyReset[i];
+        }
+        resolutionVal[0] = 800;
+        resolutionVal[1] = 600;
+        colorBlindnessVal = 0;
+
+        // update .properties
+        saveProp();
+    }
+
 }
