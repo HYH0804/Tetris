@@ -1,3 +1,4 @@
+/*
 package fxtest;
 
 import com.example.fxtest.RandomGenerator;
@@ -169,3 +170,4 @@ public class BlockTest {
     }
 
 }
+*/

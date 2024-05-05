@@ -1,7 +1,6 @@
 package com.example.fxtest.brick;
 
 import com.example.fxtest.Drawing;
-import com.example.fxtest.GameBoard;
 import com.example.fxtest.GameBoard1;
 import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
@@ -38,18 +37,18 @@ public enum Item {
     }
 
 
-    public static void doItem(GameBoard gameBoard, GridPane gridPane, Block itemBlock){
+    public static void doItem(GameBoard1 gameBoard, GridPane gridPane, Block itemBlock){
         Item item = itemBlock.getItem();
 
         if(item==ROWDELETE){
             int deleteRow = itemBlock.getX();
-            Drawing.updateBoardView(deleteRow);
+            Drawing.updateBoardView(deleteRow,gridPane);
             gameBoard.removeRow(deleteRow);
             System.out.println("Row 실행----------------------");
         }
         else if (item==COLUMNDELETE) {
             int deleteColumn = itemBlock.getY();
-            Drawing.updateBoardColumnView(deleteColumn);
+            Drawing.updateBoardColumnView(deleteColumn,gridPane);
             gameBoard.removeFullColumn(deleteColumn);
             System.out.println("Col 실행----------------------");
         }
@@ -72,7 +71,7 @@ public enum Item {
     }
 
     //GameBoardController minute10에서...
-    public static void turnEndDoItem(Brick currentBrick, GameBoard gameBoard, GridPane gridPane){
+    public static void turnEndDoItem(Brick currentBrick, GameBoard1 gameBoard, GridPane gridPane){
         Block itemBlock = currentBrick.getItem();
         if(itemBlock!=null) {
             Item item = itemBlock.getItem();
@@ -83,7 +82,7 @@ public enum Item {
 
     }
 
-    public static void sponDoItem(Brick currentBrick, GameBoard gameBoard, GridPane gridPane){
+    public static void sponDoItem(Brick currentBrick, GameBoard1 gameBoard, GridPane gridPane){
         Block itemBlock = currentBrick.getItem();
         if(itemBlock!=null) {
             Item item = itemBlock.getItem();
@@ -93,7 +92,7 @@ public enum Item {
         }
     }
 
-    public static void fullLineDoItem(Brick currentBrick, GameBoard gameBoard, GridPane gridPane){
+    public static void fullLineDoItem(Brick currentBrick, GameBoard1 gameBoard, GridPane gridPane){
         Block itemBlock = currentBrick.getItem();
         Item item = itemBlock.getItem();
         if(item==Item.NUCLEAR) {

@@ -13,7 +13,7 @@ public class RandomGenerator {
 
     //일반블록: 아이템 자체 블록 제외하고 블록 모양 택
         //a b c d 만들고 각각 색상, 폰트 주입
-    public Brick genarateNormal(int difficulty, boolean colorBlindness, GameBoard gameBoard){ //아이템블록 제외 랜덤생성
+    public Brick genarateNormal(int difficulty, boolean colorBlindness, GameBoard1 gameBoard){ //아이템블록 제외 랜덤생성
         switch (difficulty){
             case 0: //이지모드
                 return generateBlock(UPPER_EASY,colorBlindness, gameBoard);
@@ -30,7 +30,7 @@ public class RandomGenerator {
         //아니면
             //랜덤으로 a,b,c,d 중 하나만 랜덤으로 아이템 기능 가져와서 + a b c d 각각 폰트 주입
             //블록 모양대로 만듦
-    public Brick generateItem(int difficulty,boolean colorBlindness, GameBoard gameBoard){
+    public Brick generateItem(int difficulty,boolean colorBlindness, GameBoard1 gameBoard){
         Random rand = new Random(); // Random 객체 생성
         int upperBound=5; //0 ~ 4까지
         int item = rand.nextInt(upperBound) + 2; //2 부터 6까지 , Item 랜덤선택
@@ -97,7 +97,7 @@ public class RandomGenerator {
     //canMoveDown 에 대한 else에서 한번 호출(안착)
     //gravity 쪽에서 그 줄에 대해 하나씩 호출(줄 제거)
 
-    public Brick generateBlock(int upperBound,boolean colorBlindness, GameBoard gameBoard){
+    public Brick generateBlock(int upperBound,boolean colorBlindness, GameBoard1 gameBoard){
         Random rand = new Random();
         int point = rand.nextInt(upperBound)+1; //1~upperBound까지
         if(point>=1 && point<10) {

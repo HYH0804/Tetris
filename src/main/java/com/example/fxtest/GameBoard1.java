@@ -7,20 +7,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GameBoard1 implements GameBoard {
+public class GameBoard1 {
     //이거 조심
     public final static int WIDTH =10; //일단 크기로... Index는 9까지
     public final static int HEIGHT=22; //일단 크기로... 0~1 행은 블록 스폰, 2~21 행은 보드
 
     //Board 2차원 배열 , 있으면 1 없으면 0
-    public static int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
+    public int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
 
-    private static IntegerProperty score = new SimpleIntegerProperty(0); //점수
+    private IntegerProperty score = new SimpleIntegerProperty(0); //점수
 
-    public static int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
-    static boolean whileGame =false; //Flag가 True로 되면 게임 끝나는 속성 이벤트 리스너
 
-    static boolean pause = false;
+    public int downScore=0; //속도마다 다르게 변경
+
+    public double speed=1;
+
+    public int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
+    boolean whileGame =false; //Flag가 True로 되면 게임 끝나는 속성 이벤트 리스너
+
+    boolean turnEnd =false;
+
+    boolean pause = false;
+
+    int blockSpon=0; ////스폰블록
 
     //생성자 (추후 필드 추가시 다시 봐야됨)
     public GameBoard1() {
@@ -30,21 +39,20 @@ public class GameBoard1 implements GameBoard {
         }
     }
 
-    public static IntegerProperty scoreProperty() {
+    public IntegerProperty scoreProperty() {
         return score;
     }
 
-    public static int getScore() {
+    public int getScore() {
         return score.get();
     }
 
-    public static void setScore(int newScore) {
+    public void setScore(int newScore) {
         score.set(newScore);
     }
 
 
     // 보드를 순회하여 완전히 채워진 줄을 삭제하고 점수를 업데이트
-    @Override
     public void removeFullRows() {
         int rowsRemoved = 0;
         for (int row = 0; row < HEIGHT; row++) {
@@ -60,9 +68,9 @@ public class GameBoard1 implements GameBoard {
     }
 
 
-    @Override
+
     public void removeRow(int fullRow) {
-        Drawing.animeRow(fullRow);
+        //Drawing.animeRow(fullRow);
         for (int row = fullRow; row > 0; row--) {
             for (int col = 0; col < WIDTH; col++) {
                 board[row][col] = board[row - 1][col]; // 위의 줄을 아래로 복사
@@ -73,7 +81,6 @@ public class GameBoard1 implements GameBoard {
 
 
     // 특정 줄이 완전히 채워졌는지 확인
-    @Override
     public boolean isRowFull(int row) {
         for (int col = 0; col < WIDTH; col++) {
             if (board[row][col] == 0) {
@@ -84,7 +91,6 @@ public class GameBoard1 implements GameBoard {
     }
 
     // 삭제된 줄의 수에 따라 점수를 업데이트
-    @Override
     public void updateScoreLine(int rowsRemoved) {
         switch (rowsRemoved) {
             case 1:
@@ -105,7 +111,8 @@ public class GameBoard1 implements GameBoard {
         deleteLine += rowsRemoved;
     }
 
-    @Override
+
+    //완성된 줄 확인만
     public List<Integer> getRemovedRows() {
         List<Integer> removedRows = new ArrayList<>();
         for (int row = 0; row < HEIGHT; row++) {
@@ -116,21 +123,21 @@ public class GameBoard1 implements GameBoard {
         return removedRows;
     }
 
-    @Override
+
     public void removeFullColumn(int column) {
-        Drawing.animeCol(column);
+        //Drawing.animeCol(column);
         for(int i = 0; i< GameBoard1.HEIGHT; i++){
-            GameBoard1.board[i][column]=0;
+            board[i][column]=0;
         }
     }
 
 
-    @Override
+
     public void updateScore(int value) {
         score.set(getScore() + value);
     }
 
-    @Override
+
     public int[][] getBoard() {
         return board;
     }

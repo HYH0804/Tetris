@@ -1,6 +1,5 @@
 package com.example.fxtest.brick;
 
-import com.example.fxtest.GameBoard;
 import com.example.fxtest.GameBoard1;
 import com.example.fxtest.GameBoardController;
 import javafx.scene.paint.Color;
@@ -24,8 +23,8 @@ public class BrickW implements Brick{
     Block d;
     Block e;
     Block f;
-    GameBoard gameBoard;
-    public void setGameBoard(GameBoard gameBoard) {
+    GameBoard1 gameBoard;
+    public void setGameBoard(GameBoard1 gameBoard) {
         this.gameBoard = gameBoard;
     }
 
@@ -49,6 +48,7 @@ public class BrickW implements Brick{
         blockList.add(d);
         blockList.add(e);
         blockList.add(f);
+        this.gameBoard=gameBoard;
     }
     @Override
     public boolean canRotate() { // 0 > 1 > 2 > 3
@@ -256,7 +256,7 @@ public class BrickW implements Brick{
                 int x = block.getX();
                 int y = block.getY();
                 gameBoard.board[x][y] = 0;
-                colorErase(y,x);
+                //colorErase(y,x,);
             }
             a.setX(a.getX()+1);
             b.setX(b.getX()+1);
@@ -264,7 +264,7 @@ public class BrickW implements Brick{
             d.setX(d.getX()+1);
             e.setX(e.getX()+1);
             f.setX(f.getX()+1);
-            gameBoard.updateScore(GameBoardController.downScore);
+            gameBoard.updateScore(gameBoard.downScore);
         }
         //이동 후 a b c d 좌표 변경
 
@@ -291,8 +291,8 @@ public class BrickW implements Brick{
             for (Block block : temp) {
                 int x = block.getX();
                 int y = block.getY();
-                GameBoard1.board[x][y] = 0;
-                colorErase(y,x);
+                gameBoard.board[x][y] = 0;
+                //colorErase(y,x);
             }
             a.setX(a.getX()+1);
             b.setX(b.getX()+1);

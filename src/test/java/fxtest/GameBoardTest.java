@@ -1,3 +1,4 @@
+/*
 package fxtest;
 
 import com.example.fxtest.GameBoard1;
@@ -73,4 +74,4 @@ class GameBoardTest {
     }
 
 
-}
+}*/

@@ -21,21 +21,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+//Drawing에 BoardView Set 장착해서 그리는게 아니라 그때그때 파라미터로
 public class Drawing {
 
-    private static GridPane boardView;
-    private static GridPane boardView2;
-
-    //GameBoard FXML이 생성되면서 GameBoardController가 initialize 될때 자동으로 GridPane 주입
-    public static void setBoardView(GridPane boardView) {
-        Drawing.boardView = boardView;
-    }
-    public static void setBoardView2(GridPane boardView) {
-        Drawing.boardView2 = boardView;
-    }
 
     //그리드페인에 현재블록 그리기
-    public static void colorFill(Brick brick){
+    public static void colorFill(Brick brick,GridPane boardView){
 
         for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
             int x = block.getX();
@@ -54,48 +46,21 @@ public class Drawing {
         }
     }
 
-    public static void colorFill2(Brick brick){
-
-        for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
-            int x = block.getX();
-            int y = block.getY();
-
-            String string = returnItemSymbol(block);
-
-            Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
-            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
-            label.setTextFill(block.getColor()); //색깔도 바꾸고
-            GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
-
-            // GridPane에 Rectangle 추가
-            boardView2.add(label, y, x);
-        }
-    }
 
     //Brick 색 삭제
-    public static void colorErase(Brick brick) {
+    public static void colorErase(Brick brick,GridPane boardView) {
         for(Block block : brick.getBlockList()) {
             Label LabelAt = getLableAt(boardView,block.getY(),block.getX());
             boardView.getChildren().remove(LabelAt);
         }
     }
-    public static void colorErase2(Brick brick) {
-        for(Block block : brick.getBlockList()) {
-            Label LabelAt = getLableAt(boardView2,block.getY(),block.getX());
-            boardView2.getChildren().remove(LabelAt);
-        }
-    }
 
     //블록 색 삭제
-    public static void colorErase(int x,int y){
+    public static void colorErase(int x,int y,GridPane boardView){
         Label lableAt = getLableAt(boardView, x, y);
         boardView.getChildren().remove(lableAt);
     }
-    public static void colorErase2(int x,int y){
-        Label lableAt = getLableAt(boardView2, x, y);
-        boardView2.getChildren().remove(lableAt);
-    }
+
 
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
     public static Label getLableAt(GridPane gridPane, int columnIndex, int rowIndex) {
@@ -124,7 +89,7 @@ public class Drawing {
         );
     }
 
-    public static void animeRow(int fullRow) {
+    public static void animeRow(int fullRow, GridPane boardView) {
         //가득찬 줄을 가져온다
         for (int col = 0; col < GameBoard1.WIDTH; col++) {
             Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
@@ -147,30 +112,8 @@ public class Drawing {
 
         //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
-    public static void animeRow2(int fullRow) {
-        //가득찬 줄을 가져온다
-        for (int col = 0; col < GameBoard2.WIDTH; col++) {
-            Rectangle rectangle = new Rectangle(GameBoard2Controller.cellWidth,GameBoard2Controller.cellWidth,Color.BLACK);
- /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
 
-            // GridPane에 Rectangle 추가
-            boardView2.add(rectangle, col, fullRow);
-        }
-        Timeline timeline = new Timeline(
-                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
-                new KeyFrame(Duration.seconds(0.3), event -> {
-                    removeAnimeRow(boardView2,fullRow);
-                    // 아무 동작도 하지 않음
-                })
-        );
-        timeline.setCycleCount(1);
-        // 타임라인 실행
-        timeline.play();
-
-        //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
-    }
-    public static void animeCol(int col) {
+    public static void animeCol(int col,GridPane boardView) {
         //가득찬 줄을 가져온다
         for (int row = 0; row < GameBoard1.HEIGHT; row++) {
             Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
@@ -194,32 +137,8 @@ public class Drawing {
         //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
 
-    public static void animeCol2(int col) {
-        //가득찬 줄을 가져온다
-        for (int row = 0; row < GameBoard2.HEIGHT; row++) {
-            Rectangle rectangle = new Rectangle(GameBoard2Controller.cellWidth,GameBoard2Controller.cellWidth,Color.BLACK);
- /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
-
-            // GridPane에 Rectangle 추가
-            boardView2.add(rectangle, col, row);
-        }
-        Timeline timeline = new Timeline(
-                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
-                new KeyFrame(Duration.seconds(0.3), event -> {
-                    removeAnimeColumn(boardView2,col);
-                    // 아무 동작도 하지 않음
-                })
-        );
-        timeline.setCycleCount(1);
-        // 타임라인 실행
-        timeline.play();
-        //가득찬 줄의 boardview를 색칠해서 애니메이션 기능 만든다.
-        //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
-    }
-
     //줄 지웠을때 Gridpane만 냅두고 위에 객체들 새로 그리기
-    public static void updateBoardView(){
+    public static void updateBoardView(GridPane boardView, int[][] board){ //업데이트 전 GUI board를 업데이트 된 배열 board에 맞춰 새로 그리기
         // GridPane에서 제거할 Label 객체들을 담을 리스트 생성
         List<Node> labelsToRemove = new ArrayList<>();
 
@@ -234,11 +153,11 @@ public class Drawing {
         boardView.getChildren().removeAll(labelsToRemove);
 
         // board 배열을 순회
-        for (int y = 0; y < GameBoard1.HEIGHT; y++) {
-            for (int x = 0; x < GameBoard1.WIDTH; x++) {
+        for (int y = 0; y < board.length; y++) { //높이
+            for (int x = 0; x < board[0].length; x++) { //가로
                 // board에서 1이면 Label 생성 후 GridPane에 추가
-                if (GameBoard1.board[y][x] >= 1) {
-                    String string = returnItemSymbol(GameBoard1.board[y][x]);
+                if (board[y][x] >= 1) {
+                    String string = returnItemSymbol(board[y][x]);
                     Label label = new Label(string);
 
                     label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
@@ -252,7 +171,7 @@ public class Drawing {
         System.out.println("보드 업데이트 완료");
     }
 
-    public static void updateBoardView2(){
+/*    public static void updateBoardView2(){
         // GridPane에서 제거할 Label 객체들을 담을 리스트 생성
         List<Node> labelsToRemove = new ArrayList<>();
 
@@ -283,7 +202,7 @@ public class Drawing {
             }
         }
         System.out.println("보드 업데이트 완료");
-    }
+    }*/
 
 /*    public static void updateBoardView(List<Integer> removeLineList){
         for(int line : removeLineList){ //삭제해야 될 라인수만큼 반복
@@ -308,11 +227,11 @@ public class Drawing {
             }
         }
     }*/
-    public static void updateBoardView(List<Integer> removeLineList){
+    public static void updateBoardView(List<Integer> removeLineList,GridPane boardView, int[][] board){
         Collections.sort(removeLineList); // 내림차순으로 정렬
         for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
             removeRow(boardView, line);
-            for (int column = 0; column < GameBoard1.WIDTH; column++) {
+            for (int column = 0; column < board[0].length; column++) {
                 for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
                     Label labelAbove = getLableAt(boardView, column, row);
                     if (labelAbove != null) {
@@ -322,7 +241,7 @@ public class Drawing {
             }
         }
     }
-    public static void updateBoardView2(List<Integer> removeLineList){
+/*    public static void updateBoardView2(List<Integer> removeLineList){
         Collections.sort(removeLineList); // 내림차순으로 정렬
         for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
             removeRow(boardView2, line);
@@ -335,11 +254,17 @@ public class Drawing {
                 }
             }
         }
+    }*/
+    //-1 이면 한칸 위로 , +1 이면 한칸 아래로
+
+    public static void updateAttackBoardView1(List<Integer> removeLineList, Brick currentBrick, int topRowIndex){
+
     }
 
 
-    //가로줄 삭제 후 업데이트
-    public static void updateBoardView(int line){
+
+    //가로줄 삭제 후 새로 아예 쓰는게 아니라 라인 한줄씩 내리면서 업데이트
+    public static void updateBoardView(int line,GridPane boardView){
             removeRow(boardView, line);
             for (int column = 0; column < GameBoard1.WIDTH; column++) {
                 for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
@@ -353,7 +278,7 @@ public class Drawing {
 
 
     //세로줄 삭제 후 업데이트
-    public static void updateBoardColumnView(int column){
+    public static void updateBoardColumnView(int column,GridPane boardView){
         removeColumn(boardView,column);
 
     }

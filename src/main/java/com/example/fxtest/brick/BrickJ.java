@@ -1,6 +1,5 @@
 package com.example.fxtest.brick;
 
-import com.example.fxtest.GameBoard;
 import com.example.fxtest.GameBoard1;
 import com.example.fxtest.GameBoardController;
 import javafx.scene.paint.Color;
@@ -22,15 +21,15 @@ public class BrickJ implements Brick {
     Block c;
     Block d;
 
-    GameBoard gameBoard;
+    GameBoard1 gameBoard;
 
-    public void setGameBoard(GameBoard gameBoard) {
+    public void setGameBoard(GameBoard1 gameBoard) {
         this.gameBoard = gameBoard;
     }
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
     List<Block> afterList = new ArrayList<>();
 
-    public BrickJ(int center_x, int center_y, Color color, GameBoard gameBoard) {
+    public BrickJ(int center_x, int center_y, Color color, GameBoard1 gameBoard) {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅
         this.center_x = center_x;
         this.center_y = center_y;
@@ -293,7 +292,7 @@ public class BrickJ implements Brick {
         b.setX(b.getX()+1);
         c.setX(c.getX()+1);
         d.setX(d.getX()+1);
-        gameBoard.updateScore(GameBoardController.downScore);
+        gameBoard.updateScore(gameBoard.downScore);
 
         //postChange();
     }
@@ -306,7 +305,7 @@ public class BrickJ implements Brick {
             b.setX(b.getX()+1);
             c.setX(c.getX()+1);
             d.setX(d.getX()+1);
-            gameBoard.updateScore(GameBoardController.downScore);
+            gameBoard.updateScore(gameBoard.downScore);
         }
     }
 

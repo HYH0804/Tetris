@@ -61,41 +61,41 @@ public class BrickController{
     //moveR 이벤트
     public void moveR(Brick brick) {
         if(brick.canMoveRight()){
-            System.out.println("이동가능");
+            System.out.println("R 이동가능");
             brick.moveR();
             return;
         }
-        System.out.println("이동불가능");
+        System.out.println("R 이동불가능");
     }
 
     //moveL 이벤트
     public void moveL(Brick brick){
         if(brick.canMoveLeft()){
-            System.out.println("이동가능");
+            System.out.println("L 이동가능");
             brick.moveL();
             return;
         }
-        System.out.println("이동불가능");
+        System.out.println("L 이동불가능");
     }
 
     //moveD 이벤트
     public void moveD(Brick brick){
         if(brick.canMoveDown()){
-            System.out.println("이동가능");
+            System.out.println("D 이동가능");
             brick.moveD();
             return;
         }
-        System.out.println("이동불가능");
+        System.out.println("D 이동불가능");
     }
 
     //회전 이벤트
     public void rotate(Brick brick){
         if(brick.canRotate()){
-            System.out.println("이동가능");
+            System.out.println("회전 이동가능");
             brick.rotate();
             return;
         }
-        System.out.println("이동불가능");
+        System.out.println("회전 이동불가능");
     }
 
     public void straightD(Brick brick){
