@@ -81,8 +81,8 @@ public class GameBoardController implements Initializable {
         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(x), event -> {
 
-            minute10(); //x초만큼의 속도
-        }));
+                    minute10(); //x초만큼의 속도
+                }));
     }
 
 
@@ -535,6 +535,8 @@ public class GameBoardController implements Initializable {
                         timeline.stop();
                         System.out.println("---------------------------------정지");
                         gameBoard.turnEnd = true;
+                        //시작부터 바로 Space바
+                        gameBoard.whileGame=true;
                         //떨구고 바로 블록 뽑아옴
                         minute10();
                         timeline.play();
@@ -668,4 +670,3 @@ public class GameBoardController implements Initializable {
         }
     }
 }
-

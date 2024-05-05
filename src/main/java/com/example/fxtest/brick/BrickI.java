@@ -102,7 +102,7 @@ public class BrickI implements Brick{
             int x = block.getX();
             int y = block.getY();
             int[][] board= gameBoard.getBoard();
-            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && gameBoard.board[x][y] ==0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
 
             }
@@ -133,7 +133,7 @@ public class BrickI implements Brick{
             int x = block.getX();
             int y = block.getY();
             int[][] board= gameBoard.getBoard();
-            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && gameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
 
             }
@@ -164,7 +164,7 @@ public class BrickI implements Brick{
             int x = block.getX();
             int y = block.getY();
             int[][] board= gameBoard.getBoard();
-            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] == 0 )) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && gameBoard.board[x][y] == 0 )) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
 
             }
@@ -198,7 +198,7 @@ public class BrickI implements Brick{
                 return false;  //이동 불가
             }*/
             int[][] board= gameBoard.getBoard();
-            if(!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && board[x][y] == 0)){
+            if(!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && gameBoard.board[x][y] == 0)){
                 return false;
             }
         }

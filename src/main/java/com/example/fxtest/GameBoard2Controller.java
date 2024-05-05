@@ -105,7 +105,7 @@ public class GameBoard2Controller implements Initializable {
 
 
     //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
-    public void fixed(GameBoard1 gameBoard){
+    public void fixed(GameBoard1 gameBoard,Brick currentBrick){
         System.out.println(" _______________currentBrick" + currentBrick);
         if(currentBrick==null){
             return;
@@ -127,8 +127,8 @@ public class GameBoard2Controller implements Initializable {
         gameBoard=new GameBoard1();
         gameBoard2=new GameBoard1();
 
-        currentBrick=rg.genarateNormal(0,colorBlindness,gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
-        currentBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
+        //currentBrick=rg.genarateNormal(0,colorBlindness,gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
+        //currentBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
         nextBrick=rg.genarateNormal(0,colorBlindness, gameBoard);
         nextBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
 
@@ -170,7 +170,7 @@ public class GameBoard2Controller implements Initializable {
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
         //brickController2 = BrickController.getBrickController();
         // GridPane에 키 이벤트 핸들러 등록
-        regiBrickEvent(currentBrick,boardView,gameBoard);
+        regiBrickEvent(currentBrick2,boardView2,gameBoard2);
         //보드2도 등록해야됨
 
 
@@ -223,8 +223,8 @@ public class GameBoard2Controller implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
-        //Drawing.colorErase(currentBrick,boardView);
-/*        System.out.println(difficulty+">> diff");
+        Drawing.colorErase(currentBrick,boardView);
+/*      System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");*/
         //printBlock();
         if(!gameBoard.whileGame){
@@ -256,7 +256,7 @@ public class GameBoard2Controller implements Initializable {
                 nextBrickView.setVisible(true);
 
                 Drawing.colorFill(currentBrick,boardView);
-                fixed(gameBoard);
+                fixed(gameBoard,currentBrick);
                 //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
                 //Block Item
                 System.out.println("!currentBrick.canMoveDown()");
@@ -323,9 +323,9 @@ public class GameBoard2Controller implements Initializable {
             else {
                 //지우고 moveD() 호출하고 색칠하기
                 Drawing.colorErase(currentBrick,boardView);
-                System.out.println("---------------");
+                //System.out.println("---------------");
                 currentBrick.moveD();
-                printBlock(currentBrick);
+                //printBlock(currentBrick);
                 Drawing.colorFill(currentBrick,boardView);
 
                 //테스트
@@ -374,7 +374,7 @@ public class GameBoard2Controller implements Initializable {
 
 
                 Drawing.colorFill(currentBrick2,boardView2);
-                fixed(gameBoard2);
+                fixed(gameBoard2,currentBrick2);
                 //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
                 //Block Item
                 System.out.println("!currentBrick.canMoveDown()");
@@ -505,34 +505,37 @@ public class GameBoard2Controller implements Initializable {
         //nextBrick을 currentBrick으로 옮김.
         if(n==1) {
             currentBrick = nextBrick;
-            regiBrickEvent(currentBrick,boardView,gameBoard);
+            //regiBrickEvent(currentBrick,boardView,gameBoard);
         }
         else {
             currentBrick2 = nextBrick2;
-            //regiBrickEvent(currentBrick2,boardView2,gameBoard2);
+            regiBrickEvent(currentBrick2,boardView2,gameBoard2);
         }
         //nextBrick 랜덤 뽑아와서 세팅
-        if(gameBoard.deleteLine%10==0 && gameBoard.deleteLine!=0 && itemMode==true ) {
-            nextBrick = rg.generateItem(0, colorBlindness, gameBoard);
-            gameBoard.deleteLine=0;
-            gameBoard.blockSpon++;
-        }
-        else{
-            nextBrick=rg.genarateNormal(0, colorBlindness, gameBoard);
-            //nextBrick=rg.generateItem(difficulty,colorBlindness);
-            gameBoard.blockSpon++;
+        if(n==1) {
+            if (gameBoard.deleteLine % 10 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+                nextBrick = rg.generateItem(0, colorBlindness, gameBoard);
+                gameBoard.deleteLine = 0;
+                gameBoard.blockSpon++;
+            } else {
+                nextBrick = rg.genarateNormal(0, colorBlindness, gameBoard);
+                //nextBrick=rg.generateItem(difficulty,colorBlindness);
+                gameBoard.blockSpon++;
+            }
         }
 
-        if(gameBoard2.deleteLine%10==0 && gameBoard2.deleteLine!=0 && itemMode==true ) {
-            nextBrick2 = rg.generateItem(0, colorBlindness, gameBoard);
-            gameBoard2.deleteLine=0;
-            gameBoard2.blockSpon++;
+        if(n==2) {
+            if (gameBoard.deleteLine % 10 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+                nextBrick2 = rg.generateItem(0, colorBlindness, gameBoard);
+                gameBoard.deleteLine = 0;
+                gameBoard.blockSpon++;
+            } else {
+                nextBrick2 = rg.genarateNormal(0, colorBlindness, gameBoard);
+                //nextBrick=rg.generateItem(difficulty,colorBlindness);
+                gameBoard.blockSpon++;
+            }
         }
-        else{
-            nextBrick2=rg.genarateNormal(0, colorBlindness, gameBoard);
-            //nextBrick=rg.generateItem(difficulty,colorBlindness);
-            gameBoard2.blockSpon++;
-        }
+
         //nextBrick=new BrickZ(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
@@ -668,7 +671,7 @@ public class GameBoard2Controller implements Initializable {
                     //
                     if (isHardDropGameOver()) {
                         Drawing.colorFill(currentBrick,boardView);
-                        fixed(gameBoard);
+                        fixed(gameBoard,currentBrick);
                         System.out.println("수직떨구기");
                         destroy();
                     } else {
@@ -677,6 +680,7 @@ public class GameBoard2Controller implements Initializable {
                         System.out.println("---------------------------------정지");
                         gameBoard.turnEnd = true;
                         //떨구고 바로 블록 뽑아옴
+                        gameBoard.whileGame=true;
                         minute10();
                         timeline.play();
                         Drawing.colorErase(currentBrick,boardView);
