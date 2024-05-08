@@ -22,6 +22,8 @@ public class GameBoard1 {
 
     public double speed=1;
 
+    boolean gameOver=false;
+
     public int deleteLine=0; //없앤 줄 >> 나중 속도 조절할때
     boolean whileGame =false; //Flag가 True로 되면 게임 끝나는 속성 이벤트 리스너
 

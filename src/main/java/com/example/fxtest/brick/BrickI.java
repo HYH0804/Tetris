@@ -297,6 +297,7 @@ public class BrickI implements Brick{
 
         gameBoard.updateScore(gameBoard.downScore);
 
+
         //postChange();
     }
 

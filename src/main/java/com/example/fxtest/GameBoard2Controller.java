@@ -70,6 +70,7 @@ public class GameBoard2Controller implements Initializable {
 
     //난이도, 아이템 모드 확인
     public static int difficulty; //난이도
+
     public static boolean itemMode; //이거 setter로 받아야됨
 
     //타임라인 그 시간으로 시작
@@ -151,6 +152,7 @@ public class GameBoard2Controller implements Initializable {
         boardView.setFocusTraversable(true);
         boardView2.setFocusTraversable(true);
         //difficulty, 색맹여부 받아오는 ,
+        colorBlindness=getColorBliness();
 
 
 
@@ -170,8 +172,9 @@ public class GameBoard2Controller implements Initializable {
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
         //brickController2 = BrickController.getBrickController();
         // GridPane에 키 이벤트 핸들러 등록
-        regiBrickEvent(currentBrick2,boardView2,gameBoard2);
+        regiBrickEvent(currentBrick,boardView,gameBoard);
         //보드2도 등록해야됨
+        regi2();
 
 
         gameBoard.scoreProperty().addListener((obs, oldScore, newScore) -> {
@@ -505,11 +508,11 @@ public class GameBoard2Controller implements Initializable {
         //nextBrick을 currentBrick으로 옮김.
         if(n==1) {
             currentBrick = nextBrick;
-            //regiBrickEvent(currentBrick,boardView,gameBoard);
+            regiBrickEvent(currentBrick,boardView,gameBoard);
         }
         else {
             currentBrick2 = nextBrick2;
-            regiBrickEvent(currentBrick2,boardView2,gameBoard2);
+            regi2();
         }
         //nextBrick 랜덤 뽑아와서 세팅
         if(n==1) {
@@ -669,7 +672,7 @@ public class GameBoard2Controller implements Initializable {
                     System.out.println("---------------------------------수직 떨구기 누름");
                     brickController.straightD(currentBrick);
                     //
-                    if (isHardDropGameOver()) {
+                    if (isHardDropGameOver(currentBrick)) {
                         Drawing.colorFill(currentBrick,boardView);
                         fixed(gameBoard,currentBrick);
                         System.out.println("수직떨구기");
@@ -691,6 +694,62 @@ public class GameBoard2Controller implements Initializable {
                 event.consume();
                 if (gameBoard.whileGame == true) {
                     Drawing.colorFill(currentBrick,boardView);
+                }//색칠하고
+            }
+        });
+    }
+
+    private void regi2(){
+        boardView2.setOnKeyPressed(event -> {
+            Drawing.colorErase(currentBrick2, boardView2);
+            String keyValue = event.getCode().toString();
+            if (!gameBoard2.pause) {
+                if (keyValue.equals(KeyCode.D) || keyValue.toLowerCase().equals(KeyCode.D)) {
+                    // 오른쪽 이동 키가 눌렸을 때의 동작
+                    System.out.println("Right key pressed");
+                    brickController.moveR(currentBrick2);
+                    printBlock(currentBrick2);
+                } else if (keyValue.equals(KeyCode.A) || keyValue.toLowerCase().equals(KeyCode.A)) {
+                    // 왼쪽 이동 키가 눌렸을 때의 동작
+                    System.out.println("Left key pressed");
+                    brickController.moveL(currentBrick2);
+                    printBlock(currentBrick2);
+                } else if (keyValue.equals(KeyCode.S) || keyValue.toLowerCase().equals(KeyCode.S)) {
+                    // 아래 이동 키가 눌렸을 때의 동작
+                    brickController.moveD(currentBrick2);
+                    printBlock(currentBrick2);
+                } else if (keyValue.equals(KeyCode.W) || keyValue.toLowerCase().equals(KeyCode.W)) {
+                    // 회전 키가 눌렸을 때의 동작
+                    System.out.println("Rotate key pressed");
+                    brickController.rotate(currentBrick2);
+                    printBlock(currentBrick2);
+                } else if(keyValue.equals(KeyCode.X) || keyValue.toLowerCase().equals(KeyCode.X)) {
+                    //여기는 수직떨구기
+                    System.out.println("---------------------------------수직 떨구기 누름");
+                    brickController.straightD(currentBrick2);
+                    //
+                    if (isHardDropGameOver(currentBrick2)) {
+                        Drawing.colorFill(currentBrick2,boardView);
+                        fixed(gameBoard2,currentBrick2);
+                        System.out.println("수직떨구기");
+                        destroy();
+                    } else {
+                        //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
+                        timeline2.stop();
+                        System.out.println("---------------------------------정지");
+                        gameBoard2.turnEnd = true;
+                        //떨구고 바로 블록 뽑아옴
+                        gameBoard2.whileGame=true;
+                        minute10();
+                        timeline2.play();
+                        Drawing.colorErase(currentBrick2,boardView2);
+                        System.out.println("---------------------------------재게");
+                        System.out.println("수직떨구기");
+                    }
+                }
+                event.consume();
+                if (gameBoard2.whileGame == true) {
+                    Drawing.colorFill(currentBrick2,boardView2);
                 }//색칠하고
             }
         });
@@ -737,7 +796,7 @@ public class GameBoard2Controller implements Initializable {
     }
 
     //hardDrop 시에 게임오버 판단
-    public boolean isHardDropGameOver() {
+    public boolean isHardDropGameOver(Brick currentBrick) {
         boolean flag = false;
         List<Block> blockList = currentBrick.getBlockList();
         for (Block block : blockList) {
@@ -760,9 +819,10 @@ public class GameBoard2Controller implements Initializable {
     }
 
 
+    //Difficulty2Controller에서 setOption으로 호출해서 ItemMode , difficulty 넘겨줘야함.
     public static void setOptions(int difficulty, boolean itemMode) {
-        GameBoardController.difficulty = difficulty;
-        GameBoardController.itemMode = itemMode;
+        GameBoard2Controller.difficulty = difficulty;
+        GameBoard2Controller.itemMode = itemMode;
         // 여기서부터 게임을 시작할 수 있음
         System.out.println("난이도" + difficulty);
         System.out.println("아이템모드" + itemMode);
