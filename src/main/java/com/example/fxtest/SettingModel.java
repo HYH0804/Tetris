@@ -3,15 +3,22 @@ package com.example.fxtest;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class SettingModel {
     // you should change public statics
-    public static String[] keyVal; // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
+    public static List<String> startKey = new ArrayList<>(); // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
     public static int[] resolutionVal;  // index: "width", "height"
     public static int colorBlindnessVal = -1;
 
     private static final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop"};
+
+
+
+
+    //public static Boolean colorBlindnessVal;
     private static Properties properties;
 
     public static void init() {
@@ -28,9 +35,8 @@ public class SettingModel {
             }
 
             // keyVal
-            keyVal = new String[5];
             for(int i = 0; i < buttonName.length; i++){
-                keyVal[i] = properties.getProperty(buttonName[i]);
+                startKey.add(properties.getProperty(buttonName[i]));
             }
 
             // resolutionVal
@@ -52,7 +58,7 @@ public class SettingModel {
 
         // move Val to properties
         for (int i = 0; i < 5; i++) { // keyVal
-            properties.setProperty(buttonName[i], keyVal[i]);
+            properties.setProperty(buttonName[i], startKey.get(i));
         }
         properties.setProperty("resolution", resolutionVal[0] + "x" + resolutionVal[1]); // resolutionVal
         properties.setProperty("colorBlindness", Integer.toString(colorBlindnessVal));
@@ -79,7 +85,7 @@ public class SettingModel {
 
         String[] keyReset = {"UP","LEFT","RIGHT","DOWN","SPACE"};
         for(int i = 0; i < 5; i++) {
-            keyVal[i] = keyReset[i];
+            startKey.set(i, keyReset[i]);
         }
         resolutionVal[0] = 800;
         resolutionVal[1] = 600;
@@ -89,4 +95,7 @@ public class SettingModel {
         saveProp();
     }
 
+    public static List<String> getStartKey() {
+        return startKey;
+    }
 }

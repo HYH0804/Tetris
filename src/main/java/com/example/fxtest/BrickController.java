@@ -1,7 +1,6 @@
 package com.example.fxtest;
 
 import com.example.fxtest.brick.Brick;
-import com.example.fxtest.brick.BrickW;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,12 +27,12 @@ public class BrickController{
     }
 
     private BrickController(){
-        SettingController.getKey(); //키 값들 StartKey 리스트로 가져오기
-        MOVED=SettingController.startKey.get(0);
-        MOVEL=SettingController.startKey.get(1);
-        MOVER=SettingController.startKey.get(2);
-        ROTATE=SettingController.startKey.get(3);
-        HARDDROP=SettingController.startKey.get(4);
+        // SettingController.getKey(); //키 값들 StartKey 리스트로 가져오기
+        MOVED= SettingModel.startKey.get(0);
+        MOVEL= SettingModel.startKey.get(1);
+        MOVER= SettingModel.startKey.get(2);
+        ROTATE= SettingModel.startKey.get(3);
+        HARDDROP= SettingModel.startKey.get(4);
     }
     //싱글톤
 

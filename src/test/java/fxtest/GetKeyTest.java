@@ -1,15 +1,13 @@
 package fxtest;
 
 import com.example.fxtest.SettingController;
-import org.junit.jupiter.api.BeforeEach;
+import com.example.fxtest.SettingModel;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,10 +31,10 @@ class GetKeyTest {
         System.setIn(inputStream);
 
         // getKey() 메서드를 호출하여 키 값을 가져옵니다.
-        SettingController.getKey();
+        //SettingController.getKey();
 
         // 가져온 키 값을 확인합니다.
-        List<String> startKey = SettingController.startKey;
+        List<String> startKey = SettingModel.startKey;
         assertEquals(startKey.get(0), startKey.get(0)); // moveDown 키 확인
         assertEquals(startKey.get(1), startKey.get(1)); // moveLeft 키 확인
         assertEquals(startKey.get(2), startKey.get(2)); // moveRight 키 확인
