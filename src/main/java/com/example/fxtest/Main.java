@@ -16,6 +16,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        // init for SettingModel
+        SettingModel.init();
+
         // 프로퍼티 파일에서 해상도 값을 가져옴
         Properties properties = loadProperties();
         StageSaver.setStage(primaryStage);
