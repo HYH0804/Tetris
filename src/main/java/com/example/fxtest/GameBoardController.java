@@ -105,8 +105,9 @@ public class GameBoardController implements Initializable {
     //뷰 바꿔서 겜 시작이 아닌 그 뷰에서 그대로 게임 (재)시작때 초기화
     void init(){
         gameBoard=new GameBoard1();
-
+        gameBoard.gameOver=false;
         nextBrick=rg.genarateNormal(0,colorBlindness, gameBoard);
+        gameBoard.downScore=1;
 
         colorBlindness=getColorBliness();
         System.out.println("초기화완료");
@@ -144,7 +145,7 @@ public class GameBoardController implements Initializable {
 
         gameBoard.scoreProperty().addListener((obs, oldScore, newScore) -> {
             if (newScore.intValue() > oldScore.intValue()) {
-                updateScoreLabel(scoreLabel);
+                updateScoreLabel(scoreLabel, gameBoard);
             }
         });
 
@@ -181,115 +182,114 @@ public class GameBoardController implements Initializable {
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
-        Drawing.colorErase(currentBrick,boardView);
-        System.out.println(difficulty+">> diff");
-        System.out.println(itemMode +">> itemMode");
-        //printBlock();
-        if(!gameBoard.whileGame){
-            gameBoard.downScore=1;
-            System.out.println("겜 자체 시작");
-            //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
-            sponBrick();
+        if(!gameBoard.gameOver) {
+            Drawing.colorErase(currentBrick, boardView);
+            System.out.println(difficulty + ">> diff");
+            System.out.println(itemMode + ">> itemMode");
+            //printBlock();
+            if (!gameBoard.whileGame) {
+                gameBoard.downScore = 1;
+                System.out.println("겜 자체 시작");
+                //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                sponBrick();
 
-            //게임 중으로 바꿈
-            gameBoard.whileGame =true;
+                //게임 중으로 바꿈
+                gameBoard.whileGame = true;
 
 
-            //테스트
-            //printMatrix();
+                //테스트
+                //printMatrix();
 
-        }
-        else{
-            //착지시(아이템)
+            } else {
+                //착지시(아이템)
  /*           if(turnEnd==true){
 
                 Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
                 turnEnd=false;
             }*/
-            if(!currentBrick.canMoveDown()/*!canMoveDown()*/){ //더 못내려가면
-                //그 위치에 색칠
-                //colorFill();
+                if (!currentBrick.canMoveDown()/*!canMoveDown()*/) { //더 못내려가면
+                    //그 위치에 색칠
+                    //colorFill();
 
-                gameBoard.turnEnd=true;
-                nextBrickView.setVisible(true);
+                    gameBoard.turnEnd = true;
+                    nextBrickView.setVisible(true);
 
-                Drawing.colorFill(currentBrick,boardView);
-                fixed(gameBoard);
-                //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
-                //Block Item
-                System.out.println("!currentBrick.canMoveDown()");
+                    Drawing.colorFill(currentBrick, boardView);
+                    fixed(gameBoard);
+                    //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
+                    //Block Item
+                    System.out.println("!currentBrick.canMoveDown()");
 
-                //착지시(아이템) , 살포시 안착했을때
-                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템
+                    //착지시(아이템) , 살포시 안착했을때
+                    Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템
 
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
-                //System.out.println("완성 줄 삭제 전---------------");
-                printMatrix();
+                    //System.out.println("완성 줄 삭제 전---------------");
+                    printMatrix();
 
 
-                //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
-                List<Integer> removedRows = gameBoard.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
+                    //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
+                    List<Integer> removedRows = gameBoard.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
 
-                //보드 전부 0
-                checkAndDoItem6(removedRows,gameBoard,boardView);
+                    //보드 전부 0
+                    checkAndDoItem6(removedRows, gameBoard, boardView);
 
-                //NPE조심
-                Drawing.updateBoardView(removedRows,boardView, gameBoard.board); //gui 여기서 삭제
-                gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
+                    //NPE조심
+                    Drawing.updateBoardView(removedRows, boardView, gameBoard.board); //gui 여기서 삭제
+                    gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
 
-                //System.out.println("완성 줄 삭제 후---------------");
-                //printMatrix();
-                //gravity로 1인지 확인해서 board 업데이트하고
+                    //System.out.println("완성 줄 삭제 후---------------");
+                    //printMatrix();
+                    //gravity로 1인지 확인해서 board 업데이트하고
 
-                //Drawing.updateBoardView(removeLineList);
-                printMatrix();
-                //줄 지우기
+                    //Drawing.updateBoardView(removeLineList);
+                    printMatrix();
+                    //줄 지우기
 
 
-                //겜 끝났는지 확인
-                if(isGameOver()){
-                    //스코어보드 처리
+                    //겜 끝났는지 확인
+//                    if (isGameOver()) {
+//                        //스코어보드 처리
+//
+//                        System.out.println("GameOver");
+//                        //전부 초기화
+//                        destroy();
+//
+//                        //테스트
+//                        //printMatrix();
+//                    } else {
+                        Item.sponDoItem(currentBrick, gameBoard, nextBrickView);
 
-                    System.out.println("GameOver");
-                    //전부 초기화
-                    destroy();
+                        gameBoard.turnEnd = false;
+                        //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                        sponBrick();
+                        chageTime(gameBoard);
+
+                        //스폰되자마자 블록 아이템 수행
+                        //Item.sponDoItem(currentBrick, gameBoard, boardView);
+
+                        System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰" + gameBoard.blockSpon);
+                        //테스트
+                        //printMatrix();
+                    //}
+
+                } else {
+                    //지우고 moveD() 호출하고 색칠하기
+                    Drawing.colorErase(currentBrick, boardView);
+                    System.out.println("겜은 안끝났고 내려갈 곳도 있고");
+                    currentBrick.moveD();
+                    Drawing.colorFill(currentBrick, boardView);
 
                     //테스트
                     //printMatrix();
                 }
-                else{
-                    Item.sponDoItem(currentBrick, gameBoard, nextBrickView);
+                if (gameBoard.turnEnd == true) {
 
-                    gameBoard.turnEnd=false;
-                    //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
-                    sponBrick();
-                    chageTime(gameBoard);
-
-                    //스폰되자마자 블록 아이템 수행
-                    //Item.sponDoItem(currentBrick, gameBoard, boardView);
-
-                    System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰"+ gameBoard.blockSpon);
-                    //테스트
-                    //printMatrix();
+                    Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
+                    gameBoard.turnEnd = false;
                 }
-
-            }
-            else {
-                //지우고 moveD() 호출하고 색칠하기
-                Drawing.colorErase(currentBrick,boardView);
-                System.out.println("겜은 안끝났고 내려갈 곳도 있고");
-                currentBrick.moveD();
-                Drawing.colorFill(currentBrick,boardView);
-
-                //테스트
-                //printMatrix();
-            }
-            if(gameBoard.turnEnd==true){
-
-                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
-                gameBoard.turnEnd=false;
             }
         }
     }
@@ -357,6 +357,13 @@ public class GameBoardController implements Initializable {
         Drawing.colorFill(currentBrick,boardView);
         displayNextBrick(nextBrick,nextBrickView);
         //이벤트 장착
+        if (isBrickColliding(currentBrick)) {
+            // If there's a collision, handle game over logic here.
+            fixed(gameBoard);
+            System.out.println("Game over due to overlapping spawn.");
+            destroy(); // This method should effectively end the game and clean up.
+            return; // Return early to avoid further processing.
+        }
     }
 
     public boolean isGameOver() {
@@ -383,6 +390,20 @@ public class GameBoardController implements Initializable {
         return true;  // 모든 행에 0보다 큰 값이 하나 이상 있다면 true 반환
         */
 
+    }
+
+    private boolean isBrickColliding(Brick brick) {
+        for (Block block : brick.getBlockList()) {
+            int x = block.getX();
+            int y = block.getY();
+            if (gameBoard.board[x][y] != 0) {
+                gameBoard.gameOver=true;
+                gameBoard.whileGame=true;
+                // 블록이 보드의 셀과 겹칠 경우 충돌로 판단
+                return true;
+            }
+        }
+        return false; // 충돌하지 않음
     }
 
     //2차원배열 출력 테스트함수
@@ -541,6 +562,9 @@ public class GameBoardController implements Initializable {
                         minute10();
                         timeline.play();
                         Drawing.colorErase(currentBrick,boardView);
+                        if(gameBoard.gameOver){
+                            Drawing.colorFill(currentBrick, boardView);
+                        }
                         System.out.println("---------------------------------재게");
                         System.out.println("수직떨구기");
                     }
@@ -567,7 +591,7 @@ public class GameBoardController implements Initializable {
         double width = Double.parseDouble(dimensions[0]);
         double height = Double.parseDouble(dimensions[1]);
 
-        int numRows = 22; // 행의 수
+        int numRows = 20; // 행의 수
         int numCols = 10; // 열의 수
 
         //해상도 바꾸고 싶으면 여기를 바꾼다.
@@ -595,8 +619,8 @@ public class GameBoardController implements Initializable {
     }
 
 
-    public void updateScoreLabel(Label scoreLabel) {
-        this.scoreLabel.setText("Score: " +gameBoard.getScore());
+    public void updateScoreLabel(Label scoreLabel, GameBoard1 gameBoard) {
+        scoreLabel.setText("Score: " +Integer.toString(gameBoard.getScore()));
     }
 
 
@@ -621,7 +645,7 @@ public class GameBoardController implements Initializable {
         boolean flag = false;
         List<Block> blockList = currentBrick.getBlockList();
         for (Block block : blockList) {
-            if (block.getX() < 2) {
+            if (block.getX() < 1) {
                 flag = true;
             }
         }

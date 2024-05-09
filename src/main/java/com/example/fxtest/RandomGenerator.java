@@ -138,9 +138,9 @@ public class RandomGenerator {
         }
         else { //I블록
             if (colorBlindness==true)
-                return new BrickI(1,4, Color.color(86/255.0, 180/255.0, 232/255.0), gameBoard);
+                return new BrickI(0,4, Color.color(86/255.0, 180/255.0, 232/255.0), gameBoard);
             else
-                return new BrickI(1,4, Color.SKYBLUE, gameBoard);
+                return new BrickI(0,4, Color.SKYBLUE, gameBoard);
         }
     }
 }

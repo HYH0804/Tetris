@@ -20,8 +20,6 @@
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
-                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
                 <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
                 <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
                 <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
@@ -44,8 +42,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
                 <RowConstraints />
             </rowConstraints>
-            <HBox GridPane.columnSpan="10" GridPane.rowIndex="1" prefHeight="1" style="-fx-background-color: red;" />
-            <HBox GridPane.columnSpan="10" GridPane.rowIndex="0" prefHeight="1" style="-fx-background-color: red;" />
         </GridPane>
         <Label text="Next Block" layoutY="20.0" AnchorPane.rightAnchor="20.0"/>
         <GridPane fx:id="nextBrickView" gridLinesVisible="false" layoutY="50.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="20.0">

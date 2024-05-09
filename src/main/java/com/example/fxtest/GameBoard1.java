@@ -10,7 +10,7 @@ import java.util.List;
 public class GameBoard1 {
     //이거 조심
     public final static int WIDTH =10; //일단 크기로... Index는 9까지
-    public final static int HEIGHT=22; //일단 크기로... 0~1 행은 블록 스폰, 2~21 행은 보드
+    public final static int HEIGHT=20; //일단 크기로... 0~1 행은 블록 스폰, 2~21 행은 보드
 
     //Board 2차원 배열 , 있으면 1 없으면 0
     public int[][] board = new int[HEIGHT][WIDTH]; //0으로 초기화 해야됨
