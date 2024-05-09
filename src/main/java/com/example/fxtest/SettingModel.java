@@ -11,7 +11,7 @@ public class SettingModel {
     // you should change public statics
     public static List<String> startKey = new ArrayList<>(); // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
     public static int[] resolutionVal;  // index: "width", "height"
-    public static int colorBlindnessVal = -1;
+    public static int colorBlindnessVal = -1; // -1: not init, 0: X. 1: O
 
     private static final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop"};
 

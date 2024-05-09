@@ -49,6 +49,8 @@ public class SettingController implements Initializable {
         mediumSize.setToggleGroup(sizeToggleGroup);
         largeSize.setToggleGroup(sizeToggleGroup);
         changeColorBlindnessText();
+
+        SettingModel.init();
     }
 
     @FXML
@@ -103,6 +105,7 @@ public class SettingController implements Initializable {
         SettingModel.resetSetting(); // reset properties
 
         changeResolution("800x600");
+        changeColorBlindnessText();
     }
 
     @FXML
@@ -208,14 +211,14 @@ public class SettingController implements Initializable {
         Stage stage = (Stage)smallSize.getScene().getWindow();
 
         String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.resolutionVal[0] = Integer.parseInt(dimensions[0]);
+        SettingModel.resolutionVal[1] = Integer.parseInt(dimensions[1]);
 
-        stage.setWidth(width);
-        stage.setHeight(height);
+        stage.setWidth(SettingModel.resolutionVal[0]);
+        stage.setHeight(SettingModel.resolutionVal[1]);
     }
 
-
+    // change ColorBlindness text
     private void changeColorBlindnessText() {
         if(SettingModel.colorBlindnessVal == 1){
             toggleColorBlindModeButton.setText("색맹모드: ON");
