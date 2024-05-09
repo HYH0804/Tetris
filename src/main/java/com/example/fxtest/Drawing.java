@@ -161,7 +161,7 @@ public class Drawing {
                     Label label = new Label(string);
 
                     label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
-                    label.setTextFill(Color.BLUE);
+                    label.setTextFill(Color.BLACK);
                     boardView.setHalignment(label, javafx.geometry.HPos.CENTER);
                     boardView.setValignment(label, javafx.geometry.VPos.CENTER);
                     boardView.add(label, x, y);

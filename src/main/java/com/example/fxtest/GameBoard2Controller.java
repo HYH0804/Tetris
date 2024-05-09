@@ -59,6 +59,10 @@ public class GameBoard2Controller implements Initializable {
     private GridPane nextBrickView;
     @FXML
     private GridPane nextBrickView2;
+    @FXML
+    private GridPane attackBoardView;
+    @FXML
+    private GridPane attackBoardView2;
 
 
     public static double cellWidth = 20;
@@ -172,7 +176,7 @@ public class GameBoard2Controller implements Initializable {
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
         //brickController2 = BrickController.getBrickController();
         // GridPane에 키 이벤트 핸들러 등록
-        regiBrickEvent(currentBrick,boardView,gameBoard);
+
         //보드2도 등록해야됨
         regi2();
 
@@ -227,11 +231,13 @@ public class GameBoard2Controller implements Initializable {
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
     private void minute10(){
         Drawing.colorErase(currentBrick,boardView);
+        Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard);
 /*      System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");*/
         //printBlock();
         if(!gameBoard.whileGame){
             gameBoard.downScore=1;
+            regiBrickEvent(currentBrick,boardView,gameBoard);
             System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
             sponBrick(gameBoard,boardView, nextBrickView,1);
@@ -285,11 +291,13 @@ public class GameBoard2Controller implements Initializable {
 
                 gameBoard.attackLine(removedRows, currentBrick, gameBoard2);
 
+
                 //보드 전부 0
                 checkAndDoItem6(removedRows,gameBoard,boardView);
 
 
                 Drawing.updateBoardView(removedRows,boardView, gameBoard.board); //gui 여기서 삭제
+                Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard);
                 System.out.println("*************GUI 업뎃************");
 
                 gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
@@ -328,8 +336,9 @@ public class GameBoard2Controller implements Initializable {
                     gameBoard.attackStart();
                     Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView);
                     gameBoard.attackBoardClean();
+
                     sponBrick(gameBoard,boardView,nextBrickView,1);
-                    System.out.println("*************Block 새로 스폰************");
+                    System.out.println("*************Block 새로 스폰************" + currentBrick+ "== 스폰 후 CurrentBrick");
                     chageTime(gameBoard);
                     //스폰되자마자 블록 아이템 수행
                     //Item.sponDoItem(currentBrick, gameBoard, boardView);
@@ -340,7 +349,7 @@ public class GameBoard2Controller implements Initializable {
                 }
 
             }
-            else { //더 못내려가면
+            else { //내려갈수 있으면
                 //지우고 moveD() 호출하고 색칠하기
                 Drawing.colorErase(currentBrick,boardView);
                 //System.out.println("---------------");
@@ -361,6 +370,7 @@ public class GameBoard2Controller implements Initializable {
 
         private void minute10_2(){
         Drawing.colorErase(currentBrick2,boardView2);
+        Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard);
 /*        System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");*/
         //printBlock();
@@ -413,11 +423,14 @@ public class GameBoard2Controller implements Initializable {
                 //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
                 List<Integer> removedRows = gameBoard2.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
                 gameBoard2.attackLine(removedRows, currentBrick2, gameBoard);
+
+
                 //보드 전부 0
                 checkAndDoItem6(removedRows,gameBoard2,boardView2);
 
                 //NPE조심
                 Drawing.updateBoardView(removedRows,boardView2, gameBoard2.board); //gui 여기서 삭제
+                Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard);
                 gameBoard2.removeFullRows(); //배열에서 삭제 후 점수 업뎃
 
                 //System.out.println("완성 줄 삭제 후---------------");
@@ -675,25 +688,28 @@ public class GameBoard2Controller implements Initializable {
                     System.out.println("Right key pressed");
                     brickController.moveR(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
                     // 왼쪽 이동 키가 눌렸을 때의 동작
                     System.out.println("Left key pressed");
                     brickController.moveL(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
                     // 아래 이동 키가 눌렸을 때의 동작
                     brickController.moveD(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                     // 회전 키가 눌렸을 때의 동작
                     System.out.println("Rotate key pressed");
                     brickController.rotate(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
                     //여기는 수직떨구기
                     System.out.println("---------------------------------수직 떨구기 누름");
                     brickController.straightD(currentBrick);
-                    //
                     if (isHardDropGameOver(currentBrick)) {
                         Drawing.colorFill(currentBrick,boardView);
                         fixed(gameBoard,currentBrick);
@@ -707,17 +723,18 @@ public class GameBoard2Controller implements Initializable {
                         //떨구고 바로 블록 뽑아옴
                         gameBoard.whileGame=true;
                         System.out.println("**************HardDrop************");
+                        Drawing.colorFill(currentBrick,boardView);
                         minute10();
                         timeline.play();
-                        Drawing.colorErase(currentBrick,boardView);
+                        //Drawing.colorErase(currentBrick,boardView);
                         System.out.println("---------------------------------재게");
                         System.out.println("수직떨구기");
                     }
                 }
                 event.consume();
                 if (gameBoard.whileGame == true) {
-                    System.out.println("**********Regi쪽에서 색칠********");
-                    Drawing.colorFill(currentBrick,boardView);
+                    System.out.println("**********Regi쪽에서 색칠********"+currentBrick+"== regi쪽에서 spawn 이후");
+                    //Drawing.colorFill(currentBrick,boardView);
                 }//색칠하고
             }
         });
@@ -816,7 +833,7 @@ public class GameBoard2Controller implements Initializable {
     }
 
     public void updateScoreLabel(Label scoreLabel,GameBoard1 gameBoard) {
-        this.scoreLabel.setText("Score: " +Integer.toString(gameBoard.getScore()));
+        scoreLabel.setText("Score: " +Integer.toString(gameBoard.getScore()));
     }
 
     //hardDrop 시에 게임오버 판단

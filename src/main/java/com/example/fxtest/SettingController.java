@@ -269,7 +269,7 @@ public class SettingController implements Initializable {
     }
 
     private final Properties properties = new Properties();
-    private final String propertiesFileName = "src/main/resources/resolution.properties";
+    private final String propertiesFileName = "src/main/resources/setting.properties";
 
     //해상도 판단 후 적용하는 함수
     @FXML
