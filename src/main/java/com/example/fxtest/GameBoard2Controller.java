@@ -252,17 +252,18 @@ public class GameBoard2Controller implements Initializable {
                 turnEnd=false;
             }*/
             if(!currentBrick.canMoveDown()/*!canMoveDown()*/){ //더 못내려가면
+                System.out.println("!currentBrick.canMoveDown()");
                 //그 위치에 색칠
                 //colorFill();
 
                 gameBoard.turnEnd=true;
                 nextBrickView.setVisible(true);
 
+
                 Drawing.colorFill(currentBrick,boardView);
+                System.out.println("*************Current 색칠 colorFill************");
                 fixed(gameBoard,currentBrick);
-                //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
-                //Block Item
-                System.out.println("!currentBrick.canMoveDown()");
+                System.out.println("*************Current 보드 fixed************");
 
                 //착지시(아이템) , 살포시 안착했을때
                 Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템
@@ -286,6 +287,7 @@ public class GameBoard2Controller implements Initializable {
 
 
                 Drawing.updateBoardView(removedRows,boardView, gameBoard.board); //gui 여기서 삭제
+                System.out.println("*************GUI 업뎃************");
 
                 gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
                 //NPE조심
@@ -320,6 +322,7 @@ public class GameBoard2Controller implements Initializable {
                     gameBoard.turnEnd=false;
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                     sponBrick(gameBoard,boardView,nextBrickView,1);
+                    System.out.println("*************Block 새로 스폰************");
                     chageTime(gameBoard);
                     //스폰되자마자 블록 아이템 수행
                     //Item.sponDoItem(currentBrick, gameBoard, boardView);
@@ -330,7 +333,7 @@ public class GameBoard2Controller implements Initializable {
                 }
 
             }
-            else {
+            else { //더 못내려가면
                 //지우고 moveD() 호출하고 색칠하기
                 Drawing.colorErase(currentBrick,boardView);
                 //System.out.println("---------------");
@@ -691,6 +694,7 @@ public class GameBoard2Controller implements Initializable {
                         gameBoard.turnEnd = true;
                         //떨구고 바로 블록 뽑아옴
                         gameBoard.whileGame=true;
+                        System.out.println("**************HardDrop************");
                         minute10();
                         timeline.play();
                         Drawing.colorErase(currentBrick,boardView);
@@ -700,6 +704,7 @@ public class GameBoard2Controller implements Initializable {
                 }
                 event.consume();
                 if (gameBoard.whileGame == true) {
+                    System.out.println("**********Regi쪽에서 색칠********");
                     Drawing.colorFill(currentBrick,boardView);
                 }//색칠하고
             }
