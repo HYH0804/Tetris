@@ -277,15 +277,22 @@ public class GameBoard2Controller implements Initializable {
 
                 //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
                 List<Integer> removedRows = gameBoard.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
-
+                for(int line : removedRows){
+                    System.out.printf("줄삭제 : "+line +" ");
+                }
+                System.out.println();
                 //보드 전부 0
                 checkAndDoItem6(removedRows,gameBoard,boardView);
 
 
-
-                //NPE조심
                 Drawing.updateBoardView(removedRows,boardView, gameBoard.board); //gui 여기서 삭제
+
                 gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
+                //NPE조심
+
+                System.out.println("줄 삭제 이후");
+                printMatrix(gameBoard);
+
 
                 //System.out.println("완성 줄 삭제 후---------------");
                 //printMatrix();

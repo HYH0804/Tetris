@@ -38,8 +38,8 @@ public class Drawing {
             Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
             label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
             label.setTextFill(block.getColor()); //색깔도 바꾸고
-            GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+            boardView.setHalignment(label, javafx.geometry.HPos.CENTER);
+            boardView.setValignment(label, javafx.geometry.VPos.CENTER);
 
             // GridPane에 Rectangle 추가
             boardView.add(label, y, x);
@@ -65,8 +65,8 @@ public class Drawing {
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
     public static Label getLableAt(GridPane gridPane, int columnIndex, int rowIndex) {
         for (javafx.scene.Node node : gridPane.getChildren()) {
-            Integer nodeColumnIndex = GridPane.getColumnIndex(node);
-            Integer nodeRowIndex = GridPane.getRowIndex(node);
+            Integer nodeColumnIndex = gridPane.getColumnIndex(node);
+            Integer nodeRowIndex = gridPane.getRowIndex(node);
 
             if (nodeColumnIndex != null && nodeRowIndex != null && nodeColumnIndex == columnIndex && nodeRowIndex == rowIndex) {
                 if (node instanceof Label) {
@@ -79,13 +79,13 @@ public class Drawing {
     public static void removeAnimeRow(GridPane gridPane, int rowIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
         gridPane.getChildren().removeIf(node ->
-                GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == rowIndex && (node instanceof Rectangle)
+                gridPane.getRowIndex(node) != null && gridPane.getRowIndex(node) == rowIndex && (node instanceof Rectangle)
         );
     }
     public static void removeAnimeColumn(GridPane gridPane, int columnIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
         gridPane.getChildren().removeIf(node ->
-                GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == columnIndex &&(node instanceof Rectangle)
+                gridPane.getColumnIndex(node) != null && gridPane.getColumnIndex(node) == columnIndex &&(node instanceof Rectangle)
         );
     }
 
@@ -162,8 +162,8 @@ public class Drawing {
 
                     label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
                     label.setTextFill(Color.BLUE);
-                    GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-                    GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+                    boardView.setHalignment(label, javafx.geometry.HPos.CENTER);
+                    boardView.setValignment(label, javafx.geometry.VPos.CENTER);
                     boardView.add(label, x, y);
                 }
             }
@@ -235,7 +235,7 @@ public class Drawing {
                 for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
                     Label labelAbove = getLableAt(boardView, column, row);
                     if (labelAbove != null) {
-                        GridPane.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
+                        boardView.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
                     }
                 }
             }
@@ -270,7 +270,7 @@ public class Drawing {
                 for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
                     Label labelAbove = getLableAt(boardView, column, row);
                     if (labelAbove != null) {
-                        GridPane.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
+                        boardView.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
                     }
                 }
             }
@@ -287,7 +287,7 @@ public class Drawing {
     public static void removeRow(GridPane gridPane, int rowIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
         gridPane.getChildren().removeIf(node ->
-                GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == rowIndex
+                gridPane.getRowIndex(node) != null && gridPane.getRowIndex(node) == rowIndex
         );
     }
 
@@ -295,7 +295,7 @@ public class Drawing {
     public static void removeColumn(GridPane gridPane, int columnIndex) {
         // 자식 노드들을 삭제하기 위해 루프를 돌리며 순회
         gridPane.getChildren().removeIf(node ->
-                GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == columnIndex
+                gridPane.getColumnIndex(node) != null && gridPane.getColumnIndex(node) == columnIndex
         );
     }
 
@@ -364,8 +364,8 @@ public class Drawing {
             Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
             label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
             label.setTextFill(block.getColor()); //색깔도 바꾸고
-            GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+            nextBrickView.setHalignment(label, javafx.geometry.HPos.CENTER);
+            nextBrickView.setValignment(label, javafx.geometry.VPos.CENTER);
 
             // GridPane에 Rectangle 추가
             nextBrickView.add(label, y, x);
