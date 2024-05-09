@@ -282,6 +282,9 @@ public class GameBoard2Controller implements Initializable {
                     System.out.printf("줄삭제 : "+line +" ");
                 }
                 System.out.println();
+
+                gameBoard.attackLine(removedRows, currentBrick, gameBoard2);
+
                 //보드 전부 0
                 checkAndDoItem6(removedRows,gameBoard,boardView);
 
@@ -321,6 +324,10 @@ public class GameBoard2Controller implements Initializable {
 
                     gameBoard.turnEnd=false;
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                    //어택보드
+                    gameBoard.attackStart();
+                    Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView);
+                    gameBoard.attackBoardClean();
                     sponBrick(gameBoard,boardView,nextBrickView,1);
                     System.out.println("*************Block 새로 스폰************");
                     chageTime(gameBoard);
@@ -405,7 +412,7 @@ public class GameBoard2Controller implements Initializable {
 
                 //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
                 List<Integer> removedRows = gameBoard2.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
-
+                gameBoard2.attackLine(removedRows, currentBrick2, gameBoard);
                 //보드 전부 0
                 checkAndDoItem6(removedRows,gameBoard2,boardView2);
 
@@ -438,6 +445,11 @@ public class GameBoard2Controller implements Initializable {
 
                     gameBoard2.turnEnd=false;
                     //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                    //
+                    gameBoard2.attackStart();
+                    Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2);
+                    gameBoard2.attackBoardClean();
+                    //
                     sponBrick(gameBoard2,boardView2, nextBrickView2,2);
                     chageTime(gameBoard2);
 

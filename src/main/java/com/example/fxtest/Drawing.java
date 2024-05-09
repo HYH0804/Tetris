@@ -261,6 +261,40 @@ public class Drawing {
 
     }
 
+    //어택 받으면 위로 gui올리는 함수
+    public static void attackUpdateBoardView(List<List<Integer>> attackRows ,GridPane boardView){
+        if(attackRows.size()!=0){
+            int i=0;
+            for (List<Integer> count : attackRows) { // 삭제해야 될 라인 수만큼 반복
+                for (int column = 0; column < 10; column++) {
+                    for (int row = 1; row < 22; row++) { // 최상단부터 시작
+                        Label labelAbove = getLableAt(boardView, column, row);
+                        if (labelAbove != null) {
+                            GridPane.setRowIndex(labelAbove, row - 1); // 기존 라벨을 한 칸 아래로 이동
+                        }
+                    }
+                }
+                //여기서 어택보드 한칸 추가 gui
+                List<Integer> temp = null;
+                temp = attackRows.get(i);
+                i+=1;
+                for (int y = 0; y < 10; y++) {
+                    Label label = new Label("H");
+
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+                    label.setTextFill(Color.BLACK);
+                    GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+                    GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+                    if (temp.get(y) != 0) {
+                        boardView.add(label, y, 21);
+                    }
+                }
+            }
+        }
+        else {
+            System.out.println("NO_________________");
+        }
+    }
 
 
     //가로줄 삭제 후 새로 아예 쓰는게 아니라 라인 한줄씩 내리면서 업데이트
