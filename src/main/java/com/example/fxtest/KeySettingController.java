@@ -52,8 +52,6 @@ public class KeySettingController implements Initializable {
             }
         }
 
-        getKey(); // 기존 값을 list로 가져오기 및 표시하기
-
         // 핸들러
         for(int i = 0; i < LABELNUM; i++) {
             initHandler(labelSet[i],i);
@@ -67,6 +65,11 @@ public class KeySettingController implements Initializable {
                 event.consume(); // 기본 엔터 이벤트를 처리하지 않도록 consume()
             }
         });
+
+        // refactoring
+        for(int i = 0; i < LABELNUM; i++) {
+            labelSet[i].setText(SettingModel.keyVal.get(i));
+        }
     }
 
     // 포커스를 다음 라벨로 이동하는 메서드
@@ -168,25 +171,10 @@ public class KeySettingController implements Initializable {
                     }
                     if (update){
                         for(int i = 0; i < LABELNUM; i++){
-                            keyMap.put(labelSet[i],labelSet[i].getText());
+                            SettingModel.keyVal.set(i, labelSet[i].getText());
+                            //keyMap.put(labelSet[i],labelSet[i].getText());
                         }
-                        keyMap.forEach((key,value)->{
-                            settingProperties.setProperty(key.getId(),value);
-                        });
-
-                        FileOutputStream fos = null;
-                        try {
-                            fos = new FileOutputStream("src/main/resources/setting.properties");
-
-                            settingProperties.store(fos,null);
-                            System.out.println("propeties update done");
-                            BrickController.getBrickController().updateBrickController();
-                        } catch (IOException e) {}
-                        finally {
-                            try {
-                                fos.close();
-                            } catch (IOException e) {}
-                        }
+                        SettingModel.saveProp();
                     }
 
                     // go back to setting page
@@ -239,25 +227,6 @@ public class KeySettingController implements Initializable {
                 focusSelectedLabel();
             }
         });
-    }
-
-    private void getKey() {
-        // Properties 객체 생성
-        settingProperties = new Properties();
-        try {
-            // setting.properties 파일 로드
-            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
-            settingProperties.load(in);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // 기존 properties 값 받아오기
-        for(int i = 0; i < LABELNUM; i++){
-            labelSet[i].setText(settingProperties.getProperty(buttonName[i]));
-            System.out.println(buttonName[i]+ ": " + labelSet[i].getText());
-        }
     }
 
     private void buttonDrawing()

@@ -28,11 +28,11 @@ public class BrickController{
 
     private BrickController(){
         // SettingController.getKey(); //키 값들 StartKey 리스트로 가져오기
-        MOVED= SettingModel.startKey.get(0);
-        MOVEL= SettingModel.startKey.get(1);
-        MOVER= SettingModel.startKey.get(2);
-        ROTATE= SettingModel.startKey.get(3);
-        HARDDROP= SettingModel.startKey.get(4);
+        MOVED= SettingModel.keyVal.get(0);
+        MOVEL= SettingModel.keyVal.get(1);
+        MOVER= SettingModel.keyVal.get(2);
+        ROTATE= SettingModel.keyVal.get(3);
+        HARDDROP= SettingModel.keyVal.get(4);
     }
     //싱글톤
 

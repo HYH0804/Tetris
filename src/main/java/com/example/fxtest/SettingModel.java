@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class SettingModel {
     // you should change public statics
-    public static List<String> startKey = new ArrayList<>(); // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
+    public static List<String> keyVal = new ArrayList<>(); // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
     public static int[] resolutionVal;  // index: "width", "height"
     public static int colorBlindnessVal = -1; // -1: not init, 0: X. 1: O
 
@@ -36,7 +36,7 @@ public class SettingModel {
 
             // keyVal
             for(int i = 0; i < buttonName.length; i++){
-                startKey.add(properties.getProperty(buttonName[i]));
+                keyVal.add(properties.getProperty(buttonName[i]));
             }
 
             // resolutionVal
@@ -58,7 +58,7 @@ public class SettingModel {
 
         // move Val to properties
         for (int i = 0; i < 5; i++) { // keyVal
-            properties.setProperty(buttonName[i], startKey.get(i));
+            properties.setProperty(buttonName[i], keyVal.get(i));
         }
         properties.setProperty("resolution", resolutionVal[0] + "x" + resolutionVal[1]); // resolutionVal
         properties.setProperty("colorBlindness", Integer.toString(colorBlindnessVal));
@@ -85,7 +85,7 @@ public class SettingModel {
 
         String[] keyReset = {"UP","LEFT","RIGHT","DOWN","SPACE"};
         for(int i = 0; i < 5; i++) {
-            startKey.set(i, keyReset[i]);
+            keyVal.set(i, keyReset[i]);
         }
         resolutionVal[0] = 800;
         resolutionVal[1] = 600;
@@ -96,6 +96,6 @@ public class SettingModel {
     }
 
     public static List<String> getStartKey() {
-        return startKey;
+        return keyVal;
     }
 }
