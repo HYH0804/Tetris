@@ -66,10 +66,15 @@ public class GameBoard2Controller implements Initializable {
     private GridPane nextBrickView;
     @FXML
     private GridPane nextBrickView2;
+    @FXML
+    private GridPane attackBoardView;
+    @FXML
+    private GridPane attackBoardView2;
 
 
     public static double cellWidth = 20;
     public static double cellHeight = 20;
+    private int remainingTime=60;
 
 
     //SettingModel에서 받아와야 되는 것들
@@ -79,6 +84,8 @@ public class GameBoard2Controller implements Initializable {
     public static int difficulty; //난이도
 
     public static boolean itemMode; //이거 setter로 받아야됨
+
+    public static boolean timeMode;//시간 제한 모드 확인
 
     //타임라인 그 시간으로 시작
     void startTimeLine(double x){
@@ -262,11 +269,33 @@ public class GameBoard2Controller implements Initializable {
         timeline.play(); // Timeline 시작
         timeline2.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
         timeline2.play(); // Timeline 시작
-        gameTimer = new Timeline(new KeyFrame(Duration.seconds(60), event -> destroy()));
-        gameTimer.setCycleCount(1); // 단 한 번 실행
-        gameTimer.play(); // 타임라인 시작
+        if(timeMode) {
+            gameTimer = new Timeline(new KeyFrame(Duration.seconds(60), event -> destroy()));
+            gameTimer.setCycleCount(1); // 단 한 번 실행
+            gameTimer.play(); // 타임라인 시작}
+            startTimer();
+        }else {
+            timeLabel.setVisible(false);
+        }
     }
 
+    private void startTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            // 시간 업데이트
+
+             // 1초 감소
+            // 시간을 표시할 라벨 업데이트
+            if (remainingTime == 0) {
+                remainingTime=0;
+            }else {
+                remainingTime--;
+            }
+            timeLabel.setText("Time: " + remainingTime);
+
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복
+        timeline.play();
+    }
 
     //Score 컨트롤 혹은 deleteLine 컨트롤이 일정 int값 이상이면 속도 빨라짐(1초 > 0.8초 > 0.5초). 속성감시 이벤트 리스너
     //이 이벤트 리스너는 값에 맞게 현재 호출되는 정기 실행 함수를 멈추고 매 0.8 혹은 0.5마다 호출되는 함수를 여기서 호출한다.
@@ -316,6 +345,7 @@ public class GameBoard2Controller implements Initializable {
     private void minute10(){
         if(!gameBoard.gameOver) {
             Drawing.colorErase(currentBrick, boardView);
+            Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard);
 /*      System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");*/
             //printBlock();
@@ -370,16 +400,20 @@ public class GameBoard2Controller implements Initializable {
                         System.out.printf("줄삭제 : " + line + " ");
                     }
                     System.out.println();
+
+                    gameBoard.attackLine(removedRows, currentBrick, gameBoard2);
                     //보드 전부 0
                     checkAndDoItem6(removedRows, gameBoard, boardView);
 
 
                     Drawing.updateBoardView(removedRows, boardView, gameBoard.board); //gui 여기서 삭제
+                    Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard);
                     System.out.println("*************GUI 업뎃************");
+
 
                     gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
                     //NPE조심
-
+                    Drawing.animeRow(removedRows, boardView);
                     System.out.println("줄 삭제 이후");
                     printMatrix(gameBoard);
 
@@ -409,6 +443,9 @@ public class GameBoard2Controller implements Initializable {
                         gameBoard.turnEnd = false;
                         //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                         System.out.println(currentBrick + "== 스폰 전 Current Brick");
+                        gameBoard.attackStart();
+                        Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView);
+                        gameBoard.attackBoardClean();
                         sponBrick(gameBoard, boardView, nextBrickView, 1);
                         System.out.println("*************Block 새로 스폰************" + currentBrick + "== 스폰 후 CurrentBrick");
                         chageTime(gameBoard);
@@ -432,9 +469,9 @@ public class GameBoard2Controller implements Initializable {
                     //printMatrix();
                 }
                 if (gameBoard.turnEnd == true) {
-
                     Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
                     gameBoard.turnEnd = false;
+
                 }
             }
         }
@@ -443,6 +480,8 @@ public class GameBoard2Controller implements Initializable {
         private void minute10_2(){
         if(!gameBoard2.gameOver) {
             Drawing.colorErase(currentBrick2, boardView2);
+            Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard);
+
 /*        System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");*/
             //printBlock();
@@ -490,16 +529,19 @@ public class GameBoard2Controller implements Initializable {
                     System.out.println("*********************보드2**********************");
                     printMatrix(gameBoard2);
 
-
                     //먼저 삭제되는 로우 가져와서 거기에 아이템 있는지 확인(아이템)
                     List<Integer> removedRows = gameBoard2.getRemovedRows(); //삭제 전에 우선 삭제되는 라인 먼저 확인
+                    gameBoard2.attackLine(removedRows, currentBrick2, gameBoard);
+
 
                     //보드 전부 0
                     checkAndDoItem6(removedRows, gameBoard2, boardView2);
 
                     //NPE조심
                     Drawing.updateBoardView(removedRows, boardView2, gameBoard2.board); //gui 여기서 삭제
+                    Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard);
                     gameBoard2.removeFullRows(); //배열에서 삭제 후 점수 업뎃
+                    Drawing.animeRow(removedRows, boardView2);
 
                     //System.out.println("완성 줄 삭제 후---------------");
                     //printMatrix();
@@ -525,6 +567,9 @@ public class GameBoard2Controller implements Initializable {
 
                         gameBoard2.turnEnd = false;
                         //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                        gameBoard2.attackStart();
+                        Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2);
+                        gameBoard2.attackBoardClean();
                         sponBrick(gameBoard2, boardView2, nextBrickView2, 2);
                         chageTime(gameBoard2);
 
@@ -551,6 +596,8 @@ public class GameBoard2Controller implements Initializable {
 
                     Item.turnEndDoItem(currentBrick2, gameBoard2, boardView2); //아이템 , 하드드롭했을때
                     gameBoard2.turnEnd = false;
+
+
                 }
             }
         }
@@ -598,6 +645,7 @@ public class GameBoard2Controller implements Initializable {
                 Arrays.fill(row, 0);
             }
             Drawing.updateBoardView(boardView, gameBoard.board);
+            Drawing.animeNuclear(boardView);
         }
     }
 
@@ -611,7 +659,7 @@ public class GameBoard2Controller implements Initializable {
         }
         //nextBrick 랜덤 뽑아와서 세팅
         if(n==1) {
-            if (gameBoard.deleteLine % 10 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+            if (gameBoard.deleteLine % 1 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick = rg.generateItem(0, colorBlindness, gameBoard);
                 gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
@@ -623,7 +671,7 @@ public class GameBoard2Controller implements Initializable {
         }
 
         if(n==2) {
-            if (gameBoard.deleteLine % 10 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+            if (gameBoard.deleteLine % 1 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick2 = rg.generateItem(0, colorBlindness, gameBoard);
                 gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
@@ -956,11 +1004,13 @@ public class GameBoard2Controller implements Initializable {
 
 
     //Difficulty2Controller에서 setOption으로 호출해서 ItemMode , difficulty 넘겨줘야함.
-    public static void setOptions(int difficulty, boolean itemMode) {
+    public static void setOptions(int difficulty, boolean timeMode, boolean itemMode) {
         GameBoard2Controller.difficulty = difficulty;
+        GameBoard2Controller.timeMode = timeMode;
         GameBoard2Controller.itemMode = itemMode;
         // 여기서부터 게임을 시작할 수 있음
         System.out.println("난이도" + difficulty);
+        System.out.println("시간제한모드" + timeMode);
         System.out.println("아이템모드" + itemMode);
     }
 

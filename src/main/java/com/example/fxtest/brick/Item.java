@@ -5,6 +5,8 @@ import com.example.fxtest.GameBoard1;
 import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
 
+import java.util.Collections;
+
 public enum Item {
     NORMAL(1),
     WEIGHT(2),
@@ -36,20 +38,23 @@ public enum Item {
         throw new IllegalArgumentException("Invalid Item number: " + num);
     }
 
-
     public static void doItem(GameBoard1 gameBoard, GridPane gridPane, Block itemBlock){
         Item item = itemBlock.getItem();
 
         if(item==ROWDELETE){
             int deleteRow = itemBlock.getX();
             Drawing.updateBoardView(deleteRow,gridPane);
+            Drawing.animeRow(Collections.singletonList(deleteRow), gridPane);
             gameBoard.removeRow(deleteRow);
+            gameBoard.updateScore(10000);
             System.out.println("Row 실행----------------------");
         }
         else if (item==COLUMNDELETE) {
             int deleteColumn = itemBlock.getY();
             Drawing.updateBoardColumnView(deleteColumn,gridPane);
+            Drawing.animeCol(deleteColumn, gridPane);
             gameBoard.removeFullColumn(deleteColumn);
+            gameBoard.updateScore(10000);
             System.out.println("Col 실행----------------------");
         }
         else if(item==BLIND){
@@ -58,6 +63,7 @@ public enum Item {
         }
         else if(item==NUCLEAR){
             System.out.println("NUCLEAR 처리");
+            gameBoard.updateScore(10000);
         }
         else{
             System.out.println(item+" 은 해당 순서에 실행하지 않음.");

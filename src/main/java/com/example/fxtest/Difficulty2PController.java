@@ -15,7 +15,7 @@ import java.util.Properties;
 
 import static com.example.fxtest.Main.loadProperties;
 
-public class DifficultyController {
+public class Difficulty2PController {
     @FXML
     private RadioButton easyRadioButton;
 
@@ -24,20 +24,19 @@ public class DifficultyController {
 
     @FXML
     private RadioButton hardRadioButton;
-
-    private ToggleGroup toggleGroup;
-
     @FXML
     private Button itemButton;
     @FXML
     private Button normalButton;
     @FXML
+    private Button timeAttackButton;
+    @FXML
     private Button backButton;
     boolean itemMode;
-
+    boolean timeMode = false;
+    private ToggleGroup toggleGroup;
     @FXML
     private void initialize() {
-        // 라디오 버튼을 그룹으로 묶기
         toggleGroup = new ToggleGroup();
         easyRadioButton.setToggleGroup(toggleGroup);
         normalRadioButton.setToggleGroup(toggleGroup);
@@ -55,7 +54,12 @@ public class DifficultyController {
         startGame(event);
         // 아이템 모드는 여기서 설정
     }
-
+    @FXML
+    private void starttimeMode(ActionEvent event) throws IOException {
+        timeMode = true;
+        startGame(event);
+        // 아이템 모드는 여기서 설정
+    }
     private void startGame(ActionEvent event) throws IOException {
         int difficulty;
         if (easyRadioButton.isSelected()) {
@@ -65,9 +69,8 @@ public class DifficultyController {
         } else {
             difficulty = 2;
         }
-
         // 난이도와 아이템 모드 설정
-        GameBoardController.setOptions(difficulty, itemMode);
+        GameBoard2Controller.setOptions(difficulty,timeMode, itemMode);
         // 현재 스테이지(창) 닫기
         gameMode();
     }
@@ -78,13 +81,13 @@ public class DifficultyController {
         Stage stage = (Stage) itemButton.getScene().getWindow();
 
         Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
+        String resolution = properties.getProperty("resolution", "1280x1024");
         String[] dimensions = resolution.split("x");
         double width = Double.parseDouble(dimensions[0]);
         double height = Double.parseDouble(dimensions[1]);
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard2.fxml"));
         Parent root = loader.load();
         Scene scene = itemButton.getScene(); // 현재 Scene을 가져옵니다.
         scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
@@ -93,6 +96,7 @@ public class DifficultyController {
         stage.setHeight(height); // 현재 Stage의 높이를 설정합니다.
         stage.show();
     }
+
     @FXML
     private void goBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();

@@ -135,6 +135,29 @@ public class Drawing {
         //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
 
+
+    public static void animeNuclear(GridPane boardView) {
+        for (int row = 0; row < GameBoard1.HEIGHT; row++) {
+            for (int col = 0; col < GameBoard1.WIDTH; col++) {
+                Rectangle rectangle = new Rectangle(GameBoardController.cellWidth, GameBoardController.cellWidth, Color.BLACK);
+                // GridPane에 Rectangle 추가
+                boardView.add(rectangle, col, row);
+            }
+
+            int finalRow = row;
+            Timeline timeline = new Timeline(
+                    // 0.3초 후에 해당 행을 제거하는 KeyFrame을 추가
+                    new KeyFrame(Duration.seconds(0.3), event -> {
+                        removeAnimeRow(boardView, finalRow);
+                    })
+            );
+            timeline.setCycleCount(1);
+            // 타임라인 실행
+            timeline.play();
+        }
+    }
+
+
     //줄 지웠을때 Gridpane만 냅두고 위에 객체들 새로 그리기
     public static void updateBoardView(GridPane boardView, int[][] board){ //업데이트 전 GUI board를 업데이트 된 배열 board에 맞춰 새로 그리기
         // GridPane에서 제거할 Label 객체들을 담을 리스트 생성
@@ -159,7 +182,7 @@ public class Drawing {
                     Label label = new Label(string);
 
                     label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
-                    label.setTextFill(Color.BLUE);
+                    label.setTextFill(Color.BLACK);
                     boardView.setHalignment(label, javafx.geometry.HPos.CENTER);
                     boardView.setValignment(label, javafx.geometry.VPos.CENTER);
                     boardView.add(label, x, y);
@@ -259,6 +282,40 @@ public class Drawing {
 
     }
 
+    //어택 받으면 위로 gui올리는 함수
+    public static void attackUpdateBoardView(List<List<Integer>> attackRows ,GridPane boardView){
+        if(attackRows.size()!=0){
+            int i=0;
+            for (List<Integer> count : attackRows) { // 삭제해야 될 라인 수만큼 반복
+                for (int column = 0; column < 10; column++) {
+                    for (int row = 1; row < 20; row++) { // 최상단부터 시작
+                        Label labelAbove = getLableAt(boardView, column, row);
+                        if (labelAbove != null) {
+                            GridPane.setRowIndex(labelAbove, row - 1); // 기존 라벨을 한 칸 아래로 이동
+                        }
+                    }
+                }
+                //여기서 어택보드 한칸 추가 gui
+                List<Integer> temp = null;
+                temp = attackRows.get(i);
+                i+=1;
+                for (int y = 0; y < 10; y++) {
+                    Label label = new Label("H");
+
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+                    label.setTextFill(Color.BLACK);
+                    GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
+                    GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
+                    if (temp.get(y) != 0) {
+                        boardView.add(label, y, 19);
+                    }
+                }
+            }
+        }
+        else {
+            System.out.println("NO_________________");
+        }
+    }
 
 
     //가로줄 삭제 후 새로 아예 쓰는게 아니라 라인 한줄씩 내리면서 업데이트

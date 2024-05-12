@@ -38,9 +38,9 @@ public class RandomGenerator {
         int block = rand.nextInt(upperBound); //0 ~ 3까지 , 0이면 a에 Item, 1이면 b에 Item, 2이면 c에 Item, 3이면 d에 Item
         if(item==2){
             if(colorBlindness==true)
-                return new BrickW(1, 4,Color.BLACK); //색맹때 해야됨
+                return new BrickW(1, 4,Color.BLACK,gameBoard); //색맹때 해야됨
             else
-                return new BrickW(1,4, Color.BLACK);
+                return new BrickW(1,4, Color.BLACK,gameBoard);
         }
         else{
             Brick brick = genarateNormal(difficulty, colorBlindness ,gameBoard);
