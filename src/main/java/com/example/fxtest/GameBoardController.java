@@ -140,7 +140,7 @@ public class GameBoardController implements Initializable {
 
         brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
         // GridPane에 키 이벤트 핸들러 등록
-        regiBrickEvent(currentBrick,boardView,gameBoard);
+        //regiBrickEvent(currentBrick,boardView,gameBoard);
 
 
         gameBoard.scoreProperty().addListener((obs, oldScore, newScore) -> {
@@ -347,8 +347,8 @@ public class GameBoardController implements Initializable {
             gameBoard.deleteLine=0;
         }
         else{
-            //nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
-            nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
+            nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
+            //nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
         }
         gameBoard.blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
@@ -566,7 +566,6 @@ public class GameBoardController implements Initializable {
                         //떨구고 바로 블록 뽑아옴
                         minute10();
                         timeline.play();
-                        Drawing.colorErase(currentBrick,boardView);
                         if(gameBoard.gameOver){
                             Drawing.colorFill(currentBrick, boardView);
                         }
