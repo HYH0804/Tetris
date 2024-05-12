@@ -267,7 +267,7 @@ public class Drawing {
             int i=0;
             for (List<Integer> count : attackRows) { // 삭제해야 될 라인 수만큼 반복
                 for (int column = 0; column < 10; column++) {
-                    for (int row = 1; row < 22; row++) { // 최상단부터 시작
+                    for (int row = 1; row < 20; row++) { // 최상단부터 시작
                         Label labelAbove = getLableAt(boardView, column, row);
                         if (labelAbove != null) {
                             GridPane.setRowIndex(labelAbove, row - 1); // 기존 라벨을 한 칸 아래로 이동
@@ -286,7 +286,7 @@ public class Drawing {
                     GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
                     GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
                     if (temp.get(y) != 0) {
-                        boardView.add(label, y, 21);
+                        boardView.add(label, y, 19);
                     }
                 }
             }

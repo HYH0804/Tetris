@@ -31,7 +31,7 @@ public class BrickW implements Brick{
     List<Block> blockList = new ArrayList<>(); //그냥 하드코딩 귀차나서
     List<Block> afterList = new ArrayList<>();
 
-    public BrickW(int center_x, int center_y, Color color) {
+    public BrickW(int center_x, int center_y, Color color, GameBoard1 gameBoard) {
         //테트리미노 모양 및 초기회전 정의 , 각각의 블록 위치 세팅
         this.center_x = center_x;
         this.center_y = center_y;

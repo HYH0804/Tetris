@@ -186,7 +186,12 @@ public class GameBoard1 {
             temp = attackLine.get(i);
             attackBoardUp(gameBoard);
             for (int j=0; j<10; j++){
-                gameBoard.attackBoard[9][j] = (int)temp.get(j);
+                if(temp.get(j)!=0){
+                    gameBoard.attackBoard[9][j] = 1;
+                }
+                else {
+                    gameBoard.attackBoard[9][j] = 0;
+                }
             }
         }
         for(int n=0;n<10;n++){
@@ -213,7 +218,7 @@ public class GameBoard1 {
             System.out.println(hi);
             boardUp();
             for (int j = 0; j < 10; j++) {
-                board[21][j] = hi.get(j);
+                board[19][j] = hi.get(j);
             }
         }
     }
@@ -228,7 +233,7 @@ public class GameBoard1 {
     }
     //어택 당했을때 내 보드 한칸 올리기
     public void boardUp(){
-        for(int i=1; i<22; i++){
+        for(int i=1; i<20; i++){
             for (int j=0; j<10; j++){
                 board[i-1][j]=board[i][j];
             }
