@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Properties;
 
 public class SettingModel {
+
     // you should change public statics
     public static List<String> keyVal = new ArrayList<>(); // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
+
     public static int[] resolutionVal;  // index: "width", "height"
     public static int colorBlindnessVal = -1; // -1: not init, 0: X. 1: O
 
@@ -95,7 +97,44 @@ public class SettingModel {
         saveProp();
     }
 
-    public static List<String> getStartKey() {
-        return keyVal;
+    // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight" // index: "width", "height" // -1: not init, 0: X. 1: O
+    public static String getRotate() {
+        init();
+        return keyVal.get(0);
     }
+
+    public static String getMoveL() {
+        init();
+        return keyVal.get(1);
+    }
+
+    public static String getMoveR() {
+        init();
+        return keyVal.get(2);
+    }
+
+    public static String getMoveD() {
+        init();
+        return keyVal.get(3);
+    }
+
+    public static String getHardDrop() {
+        init();
+        return keyVal.get(4);
+    }
+
+    public static int getWidth() {
+        init();
+        return resolutionVal[0];
+    }
+
+    public static int getHeight() {
+        init();
+        return resolutionVal[1];
+    }
+    public static int getColorBlindnessVal() {
+        init();
+        return colorBlindnessVal;
+    }
+
 }
