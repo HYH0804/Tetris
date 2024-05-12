@@ -61,6 +61,8 @@ public class GameBoard2Controller implements Initializable {
     @FXML
     private Label scoreLabel2;
     @FXML
+    private Label timeLabel;
+    @FXML
     private GridPane nextBrickView;
     @FXML
     private GridPane nextBrickView2;
@@ -72,6 +74,7 @@ public class GameBoard2Controller implements Initializable {
 
     public static double cellWidth = 20;
     public static double cellHeight = 20;
+    private int remainingTime=60;
 
 
     //SettingModel에서 받아와야 되는 것들
@@ -270,9 +273,29 @@ public class GameBoard2Controller implements Initializable {
             gameTimer = new Timeline(new KeyFrame(Duration.seconds(60), event -> destroy()));
             gameTimer.setCycleCount(1); // 단 한 번 실행
             gameTimer.play(); // 타임라인 시작}
+            startTimer();
+        }else {
+            timeLabel.setVisible(false);
         }
     }
 
+    private void startTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            // 시간 업데이트
+
+             // 1초 감소
+            // 시간을 표시할 라벨 업데이트
+            if (remainingTime == 0) {
+                remainingTime=0;
+            }else {
+                remainingTime--;
+            }
+            timeLabel.setText("Time: " + remainingTime);
+
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복
+        timeline.play();
+    }
 
     //Score 컨트롤 혹은 deleteLine 컨트롤이 일정 int값 이상이면 속도 빨라짐(1초 > 0.8초 > 0.5초). 속성감시 이벤트 리스너
     //이 이벤트 리스너는 값에 맞게 현재 호출되는 정기 실행 함수를 멈추고 매 0.8 혹은 0.5마다 호출되는 함수를 여기서 호출한다.

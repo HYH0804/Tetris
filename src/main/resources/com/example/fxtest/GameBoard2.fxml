@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.GameBoard2Controller">
+    <Label fx:id="timeLabel" layoutY="180.0" text="Time: " AnchorPane.leftAnchor="300.0"/>
     <children>
         <GridPane fx:id="boardView" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="200.0">
             <columnConstraints>
