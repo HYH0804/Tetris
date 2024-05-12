@@ -89,27 +89,25 @@ public class Drawing {
         );
     }
 
-    public static void animeRow(int fullRow, GridPane boardView) {
-        //가득찬 줄을 가져온다
-        for (int col = 0; col < GameBoard1.WIDTH; col++) {
-            Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
- /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
-
-            // GridPane에 Rectangle 추가
-            boardView.add(rectangle, col, fullRow);
+    public static void animeRow(List<Integer> fullRows, GridPane boardView) {
+        for (Integer fullRow : fullRows) {
+            //가득찬 줄을 가져온다
+            for (int col = 0; col < GameBoard1.WIDTH; col++) {
+                Rectangle rectangle = new Rectangle(GameBoardController.cellWidth, GameBoardController.cellWidth, Color.BLACK);
+                // GridPane에 Rectangle 추가
+                boardView.add(rectangle, col, fullRow);
+            }
+            Timeline timeline = new Timeline(
+                    // 0.3초 후에 아무 동작도 하지 않는 KeyFrame을 추가
+                    new KeyFrame(Duration.seconds(0.3), event -> {
+                        removeAnimeRow(boardView, fullRow);
+                        // 아무 동작도 하지 않음
+                    })
+            );
+            timeline.setCycleCount(1);
+            // 타임라인 실행
+            timeline.play();
         }
-        Timeline timeline = new Timeline(
-                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
-                new KeyFrame(Duration.seconds(0.3), event -> {
-                        removeAnimeRow(boardView,fullRow);
-                    // 아무 동작도 하지 않음
-                })
-        );
-        timeline.setCycleCount(1);
-        // 타임라인 실행
-        timeline.play();
-
         //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
 
@@ -136,6 +134,29 @@ public class Drawing {
         //가득찬 줄의 boardview를 색칠해서 애니메이션 기능 만든다.
         //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
+
+
+    public static void animeNuclear(GridPane boardView) {
+        for (int row = 0; row < GameBoard1.HEIGHT; row++) {
+            for (int col = 0; col < GameBoard1.WIDTH; col++) {
+                Rectangle rectangle = new Rectangle(GameBoardController.cellWidth, GameBoardController.cellWidth, Color.BLACK);
+                // GridPane에 Rectangle 추가
+                boardView.add(rectangle, col, row);
+            }
+
+            int finalRow = row;
+            Timeline timeline = new Timeline(
+                    // 0.3초 후에 해당 행을 제거하는 KeyFrame을 추가
+                    new KeyFrame(Duration.seconds(0.3), event -> {
+                        removeAnimeRow(boardView, finalRow);
+                    })
+            );
+            timeline.setCycleCount(1);
+            // 타임라인 실행
+            timeline.play();
+        }
+    }
+
 
     //줄 지웠을때 Gridpane만 냅두고 위에 객체들 새로 그리기
     public static void updateBoardView(GridPane boardView, int[][] board){ //업데이트 전 GUI board를 업데이트 된 배열 board에 맞춰 새로 그리기

@@ -239,7 +239,7 @@ public class GameBoardController implements Initializable {
                     //NPE조심
                     Drawing.updateBoardView(removedRows, boardView, gameBoard.board); //gui 여기서 삭제
                     gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
-
+                    Drawing.animeRow(removedRows, boardView);
                     //System.out.println("완성 줄 삭제 후---------------");
                     //printMatrix();
                     //gravity로 1인지 확인해서 board 업데이트하고
@@ -333,6 +333,7 @@ public class GameBoardController implements Initializable {
                 Arrays.fill(row, 0);
             }
             Drawing.updateBoardView(boardView, gameBoard.board);
+            Drawing.animeNuclear(boardView);
         }
     }
 
@@ -342,7 +343,7 @@ public class GameBoardController implements Initializable {
         regiBrickEvent(currentBrick,boardView,gameBoard);
 
         //nextBrick 랜덤 뽑아와서 세팅
-        if(gameBoard.deleteLine%10==0 && gameBoard.deleteLine!=0 && itemMode==true ) {
+        if(gameBoard.deleteLine%1==0 && gameBoard.deleteLine!=0 && itemMode==true ) {
             nextBrick = rg.generateItem(0, colorBlindness,gameBoard);
             gameBoard.deleteLine=0;
         }
