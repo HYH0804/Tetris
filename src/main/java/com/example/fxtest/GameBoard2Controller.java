@@ -77,6 +77,8 @@ public class GameBoard2Controller implements Initializable {
 
     public static boolean itemMode; //이거 setter로 받아야됨
 
+    public static boolean timeMode;//시간 제한 모드 확인
+
     //타임라인 그 시간으로 시작
     void startTimeLine(double x){
         timeline.stop();
@@ -861,11 +863,13 @@ public class GameBoard2Controller implements Initializable {
 
 
     //Difficulty2Controller에서 setOption으로 호출해서 ItemMode , difficulty 넘겨줘야함.
-    public static void setOptions(int difficulty, boolean itemMode) {
+    public static void setOptions(int difficulty, boolean timeMode, boolean itemMode) {
         GameBoard2Controller.difficulty = difficulty;
+        GameBoard2Controller.timeMode = timeMode;
         GameBoard2Controller.itemMode = itemMode;
         // 여기서부터 게임을 시작할 수 있음
         System.out.println("난이도" + difficulty);
+        System.out.println("시간제한모드" + timeMode);
         System.out.println("아이템모드" + itemMode);
     }
 

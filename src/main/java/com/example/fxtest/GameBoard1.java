@@ -234,6 +234,7 @@ public class GameBoard1 {
             }
         }
     }
+    //어택보드 값을 리스트로 바꿔서 리턴
     public List<List<Integer>> myAttackBoardToList() {
         List<List<Integer>> listMatrix = new ArrayList<>();
         for (int[] row : attackBoard) {
@@ -248,6 +249,7 @@ public class GameBoard1 {
         System.out.println(listMatrix);
         return listMatrix;
     }
+    //어택보드가 전부0이면 false
     public boolean isAllZeros(int[] array) {
         for (int value : array) {
             if (value != 0) {
