@@ -388,7 +388,7 @@ public class GameBoard2Controller implements Initializable {
 
                     gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
                     //NPE조심
-
+                    Drawing.animeRow(removedRows, boardView);
                     System.out.println("줄 삭제 이후");
                     printMatrix(gameBoard);
 
@@ -516,7 +516,7 @@ public class GameBoard2Controller implements Initializable {
                     Drawing.updateBoardView(removedRows, boardView2, gameBoard2.board); //gui 여기서 삭제
                     Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard);
                     gameBoard2.removeFullRows(); //배열에서 삭제 후 점수 업뎃
-
+                    Drawing.animeRow(removedRows, boardView2);
 
                     //System.out.println("완성 줄 삭제 후---------------");
                     //printMatrix();
@@ -620,6 +620,7 @@ public class GameBoard2Controller implements Initializable {
                 Arrays.fill(row, 0);
             }
             Drawing.updateBoardView(boardView, gameBoard.board);
+            Drawing.animeNuclear(boardView);
         }
     }
 

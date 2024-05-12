@@ -343,7 +343,7 @@ public class GameBoardController implements Initializable {
         regiBrickEvent(currentBrick,boardView,gameBoard);
 
         //nextBrick 랜덤 뽑아와서 세팅
-        if(gameBoard.deleteLine%1==0 && gameBoard.deleteLine!=0 && itemMode==true ) {
+        if(gameBoard.deleteLine%10==0 && gameBoard.deleteLine!=0 && itemMode==true ) {
             nextBrick = rg.generateItem(0, colorBlindness,gameBoard);
             gameBoard.deleteLine=0;
         }
