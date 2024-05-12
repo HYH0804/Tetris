@@ -89,27 +89,25 @@ public class Drawing {
         );
     }
 
-    public static void animeRow(int fullRow, GridPane boardView) {
-        //가득찬 줄을 가져온다
-        for (int col = 0; col < GameBoard1.WIDTH; col++) {
-            Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
- /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-            GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
-
-            // GridPane에 Rectangle 추가
-            boardView.add(rectangle, col, fullRow);
+    public static void animeRow(List<Integer> fullRows, GridPane boardView) {
+        for (Integer fullRow : fullRows) {
+            //가득찬 줄을 가져온다
+            for (int col = 0; col < GameBoard1.WIDTH; col++) {
+                Rectangle rectangle = new Rectangle(GameBoardController.cellWidth, GameBoardController.cellWidth, Color.BLACK);
+                // GridPane에 Rectangle 추가
+                boardView.add(rectangle, col, fullRow);
+            }
+            Timeline timeline = new Timeline(
+                    // 0.3초 후에 아무 동작도 하지 않는 KeyFrame을 추가
+                    new KeyFrame(Duration.seconds(0.3), event -> {
+                        removeAnimeRow(boardView, fullRow);
+                        // 아무 동작도 하지 않음
+                    })
+            );
+            timeline.setCycleCount(1);
+            // 타임라인 실행
+            timeline.play();
         }
-        Timeline timeline = new Timeline(
-                // 1초 후에 아무 동작도 하지 않는 KeyFrame을 추가
-                new KeyFrame(Duration.seconds(0.3), event -> {
-                        removeAnimeRow(boardView,fullRow);
-                    // 아무 동작도 하지 않음
-                })
-        );
-        timeline.setCycleCount(1);
-        // 타임라인 실행
-        timeline.play();
-
         //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
 

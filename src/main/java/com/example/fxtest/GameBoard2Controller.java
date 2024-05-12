@@ -61,6 +61,8 @@ public class GameBoard2Controller implements Initializable {
     @FXML
     private Label scoreLabel2;
     @FXML
+    private Label timeLabel;
+    @FXML
     private GridPane nextBrickView;
     @FXML
     private GridPane nextBrickView2;
