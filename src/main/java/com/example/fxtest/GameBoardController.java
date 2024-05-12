@@ -187,6 +187,7 @@ public class GameBoardController implements Initializable {
         //printBlock();
         if(!gameBoard.whileGame){
             gameBoard.downScore=1;
+            regiBrickEvent(currentBrick,boardView,gameBoard);
             System.out.println("겜 자체 시작");
             //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
             sponBrick();
@@ -506,25 +507,28 @@ public class GameBoardController implements Initializable {
                     System.out.println("Right key pressed");
                     brickController.moveR(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
                     // 왼쪽 이동 키가 눌렸을 때의 동작
                     System.out.println("Left key pressed");
                     brickController.moveL(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
                     // 아래 이동 키가 눌렸을 때의 동작
                     brickController.moveD(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                     // 회전 키가 눌렸을 때의 동작
                     System.out.println("Rotate key pressed");
                     brickController.rotate(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView);
                 } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
                     //여기는 수직떨구기
                     System.out.println("---------------------------------수직 떨구기 누름");
                     brickController.straightD(currentBrick);
-                    //
                     if (isHardDropGameOver()) {
                         Drawing.colorFill(currentBrick,boardView);
                         fixed(gameBoard);
@@ -537,17 +541,18 @@ public class GameBoardController implements Initializable {
                         gameBoard.turnEnd = true;
                         //시작부터 바로 Space바
                         gameBoard.whileGame=true;
+                        Drawing.colorFill(currentBrick, boardView);
                         //떨구고 바로 블록 뽑아옴
                         minute10();
                         timeline.play();
-                        Drawing.colorErase(currentBrick,boardView);
+                        //Drawing.colorErase(currentBrick,boardView);
                         System.out.println("---------------------------------재게");
                         System.out.println("수직떨구기");
                     }
                 }
                 event.consume();
                 if (gameBoard.whileGame == true) {
-                    Drawing.colorFill(currentBrick,boardView);
+                    //Drawing.colorFill(currentBrick,boardView);
                 }//색칠하고
             }
         });
