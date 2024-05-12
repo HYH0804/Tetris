@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
 package fxtest;
 
 import com.example.fxtest.BrickController;
@@ -115,4 +118,8 @@ public class BrickController1Test {
     }
 
     // You can add more tests as needed for other methods and edge cases
+<<<<<<< HEAD
 }*/
+=======
+}
+>>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5

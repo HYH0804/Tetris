@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
 package fxtest;
 
 import com.example.fxtest.RandomGenerator;
@@ -170,4 +173,7 @@ public class BlockTest {
     }
 
 }
+<<<<<<< HEAD
 */
+=======
+>>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5

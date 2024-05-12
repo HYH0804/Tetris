@@ -173,6 +173,7 @@ class BrickITest {
     }
 
     @Test
+<<<<<<< HEAD
     void rotate5(){
         brickI.setShape(0);
         //given
@@ -194,6 +195,8 @@ class BrickITest {
     }
 
     @Test
+=======
+>>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
     void moveR() {
         //given
         Block blockA = brickI.getA();
