@@ -266,9 +266,11 @@ public class GameBoard2Controller implements Initializable {
         timeline.play(); // Timeline 시작
         timeline2.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
         timeline2.play(); // Timeline 시작
-        gameTimer = new Timeline(new KeyFrame(Duration.seconds(60), event -> destroy()));
-        gameTimer.setCycleCount(1); // 단 한 번 실행
-        gameTimer.play(); // 타임라인 시작
+        if(timeMode) {
+            gameTimer = new Timeline(new KeyFrame(Duration.seconds(60), event -> destroy()));
+            gameTimer.setCycleCount(1); // 단 한 번 실행
+            gameTimer.play(); // 타임라인 시작}
+        }
     }
 
 
@@ -418,6 +420,9 @@ public class GameBoard2Controller implements Initializable {
                         gameBoard.turnEnd = false;
                         //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                         System.out.println(currentBrick + "== 스폰 전 Current Brick");
+                        gameBoard.attackStart();
+                        Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView);
+                        gameBoard.attackBoardClean();
                         sponBrick(gameBoard, boardView, nextBrickView, 1);
                         System.out.println("*************Block 새로 스폰************" + currentBrick + "== 스폰 후 CurrentBrick");
                         chageTime(gameBoard);
@@ -443,9 +448,6 @@ public class GameBoard2Controller implements Initializable {
                 if (gameBoard.turnEnd == true) {
                     Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
                     gameBoard.turnEnd = false;
-                    gameBoard.attackStart();
-                    Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView);
-                    gameBoard.attackBoardClean();
 
                 }
             }
@@ -542,6 +544,9 @@ public class GameBoard2Controller implements Initializable {
 
                         gameBoard2.turnEnd = false;
                         //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                        gameBoard2.attackStart();
+                        Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2);
+                        gameBoard2.attackBoardClean();
                         sponBrick(gameBoard2, boardView2, nextBrickView2, 2);
                         chageTime(gameBoard2);
 
@@ -569,9 +574,6 @@ public class GameBoard2Controller implements Initializable {
                     Item.turnEndDoItem(currentBrick2, gameBoard2, boardView2); //아이템 , 하드드롭했을때
                     gameBoard2.turnEnd = false;
 
-                    gameBoard2.attackStart();
-                    Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2);
-                    gameBoard2.attackBoardClean();
 
                 }
             }
@@ -633,7 +635,7 @@ public class GameBoard2Controller implements Initializable {
         }
         //nextBrick 랜덤 뽑아와서 세팅
         if(n==1) {
-            if (gameBoard.deleteLine % 10 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+            if (gameBoard.deleteLine % 1 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick = rg.generateItem(0, colorBlindness, gameBoard);
                 gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
@@ -645,7 +647,7 @@ public class GameBoard2Controller implements Initializable {
         }
 
         if(n==2) {
-            if (gameBoard.deleteLine % 10 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+            if (gameBoard.deleteLine % 1 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick2 = rg.generateItem(0, colorBlindness, gameBoard);
                 gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;

@@ -81,7 +81,7 @@ public class Difficulty2PController {
         Stage stage = (Stage) itemButton.getScene().getWindow();
 
         Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
+        String resolution = properties.getProperty("resolution", "1280x1024");
         String[] dimensions = resolution.split("x");
         double width = Double.parseDouble(dimensions[0]);
         double height = Double.parseDouble(dimensions[1]);
