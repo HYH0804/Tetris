@@ -36,7 +36,6 @@ public enum Item {
         throw new IllegalArgumentException("Invalid Item number: " + num);
     }
 
-
     public static void doItem(GameBoard1 gameBoard, GridPane gridPane, Block itemBlock){
         Item item = itemBlock.getItem();
 
@@ -44,12 +43,14 @@ public enum Item {
             int deleteRow = itemBlock.getX();
             Drawing.updateBoardView(deleteRow,gridPane);
             gameBoard.removeRow(deleteRow);
+            gameBoard.updateScore(10000);
             System.out.println("Row 실행----------------------");
         }
         else if (item==COLUMNDELETE) {
             int deleteColumn = itemBlock.getY();
             Drawing.updateBoardColumnView(deleteColumn,gridPane);
             gameBoard.removeFullColumn(deleteColumn);
+            gameBoard.updateScore(10000);
             System.out.println("Col 실행----------------------");
         }
         else if(item==BLIND){
@@ -58,6 +59,7 @@ public enum Item {
         }
         else if(item==NUCLEAR){
             System.out.println("NUCLEAR 처리");
+            gameBoard.updateScore(10000);
         }
         else{
             System.out.println(item+" 은 해당 순서에 실행하지 않음.");
