@@ -63,7 +63,7 @@
             </rowConstraints>
         </GridPane>
         <Label fx:id="scoreLabel" layoutY="150.0" text="Score: 0" AnchorPane.leftAnchor="300.0"/>
-        <GridPane fx:id="nextLine" gridLinesVisible="true" layoutY="300.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="270.0">
+        <GridPane fx:id="attackBoardView" gridLinesVisible="true" layoutY="300.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="270.0">
             <columnConstraints>
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
@@ -147,7 +147,7 @@
             </rowConstraints>
         </GridPane>
         <Label fx:id="scoreLabel2" layoutY="150.0" text="Score: 0" AnchorPane.rightAnchor="40.0"/>
-        <GridPane fx:id="nextLine2" gridLinesVisible="true" layoutY="300.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="20.0">
+        <GridPane fx:id="attackBoardView2" gridLinesVisible="true" layoutY="300.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="20.0">
             <columnConstraints>
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />

@@ -148,7 +148,7 @@ public class StartController implements Initializable {
         double height = Double.parseDouble(dimensions[1]);
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard2.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("difficulty2P.fxml"));
         Parent root = loader.load();
         Scene scene = twoplayerButton.getScene(); // 현재 Scene을 가져옵니다.
         scene.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.
