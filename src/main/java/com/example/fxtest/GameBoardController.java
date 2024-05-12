@@ -222,7 +222,6 @@ public class GameBoardController implements Initializable {
 
                 //착지시(아이템) , 살포시 안착했을때
                 Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템
-
                 /*if(currentBrick.isItem?) {
                     //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
                 }*/
@@ -329,6 +328,7 @@ public class GameBoardController implements Initializable {
             }
         }
         if(flag==true){
+            gameBoard.updateScore(10000);
             for (int[] row : gameBoard.board) {
                 Arrays.fill(row, 0);
             }
@@ -347,8 +347,8 @@ public class GameBoardController implements Initializable {
             gameBoard.deleteLine=0;
         }
         else{
-            nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
-            //nextBrick=rg.generateItem(difficulty,colorBlindness);
+            //nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
+            nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
         }
         gameBoard.blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
