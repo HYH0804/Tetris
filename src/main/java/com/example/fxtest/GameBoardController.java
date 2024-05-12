@@ -239,7 +239,7 @@ public class GameBoardController implements Initializable {
                     //NPE조심
                     Drawing.updateBoardView(removedRows, boardView, gameBoard.board); //gui 여기서 삭제
                     gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
-
+                    Drawing.animeRow(removedRows, boardView);
                     //System.out.println("완성 줄 삭제 후---------------");
                     //printMatrix();
                     //gravity로 1인지 확인해서 board 업데이트하고
@@ -333,6 +333,7 @@ public class GameBoardController implements Initializable {
                 Arrays.fill(row, 0);
             }
             Drawing.updateBoardView(boardView, gameBoard.board);
+            Drawing.animeNuclear(boardView);
         }
     }
 

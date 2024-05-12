@@ -5,6 +5,8 @@ import com.example.fxtest.GameBoard1;
 import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
 
+import java.util.Collections;
+
 public enum Item {
     NORMAL(1),
     WEIGHT(2),
@@ -42,6 +44,7 @@ public enum Item {
         if(item==ROWDELETE){
             int deleteRow = itemBlock.getX();
             Drawing.updateBoardView(deleteRow,gridPane);
+            Drawing.animeRow(Collections.singletonList(deleteRow), gridPane);
             gameBoard.removeRow(deleteRow);
             gameBoard.updateScore(10000);
             System.out.println("Row 실행----------------------");
@@ -49,6 +52,7 @@ public enum Item {
         else if (item==COLUMNDELETE) {
             int deleteColumn = itemBlock.getY();
             Drawing.updateBoardColumnView(deleteColumn,gridPane);
+            Drawing.animeCol(deleteColumn, gridPane);
             gameBoard.removeFullColumn(deleteColumn);
             gameBoard.updateScore(10000);
             System.out.println("Col 실행----------------------");
