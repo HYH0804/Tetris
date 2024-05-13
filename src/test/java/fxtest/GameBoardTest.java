@@ -13,11 +13,15 @@ import com.example.fxtest.GameBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+<<<<<<< HEAD
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 >>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+=======
+import org.junit.jupiter.api.*;
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
 import java.util.List;
 
@@ -76,6 +80,7 @@ class GameBoardTest {
     }
 
     @Test
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     @DisplayName("RemoveRows() 확인")
@@ -137,6 +142,8 @@ class GameBoardTest {
 
     @Test
 >>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+=======
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
     @DisplayName("getRemovedRows 확인")
     public void testGetRemovedRows(){
 
@@ -155,10 +162,28 @@ class GameBoardTest {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Test
     public void testScore(){
         gameBoard.updateScoreLine(1);
         Assertions.assertEquals(GameBoard1.deleteLine, 1 );
+=======
+    @Test
+    public void testScore(){
+        gameBoard.updateScoreLine(1);
+        Assertions.assertEquals(GameBoard.deleteLine, 1 );
+
+        gameBoard.updateScoreLine(2);
+        Assertions.assertEquals(GameBoard.deleteLine, 3 );
+
+        gameBoard.updateScoreLine(3);
+        Assertions.assertEquals(GameBoard.deleteLine, 6 );
+
+        gameBoard.updateScoreLine(4);
+        Assertions.assertEquals(GameBoard.deleteLine, 10 );
+    }
+
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
         gameBoard.updateScoreLine(2);
         Assertions.assertEquals(GameBoard1.deleteLine, 3 );

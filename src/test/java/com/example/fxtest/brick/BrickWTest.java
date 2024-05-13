@@ -28,14 +28,20 @@ class BrickWTest {
         //then
         Assertions.assertEquals(flag,false);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
     }
 
 
+<<<<<<< HEAD
 =======
     }
 
 >>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+=======
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
     @Test
     void canMoveRight() {
         //given
@@ -67,10 +73,14 @@ class BrickWTest {
 
         //when
 <<<<<<< HEAD
+<<<<<<< HEAD
         flag=brickW.canMoveDown();
 =======
         flag=brickW.canMoveRight();
 >>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+=======
+        flag=brickW.canMoveDown();
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
         //then
         Assertions.assertEquals(flag,true);
@@ -138,6 +148,7 @@ class BrickWTest {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     @Test
     void moveD() {
@@ -179,6 +190,8 @@ class BrickWTest {
         Assertions.assertEquals(blockD.getY(), 2);
     }
 >>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+=======
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
     @Test
     void setCenter_x() {

@@ -30,10 +30,24 @@ public class GameBoardControllerTest {
         Assertions.assertEquals(true, GameBoardController.itemMode);
     }
 
+<<<<<<< HEAD
 /*    @Test
     void fixed(){
         gameBoardController.fixed();
     }*/
+=======
+    @Test
+    void setOption(){
+        GameBoardController.setOptions(0,true);
+        Assertions.assertEquals(0, GameBoardController.difficulty);
+        Assertions.assertEquals(true, GameBoardController.itemMode);
+    }
+
+    @Test
+    void fixed(){
+        gameBoardController.fixed();
+    }
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
     @Test
     void isGameOver(){
@@ -42,7 +56,10 @@ public class GameBoardControllerTest {
     }
 
 
+<<<<<<< HEAD
 =======
     }
 >>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+=======
+>>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 }

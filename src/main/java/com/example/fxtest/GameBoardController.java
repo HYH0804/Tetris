@@ -89,6 +89,7 @@ public class GameBoardController implements Initializable {
 
     //더 이상 못내려갈때 Brick 행렬에 고정 , 노말 블록이면 1 , 아이템 블록이면 그 아이템 숫자 고정
     public void fixed(GameBoard1 gameBoard){
+
         if(currentBrick==null){
             return;
         }
