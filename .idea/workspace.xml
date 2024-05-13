@@ -11,16 +11,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/Drawing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/Drawing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard2Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/brick/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/brick/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/resolution.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/score/easy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/score/easy.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/BrickController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/BrickController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/setting.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/setting.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
