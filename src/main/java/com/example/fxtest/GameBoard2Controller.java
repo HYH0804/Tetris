@@ -167,13 +167,18 @@ public class GameBoard2Controller implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("게임 종료");
 
-            if (gameBoard.gameOver || gameBoard.getScore()<gameBoard2.getScore()) {
+            if (gameBoard.gameOver ) {
                 alert.setHeaderText("PLAYER 2 WIN");
-            } else if (gameBoard2.gameOver || gameBoard.getScore()>gameBoard2.getScore()) {
+            } else if (gameBoard2.gameOver) {
                 alert.setHeaderText("PLAYER 1 WIN");
-            } else {
+            } else if(gameBoard.getScore()<gameBoard2.getScore()){
+                alert.setHeaderText("PLAYER 2 WIN");
+            }else if(gameBoard.getScore()>gameBoard2.getScore()){
+                alert.setHeaderText("PLAYER 1 WIN");
+            }else{
                 alert.setHeaderText("DRAW");
             }
+
             alert.getButtonTypes().setAll(homeButtonType);
 
             result = alert.showAndWait();
@@ -257,6 +262,8 @@ public class GameBoard2Controller implements Initializable {
         try {
             change(boardView);
             change(boardView2);
+            attackchange(attackBoardView);
+            attackchange(attackBoardView2);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -975,6 +982,41 @@ public class GameBoard2Controller implements Initializable {
             rowConstraints.setMinHeight(cellHeight);
             rowConstraints.setPrefHeight(cellHeight);
             rowConstraints.setMaxHeight(cellHeight);
+            boardView.getRowConstraints().add(rowConstraints);
+        }
+    }
+
+    public void attackchange(GridPane boardView) throws IOException {
+        // 해상도에 따라 칸의 크기를 동적으로 조정
+        Properties properties = loadProperties();
+        String resolution = properties.getProperty("resolution", "800x600");
+        String[] dimensions = resolution.split("x");
+        double width = Double.parseDouble(dimensions[0]);
+        double height = Double.parseDouble(dimensions[1]);
+
+        int numRows = 10; // 행의 수
+        int numCols = 10; // 열의 수
+
+        //해상도 바꾸고 싶으면 여기를 바꾼다.
+        cellWidth = height / 30;
+        cellHeight = height / 30;
+        double val = cellWidth/2;
+        boardView.getColumnConstraints().clear();
+        boardView.getRowConstraints().clear();
+
+        for (int i = 0; i < numCols; i++) {
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setMinWidth(val);
+            colConstraints.setPrefWidth(val);
+            colConstraints.setMaxWidth(val);
+            boardView.getColumnConstraints().add(colConstraints);
+        }
+
+        for (int i = 0; i < numRows; i++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setMinHeight(val);
+            rowConstraints.setPrefHeight(val);
+            rowConstraints.setMaxHeight(val);
             boardView.getRowConstraints().add(rowConstraints);
         }
     }
