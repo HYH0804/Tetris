@@ -252,9 +252,7 @@ public class GameBoard2Controller implements Initializable {
             }
         });
 
-        displayNextBrick(nextBrick,nextBrickView);
-        displayNextBrick(nextBrick2,nextBrickView2);
-
+        //여기서 CellWidth 바꾸기
         //change()함수 실행
         try {
             change(boardView);
@@ -262,6 +260,12 @@ public class GameBoard2Controller implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        
+        
+        displayNextBrick(nextBrick,nextBrickView,cellWidth);
+        displayNextBrick(nextBrick2,nextBrickView2,cellWidth);
+
+
 
         setTime(1.0);
         setTime2(1.0);
@@ -345,7 +349,7 @@ public class GameBoard2Controller implements Initializable {
     private void minute10(){
         if(!gameBoard.gameOver) {
             Drawing.colorErase(currentBrick, boardView);
-            Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard);
+            Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard,cellWidth);
 /*      System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");*/
             //printBlock();
@@ -378,7 +382,7 @@ public class GameBoard2Controller implements Initializable {
                     nextBrickView.setVisible(true);
 
 
-                    Drawing.colorFill(currentBrick, boardView);
+                    Drawing.colorFill(currentBrick, boardView,cellWidth);
                     System.out.println("*************Current 색칠 colorFill************");
                     fixed(gameBoard, currentBrick);
                     System.out.println("*************Current 보드 fixed************");
@@ -407,13 +411,13 @@ public class GameBoard2Controller implements Initializable {
 
 
                     Drawing.updateBoardView(removedRows, boardView, gameBoard.board); //gui 여기서 삭제
-                    Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard);
+                    Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard,cellWidth);
                     System.out.println("*************GUI 업뎃************");
 
 
                     gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
                     //NPE조심
-                    Drawing.animeRow(removedRows, boardView);
+                    Drawing.animeRow(removedRows, boardView,cellWidth);
                     System.out.println("줄 삭제 이후");
                     printMatrix(gameBoard);
 
@@ -444,7 +448,7 @@ public class GameBoard2Controller implements Initializable {
                         //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                         System.out.println(currentBrick + "== 스폰 전 Current Brick");
                         gameBoard.attackStart();
-                        Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView);
+                        Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView,cellWidth);
                         gameBoard.attackBoardClean();
                         sponBrick(gameBoard, boardView, nextBrickView, 1);
                         System.out.println("*************Block 새로 스폰************" + currentBrick + "== 스폰 후 CurrentBrick");
@@ -463,7 +467,7 @@ public class GameBoard2Controller implements Initializable {
                     //System.out.println("---------------");
                     currentBrick.moveD();
                     //printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick, boardView);
+                    Drawing.colorFill(currentBrick, boardView,cellWidth);
 
                     //테스트
                     //printMatrix();
@@ -480,7 +484,7 @@ public class GameBoard2Controller implements Initializable {
         private void minute10_2(){
         if(!gameBoard2.gameOver) {
             Drawing.colorErase(currentBrick2, boardView2);
-            Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard);
+            Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard,cellWidth);
 
 /*        System.out.println(difficulty+">> diff");
         System.out.println(itemMode +">> itemMode");*/
@@ -513,7 +517,7 @@ public class GameBoard2Controller implements Initializable {
                     nextBrickView2.setVisible(true);
 
 
-                    Drawing.colorFill(currentBrick2, boardView2);
+                    Drawing.colorFill(currentBrick2, boardView2,cellWidth);
                     fixed(gameBoard2, currentBrick2);
                     //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
                     //Block Item
@@ -539,9 +543,9 @@ public class GameBoard2Controller implements Initializable {
 
                     //NPE조심
                     Drawing.updateBoardView(removedRows, boardView2, gameBoard2.board); //gui 여기서 삭제
-                    Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard);
+                    Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard,cellWidth);
                     gameBoard2.removeFullRows(); //배열에서 삭제 후 점수 업뎃
-                    Drawing.animeRow(removedRows, boardView2);
+                    Drawing.animeRow(removedRows, boardView2,cellWidth);
 
                     //System.out.println("완성 줄 삭제 후---------------");
                     //printMatrix();
@@ -568,7 +572,7 @@ public class GameBoard2Controller implements Initializable {
                         gameBoard2.turnEnd = false;
                         //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
                         gameBoard2.attackStart();
-                        Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2);
+                        Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2,cellWidth);
                         gameBoard2.attackBoardClean();
                         sponBrick(gameBoard2, boardView2, nextBrickView2, 2);
                         chageTime(gameBoard2);
@@ -587,7 +591,7 @@ public class GameBoard2Controller implements Initializable {
                     Drawing.colorErase(currentBrick2, boardView2);
                     //System.out.println("겜은 안끝났고 내려갈 곳도 있고");
                     currentBrick2.moveD();
-                    Drawing.colorFill(currentBrick2, boardView2);
+                    Drawing.colorFill(currentBrick2, boardView2,cellWidth);
 
                     //테스트
                     //printMatrix();
@@ -644,8 +648,8 @@ public class GameBoard2Controller implements Initializable {
             for (int[] row : gameBoard.board) {
                 Arrays.fill(row, 0);
             }
-            Drawing.updateBoardView(boardView, gameBoard.board);
-            Drawing.animeNuclear(boardView);
+            Drawing.updateBoardView(boardView, gameBoard.board,cellWidth);
+            Drawing.animeNuclear(boardView,cellWidth);
         }
     }
 
@@ -688,8 +692,8 @@ public class GameBoard2Controller implements Initializable {
 
         if(n==1) {
             //currentBrick 색칠하고
-            Drawing.colorFill(currentBrick, gridPane);
-            displayNextBrick(nextBrick, nextBrickView);
+            Drawing.colorFill(currentBrick, gridPane,cellWidth);
+            displayNextBrick(nextBrick, nextBrickView,cellWidth);
             //이벤트 장착
             if (isBrickColliding(currentBrick, gameBoard)) {
                 // If there's a collision, handle game over logic here.
@@ -700,8 +704,8 @@ public class GameBoard2Controller implements Initializable {
             }
         }
         else{
-            Drawing.colorFill(currentBrick2, gridPane);
-            displayNextBrick(nextBrick2, nextBrickView);
+            Drawing.colorFill(currentBrick2, gridPane,cellWidth);
+            displayNextBrick(nextBrick2, nextBrickView,cellWidth);
             if (isBrickColliding(currentBrick2, gameBoard)) {
                 // If there's a collision, handle game over logic here.
                 fixed(gameBoard, currentBrick2);
@@ -817,7 +821,7 @@ public class GameBoard2Controller implements Initializable {
                     nextBrickView.setOpacity(1);
                     boardView2.setOpacity(1);
                     nextBrickView2.setOpacity(1);
-                    Drawing.colorFill(currentBrick, boardView);
+                    Drawing.colorFill(currentBrick, boardView,cellWidth);
                     timeline.play();
                     timeline2.play();
                 }
@@ -832,30 +836,30 @@ public class GameBoard2Controller implements Initializable {
                     System.out.println("Right key pressed");
                     brickController.moveR(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
                     // 왼쪽 이동 키가 눌렸을 때의 동작
                     System.out.println("Left key pressed");
                     brickController.moveL(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
                     // 아래 이동 키가 눌렸을 때의 동작
                     brickController.moveD(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                     // 회전 키가 눌렸을 때의 동작
                     System.out.println("Rotate key pressed");
                     brickController.rotate(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
                     //여기는 수직떨구기
                     System.out.println("---------------------------------수직 떨구기 누름");
                     brickController.straightD(currentBrick);
                     if (isHardDropGameOver(currentBrick)) {
-                        Drawing.colorFill(currentBrick,boardView);
+                        Drawing.colorFill(currentBrick,boardView,cellWidth);
                         fixed(gameBoard,currentBrick);
                         System.out.println("수직떨구기");
                         gameBoard.gameOver=true;
@@ -868,7 +872,7 @@ public class GameBoard2Controller implements Initializable {
                         //떨구고 바로 블록 뽑아옴
                         gameBoard.whileGame=true;
                         System.out.println("**************HardDrop************");
-                        Drawing.colorFill(currentBrick,boardView);
+                        Drawing.colorFill(currentBrick,boardView,cellWidth);
                         minute10();
                         timeline.play();
                         //Drawing.colorErase(currentBrick,boardView);
@@ -913,7 +917,7 @@ public class GameBoard2Controller implements Initializable {
                     brickController2.straightD(currentBrick2);
                     //
                     if (isHardDropGameOver(currentBrick2)) {
-                        Drawing.colorFill(currentBrick2,boardView2);
+                        Drawing.colorFill(currentBrick2,boardView2,cellWidth);
                         fixed(gameBoard2,currentBrick2);
                         System.out.println("수직떨구기");
                         gameBoard2.gameOver=true;
@@ -934,7 +938,7 @@ public class GameBoard2Controller implements Initializable {
                 }
                 event.consume();
                 if (gameBoard2.whileGame == true) {
-                    Drawing.colorFill(currentBrick2,boardView2);
+                    Drawing.colorFill(currentBrick2,boardView2,cellWidth);
                 }//색칠하고
             }
     }

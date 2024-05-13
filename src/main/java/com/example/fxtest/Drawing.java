@@ -27,7 +27,7 @@ public class Drawing {
 
 
     //그리드페인에 현재블록 그리기
-    public static void colorFill(Brick brick,GridPane boardView){
+    public static void colorFill(Brick brick,GridPane boardView,double cellWidth){
 
         for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
             int x = block.getX();
@@ -36,7 +36,7 @@ public class Drawing {
             String string = returnItemSymbol(block);
 
             Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
-            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+            label.setFont(Font.font("Arial", FontWeight.BOLD, cellWidth)); //set size
             label.setTextFill(block.getColor()); //색깔도 바꾸고
             boardView.setHalignment(label, javafx.geometry.HPos.CENTER);
             boardView.setValignment(label, javafx.geometry.VPos.CENTER);
@@ -89,11 +89,11 @@ public class Drawing {
         );
     }
 
-    public static void animeRow(List<Integer> fullRows, GridPane boardView) {
+    public static void animeRow(List<Integer> fullRows, GridPane boardView,double cellWidth) {
         for (Integer fullRow : fullRows) {
             //가득찬 줄을 가져온다
             for (int col = 0; col < GameBoard1.WIDTH; col++) {
-                Rectangle rectangle = new Rectangle(GameBoardController.cellWidth, GameBoardController.cellWidth, Color.BLACK);
+                Rectangle rectangle = new Rectangle(cellWidth, cellWidth, Color.BLACK);
                 // GridPane에 Rectangle 추가
                 boardView.add(rectangle, col, fullRow);
             }
@@ -111,10 +111,10 @@ public class Drawing {
         //Gameboard클래스의 removerow함수에서 anime(fullrow)를 실행한다.
     }
 
-    public static void animeCol(int col,GridPane boardView) {
+    public static void animeCol(int col,GridPane boardView,double cellWidth) {
         //가득찬 줄을 가져온다
         for (int row = 0; row < GameBoard1.HEIGHT; row++) {
-            Rectangle rectangle = new Rectangle(GameBoardController.cellWidth,GameBoardController.cellWidth,Color.BLACK);
+            Rectangle rectangle = new Rectangle(cellWidth,cellWidth,Color.BLACK);
  /*           GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
             GridPane.setValignment(label, javafx.geometry.VPos.CENTER);*/
 
@@ -136,10 +136,10 @@ public class Drawing {
     }
 
 
-    public static void animeNuclear(GridPane boardView) {
+    public static void animeNuclear(GridPane boardView,double cellWidth) {
         for (int row = 0; row < GameBoard1.HEIGHT; row++) {
             for (int col = 0; col < GameBoard1.WIDTH; col++) {
-                Rectangle rectangle = new Rectangle(GameBoardController.cellWidth, GameBoardController.cellWidth, Color.BLACK);
+                Rectangle rectangle = new Rectangle(cellWidth, cellWidth, Color.BLACK);
                 // GridPane에 Rectangle 추가
                 boardView.add(rectangle, col, row);
             }
@@ -159,7 +159,7 @@ public class Drawing {
 
 
     //줄 지웠을때 Gridpane만 냅두고 위에 객체들 새로 그리기
-    public static void updateBoardView(GridPane boardView, int[][] board){ //업데이트 전 GUI board를 업데이트 된 배열 board에 맞춰 새로 그리기
+    public static void updateBoardView(GridPane boardView, int[][] board,double cellWidth){ //업데이트 전 GUI board를 업데이트 된 배열 board에 맞춰 새로 그리기
         // GridPane에서 제거할 Label 객체들을 담을 리스트 생성
         List<Node> labelsToRemove = new ArrayList<>();
 
@@ -181,7 +181,7 @@ public class Drawing {
                     String string = returnItemSymbol(board[y][x]);
                     Label label = new Label(string);
 
-                    label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, cellWidth)); //set size
                     label.setTextFill(Color.BLACK);
                     boardView.setHalignment(label, javafx.geometry.HPos.CENTER);
                     boardView.setValignment(label, javafx.geometry.VPos.CENTER);
@@ -283,7 +283,7 @@ public class Drawing {
     }
 
     //어택 받으면 위로 gui올리는 함수
-    public static void attackUpdateBoardView(List<List<Integer>> attackRows ,GridPane boardView){
+    public static void attackUpdateBoardView(List<List<Integer>> attackRows ,GridPane boardView,double cellWidth){
         if(attackRows.size()!=0){
             int i=0;
             for (List<Integer> count : attackRows) { // 삭제해야 될 라인 수만큼 반복
@@ -302,7 +302,7 @@ public class Drawing {
                 for (int y = 0; y < 10; y++) {
                     Label label = new Label("H");
 
-                    label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, cellWidth)); //set size
                     label.setTextFill(Color.BLACK);
                     GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
                     GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
@@ -355,16 +355,6 @@ public class Drawing {
     }
 
 
-    public static Label newLabel(String text , Color color){
-        Label label = new Label(text); //이거 아이템 들어가면 고민 좀 해야될듯
-        label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
-        label.setTextFill(color);
-        GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-        GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
-        return label;
-    }
-
-
     public static String returnItemSymbol(Block block){
         Item item = block.getItem();
         if(item==Item.NORMAL){
@@ -407,7 +397,7 @@ public class Drawing {
         }
     }
 
-    public static void displayNextBrick(Brick brick, GridPane nextBrickView) {
+    public static void displayNextBrick(Brick brick, GridPane nextBrickView,double cellWidth) {
         nextBrickView.getChildren().clear(); // 이전에 표시된 블록 제거
 
         for (Block block : brick.getBlockList()) { // currentBrick에서 Block 배열을 가져오는 가정
@@ -417,7 +407,7 @@ public class Drawing {
             String string = returnItemSymbol(block);
 
             Label label = new Label(string); //여기서 아이템들 폰트 바꾸고
-            label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoardController.cellWidth)); //set size
+            label.setFont(Font.font("Arial", FontWeight.BOLD, cellWidth)); //set size
             label.setTextFill(block.getColor()); //색깔도 바꾸고
             nextBrickView.setHalignment(label, javafx.geometry.HPos.CENTER);
             nextBrickView.setValignment(label, javafx.geometry.VPos.CENTER);

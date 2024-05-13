@@ -2,6 +2,7 @@ package com.example.fxtest.brick;
 
 import com.example.fxtest.Drawing;
 import com.example.fxtest.GameBoard1;
+import com.example.fxtest.SettingModel;
 import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
 
@@ -44,7 +45,11 @@ public enum Item {
         if(item==ROWDELETE){
             int deleteRow = itemBlock.getX();
             Drawing.updateBoardView(deleteRow,gridPane);
-            Drawing.animeRow(Collections.singletonList(deleteRow), gridPane);
+
+            int height = SettingModel.getHeight();
+            double cellWidth = height / 30;
+
+            Drawing.animeRow(Collections.singletonList(deleteRow), gridPane, cellWidth);
             gameBoard.removeRow(deleteRow);
             gameBoard.updateScore(10000);
             System.out.println("Row 실행----------------------");
@@ -52,7 +57,11 @@ public enum Item {
         else if (item==COLUMNDELETE) {
             int deleteColumn = itemBlock.getY();
             Drawing.updateBoardColumnView(deleteColumn,gridPane);
-            Drawing.animeCol(deleteColumn, gridPane);
+
+            int height = SettingModel.getHeight();
+            double cellWidth = height / 30;
+
+            Drawing.animeCol(deleteColumn, gridPane,cellWidth);
             gameBoard.removeFullColumn(deleteColumn);
             gameBoard.updateScore(10000);
             System.out.println("Col 실행----------------------");

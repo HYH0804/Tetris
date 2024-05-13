@@ -5,38 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d29e2c0-d5e4-4f98-aa52-0be93741d3bb" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/SettingModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/com/example/fxtest/GameBoard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/example/fxtest/GameBoard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/BrickController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/BrickController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/ColorBlindness.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/ColorBlindness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/Drawing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/Drawing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoard2Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/GameBoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/KeySettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/KeySettingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/SettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/SettingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/brick/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/brick/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/resolution.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/score/easy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/score/easy.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/setting.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/setting.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickITest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickWTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickWTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/BrickControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/BrickControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/GetKeyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/GetKeyTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +51,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -85,7 +70,7 @@
     "Gradle.Tetris [:Main.main()].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging develop",
+    "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

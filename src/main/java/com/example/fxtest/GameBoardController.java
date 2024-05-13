@@ -150,7 +150,7 @@ public class GameBoardController implements Initializable {
             }
         });
 
-        displayNextBrick(nextBrick,nextBrickView);
+        displayNextBrick(nextBrick,nextBrickView,cellWidth);
 
         //change()함수 실행
         try {
@@ -215,7 +215,7 @@ public class GameBoardController implements Initializable {
                     gameBoard.turnEnd = true;
                     nextBrickView.setVisible(true);
 
-                    Drawing.colorFill(currentBrick, boardView);
+                    Drawing.colorFill(currentBrick, boardView,cellWidth);
                     fixed(gameBoard);
                     //아이템 기능을 빼고 아무슨아이템이냐 받고 호출
                     //Block Item
@@ -240,7 +240,7 @@ public class GameBoardController implements Initializable {
                     //NPE조심
                     Drawing.updateBoardView(removedRows, boardView, gameBoard.board); //gui 여기서 삭제
                     gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
-                    Drawing.animeRow(removedRows, boardView);
+                    Drawing.animeRow(removedRows, boardView,cellWidth);
                     //System.out.println("완성 줄 삭제 후---------------");
                     //printMatrix();
                     //gravity로 1인지 확인해서 board 업데이트하고
@@ -281,7 +281,7 @@ public class GameBoardController implements Initializable {
                     Drawing.colorErase(currentBrick, boardView);
                     System.out.println("겜은 안끝났고 내려갈 곳도 있고");
                     currentBrick.moveD();
-                    Drawing.colorFill(currentBrick, boardView);
+                    Drawing.colorFill(currentBrick, boardView,cellWidth);
 
                     //테스트
                     //printMatrix();
@@ -333,8 +333,8 @@ public class GameBoardController implements Initializable {
             for (int[] row : gameBoard.board) {
                 Arrays.fill(row, 0);
             }
-            Drawing.updateBoardView(boardView, gameBoard.board);
-            Drawing.animeNuclear(boardView);
+            Drawing.updateBoardView(boardView, gameBoard.board,cellWidth);
+            Drawing.animeNuclear(boardView,cellWidth);
         }
     }
 
@@ -357,8 +357,8 @@ public class GameBoardController implements Initializable {
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
         //currentBrick 색칠하고
-        Drawing.colorFill(currentBrick,boardView);
-        displayNextBrick(nextBrick,nextBrickView);
+        Drawing.colorFill(currentBrick,boardView,cellWidth);
+        displayNextBrick(nextBrick,nextBrickView,cellWidth);
         //이벤트 장착
         if (isBrickColliding(currentBrick)) {
             // If there's a collision, handle game over logic here.
@@ -530,30 +530,30 @@ public class GameBoardController implements Initializable {
                     System.out.println("Right key pressed");
                     brickController.moveR(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
                     // 왼쪽 이동 키가 눌렸을 때의 동작
                     System.out.println("Left key pressed");
                     brickController.moveL(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
                     // 아래 이동 키가 눌렸을 때의 동작
                     brickController.moveD(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                     // 회전 키가 눌렸을 때의 동작
                     System.out.println("Rotate key pressed");
                     brickController.rotate(currentBrick);
                     printBlock(currentBrick);
-                    Drawing.colorFill(currentBrick,boardView);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
                     //여기는 수직떨구기
                     System.out.println("---------------------------------수직 떨구기 누름");
                     brickController.straightD(currentBrick);
                     if (isHardDropGameOver()) {
-                        Drawing.colorFill(currentBrick,boardView);
+                        Drawing.colorFill(currentBrick,boardView,cellWidth);
                         fixed(gameBoard);
                         System.out.println("수직떨구기");
                         destroy();
@@ -564,12 +564,12 @@ public class GameBoardController implements Initializable {
                         gameBoard.turnEnd = true;
                         //시작부터 바로 Space바
                         gameBoard.whileGame=true;
-                        Drawing.colorFill(currentBrick, boardView);
+                        Drawing.colorFill(currentBrick, boardView,cellWidth);
                         //떨구고 바로 블록 뽑아옴
                         minute10();
                         timeline.play();
                         if(gameBoard.gameOver){
-                            Drawing.colorFill(currentBrick, boardView);
+                            Drawing.colorFill(currentBrick, boardView,cellWidth);
                         }
                         System.out.println("---------------------------------재게");
                         System.out.println("수직떨구기");
