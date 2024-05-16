@@ -43,8 +43,8 @@
                 <RowConstraints />
             </rowConstraints>
         </GridPane>
-        <Label text="Next Block" layoutY="20.0" AnchorPane.leftAnchor="300.0"/>
-        <GridPane fx:id="nextBrickView" gridLinesVisible="false" layoutY="50.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="250.0">
+        <Label text="Next Block" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0"/>
+        <GridPane fx:id="nextBrickView" gridLinesVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
                 <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
@@ -58,8 +58,8 @@
                 <RowConstraints minHeight="20.0" prefHeight="20.0" />
             </rowConstraints>
         </GridPane>
-        <Label fx:id="scoreLabel" layoutY="150.0" text="Score: 0" AnchorPane.leftAnchor="300.0"/>
-        <GridPane fx:id="attackBoardView" gridLinesVisible="true" layoutY="300.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.leftAnchor="270.0">
+        <Label fx:id="scoreLabel" AnchorPane.bottomAnchor="100.0" text="Score: 0" AnchorPane.leftAnchor="160.0"/>
+        <GridPane fx:id="attackBoardView" gridLinesVisible="true" layoutY="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="270.0">
             <columnConstraints>
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
@@ -86,7 +86,7 @@
             </rowConstraints>
         </GridPane>
 
-        <GridPane fx:id="boardView2" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="200.0" AnchorPane.rightAnchor="200.0">
+        <GridPane fx:id="boardView2" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.rightAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="20.0" />
@@ -123,8 +123,8 @@
                 <RowConstraints />
             </rowConstraints>
         </GridPane>
-        <Label text="Next Block" layoutY="20.0" AnchorPane.rightAnchor="20.0"/>
-        <GridPane fx:id="nextBrickView2" gridLinesVisible="false" layoutY="50.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="20.0">
+        <Label text="Next Block" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="10.0"/>
+        <GridPane fx:id="nextBrickView2" gridLinesVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
                 <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
@@ -138,8 +138,8 @@
                 <RowConstraints minHeight="20.0" prefHeight="20.0" />
             </rowConstraints>
         </GridPane>
-        <Label fx:id="scoreLabel2" layoutY="150.0" text="Score: 0" AnchorPane.rightAnchor="40.0"/>
-        <GridPane fx:id="attackBoardView2" gridLinesVisible="true" layoutY="300.0" prefHeight="80.0" prefWidth="80.0" AnchorPane.rightAnchor="20.0">
+        <Label fx:id="scoreLabel2" AnchorPane.bottomAnchor="100.0" text="Score: 0" AnchorPane.rightAnchor="130.0"/>
+        <GridPane fx:id="attackBoardView2" gridLinesVisible="true" AnchorPane.bottomAnchor="0.0"  AnchorPane.rightAnchor="270.0">
             <columnConstraints>
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
                 <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
