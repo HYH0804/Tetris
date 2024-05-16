@@ -31,9 +31,30 @@ public class KeySettingController implements Initializable {
     @FXML
     private VBox keySettingVbox;
 
-    private final static int LABELNUM = 5;
+    @FXML
+    private Label rotate1;
+    @FXML
+    private Label moveLeft1;
+    @FXML
+    private Label moveRight1;
+    @FXML
+    private Label moveDown1;
+    @FXML
+    private Label hardDrop1;
+    @FXML
+    private Label rotate2;
+    @FXML
+    private Label moveLeft2;
+    @FXML
+    private Label moveRight2;
+    @FXML
+    private Label moveDown2;
+    @FXML
+    private Label hardDrop2;
+
+    private final static int LABELNUM = 10;
     private Map<Label,String> keyMap = new HashMap<>();
-    private static Boolean[] buttonClicked = {false,false,false,false,false};
+    private static Boolean[] buttonClicked = {false,false,false,false,false,false,false,false,false,false};
     private Label[] labelSet = new Label[LABELNUM];
 
     private final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop"};
@@ -42,7 +63,7 @@ public class KeySettingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Node> children = keySettingVbox.getChildren();
+        /*ObservableList<Node> children = keySettingVbox.getChildren();
         int idx = 0;
         for(Node child : children){
             if (child instanceof Label) {
@@ -50,7 +71,8 @@ public class KeySettingController implements Initializable {
                 labelSet[idx] = label;
                 idx++;
             }
-        }
+        }*/
+        labelInit();
 
         // 핸들러
         for(int i = 0; i < LABELNUM; i++) {
@@ -255,6 +277,19 @@ public class KeySettingController implements Initializable {
                 }
             }
         }
+    }
+
+    private void labelInit() {
+        labelSet[0] = rotate1;
+        labelSet[1] = moveLeft1;
+        labelSet[2] = moveRight1;
+        labelSet[3] = moveDown1;
+        labelSet[4] = hardDrop1;
+        labelSet[5] = rotate2;
+        labelSet[6] = moveLeft2;
+        labelSet[7] = moveRight2;
+        labelSet[8] = moveDown2;
+        labelSet[9] = hardDrop2;
     }
 
 }

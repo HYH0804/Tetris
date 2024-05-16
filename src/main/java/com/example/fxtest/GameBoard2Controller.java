@@ -24,6 +24,7 @@ import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
@@ -88,24 +89,39 @@ public class GameBoard2Controller implements Initializable {
     public static boolean timeMode;//시간 제한 모드 확인
 
     //타임라인 그 시간으로 시작
-    void startTimeLine(double x){
+    void startTimeLine(double x,int player, Timeline timeline){
         timeline.stop();
         System.out.println("startTimeLine실행, double x : " + x);
-        setTime(x);
-        timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
-        timeline.play(); // Timeline 시작
+        setTime(x,player);
+        if(player==1){
+            this.timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
+            this.timeline.play(); // Timeline 시작
+        }
+        else{
+            this.timeline2.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
+            this.timeline2.play(); // Timeline 시작
+        }
+
     }
 
 
 
     //타임라인 시간 설정 메서드
-    void setTime(double x){
+    void setTime(double x,int player){
+        if(player==1) {
+            this.timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(x), event -> {
 
-        timeline = new Timeline(
-                new KeyFrame(Duration.seconds(x), event -> {
+                        minute10(); //x초만큼의 속도
+                    }));
+        }
+        else{
+            this.timeline2 = new Timeline(
+                    new KeyFrame(Duration.seconds(x), event -> {
 
-                    minute10(); //x초만큼의 속도
-                }));
+                        minute10_2(); //x초만큼의 속도
+                    }));
+        }
     }
 
     void setTime2(double x){
@@ -229,8 +245,8 @@ public class GameBoard2Controller implements Initializable {
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
         nextBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
 
-        brickController = BrickController.getBrickController(); //키 값 전부 field에 세팅
-        brickController2 = BrickController.getBrickController();
+        brickController = new BrickController(SettingModel.getRotate1(),SettingModel.getMoveL1(), SettingModel.getMoveR1(),SettingModel.getMoveD1(),SettingModel.getHardDrop1()); //키 값 전부 field에 세팅
+        brickController2 = new BrickController(SettingModel.getRotate2(),SettingModel.getMoveL2(), SettingModel.getMoveR2(),SettingModel.getMoveD2(),SettingModel.getHardDrop2());
         // GridPane에 키 이벤트 핸들러 등록
 
         //보드2도 등록해야됨
@@ -274,8 +290,8 @@ public class GameBoard2Controller implements Initializable {
 
 
 
-        setTime(1.0);
-        setTime2(1.0);
+        setTime(1.0,1);
+        setTime(1.0,2);
         timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
         timeline.play(); // Timeline 시작
         timeline2.setCycleCount(Timeline.INDEFINITE); // 무한 반복 설정
@@ -319,27 +335,41 @@ public class GameBoard2Controller implements Initializable {
                 return;
             }
             if (isLeftPlayerControl(event)) {
-                regiBrickEvent(event);
-            } else if (isRightPlayerControl(event)) {
-                regi2(event);
+                regiBrickEvent(brickController,currentBrick,boardView,gameBoard,nextBrickView,timeline,1,event);
+            }
+            if (isRightPlayerControl(event)){
+                regiBrickEvent(brickController2,currentBrick2,boardView2,gameBoard2,nextBrickView2,timeline2,2,event);
             }
             event.consume(); // Ensure the event is not propagated further unnecessarily
         });
     }
 
     private boolean isLeftPlayerControl(KeyEvent event) {
-        // Define keys for the left player
-        return event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN ||
-                event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT ||
-                event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.BACK_SPACE ||
-                event.getCode() == KeyCode.ESCAPE ;
+        for (int i =0; i<5; i++){
+            if(event.getCode() ==  getKeyCodeFromString(SettingModel.keyVal.get(i)) || event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.BACK_SPACE){
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isRightPlayerControl(KeyEvent event) {
-        // Define keys for the right player
-        return event.getCode() == KeyCode.W || event.getCode() == KeyCode.A ||
-                event.getCode() == KeyCode.S || event.getCode() == KeyCode.D ||
-                event.getCode() == KeyCode.X;
+        for (int i =5; i<10; i++){
+            if(event.getCode() ==  getKeyCodeFromString(SettingModel.keyVal.get(i)) || event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.BACK_SPACE){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private KeyCode getKeyCodeFromString(String keyString) {
+        try {
+            Field field = KeyCode.class.getField(keyString);
+            return (KeyCode) field.get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -353,7 +383,7 @@ public class GameBoard2Controller implements Initializable {
     //줄 꽉차면 없애고 그 윗줄 내리고
     //어느 한계 선 이상이 되면 끝인지 매초 확인하고 맞으면 종료
     //아이템은 총 2가지 케이스 >> (1) 떨어지면 바로 작동 (2) 줄 삭제가 되어야 작동
-    private void minute10(){
+    private void minute10(){ //currentBrick , boardView, attackBoardBiew , gameBoard, nextBrickView, timeLine , gameBoard2 , attackBoardView2
         if(!gameBoard.gameOver) {
             Drawing.colorErase(currentBrick, boardView);
             Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard,cellWidth);
@@ -459,7 +489,7 @@ public class GameBoard2Controller implements Initializable {
                         gameBoard.attackBoardClean();
                         sponBrick(gameBoard, boardView, nextBrickView, 1);
                         System.out.println("*************Block 새로 스폰************" + currentBrick + "== 스폰 후 CurrentBrick");
-                        chageTime(gameBoard);
+                        chageTime(gameBoard,1,timeline);
                         //스폰되자마자 블록 아이템 수행
                         //Item.sponDoItem(currentBrick, gameBoard, boardView);
 
@@ -582,7 +612,7 @@ public class GameBoard2Controller implements Initializable {
                         Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2,cellWidth);
                         gameBoard2.attackBoardClean();
                         sponBrick(gameBoard2, boardView2, nextBrickView2, 2);
-                        chageTime(gameBoard2);
+                        chageTime(gameBoard2,2,timeline2);
 
 
                         //스폰되자마자 블록 아이템 수행
@@ -614,25 +644,33 @@ public class GameBoard2Controller implements Initializable {
         }
     }
 
-    private void chageTime(GameBoard1 gameBoard) {
-        if((gameBoard.deleteLine%10==0 && gameBoard.deleteLine!=0) || gameBoard.blockSpon%20 ==0) {
+    private void chageTime(GameBoard1 gameBoard,int player,Timeline timeline) {
+        if((gameBoard.deleteLine%3==0 && gameBoard.deleteLine!=0) || gameBoard.blockSpon%20 ==0) {
+            gameBoard.deleteLine=0;
+            gameBoard.blockSpon=0;
             gameBoard.downScore++;
             System.out.println("changeTime 실행");
-            startTimeLine(changeSpeed(difficulty, gameBoard));
+            startTimeLine(changeSpeed(difficulty, gameBoard), player,timeline);
         }
     }
 
     public double changeSpeed(int difficulty, GameBoard1 gameBoard){
         if(difficulty==0){ //이지
             gameBoard.speed=gameBoard.speed*0.92;
+            System.out.println("difficulty = " + difficulty);
+            System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
         }
         else if(difficulty==1){ //노말
             gameBoard.speed= gameBoard.speed*0.9;
+            System.out.println("difficulty = " + difficulty);
+            System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
         }
         else{ //하드
             gameBoard.speed= gameBoard.speed*0.88;
+            System.out.println("difficulty = " + difficulty);
+            System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
         }
     }
@@ -810,8 +848,8 @@ public class GameBoard2Controller implements Initializable {
 
 
 
-    //무게추 같은 경우에는 로테이트 함수 구현은 해놔야됨. 바디는 냅두고
-    private void regiBrickEvent(KeyEvent event) {
+/*    //무게추 같은 경우에는 로테이트 함수 구현은 해놔야됨. 바디는 냅두고
+    private void regiBrickEvent(BrickController brickController,KeyEvent event) {
             Drawing.colorErase(currentBrick,boardView);
             String keyValue = event.getCode().toString();
             if (event.getCode() == KeyCode.ESCAPE) {
@@ -893,6 +931,91 @@ public class GameBoard2Controller implements Initializable {
                     //Drawing.colorFill(currentBrick,boardView);
                 }//색칠하고
             }
+    }*/
+
+    //무게추 같은 경우에는 로테이트 함수 구현은 해놔야됨. 바디는 냅두고
+    private void regiBrickEvent(BrickController brickController, Brick currentBrick,GridPane boardView,GameBoard1 gameBoard,GridPane nextBrickView, Timeline timeline,int player, KeyEvent event) {
+            Drawing.colorErase(currentBrick,boardView);
+            String keyValue = event.getCode().toString();
+            if (event.getCode() == KeyCode.ESCAPE) {
+                gameBoard.pause = !gameBoard.pause;
+                if(gameBoard.pause) {
+                    boardView.setOpacity(0);
+                    nextBrickView.setOpacity(0);
+                    timeline.stop();
+                } else {
+                    boardView.setOpacity(1);
+                    nextBrickView.setOpacity(1);
+                    timeline.play();
+                }
+            } else if (event.getCode() == KeyCode.BACK_SPACE) {
+                // 백스페이스 키가 눌렸을 때의 동작 (게임 종료)
+                Stage stage = (Stage) boardView.getScene().getWindow();
+                timeline.stop(); // 타임라인 애니메이션을 정지합니다.
+                stage.close(); // 현재 스테이지를 닫습니다.
+            }
+            if (!gameBoard.pause) {
+                if (keyValue.equals(brickController.getMOVER()) || keyValue.toLowerCase().equals(brickController.getMOVER())) {
+                    // 오른쪽 이동 키가 눌렸을 때의 동작
+                    System.out.println("Right key pressed");
+                    brickController.moveR(currentBrick);
+                    printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
+                } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
+                    // 왼쪽 이동 키가 눌렸을 때의 동작
+                    System.out.println("Left key pressed");
+                    brickController.moveL(currentBrick);
+                    printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
+                } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
+                    // 아래 이동 키가 눌렸을 때의 동작
+                    brickController.moveD(currentBrick);
+                    printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
+                } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
+                    // 회전 키가 눌렸을 때의 동작
+                    System.out.println("Rotate key pressed");
+                    brickController.rotate(currentBrick);
+                    printBlock(currentBrick);
+                    Drawing.colorFill(currentBrick,boardView,cellWidth);
+                } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
+                    //여기는 수직떨구기
+                    System.out.println("---------------------------------수직 떨구기 누름");
+                    brickController.straightD(currentBrick);
+                    if (isHardDropGameOver(currentBrick)) {
+                        Drawing.colorFill(currentBrick,boardView,cellWidth);
+                        fixed(gameBoard,currentBrick);
+                        System.out.println("수직떨구기");
+                        destroy();
+                    } else {
+                        //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
+                        timeline.stop();
+                        System.out.println("---------------------------------정지");
+                        gameBoard.turnEnd = true;
+                        //시작부터 바로 Space바
+                        gameBoard.whileGame=true;
+                        Drawing.colorFill(currentBrick, boardView,cellWidth);
+                        //떨구고 바로 블록 뽑아옴
+                        if(player==1) {
+                            minute10();
+                        }
+                        else {
+                            minute10_2();
+                        }
+                        timeline.play();
+                        if(gameBoard.gameOver){
+                            Drawing.colorFill(currentBrick, boardView,cellWidth);
+                        }
+                        System.out.println("---------------------------------재게");
+                        System.out.println("수직떨구기");
+                    }
+                }
+                event.consume();
+                if (gameBoard.whileGame == true) {
+                    //Drawing.colorFill(currentBrick,boardView);
+                }//색칠하고
+            }
+
     }
 
     private void regi2(KeyEvent event){

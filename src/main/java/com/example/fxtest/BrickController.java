@@ -18,21 +18,14 @@ public class BrickController{
     private String HARDDROP;
 
 
-
-    //싱글톤
-    private static BrickController brickController = new BrickController();
-
-    public static BrickController getBrickController() {
-        return brickController;
-    }
-
-    private BrickController(){
+    BrickController(String rotate, String moveL, String moveR, String moveD, String hardDrop){
         // SettingController.getKey(); //키 값들 StartKey 리스트로 가져오기
-        ROTATE= SettingModel.keyVal.get(0);
-        MOVEL= SettingModel.keyVal.get(1);
-        MOVER= SettingModel.keyVal.get(2);
-        MOVED= SettingModel.keyVal.get(3);
-        HARDDROP= SettingModel.keyVal.get(4);
+        SettingModel.init();
+        this.ROTATE= rotate;
+        this.MOVEL= moveL;
+        this.MOVER= moveR;
+        this.MOVED= moveD;
+        this.HARDDROP= hardDrop;
     }
     //싱글톤
 

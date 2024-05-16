@@ -8,15 +8,15 @@
    <VBox fx:id="keySettingVbox" alignment="CENTER" spacing="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0">
       <children>
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Rotate" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true" />
-         <Label fx:id="rotate" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="rotate" />
+         <Label fx:id="rotate1" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="rotate" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Left" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true"/>
-         <Label fx:id="moveLeft" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveLeft" />
+         <Label fx:id="moveLeft1" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveLeft" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Right" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true"/>
-         <Label fx:id="moveRight" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveRight" />
+         <Label fx:id="moveRight1" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveRight" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Down" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true"/>
-         <Label fx:id="moveDown" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveDown" />
+         <Label fx:id="moveDown1" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="moveDown" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Drop" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true"/>
-         <Label fx:id="hardDrop" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="hardDrop" />
+         <Label fx:id="hardDrop1" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="hardDrop" />
       </children>
    </VBox>
    <VBox fx:id="keySettingVbox2" alignment="CENTER" spacing="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0">

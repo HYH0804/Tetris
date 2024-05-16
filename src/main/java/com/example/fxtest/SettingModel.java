@@ -10,7 +10,7 @@ import java.util.Properties;
 public class SettingModel {
 
     // you should change public statics
-    public static List<String> keyVal = new ArrayList<>(); // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight"
+    public static List<String> keyVal = new ArrayList<>(); // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight" * 2
 
     public static int[] resolutionVal;  // index: "width", "height"
     public static int colorBlindnessVal = -1; // -1: not init, 0: X. 1: O
@@ -27,7 +27,8 @@ public class SettingModel {
         // if one of these is not loaded
         //if (keyVal == null || resolutionVal == null || colorBlindnessVal == -1) {
           if (properties == null) {
-            try {
+
+              try {
                 FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
                 properties = new Properties();
                 properties.load(in);
@@ -38,8 +39,12 @@ public class SettingModel {
 
             // keyVal
             for(int i = 0; i < buttonName.length; i++){
-                keyVal.add(properties.getProperty(buttonName[i]));
+                keyVal.add(properties.getProperty(buttonName[i] + "1"));
             }
+            // 2P
+              for(int i = 0; i < buttonName.length; i++){
+                  keyVal.add(properties.getProperty(buttonName[i] + "2"));
+              }
 
             // resolutionVal
             resolutionVal = new int[2];
@@ -60,7 +65,11 @@ public class SettingModel {
 
         // move Val to properties
         for (int i = 0; i < 5; i++) { // keyVal
-            properties.setProperty(buttonName[i], keyVal.get(i));
+            properties.setProperty(buttonName[i]+"1", keyVal.get(i));
+        }
+        // 2P
+        for (int i = 0; i < 5; i++) { // keyVal
+            properties.setProperty(buttonName[i]+"2", keyVal.get(i+5));
         }
         properties.setProperty("resolution", resolutionVal[0] + "x" + resolutionVal[1]); // resolutionVal
         properties.setProperty("colorBlindness", Integer.toString(colorBlindnessVal));
@@ -85,8 +94,11 @@ public class SettingModel {
     public static void resetSetting() {
         init(); // init 실행하면 작성 안해도 됨
 
-        String[] keyReset = {"UP","LEFT","RIGHT","DOWN","SPACE"};
-        for(int i = 0; i < 5; i++) {
+        // create new properties
+        properties = new Properties();
+
+        String[] keyReset = {"UP","LEFT","RIGHT","DOWN","SPACE", "W", "A", "D", "S", "X"};
+        for(int i = 0; i < 10; i++) {
             keyVal.set(i, keyReset[i]);
         }
         resolutionVal[0] = 800;
@@ -97,30 +109,57 @@ public class SettingModel {
         saveProp();
     }
 
+
+
     // index: "rotate", "moveLeft", "moveRight", "moveDown", "straight" // index: "width", "height" // -1: not init, 0: X. 1: O
-    public static String getRotate() {
+    public static String getRotate1() {
         init();
         return keyVal.get(0);
     }
 
-    public static String getMoveL() {
+    public static String getMoveL1() {
         init();
         return keyVal.get(1);
     }
 
-    public static String getMoveR() {
+    public static String getMoveR1() {
         init();
         return keyVal.get(2);
     }
 
-    public static String getMoveD() {
+    public static String getMoveD1() {
         init();
         return keyVal.get(3);
     }
 
-    public static String getHardDrop() {
+    public static String getHardDrop1() {
         init();
         return keyVal.get(4);
+    }
+
+    public static String getRotate2() {
+        init();
+        return keyVal.get(5);
+    }
+
+    public static String getMoveL2() {
+        init();
+        return keyVal.get(6);
+    }
+
+    public static String getMoveR2() {
+        init();
+        return keyVal.get(7);
+    }
+
+    public static String getMoveD2() {
+        init();
+        return keyVal.get(8);
+    }
+
+    public static String getHardDrop2() {
+        init();
+        return keyVal.get(9);
     }
 
     public static int getWidth() {
