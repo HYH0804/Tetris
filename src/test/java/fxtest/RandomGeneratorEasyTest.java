@@ -1,10 +1,7 @@
 package fxtest;
 
-
-<<<<<<< HEAD
 import com.example.fxtest.GameBoard1;
-=======
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+
 import com.example.fxtest.RandomGenerator;
 import com.example.fxtest.brick.*;
 import org.junit.jupiter.api.Test;
@@ -21,11 +18,9 @@ public class RandomGeneratorEasyTest {
         int totalRuns = 1000;
         int difficulty = 0; // Test for easy mode
         boolean colorBlindness = false; // Not color blind
-<<<<<<< HEAD
-        GameBoard1 gameBoard= new GameBoard1();
-=======
 
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+        GameBoard1 gameBoard= new GameBoard1();
+
         // Initialize counts
         counts.put(BrickJ.class, 0);
         counts.put(BrickL.class, 0);
@@ -37,11 +32,8 @@ public class RandomGeneratorEasyTest {
 
         // Generate bricks and count each type
         for (int i = 0; i < totalRuns; i++) {
-<<<<<<< HEAD
+
             Brick brick = generator.genarateNormal(difficulty, colorBlindness, gameBoard); // Correct method name
-=======
-            Brick brick = generator.genarateNormal(difficulty, colorBlindness); // Correct method name
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
             counts.put(brick.getClass(), counts.getOrDefault(brick.getClass(), 0) + 1);
         }
 

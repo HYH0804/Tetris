@@ -1,0 +1,9 @@
+fxtest\RandomGeneratorEasyTest.class
+fxtest\GetKeyTest.class
+fxtest\RandomGeneratorHardTest.class
+com\example\fxtest\GameBoard1Test.class
+fxtest\MainTest.class
+com\example\fxtest\brick\ScoreboardControllerTest.class
+fxtest\ResetButtonTest.class
+fxtest\RandomGeneratorNormalTest.class
+fxtest\SettingControllerTest.class

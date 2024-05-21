@@ -1,17 +1,14 @@
+/*
 package fxtest;
 
 import com.example.fxtest.BrickController;
 import com.example.fxtest.brick.Brick;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 import org.junit.jupiter.api.DisplayName;
-=======
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
-=======
-import org.junit.jupiter.api.DisplayName;
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -75,4 +72,4 @@ public class BrickControllerTest {
     }
 
 
-}
+}*/

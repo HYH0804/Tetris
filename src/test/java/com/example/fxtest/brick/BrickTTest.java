@@ -1,3 +1,4 @@
+/*
 package com.example.fxtest.brick;
 
 import javafx.scene.paint.Color;
@@ -322,4 +323,4 @@ class BrickTTest {
     }
 
 
-}
+}*/

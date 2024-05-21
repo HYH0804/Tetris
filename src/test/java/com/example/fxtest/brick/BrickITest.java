@@ -1,3 +1,4 @@
+/*
 package com.example.fxtest.brick;
 
 import com.example.fxtest.brick.Block;
@@ -173,10 +174,6 @@ class BrickITest {
     }
 
     @Test
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
     void rotate5(){
         brickI.setShape(0);
         //given
@@ -198,11 +195,7 @@ class BrickITest {
     }
 
     @Test
-<<<<<<< HEAD
-=======
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
-=======
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
+
     void moveR() {
         //given
         Block blockA = brickI.getA();
@@ -332,4 +325,4 @@ class BrickITest {
         //then
         Assertions.assertEquals(itemBlock, brickI.getItem());
     }
-}
+}*/

@@ -1,0 +1,4 @@
+--patch-module
+com.example.fxtest=_
+--add-reads
+com.example.fxtest=ALL-UNNAMED
