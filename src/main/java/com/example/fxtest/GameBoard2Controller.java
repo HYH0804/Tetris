@@ -1188,7 +1188,7 @@ public class GameBoard2Controller implements Initializable {
     public boolean getColorBliness(){
         //setting.properties에서 값 가져와서 MOVE에 넣기
         // Properties 객체 생성
-        Properties settingProperties = new Properties();
+        /*Properties settingProperties = new Properties();
         try {
             // setting.properties 파일 로드
             FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
@@ -1197,8 +1197,8 @@ public class GameBoard2Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String temp = settingProperties.getProperty("colorBlindness");
-        int num = Integer.parseInt(temp);
+        String temp = settingProperties.getProperty("colorBlindness");*/
+        int num = SettingModel.getColorBlindnessVal();
         if(num==0){
             return false;
         }
