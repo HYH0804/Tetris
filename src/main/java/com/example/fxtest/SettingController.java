@@ -17,7 +17,6 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 
-import static com.example.fxtest.Main.loadProperties;
 
 public class SettingController implements Initializable {
 //확인 버튼 누르면 Scene 다시 띄우는걸로
@@ -173,11 +172,10 @@ public class SettingController implements Initializable {
         // 현재 스테이지를 가져옵니다.
         Stage stage = (Stage) backButton.getScene().getWindow();
 
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
         // 세팅 페이지 로드
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));

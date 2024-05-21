@@ -25,7 +25,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import static com.example.fxtest.Main.loadProperties;
 
 public class ScoreboardController implements Initializable {
 
@@ -77,11 +76,10 @@ public class ScoreboardController implements Initializable {
     public void goHomeButtonClick() throws IOException{
         Stage stage = (Stage) GoHomeButton.getScene().getWindow();
 
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
@@ -262,11 +260,10 @@ public class ScoreboardController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(StartController.class.getResource("scoreboard-view.fxml"));
         Parent root = fxmlLoader.load();
 
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
         Scene mainpage = st.getScene();
         mainpage.setRoot(root); // 현재 Scene의 root를 새로운 root로 설정합니다.

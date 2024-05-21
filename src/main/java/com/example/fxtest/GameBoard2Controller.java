@@ -29,7 +29,7 @@ import java.net.URL;
 import java.util.*;
 
 import static com.example.fxtest.Drawing.displayNextBrick;
-import static com.example.fxtest.Main.loadProperties;
+
 
 //시간이 좀 많이 지나고 브릭 스폰 위치가 이미 쌓여있는 board 블록과 겹치면? >> Board 늘려서 스폰 위치 따로 빼거나 스폰 자체를 바꿔야될듯
 public class GameBoard2Controller implements Initializable {
@@ -202,11 +202,10 @@ public class GameBoard2Controller implements Initializable {
             if (result.isPresent() && result.get().equals(homeButtonType)) {
                 try {
                     Stage stage = (Stage) boardView.getScene().getWindow();
-                    Properties properties = loadProperties();
-                    String resolution = properties.getProperty("resolution", "800x600");
-                    String[] dimensions = resolution.split("x");
-                    double width = Double.parseDouble(dimensions[0]);
-                    double height = Double.parseDouble(dimensions[1]);
+                    SettingModel.init();
+
+                    int width = SettingModel.getWidth();
+                    int height = SettingModel.getHeight();
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
                     Parent root = loader.load();
@@ -1076,11 +1075,10 @@ public class GameBoard2Controller implements Initializable {
     //보드 해상도 change함수
     public void change(GridPane boardView) throws IOException {
         // 해상도에 따라 칸의 크기를 동적으로 조정
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
         int numRows = 20; // 행의 수
         int numCols = 10; // 열의 수
@@ -1111,11 +1109,10 @@ public class GameBoard2Controller implements Initializable {
 
     public void attackchange(GridPane boardView) throws IOException {
         // 해상도에 따라 칸의 크기를 동적으로 조정
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
         int numRows = 10; // 행의 수
         int numCols = 10; // 열의 수

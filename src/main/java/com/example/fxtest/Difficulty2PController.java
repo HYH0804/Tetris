@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Properties;
 
-import static com.example.fxtest.Main.loadProperties;
+//import static com.example.fxtest.Main.loadProperties;
 
 public class Difficulty2PController {
     @FXML
@@ -80,11 +80,10 @@ public class Difficulty2PController {
         // 여기에 스코어보드 화면을 보여주는 로직 추가
         Stage stage = (Stage) itemButton.getScene().getWindow();
 
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "1280x1024");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameBoard2.fxml"));
@@ -101,11 +100,10 @@ public class Difficulty2PController {
     private void goBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
 
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
