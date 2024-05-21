@@ -486,6 +486,7 @@ public class GameBoard2Controller implements Initializable {
                         gameBoard.attackStart();
                         Drawing.attackUpdateBoardView(gameBoard.myAttackBoardToList(), boardView,cellWidth);
                         gameBoard.attackBoardClean();
+                        Drawing.updateBoardView(attackBoardView, gameBoard.attackBoard,cellWidth);
                         sponBrick(gameBoard, boardView, nextBrickView, 1);
                         System.out.println("*************Block 새로 스폰************" + currentBrick + "== 스폰 후 CurrentBrick");
                         chageTime(gameBoard,1,timeline);
@@ -610,6 +611,7 @@ public class GameBoard2Controller implements Initializable {
                         gameBoard2.attackStart();
                         Drawing.attackUpdateBoardView(gameBoard2.myAttackBoardToList(), boardView2,cellWidth);
                         gameBoard2.attackBoardClean();
+                        Drawing.updateBoardView(attackBoardView2, gameBoard2.attackBoard,cellWidth);
                         sponBrick(gameBoard2, boardView2, nextBrickView2, 2);
                         chageTime(gameBoard2,2,timeline2);
 
