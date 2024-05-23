@@ -11,31 +11,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/ScoreboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/score/easy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/score/easy.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickITest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickJTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickJTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickLTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickLTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickSTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickSTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickTTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickTTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickWTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickWTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickZTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickZTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/BlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/BlockTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/BrickController1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/BrickController1Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/BrickControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/BrickControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorEasyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorEasyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorHardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorHardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorNormalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorNormalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/score/easy(item).txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/score/easy(item).txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/MainTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +31,17 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SE_Tetris" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -74,9 +62,9 @@
       </UrlAndAccount>
     </option>
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -113,7 +101,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Bogil/Desktop/Github/aaaaaaaaaaaaaaa",
+    "last_opened_file_path": "C:/Users/Bogil/Desktop/Github/real_tetris/Tetris",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -131,7 +119,7 @@
       <recent name="com.example.fxtest.SettingModel" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.Tests in 'SE_Tetris.test'">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.fxtest.Main" />
       <module name="SE_Tetris.main" />
@@ -241,8 +229,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.Tests in 'SE_Tetris.test'" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.GameBoard1Test.testClean" />
         <item itemvalue="Gradle.GameBoard1Test.testAttackStart" />
         <item itemvalue="Gradle.GameBoard1Test.testAttackLine" />
@@ -252,7 +240,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-18.0.2-corretto-18.0.2-4caba194b151-5720f15e" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
       </set>
     </attachedChunks>
   </component>
@@ -266,6 +254,7 @@
       <updated>1715174178359</updated>
       <workItem from="1715174181560" duration="2839000" />
       <workItem from="1715177078873" duration="873000" />
+      <workItem from="1716427179085" duration="318000" />
     </task>
     <servers />
   </component>
@@ -291,6 +280,11 @@
           <line>28</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/fxtest/GetKeyTest.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/example/fxtest/GameBoard1Test.java</url>
           <line>132</line>
@@ -304,7 +298,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SE_Tetris$Tests_in__SE_Tetris_test_.ic" NAME="Tests in 'SE_Tetris.test' Coverage Results" MODIFIED="1716285041757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SE_Tetris$Tests_in__SE_Tetris_test_.ic" NAME="Tests in 'SE_Tetris.test' Coverage Results" MODIFIED="1716289943993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/SE_Tetris$All_in_SE_Tetris_main.ic" NAME="All in SE_Tetris.main Coverage Results" MODIFIED="1714054827408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/SE_Tetris$Tests_in__com_example_fxtest_brick_.ic" NAME="Tests in 'com.example.fxtest.brick' Coverage Results" MODIFIED="1714052270318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
