@@ -1,5 +1,6 @@
 package com.example.fxtest.brick;
 
+import com.example.fxtest.GameBoard1;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,10 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BrickWTest {
     Brick brickW;
+    GameBoard1 gameBoard1 = new GameBoard1();
+
 
     @BeforeEach
     void initBlock(){
-        brickW=new BrickW(4, 4, Color.PALEGOLDENROD); //새로 뽑아오기
+        brickW=new BrickW(4, 4, Color.PALEGOLDENROD,gameBoard1); //새로 뽑아오기
     }
 
     @Test
@@ -27,21 +30,8 @@ class BrickWTest {
 
         //then
         Assertions.assertEquals(flag,false);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
-
     }
 
-
-<<<<<<< HEAD
-=======
-    }
-
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
-=======
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
     @Test
     void canMoveRight() {
         //given
@@ -72,15 +62,11 @@ class BrickWTest {
         boolean flag;
 
         //when
-<<<<<<< HEAD
-<<<<<<< HEAD
         flag=brickW.canMoveDown();
-=======
         flag=brickW.canMoveRight();
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+
 =======
         flag=brickW.canMoveDown();
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
         //then
         Assertions.assertEquals(flag,true);

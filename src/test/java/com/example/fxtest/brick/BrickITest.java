@@ -1,5 +1,6 @@
 package com.example.fxtest.brick;
 
+import com.example.fxtest.GameBoard1;
 import com.example.fxtest.brick.Block;
 import com.example.fxtest.brick.Brick;
 import com.example.fxtest.brick.BrickI;
@@ -14,10 +15,12 @@ import java.util.List;
 class BrickITest {
 
     Brick brickI;
+    GameBoard1 gameBoard1 = new GameBoard1();
+
 
     @BeforeEach
     void initBlock(){
-        brickI=new BrickI(4, 4, Color.PALEGOLDENROD); //새로 뽑아오기
+        brickI=new BrickI(4, 4, Color.PALEGOLDENROD,gameBoard1); //새로 뽑아오기
     }
 
     @Test
@@ -173,10 +176,6 @@ class BrickITest {
     }
 
     @Test
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
     void rotate5(){
         brickI.setShape(0);
         //given
@@ -198,11 +197,6 @@ class BrickITest {
     }
 
     @Test
-<<<<<<< HEAD
-=======
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
-=======
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
     void moveR() {
         //given
         Block blockA = brickI.getA();

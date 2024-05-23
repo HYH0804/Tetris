@@ -1,5 +1,6 @@
 package com.example.fxtest.brick;
 
+import com.example.fxtest.GameBoard1;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,10 +12,11 @@ import java.util.List;
 class BrickSTest {
 
     Brick brickS;
+    GameBoard1 gameBoard1 = new GameBoard1();
 
     @BeforeEach
     void initBlock(){
-        brickS =new BrickS(4, 4, Color.PALEGOLDENROD); //새로 뽑아오기
+        brickS =new BrickS(4, 4, Color.PALEGOLDENROD,gameBoard1); //새로 뽑아오기
     }
 
     @Test
