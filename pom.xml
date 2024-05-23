@@ -51,31 +51,26 @@
     <!-- https://mvnrepository.com/artifact/org.testfx/testfx-junit -->
     <dependency>
       <groupId>org.testfx</groupId>
-      <artifactId>testfx-junit</artifactId>
-      <version>4.0.18</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testfx</groupId>
       <artifactId>testfx-junit5</artifactId>
-      <version>4.0.16-alpha</version>
+      <version>4.0.18</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>3.11.2</version> <!-- 또는 최신 버전 -->
+      <version>4.2.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testfx</groupId>
-      <artifactId>testfx-core</artifactId>
-      <version>4.0.16-alpha</version>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-inline</artifactId>
+      <version>4.2.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testfx</groupId>
-      <artifactId>openjfx-monocle</artifactId>
-      <version>jdk-11+26</version>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

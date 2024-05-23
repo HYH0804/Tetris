@@ -44,6 +44,7 @@ public class StartController implements Initializable {
         handleButtonKeyEvent(settingsButton);
         handleButtonKeyEvent(scoreboardButton);
         handleButtonKeyEvent(exitButton);
+        handleButtonKeyEvent(twoplayerButton);
     }
 
     private void handleButtonKeyEvent(Button button) {

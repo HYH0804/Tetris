@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -20,16 +21,16 @@ import static org.testfx.util.NodeQueryUtils.hasText;
 
 @ExtendWith(ApplicationExtension.class)
 public class StartPageKeyboardTest {
-    private Button settingsButton;
+    private Button twoplayerButton;
     private Button startButton;
     @Start
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartPageKeyboardTest.class.getResource("Start.fxml"));
         Parent root = fxmlLoader.load();
-        settingsButton = (Button) root.lookup("#settingsButton");
+        twoplayerButton = (Button) root.lookup("#twoplayerButton");
         startButton = (Button) root.lookup("#startButton");
 
-        Scene scene = new Scene(root, 1000, 1000);;
+        Scene scene = new Scene(root, 400, 400);;
         stage.setScene(scene);
         stage.show();
     }
@@ -40,7 +41,7 @@ public class StartPageKeyboardTest {
 
         robot.push(KeyCode.DOWN);
         robot.sleep(1000);
-        verifyThat(settingsButton, isFocused());
+        verifyThat(twoplayerButton, isFocused());
 
         robot.push(KeyCode.LEFT);
         robot.sleep(1000);
