@@ -13,29 +13,29 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/SE_Tetris-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fxtest/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fxtest/ScoreboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/score/easy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/score/easy.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickITest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickJTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickJTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickLTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickLTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickSTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickSTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickTTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickTTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickWTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickWTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickZTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/fxtest/brick/BrickZTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/BlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/BlockTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/BrickController1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/BrickController1Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/BrickControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/BrickControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/GameBoardTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorEasyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorEasyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorHardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorHardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorNormalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fxtest/RandomGeneratorNormalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/score/easy(item).txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/score/easy(item).txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/fxtest/MainTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/Difficulty2PController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/Difficulty2PController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/DifficultyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/DifficultyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/GameBoard2Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/GameBoard2Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/GameBoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/GameBoardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/KeySettingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/KeySettingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/ScoreboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/ScoreboardController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/ScoreboardController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/ScoreboardController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/ScoreboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/ScoreboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/SettingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/SettingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/SettingModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/SettingModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/StartController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/StartController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/fxtest/StartController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/fxtest/StartController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/fxtest/MainTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/fxtest/MainTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +53,26 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SE_Tetris" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,9 +91,9 @@
       </UrlAndAccount>
     </option>
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -104,6 +121,13 @@
     "Gradle.GameBoard1Test.testRemoveRows.executor": "Run",
     "Gradle.Tests in 'SE_Tetris.test'.executor": "Coverage",
     "Gradle.Tetris [:Main.main()].executor": "Run",
+    "JUnit.All in SE_Tetris.test (1).executor": "Coverage",
+    "JUnit.All in SE_Tetris.test (2).executor": "Coverage",
+    "JUnit.All in SE_Tetris.test.executor": "Run",
+    "JUnit.All in Tetris.executor": "Run",
+    "JUnit.RandomGeneratorEasyTest.testBlockDistribution.executor": "Run",
+    "JUnit.RandomGeneratorHardTest.testBlockDistribution.executor": "Run",
+    "JUnit.RandomGeneratorTest.testGenerateItem.executor": "Run",
     "Maven.Tetris [clean].executor": "Run",
     "Maven.Tetris [install].executor": "Run",
     "Repository.Attach.Annotations": "false",
@@ -111,6 +135,9 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
     "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Bogil/Desktop/Github/aaaaaaaaaaaaaaa",
@@ -130,131 +157,60 @@
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="com.example.fxtest.SettingModel" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.fxtest" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.fxtest.Main" />
-      <module name="SE_Tetris.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.fxtest.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+  <component name="RunManager" selected="JUnit.All in SE_Tetris.test">
+    <configuration name="All in SE_Tetris.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SE_Tetris.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameBoard1Test.testAttackLine" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.example.fxtest.GameBoard1Test.testAttackLine&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
+    <configuration name="All in Tetris" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tetris" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="GameBoard1Test.testAttackStart" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.example.fxtest.GameBoard1Test.testAttackStart&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
+    <configuration name="RandomGeneratorTest.testGenerateItem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tetris" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fxtest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="fxtest" />
+      <option name="MAIN_CLASS_NAME" value="fxtest.RandomGeneratorTest" />
+      <option name="METHOD_NAME" value="testGenerateItem" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="GameBoard1Test.testClean" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.example.fxtest.GameBoard1Test.testClean&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'SE_Tetris.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
+    <list>
+      <item itemvalue="JUnit.All in SE_Tetris.test" />
+      <item itemvalue="JUnit.All in Tetris" />
+      <item itemvalue="JUnit.RandomGeneratorTest.testGenerateItem" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Gradle.Tests in 'SE_Tetris.test'" />
-        <item itemvalue="Gradle.GameBoard1Test.testClean" />
-        <item itemvalue="Gradle.GameBoard1Test.testAttackStart" />
-        <item itemvalue="Gradle.GameBoard1Test.testAttackLine" />
+        <item itemvalue="JUnit.All in SE_Tetris.test" />
+        <item itemvalue="JUnit.RandomGeneratorTest.testGenerateItem" />
+        <item itemvalue="JUnit.All in Tetris" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-18.0.2-corretto-18.0.2-4caba194b151-5720f15e" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -266,6 +222,7 @@
       <updated>1715174178359</updated>
       <workItem from="1715174181560" duration="2839000" />
       <workItem from="1715177078873" duration="873000" />
+      <workItem from="1716410265315" duration="5512000" />
     </task>
     <servers />
   </component>
@@ -288,7 +245,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/fxtest/GameBoardControllerTest.java</url>
-          <line>28</line>
+          <line>31</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
@@ -304,8 +261,15 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SE_Tetris$Tests_in__com_example_fxtest_brick_.ic" NAME="Tests in 'com.example.fxtest.brick' Coverage Results" MODIFIED="1714052270318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SE_Tetris$All_in_SE_Tetris_test__2_.ic" NAME="All in SE_Tetris.test (2) Coverage Results" MODIFIED="1716424724274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SE_Tetris$RandomGeneratorTest_testGenerateItem.ic" NAME="RandomGeneratorTest.testGenerateItem Coverage Results" MODIFIED="1716425336701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>fxtest.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SE_Tetris$All_in_SE_Tetris_test__1_.ic" NAME="All in SE_Tetris.test (1) Coverage Results" MODIFIED="1716425081465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SE_Tetris$All_in_SE_Tetris_test.ic" NAME="All in SE_Tetris.test Coverage Results" MODIFIED="1716426334505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SE_Tetris$All_in_Tetris.ic" NAME="All in Tetris Coverage Results" MODIFIED="1716425400226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/SE_Tetris$Tests_in__SE_Tetris_test_.ic" NAME="Tests in 'SE_Tetris.test' Coverage Results" MODIFIED="1716285041757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/SE_Tetris$All_in_SE_Tetris_main.ic" NAME="All in SE_Tetris.main Coverage Results" MODIFIED="1714054827408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SE_Tetris$Tests_in__com_example_fxtest_brick_.ic" NAME="Tests in 'com.example.fxtest.brick' Coverage Results" MODIFIED="1714052270318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
