@@ -1,6 +1,6 @@
 package com.example.fxtest;
 import static com.example.fxtest.Drawing.displayNextBrick;
-import static com.example.fxtest.Main.loadProperties;
+
 
 import com.example.fxtest.brick.*;
 
@@ -202,12 +202,6 @@ public class GameBoardController implements Initializable {
                 //printMatrix();
 
             } else {
-                //착지시(아이템)
- /*           if(turnEnd==true){
-
-                Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템 , 하드드롭했을때
-                turnEnd=false;
-            }*/
                 if (!currentBrick.canMoveDown()/*!canMoveDown()*/) { //더 못내려가면
                     //그 위치에 색칠
                     //colorFill();
@@ -224,10 +218,6 @@ public class GameBoardController implements Initializable {
                     //착지시(아이템) , 살포시 안착했을때
                     Item.turnEndDoItem(currentBrick, gameBoard, boardView); //아이템
 
-                /*if(currentBrick.isItem?) {
-                    //(1) 케이스 아이템 있으면 해당 로직 먼저 수행
-                }*/
-                    //System.out.println("완성 줄 삭제 전---------------");
                     printMatrix();
 
 
@@ -241,41 +231,21 @@ public class GameBoardController implements Initializable {
                     Drawing.updateBoardView(removedRows, boardView, gameBoard.board); //gui 여기서 삭제
                     gameBoard.removeFullRows(); //배열에서 삭제 후 점수 업뎃
                     Drawing.animeRow(removedRows, boardView,cellWidth);
-                    //System.out.println("완성 줄 삭제 후---------------");
-                    //printMatrix();
-                    //gravity로 1인지 확인해서 board 업데이트하고
-
-                    //Drawing.updateBoardView(removeLineList);
                     printMatrix();
-                    //줄 지우기
 
+                    Item.sponDoItem(currentBrick, gameBoard, nextBrickView);
 
-                    //겜 끝났는지 확인
-//                    if (isGameOver()) {
-//                        //스코어보드 처리
-//
-//                        System.out.println("GameOver");
-//                        //전부 초기화
-//                        destroy();
-//
-//                        //테스트
-//                        //printMatrix();
-//                    } else {
-                        Item.sponDoItem(currentBrick, gameBoard, nextBrickView);
+                    gameBoard.turnEnd = false;
+                    //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
+                    sponBrick();
+                    chageTime(gameBoard);
 
-                        gameBoard.turnEnd = false;
-                        //nextBrick을 currentBrick으로 옮김. + 색칠 + 이벤트 장착
-                        sponBrick();
-                        chageTime(gameBoard);
+                    //스폰되자마자 블록 아이템 수행
+                    //Item.sponDoItem(currentBrick, gameBoard, boardView);
 
-                        //스폰되자마자 블록 아이템 수행
-                        //Item.sponDoItem(currentBrick, gameBoard, boardView);
-
-                        System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰" + gameBoard.blockSpon);
-                        //테스트
-                        //printMatrix();
-                    //}
-
+                    System.out.println("겜은 안끝났지만 내려갈 곳 없어서 블록 스폰" + gameBoard.blockSpon);
+                    //테스트
+                    //printMatrix();
                 } else {
                     //지우고 moveD() 호출하고 색칠하기
                     Drawing.colorErase(currentBrick, boardView);
@@ -371,31 +341,6 @@ public class GameBoardController implements Initializable {
         }
     }
 
-    public boolean isGameOver() {
-        for(int i = 0; i< GameBoard1.WIDTH; i++){
-            if(gameBoard.board[1][i]>=1){
-                //GameBoard.whileGame =true;
-                gameBoard.whileGame =false;
-                return true;
-            }
-        }
-        return false;
-        /*for (int i = 1; i < GameBoard.HEIGHT; i++) {
-            boolean found = false;  // 각 행마다 검사를 시작할 때 'found'를 'false'로 설정
-            for (int j = 0; j < GameBoard.WIDTH; j++) {
-                if (GameBoard.board[i][j] > 0) {
-                    found = true;  // 0보다 큰 값을 찾으면 'found'를 'true'로 설정
-                    break;  // 더 이상 검사할 필요 없음
-                }
-            }
-            if (!found) {  // 만약 이 행에서 0보다 큰 값이 없다면
-                return false;  // 즉시 false 반환
-            }
-        }
-        return true;  // 모든 행에 0보다 큰 값이 하나 이상 있다면 true 반환
-        */
-
-    }
 
     private boolean isBrickColliding(Brick brick) {
         for (Block block : brick.getBlockList()) {
@@ -431,78 +376,7 @@ public class GameBoardController implements Initializable {
 
 
 
-/*    //무게추 같은 경우에는 로테이트 함수 구현은 해놔야됨. 바디는 냅두고
-    private void regiBrickEvent() {
-        boardView.setOnKeyPressed(event -> {
-            Drawing.colorErase(currentBrick);
-            String keyValue = event.getCode().toString();
-            if (event.getCode() == KeyCode.ESCAPE) {
-                GameBoard1.pause = !GameBoard1.pause;
-                if(GameBoard1.pause) {
-                    boardView.setOpacity(0);
-                    nextBrickView.setOpacity(0);
-                    timeline.stop();
-                } else {
-                    boardView.setOpacity(1);
-                    nextBrickView.setOpacity(1);
-                    timeline.play();
-                }
-            } else if (event.getCode() == KeyCode.BACK_SPACE) {
-                // 백스페이스 키가 눌렸을 때의 동작 (게임 종료)
-                Stage stage = (Stage) boardView.getScene().getWindow();
-                timeline.stop(); // 타임라인 애니메이션을 정지합니다.
-                stage.close(); // 현재 스테이지를 닫습니다.
-            }
-            if (!GameBoard1.pause) {
-                if (keyValue.equals(brickController.getMOVER()) || keyValue.toLowerCase().equals(brickController.getMOVER())) {
-                    // 오른쪽 이동 키가 눌렸을 때의 동작
-                    System.out.println("Right key pressed");
-                    brickController.moveR(currentBrick);
-                    printBlock();
-                } else if (keyValue.equals(brickController.getMOVEL()) || keyValue.toLowerCase().equals(brickController.getMOVEL())) {
-                    // 왼쪽 이동 키가 눌렸을 때의 동작
-                    System.out.println("Left key pressed");
-                    brickController.moveL(currentBrick);
-                    printBlock();
-                } else if (keyValue.equals(brickController.getMOVED()) || keyValue.toLowerCase().equals(brickController.getMOVED())) {
-                    // 아래 이동 키가 눌렸을 때의 동작
-                    brickController.moveD(currentBrick);
-                    printBlock();
-                } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
-                    // 회전 키가 눌렸을 때의 동작
-                    System.out.println("Rotate key pressed");
-                    brickController.rotate(currentBrick);
-                    printBlock();
-                } else if(keyValue.equals(brickController.getSTRAIGHT()) || keyValue.toLowerCase().equals(brickController.getSTRAIGHT())) {
-                    //여기는 수직떨구기
-                    System.out.println("---------------------------------수직 떨구기 누름");
-                    brickController.straightD(currentBrick);
-                    //
-                    if (isHardDropGameOver()) {
-                        Drawing.colorFill(currentBrick,boardView);
-                        fixed();
-                        System.out.println("수직떨구기");
-                        destroy();
-                    } else {
-                        //수직 떨구고 timeline을 간격 없이 바로 새로 시작해야돼서
-                        timeline.stop();
-                        System.out.println("---------------------------------정지");
-                        turnEnd = true;
-                        //떨구고 바로 블록 뽑아옴
-                        minute10();
-                        timeline.play();
-                        Drawing.colorErase(currentBrick);
-                        System.out.println("---------------------------------재게");
-                        System.out.println("수직떨구기");
-                    }
-                }
-                    event.consume();
-                    if (GameBoard1.whileGame == true) {
-                        Drawing.colorFill(currentBrick,boardView);
-                    }//색칠하고
-                }
-        });
-    }*/
+
 
     //무게추 같은 경우에는 로테이트 함수 구현은 해놔야됨. 바디는 냅두고
     private void regiBrickEvent(Brick currentBrick,GridPane boardView,GameBoard1 gameBoard) {
@@ -587,17 +461,15 @@ public class GameBoardController implements Initializable {
 
 
 
-
-    private static final String PROPERTIES_FILE = "src/main/resources/resolution.properties";
+    //private static final String PROPERTIES_FILE = "src/main/resources/resolution.properties";
 
     //보드 해상도 change함수
     public void change() throws IOException {
         // 해상도에 따라 칸의 크기를 동적으로 조정
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
         int numRows = 20; // 행의 수
         int numCols = 10; // 열의 수
@@ -681,19 +553,7 @@ public class GameBoardController implements Initializable {
 
     //프로퍼티에서 색맹모드 여부 가져오기
     public boolean getColorBliness(){
-        //setting.properties에서 값 가져와서 MOVE에 넣기
-        // Properties 객체 생성
-        Properties settingProperties = new Properties();
-        try {
-            // setting.properties 파일 로드
-            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
-            settingProperties.load(in);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String temp = settingProperties.getProperty("colorBlindness");
-        int num = Integer.parseInt(temp);
+        int num = SettingModel.getColorBlindnessVal();
         if(num==0){
             return false;
         }

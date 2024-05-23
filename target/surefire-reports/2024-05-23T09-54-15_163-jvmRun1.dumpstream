@@ -1,0 +1,6 @@
+# Created at 2024-05-23T09:54:16.785
+Corrupted channel by directly writing to native stream in forked JVM 1. Stream 'Error occurred during initialization of boot layer'.
+
+# Created at 2024-05-23T09:54:16.796
+Corrupted channel by directly writing to native stream in forked JVM 1. Stream 'java.lang.module.FindException: Module com.example.fxtest not found'.
+

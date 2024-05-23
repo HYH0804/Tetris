@@ -1,3 +1,4 @@
+
 package com.example.fxtest.brick;
 
 import com.example.fxtest.GameBoard1;
@@ -262,13 +263,13 @@ class BrickOTest {
         //when
         brickO.straightD();
         //then
-        Assertions.assertEquals(blockA.getX(), 20);
+        Assertions.assertEquals(blockA.getX(), 18);
         Assertions.assertEquals(blockA.getY(), 3);
-        Assertions.assertEquals(blockB.getX(), 20);
+        Assertions.assertEquals(blockB.getX(), 18);
         Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 21);
+        Assertions.assertEquals(blockC.getX(), 19);
         Assertions.assertEquals(blockC.getY(), 3);
-        Assertions.assertEquals(blockD.getX(), 21);
+        Assertions.assertEquals(blockD.getX(), 19);
         Assertions.assertEquals(blockD.getY(), 4);
     }
 

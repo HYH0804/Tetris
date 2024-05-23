@@ -34,11 +34,12 @@ class GetKeyTest {
         //SettingController.getKey();
 
         // 가져온 키 값을 확인합니다.
+        SettingModel.init();
         List<String> startKey = SettingModel.keyVal;
-        assertEquals(startKey.get(0), startKey.get(0)); // moveDown 키 확인
-        assertEquals(startKey.get(1), startKey.get(1)); // moveLeft 키 확인
-        assertEquals(startKey.get(2), startKey.get(2)); // moveRight 키 확인
-        assertEquals(startKey.get(3), startKey.get(3)); // rotate 키 확인
-        assertEquals(startKey.get(4), startKey.get(4)); // hardDrop 키 확인
+        assertEquals(startKey.get(0), "UP"); // moveDown 키 확인
+        assertEquals(startKey.get(1), "LEFT"); // moveLeft 키 확인
+        assertEquals(startKey.get(2), "RIGHT"); // moveRight 키 확인
+        assertEquals(startKey.get(3), "DOWN"); // rotate 키 확인
+        assertEquals(startKey.get(4), "SPACE"); // hardDrop 키 확인
     }
 }

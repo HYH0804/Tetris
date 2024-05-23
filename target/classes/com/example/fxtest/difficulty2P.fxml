@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.fxtest.Difficulty2PController"
+      spacing="10"> <!-- 간격 조정 -->
+
+        <VBox alignment="CENTER" spacing="10">
+                <RadioButton fx:id="easyRadioButton" text="이지 모드" selected="true"/>
+                <RadioButton fx:id="normalRadioButton" text="노말 모드"/>
+                <RadioButton fx:id="hardRadioButton" text="하드 모드"/>
+        </VBox>
+
+        <Button fx:id="itemButton" text="아이템 모드 실행" onAction="#startItemMode"/>
+        <Button fx:id="normalButton" text="노말 모드 실행" onAction="#startNormalMode"/>
+        <Button fx:id="timeAttackButton" text="시간 제한 모드 실행" onAction="#starttimeMode"/>
+        <Button fx:id="backButton" text="뒤로" onAction="#goBack" alignment="BOTTOM_LEFT"/> <!-- 뒤로 버튼 추가 -->
+
+</VBox>

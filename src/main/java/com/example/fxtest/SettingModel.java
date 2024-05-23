@@ -3,6 +3,7 @@ package com.example.fxtest;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -28,14 +29,27 @@ public class SettingModel {
         //if (keyVal == null || resolutionVal == null || colorBlindnessVal == -1) {
           if (properties == null) {
 
-              try {
+              /*try {
                 FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
                 properties = new Properties();
                 properties.load(in);
                 in.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
-            }
+            }*/
+              ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+              if (classLoader == null) {
+                  classLoader = Class.class.getClassLoader();
+              }
+              try (InputStream in = classLoader.getResourceAsStream("setting.properties")) {
+                  if (in == null) {
+                      throw new IOException("Properties file not found");
+                  }
+                  properties = new Properties();
+                  properties.load(in);
+              } catch (IOException e) {
+                  throw new RuntimeException(e);
+              }
 
             // keyVal
             for(int i = 0; i < buttonName.length; i++){

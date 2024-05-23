@@ -12,20 +12,25 @@ import java.util.Properties;
 import java.util.prefs.Preferences;
 
 public class Main extends Application {
-    private static final String PROPERTIES_FILE = "src/main/resources/setting.properties";
+    private static final String PROPERTIES_FILE = "setting.properties";
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         // init for SettingModel
+        StageSaver.setStage(primaryStage);
         SettingModel.init();
 
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
         // 프로퍼티 파일에서 해상도 값을 가져옴
-        Properties properties = loadProperties();
+        /*Properties properties = loadProperties();
         StageSaver.setStage(primaryStage);
         String resolution = properties.getProperty("resolution", "800x600");
         String[] dimensions = resolution.split("x");
         double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        double height = Double.parseDouble(dimensions[1]);*/
+
+
 
         // 세팅 페이지 로드
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
@@ -41,13 +46,13 @@ public class Main extends Application {
     }
 
     //properties에서 값가져오는 함수
-    public static Properties loadProperties() throws IOException {
+    /*public static Properties loadProperties() throws IOException {
         Properties properties = new Properties();
         try (FileInputStream in = new FileInputStream(PROPERTIES_FILE)) {
             properties.load(in);
         }
         return properties;
-    }
+    }*/
     public static void main(String[] args) {
         launch(args);
     }

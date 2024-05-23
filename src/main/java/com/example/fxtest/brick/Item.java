@@ -80,10 +80,6 @@ public enum Item {
 
     }
 
-    //이걸로 GameBoardController에서 가져와서 Stop 실행
-    public static PauseTransition getHidePause() {
-        return hidePause;
-    }
 
     //GameBoardController minute10에서...
     public static void turnEndDoItem(Brick currentBrick, GameBoard1 gameBoard, GridPane gridPane){
@@ -107,12 +103,5 @@ public enum Item {
         }
     }
 
-    public static void fullLineDoItem(Brick currentBrick, GameBoard1 gameBoard, GridPane gridPane){
-        Block itemBlock = currentBrick.getItem();
-        Item item = itemBlock.getItem();
-        if(item==Item.NUCLEAR) {
-            doItem(gameBoard, gridPane, itemBlock);
-        }
-    }
 
 }

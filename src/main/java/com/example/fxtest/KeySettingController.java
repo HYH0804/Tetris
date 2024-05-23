@@ -200,12 +200,12 @@ public class KeySettingController implements Initializable {
                     }
 
                     // go back to setting page
-                    Properties properties = null;
+                    /*Properties properties = null;
                     try {
                         properties = Main.loadProperties();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
-                    }
+                    }*/
                     Stage stage = (Stage) pScene.getWindow(); // 현재 창(Stage) 가져오기
                     stage.close(); // 창 닫기
                 }

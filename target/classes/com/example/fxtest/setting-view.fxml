@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="settingPage" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.SettingController">
+    <center>
+        <VBox alignment="CENTER" spacing="30">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+            <Label style="-fx-text-fill: black;" text="화면 크기 설정" />
+            <HBox spacing="10" alignment="CENTER"> <!-- 여기서 가운데 정렬 설정 -->
+                <RadioButton fx:id="smallSize" text="800x600" style="-fx-text-fill: black;" selected="true"/>
+                <RadioButton fx:id="mediumSize" text="1024x768" style="-fx-text-fill: black;" />
+                <RadioButton fx:id="largeSize" text="1280x1024" style="-fx-text-fill: black;" />
+            </HBox>
+
+            <Button fx:id="setKeyButton" style="-fx-text-fill: black; -fx-border-width: 0;" text="조작키 설정" onAction="#onSetKeyButtonClick"/>
+            <Button fx:id="resetScoreButton" style="-fx-text-fill: black; -fx-border-width: 0;" text="스코어 보드 초기화" onAction = "#onResetScoreBButton"/>
+
+
+            <Button fx:id="toggleColorBlindModeButton" style="-fx-text-fill: black; -fx-border-width: 0;" text="색맹 모드 전환" onAction = "#onToggleColorBlindModeButton"/>
+            <Button fx:id="resetSettingsButton" style=" -fx-text-fill: black; -fx-border-width: 0;" text="설정 초기화" onAction = "#onResetSettingsButton"/>
+
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="BOTTOM_LEFT" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <Button fx:id="backButton" text="뒤로" onAction="#onBackButtonClick" />
+            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="확인" />
+        </HBox>
+    </bottom>
+</BorderPane>

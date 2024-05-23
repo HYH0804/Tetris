@@ -1,15 +1,18 @@
+
 package com.example.fxtest.brick;
 
 import com.example.fxtest.GameBoard1;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Nested
 class BrickWTest {
     Brick brickW;
     GameBoard1 gameBoard1 = new GameBoard1();
@@ -44,7 +47,8 @@ class BrickWTest {
         Assertions.assertEquals(flag,true);
     }
 
-    @Test
+
+   @Test
     void canMoveLeft() {
         //given
         boolean flag;
@@ -56,6 +60,7 @@ class BrickWTest {
         Assertions.assertEquals(flag,true);
     }
 
+
     @Test
     void canMoveDown() {
         //given
@@ -65,12 +70,13 @@ class BrickWTest {
         flag=brickW.canMoveDown();
         flag=brickW.canMoveRight();
 
-=======
+
         flag=brickW.canMoveDown();
 
         //then
         Assertions.assertEquals(flag,true);
     }
+
 
     @Test
     void rotate() {
@@ -133,9 +139,6 @@ class BrickWTest {
         Assertions.assertEquals(blockD.getY(), 5);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     @Test
     void moveD() {
         //given
@@ -147,13 +150,13 @@ class BrickWTest {
         brickW.moveD();
         //then
         Assertions.assertEquals(blockA.getX(), 5);
-        Assertions.assertEquals(blockA.getY(), 5);
+        Assertions.assertEquals(blockA.getY(), 3);
         Assertions.assertEquals(blockB.getX(), 5);
         Assertions.assertEquals(blockB.getY(), 4);
         Assertions.assertEquals(blockC.getX(), 5);
-        Assertions.assertEquals(blockC.getY(), 3);
+        Assertions.assertEquals(blockC.getY(), 5);
         Assertions.assertEquals(blockD.getX(), 5);
-        Assertions.assertEquals(blockD.getY(), 2);
+        Assertions.assertEquals(blockD.getY(), 6);
     }
 
     @Test
@@ -166,18 +169,15 @@ class BrickWTest {
         //when
         brickW.straightD();
         //then
-        Assertions.assertEquals(blockA.getX(), 21);
-        Assertions.assertEquals(blockA.getY(), 5);
-        Assertions.assertEquals(blockB.getX(), 21);
+        Assertions.assertEquals(blockA.getX(), 19);
+        Assertions.assertEquals(blockA.getY(), 3);
+        Assertions.assertEquals(blockB.getX(), 19);
         Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 21);
-        Assertions.assertEquals(blockC.getY(), 3);
-        Assertions.assertEquals(blockD.getX(), 21);
-        Assertions.assertEquals(blockD.getY(), 2);
+        Assertions.assertEquals(blockC.getX(), 19);
+        Assertions.assertEquals(blockC.getY(), 5);
+        Assertions.assertEquals(blockD.getX(), 19);
+        Assertions.assertEquals(blockD.getY(), 6);
     }
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
-=======
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 
     @Test
     void setCenter_x() {

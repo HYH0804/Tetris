@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import static com.example.fxtest.Main.loadProperties;
 
 public class StartController implements Initializable {
 
@@ -75,11 +74,10 @@ public class StartController implements Initializable {
     @FXML
     private void startGame() throws IOException {
         Stage stage = (Stage) startButton.getScene().getWindow();
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("difficulty.fxml"));
@@ -97,11 +95,10 @@ public class StartController implements Initializable {
     private void openSettings() throws IOException {
         Stage stage = (Stage) settingsButton.getScene().getWindow();
 
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("setting-view.fxml"));
@@ -121,11 +118,10 @@ public class StartController implements Initializable {
         // 여기에 스코어보드 화면을 보여주는 로직 추가
         Stage stage = (Stage) scoreboardButton.getScene().getWindow();
 
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("scoreboard-view.fxml"));
@@ -141,11 +137,10 @@ public class StartController implements Initializable {
     @FXML
     private void twoPlayer() throws IOException {
         Stage stage = (Stage) twoplayerButton.getScene().getWindow();
-        Properties properties = loadProperties();
-        String resolution = properties.getProperty("resolution", "800x600");
-        String[] dimensions = resolution.split("x");
-        double width = Double.parseDouble(dimensions[0]);
-        double height = Double.parseDouble(dimensions[1]);
+        SettingModel.init();
+
+        int width = SettingModel.getWidth();
+        int height = SettingModel.getHeight();
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("difficulty2P.fxml"));

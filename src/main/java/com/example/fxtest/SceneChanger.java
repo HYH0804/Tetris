@@ -47,7 +47,13 @@ public class SceneChanger {
         return newStage;
     }
 
-    public static void changeScene(Button buttonScene, String view, double width, double height){
-
-    }
+/*    public static Stage changeScene(Scene scene, FXMLLoader loader, double width, double height) throws IOException {
+        Stage stage = (Stage) scene.getWindow();
+        Parent root = loader.load();
+        scene.setRoot(root);
+        stage.setTitle("Tetris");
+        stage.setWidth(width);
+        stage.setHeight(height);
+        return stage;
+    }*/
 }

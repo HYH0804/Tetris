@@ -1,0 +1,18 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane fx:id="rootPane" prefHeight="440.0" prefWidth="300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.StartController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0">
+            <children>
+                <Label fx:id="infoLabel" layoutX="50" layoutY="400" prefWidth="200" prefHeight="30" textAlignment="CENTER" />
+                <Label alignment="CENTER" style="-fx-font-size: 27pt; -fx-text-fill: black;" text="Tetris" wrapText="true" />
+                <Button fx:id="startButton" text="Start Game" onAction="#startGame" focusTraversable="true"/>
+                <Button fx:id="twoplayerButton" text="2P Game" onAction="#twoPlayer" focusTraversable="true"/>
+                <Button fx:id="settingsButton" text="Settings" onAction="#openSettings" focusTraversable="true"/>
+                <Button fx:id="scoreboardButton" text="Scoreboard" onAction="#openScoreboard" focusTraversable="true"/>
+                <Button fx:id="exitButton" text="Exit Game" onAction="#exitGame" focusTraversable="true"/>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
+

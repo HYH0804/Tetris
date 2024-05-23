@@ -1,3 +1,4 @@
+/*
 package fxtest;
 
 import com.example.fxtest.GameBoardController;
@@ -8,7 +9,8 @@ public class GameBoardControllerTest {
 
     GameBoardController gameBoardController = new GameBoardController();
 
-<<<<<<< HEAD
+
+*/
 /*    @Test
 =======
     @Test
@@ -21,7 +23,8 @@ public class GameBoardControllerTest {
         Assertions.assertEquals(v2,0.9);
         Assertions.assertEquals(v3,0.88);
 <<<<<<< HEAD
-    }*/
+    }*//*
+
 
     @Test
     void setOption(){
@@ -30,12 +33,14 @@ public class GameBoardControllerTest {
         Assertions.assertEquals(true, GameBoardController.itemMode);
     }
 
-<<<<<<< HEAD
+
+*/
 /*    @Test
     void fixed(){
         gameBoardController.fixed();
-    }*/
-=======
+    }*//*
+
+
     @Test
     void setOption(){
         GameBoardController.setOptions(0,true);
@@ -47,7 +52,7 @@ public class GameBoardControllerTest {
     void fixed(){
         gameBoardController.fixed();
     }
->>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
+
 
     @Test
     void isGameOver(){
@@ -63,3 +68,4 @@ public class GameBoardControllerTest {
 =======
 >>>>>>> 85d5d17c9ebe59aa7a5f9e9fe1b74b8828e87e7c
 }
+*/

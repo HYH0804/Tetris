@@ -55,11 +55,6 @@ public class Drawing {
         }
     }
 
-    //블록 색 삭제
-    public static void colorErase(int x,int y,GridPane boardView){
-        Label lableAt = getLableAt(boardView, x, y);
-        boardView.getChildren().remove(lableAt);
-    }
 
 
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
@@ -192,62 +187,7 @@ public class Drawing {
         System.out.println("보드 업데이트 완료");
     }
 
-/*    public static void updateBoardView2(){
-        // GridPane에서 제거할 Label 객체들을 담을 리스트 생성
-        List<Node> labelsToRemove = new ArrayList<>();
 
-        // GridPane의 모든 자식 노드를 순회하며 Label 타입의 노드를 찾는다
-        for (Node child : boardView2.getChildren()) {
-            if (child instanceof Label) {
-                labelsToRemove.add(child);
-            }
-        }
-
-        // 찾은 Label 객체들을 GridPane에서 제거
-        boardView2.getChildren().removeAll(labelsToRemove);
-
-        // board 배열을 순회
-        for (int y = 0; y < GameBoard1.HEIGHT; y++) {
-            for (int x = 0; x < GameBoard1.WIDTH; x++) {
-                // board에서 1이면 Label 생성 후 GridPane에 추가
-                if (GameBoard2.board[y][x] >= 1) {
-                    String string = returnItemSymbol(GameBoard2.board[y][x]);
-                    Label label = new Label(string);
-
-                    label.setFont(Font.font("Arial", FontWeight.BOLD, GameBoard2Controller.cellWidth)); //set size
-                    label.setTextFill(Color.BLUE);
-                    GridPane.setHalignment(label, javafx.geometry.HPos.CENTER);
-                    GridPane.setValignment(label, javafx.geometry.VPos.CENTER);
-                    boardView2.add(label, x, y);
-                }
-            }
-        }
-        System.out.println("보드 업데이트 완료");
-    }*/
-
-/*    public static void updateBoardView(List<Integer> removeLineList){
-        for(int line : removeLineList){ //삭제해야 될 라인수만큼 반복
-
-            for(int coloumn=0; coloumn<GameBoard.WIDTH; coloumn++){
-                for(int row=line-1; row>1 ; row--){
-                    if(GameBoard.board[row][coloumn]!=0) {
-                        System.out.println("없어질 라인 " + line+ " coloumn 값 " +coloumn + " row 값 "+ row);
-                        Label lableAt = getLableAt(boardView, coloumn, row);
-                        String text = lableAt.getText();
-                        Color textColor = (Color) lableAt.getTextFill();
-                        boardView.getChildren().remove(lableAt);
-                        Label label = newLabel(text, textColor);
-                        boardView.add(label, coloumn, row); //가로세로
-                    }
-                    else{
-                        continue;
-                    }
-
-
-                }
-            }
-        }
-    }*/
     public static void updateBoardView(List<Integer> removeLineList,GridPane boardView, int[][] board){
         Collections.sort(removeLineList); // 내림차순으로 정렬
         for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
@@ -261,25 +201,6 @@ public class Drawing {
                 }
             }
         }
-    }
-/*    public static void updateBoardView2(List<Integer> removeLineList){
-        Collections.sort(removeLineList); // 내림차순으로 정렬
-        for (int line : removeLineList) { // 삭제해야 될 라인 수만큼 반복
-            removeRow(boardView2, line);
-            for (int column = 0; column < GameBoard1.WIDTH; column++) {
-                for (int row = line - 1; row >= 0; row--) { // 최상단부터 시작
-                    Label labelAbove = getLableAt(boardView2, column, row);
-                    if (labelAbove != null) {
-                        GridPane.setRowIndex(labelAbove, row + 1); // 기존 라벨을 한 칸 아래로 이동
-                    }
-                }
-            }
-        }
-    }*/
-    //-1 이면 한칸 위로 , +1 이면 한칸 아래로
-
-    public static void updateAttackBoardView1(List<Integer> removeLineList, Brick currentBrick, int topRowIndex){
-
     }
 
     //어택 받으면 위로 gui올리는 함수

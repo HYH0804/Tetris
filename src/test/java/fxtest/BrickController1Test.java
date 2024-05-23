@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/*
-=======
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
 package fxtest;
 
 import com.example.fxtest.BrickController;
@@ -26,7 +22,7 @@ public class BrickController1Test {
     @Test
     public void testMoveL_WhenCanMoveLeft() {
         // Given
-        BrickController brickController = BrickController.getBrickController();
+        BrickController brickController = new BrickController("UP","LEFT","RIGHT","DOWN","SPACE");
         doReturn(true).when(brickMock).canMoveLeft();
 
         // When
@@ -39,7 +35,7 @@ public class BrickController1Test {
     @Test
     public void testMoveL_WhenCannotMoveLeft() {
         // Given
-        BrickController brickController = BrickController.getBrickController();
+        BrickController brickController = new BrickController("UP","LEFT","RIGHT","DOWN","SPACE");
         doReturn(false).when(brickMock).canMoveLeft();
 
         // When
@@ -53,7 +49,7 @@ public class BrickController1Test {
     @Test
     public void testMoveD_WhenCanMoveDown() {
         // Given
-        BrickController brickController = BrickController.getBrickController();
+        BrickController brickController = new BrickController("UP","LEFT","RIGHT","DOWN","SPACE");
         doReturn(true).when(brickMock).canMoveDown();
 
         // When
@@ -66,7 +62,7 @@ public class BrickController1Test {
     @Test
     public void testMoveD_WhenCannotMoveDown() {
         // Given
-        BrickController brickController = BrickController.getBrickController();
+        BrickController brickController = new BrickController("UP","LEFT","RIGHT","DOWN","SPACE");
         doReturn(false).when(brickMock).canMoveDown();
 
         // When
@@ -80,7 +76,7 @@ public class BrickController1Test {
     @Test
     public void testRotate_WhenCanRotate() {
         // Given
-        BrickController brickController = BrickController.getBrickController();
+        BrickController brickController = new BrickController("UP","LEFT","RIGHT","DOWN","SPACE");
         doReturn(true).when(brickMock).canRotate();
 
         // When
@@ -93,7 +89,7 @@ public class BrickController1Test {
     @Test
     public void testRotate_WhenCannotRotate() {
         // Given
-        BrickController brickController = BrickController.getBrickController();
+        BrickController brickController = new BrickController("UP","LEFT","RIGHT","DOWN","SPACE");
         doReturn(false).when(brickMock).canRotate();
 
         // When
@@ -107,7 +103,7 @@ public class BrickController1Test {
     @Test
     public void testStraightD() {
         // Given
-        BrickController brickController = BrickController.getBrickController();
+        BrickController brickController = new BrickController("UP","LEFT","RIGHT","DOWN","SPACE");
 
         // When
         brickController.straightD(brickMock);
@@ -118,8 +114,5 @@ public class BrickController1Test {
     }
 
     // You can add more tests as needed for other methods and edge cases
-<<<<<<< HEAD
-}*/
-=======
 }
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+

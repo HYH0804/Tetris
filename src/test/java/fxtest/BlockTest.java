@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-/*
-=======
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
 package fxtest;
 
+import com.example.fxtest.GameBoard1;
 import com.example.fxtest.RandomGenerator;
 import com.example.fxtest.brick.*;
 import javafx.scene.paint.Color;
@@ -13,10 +10,10 @@ import org.junit.jupiter.api.Test;
 public class BlockTest {
     RandomGenerator rg = new RandomGenerator();
     Block block = new Block(1, 2, Item.ROWDELETE, Color.PALEGOLDENROD); //3
-
+    GameBoard1 gameBoard1 = new GameBoard1();
     @Test
     void generateItem(){
-        Brick itemBrick = rg.generateItem(0, false);
+        Brick itemBrick = rg.generateItem(0, false, gameBoard1);
         Assertions.assertTrue(itemBrick instanceof Brick);
     }
 
@@ -34,7 +31,7 @@ public class BlockTest {
 
     @Test
     void setter(){
-        BrickI brickI = new BrickI(1, 4, Color.BLACK);
+        BrickI brickI = new BrickI(1, 4, Color.BLACK,gameBoard1);
         Block blockA = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockB = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockC = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
@@ -54,7 +51,7 @@ public class BlockTest {
 
     @Test
     void setterJ(){
-        BrickJ brickJ = new BrickJ(1, 4, Color.BLACK);
+        BrickJ brickJ = new BrickJ(1, 4, Color.BLACK,gameBoard1);
         Block blockA = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockB = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockC = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
@@ -74,7 +71,7 @@ public class BlockTest {
 
     @Test
     void setterL(){
-        BrickL brickL = new BrickL(1, 4, Color.BLACK);
+        BrickL brickL = new BrickL(1, 4, Color.BLACK,gameBoard1);
         Block blockA = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockB = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockC = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
@@ -94,7 +91,7 @@ public class BlockTest {
 
     @Test
     void setterO(){
-        BrickO brickO = new BrickO(1, 4, Color.BLACK);
+        BrickO brickO = new BrickO(1, 4, Color.BLACK,gameBoard1);
         Block blockA = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockB = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockC = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
@@ -114,7 +111,7 @@ public class BlockTest {
 
     @Test
     void setterS(){
-        BrickS brickS = new BrickS(1, 4, Color.BLACK);
+        BrickS brickS = new BrickS(1, 4, Color.BLACK,gameBoard1);
         Block blockA = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockB = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockC = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
@@ -134,7 +131,7 @@ public class BlockTest {
 
     @Test
     void setterT(){
-        BrickT brickT = new BrickT(1, 4, Color.BLACK);
+        BrickT brickT = new BrickT(1, 4, Color.BLACK,gameBoard1);
         Block blockA = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockB = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockC = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
@@ -154,7 +151,7 @@ public class BlockTest {
 
     @Test
     void setterZ(){
-        BrickZ brickZ = new BrickZ(1, 4, Color.BLACK);
+        BrickZ brickZ = new BrickZ(1, 4, Color.BLACK,gameBoard1);
         Block blockA = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockB = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
         Block blockC = new Block(5, 5, Item.ROWDELETE, Color.BLACK);
@@ -173,7 +170,5 @@ public class BlockTest {
     }
 
 }
-<<<<<<< HEAD
-*/
-=======
->>>>>>> bbe697f0f626ce69284da1bd18325a3529e425b5
+
+

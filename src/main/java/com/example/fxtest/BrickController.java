@@ -18,7 +18,7 @@ public class BrickController{
     private String HARDDROP;
 
 
-    BrickController(String rotate, String moveL, String moveR, String moveD, String hardDrop){
+    public BrickController(String rotate, String moveL, String moveR, String moveD, String hardDrop){
         // SettingController.getKey(); //키 값들 StartKey 리스트로 가져오기
         SettingModel.init();
         this.ROTATE= rotate;
@@ -27,28 +27,6 @@ public class BrickController{
         this.MOVED= moveD;
         this.HARDDROP= hardDrop;
     }
-    //싱글톤
-
-    public void updateBrickController(){
-        //setting.properties에서 값 가져와서 MOVE에 넣기
-        // Properties 객체 생성
-        Properties settingProperties = new Properties();
-        try {
-            // setting.properties 파일 로드
-            FileInputStream in = new FileInputStream("src/main/resources/setting.properties");
-            settingProperties.load(in);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ROTATE=settingProperties.getProperty("rotate");
-        MOVER=settingProperties.getProperty("moveRight");
-        MOVEL=settingProperties.getProperty("moveLeft");
-        HARDDROP=settingProperties.getProperty("hardDrop");
-        MOVED=settingProperties.getProperty("moveDown");
-    }
-
-
 
     //moveR 이벤트
     public void moveR(Brick brick) {
@@ -113,23 +91,4 @@ public class BrickController{
         return HARDDROP;
     }
 
-    public void setMOVED(String MOVED) {
-        this.MOVED = MOVED;
-    }
-
-    public void setMOVEL(String MOVEL) {
-        this.MOVEL = MOVEL;
-    }
-
-    public void setMOVER(String MOVER) {
-        this.MOVER = MOVER;
-    }
-
-    public void setROTATE(String ROTATE) {
-        this.ROTATE = ROTATE;
-    }
-
-    public void setHARDDROP(String HARDDROP) {
-        this.HARDDROP = HARDDROP;
-    }
 }
