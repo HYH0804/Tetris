@@ -56,10 +56,10 @@ public class Drawing {
     }
 
     //블록 색 삭제
-    public static void colorErase(int x,int y,GridPane boardView){
+    /*public static void colorErase(int x,int y,GridPane boardView){
         Label lableAt = getLableAt(boardView, x, y);
         boardView.getChildren().remove(lableAt);
-    }
+    }*/
 
 
     //특정 GridPane의 인덱스에 있는 Lable 객체 반환
@@ -278,9 +278,9 @@ public class Drawing {
     }*/
     //-1 이면 한칸 위로 , +1 이면 한칸 아래로
 
-    public static void updateAttackBoardView1(List<Integer> removeLineList, Brick currentBrick, int topRowIndex){
+   /* public static void updateAttackBoardView1(List<Integer> removeLineList, Brick currentBrick, int topRowIndex){
 
-    }
+    }*/
 
     //어택 받으면 위로 gui올리는 함수
     public static void attackUpdateBoardView(List<List<Integer>> attackRows ,GridPane boardView,double cellWidth){
