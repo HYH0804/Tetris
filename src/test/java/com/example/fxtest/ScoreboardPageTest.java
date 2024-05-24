@@ -4,9 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -20,44 +20,47 @@ import static org.testfx.matcher.base.NodeMatchers.isFocused;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
 @ExtendWith(ApplicationExtension.class)
-public class StartPageKeyboardTest {
-    private Button twoplayerButton;
-    private Button startButton;
+public class ScoreboardPageTest {
+    private Label selected;
+
+
     @Start
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StartPageKeyboardTest.class.getResource("Start.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartPageKeyboardTest.class.getResource("scoreboard-view.fxml"));
         Parent root = fxmlLoader.load();
-        twoplayerButton = (Button) root.lookup("#twoplayerButton");
-        startButton = (Button) root.lookup("#startButton");
-
+        selected = (Label) root.lookup("#selected");
         Scene scene = new Scene(root, 400, 400);;
         stage.setScene(scene);
         stage.show();
     }
     @Test
-    public void MovingMenu(FxRobot robot) {
-        //robot.clickOn("#settingsButton");
+    public void difficultyItemButtonTest(FxRobot robot) {
         robot.sleep(100);
 
-        robot.push(KeyCode.DOWN);
+        robot.clickOn("#easyBtn");
         robot.sleep(100);
-        verifyThat(twoplayerButton, isFocused());
+        verifyThat(selected, hasText("easy"));
 
-        robot.push(KeyCode.LEFT);
+        robot.clickOn("#normalBtn");
         robot.sleep(100);
-        verifyThat("#infoLabel", hasText("Available keys: Up, Down, Enter"));
+        verifyThat(selected, hasText("normal"));
 
-        robot.push(KeyCode.UP);
+        robot.clickOn("#hardBtn");
         robot.sleep(100);
-        verifyThat(startButton, isFocused());
+        verifyThat(selected, hasText("hard"));
+
+        robot.clickOn("#itemModeBtn");
+        robot.sleep(100);
+        verifyThat(selected, hasText("hard(item)"));
+
     }
     @Test
-    public void Enter(FxRobot robot) {
+    public void goHomeButtonTest(FxRobot robot) {
         robot.sleep(100);
 
-        robot.push(KeyCode.ENTER);
+        robot.clickOn("#GoHomeButton");
         robot.sleep(100);
-        verifyThat(".button", hasText("아이템 모드 실행"));
+        verifyThat("#startButton", hasText("Start Game"));
     }
 
 }
