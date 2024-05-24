@@ -53,6 +53,8 @@ public class ScoreboardPageTest {
         robot.sleep(100);
         verifyThat(selected, hasText("hard(item)"));
 
+        robot.clickOn("#easyBtn");
+        robot.clickOn("#itemModeBtn");
     }
     @Test
     public void goHomeButtonTest(FxRobot robot) {
