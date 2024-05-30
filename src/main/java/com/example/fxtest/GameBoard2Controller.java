@@ -48,6 +48,7 @@ public class GameBoard2Controller implements Initializable {
     Timeline timeline;
     Timeline timeline2;
     Timeline gameTimer;
+    Timeline updateTimer;
 
     RandomGenerator rg = new RandomGenerator();
 
@@ -306,21 +307,17 @@ public class GameBoard2Controller implements Initializable {
     }
 
     private void startTimer() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            // 시간 업데이트
+        remainingTime = 60; // 남은 시간을 초기화
+        timeLabel.setText("Time: " + remainingTime); // 초기 시간 표시
 
-             // 1초 감소
-            // 시간을 표시할 라벨 업데이트
-            if (remainingTime == 0) {
-                remainingTime=0;
-            }else {
-                remainingTime--;
+        updateTimer = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            if (remainingTime > 0) {
+                remainingTime--; // 1초 감소
+                timeLabel.setText("Time: " + remainingTime); // 시간을 표시할 라벨 업데이트
             }
-            timeLabel.setText("Time: " + remainingTime);
-
         }));
-        timeline.setCycleCount(Timeline.INDEFINITE); // 무한 반복
-        timeline.play();
+        updateTimer.setCycleCount(Timeline.INDEFINITE); // 무한 반복
+        updateTimer.play();
     }
 
     //Score 컨트롤 혹은 deleteLine 컨트롤이 일정 int값 이상이면 속도 빨라짐(1초 > 0.8초 > 0.5초). 속성감시 이벤트 리스너
@@ -567,8 +564,12 @@ public class GameBoard2Controller implements Initializable {
 
     private void chageTime(GameBoard1 gameBoard,int player,Timeline timeline) {
         if((gameBoard.deleteLine>=10 && gameBoard.deleteLine!=0) || gameBoard.blockSpon%20 ==0) {
-            gameBoard.deleteLine=0;
-            gameBoard.blockSpon=0;
+            if(gameBoard.blockSpon%20==0){
+                gameBoard.blockSpon=0;
+            }
+            else{
+                gameBoard.deleteLine=0;
+            }
             gameBoard.downScore++;
             System.out.println("changeTime 실행");
             startTimeLine(changeSpeed(difficulty, gameBoard), player,timeline);
@@ -733,10 +734,18 @@ public class GameBoard2Controller implements Initializable {
                     boardView.setOpacity(0);
                     nextBrickView.setOpacity(0);
                     timeline.stop();
+                    if (timeMode){
+                        gameTimer.pause();
+                        updateTimer.pause();
+                    }
                 } else {
                     boardView.setOpacity(1);
                     nextBrickView.setOpacity(1);
                     timeline.play();
+                    if (timeMode){
+                        gameTimer.play();
+                        updateTimer.play();
+                    }
                 }
             } else if (event.getCode() == KeyCode.BACK_SPACE) {
                 // 백스페이스 키가 눌렸을 때의 동작 (게임 종료)

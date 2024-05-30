@@ -278,8 +278,12 @@ public class GameBoardController implements Initializable {
 
     private void chageTime(GameBoard1 gameBoard) {
         if((gameBoard.deleteLine>=10 && gameBoard.deleteLine!=0) || gameBoard.blockSpon%20 ==0) {
-            gameBoard.deleteLine=0;
-            gameBoard.blockSpon=0;
+            if(gameBoard.blockSpon%20 ==0) {
+                gameBoard.blockSpon=0;
+            }
+            else {
+                gameBoard.deleteLine=0;
+            }
             gameBoard.downScore++;
             System.out.println("changeTime 실행");
             startTimeLine(changeSpeed(difficulty, gameBoard));
