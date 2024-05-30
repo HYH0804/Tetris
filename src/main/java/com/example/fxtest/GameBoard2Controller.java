@@ -631,7 +631,7 @@ public class GameBoard2Controller implements Initializable {
         if(n==1) {
             if (gameBoard.deleteLine >= 10  && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick = rg.generateItem(0, colorBlindness, gameBoard);
-                gameBoard.deleteLine = 0;
+                //gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
             } else {
                 nextBrick = rg.genarateNormal(0, colorBlindness, gameBoard);
