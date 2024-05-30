@@ -101,7 +101,7 @@ public class BrickW implements Brick{
             int x = block2.getX()+1;
             int y = block2.getY()-1;
             int[][] board= gameBoard.getBoard();
-            if (board[x][y] != 0) {
+            if (board[x-1][y] != 0) {
                 possible = false;//이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)//이동 불가
                 return false;
             }
@@ -153,7 +153,7 @@ public class BrickW implements Brick{
             int x = block2.getX()+1;
             int y = block2.getY()+1;
             int[][] board= gameBoard.getBoard();
-            if (board[x][y] != 0) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
+            if (board[x-1][y] != 0) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 possible = false;  //이동 불가
                 return false;
             }
@@ -194,9 +194,10 @@ public class BrickW implements Brick{
             if (!(y < gameBoard.WIDTH && y >= 0 && x< gameBoard.HEIGHT && x>=0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
-            if(possible==false){
-                return false;
+            if(board[x][y]!=0){
+                possible=false;
             }
+
         }
         return true; //이동 가능
     }

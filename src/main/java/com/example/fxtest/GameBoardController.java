@@ -107,7 +107,7 @@ public class GameBoardController implements Initializable {
     void init(){
         gameBoard=new GameBoard1();
         gameBoard.gameOver=false;
-        nextBrick=rg.genarateNormal(0,colorBlindness, gameBoard);
+        nextBrick=rg.genarateNormal(difficulty,colorBlindness, gameBoard);
         gameBoard.downScore=1;
 
         colorBlindness=getColorBliness();
@@ -131,11 +131,11 @@ public class GameBoardController implements Initializable {
         init();
 
 
-        currentBrick=rg.genarateNormal(0,colorBlindness, gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
+        currentBrick=rg.genarateNormal(difficulty,colorBlindness, gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick= new BrickI(0,4,Color.GREEN );
         //currentBrick = new BrickO(0,4,Color.SKYBLUE);
 
-        nextBrick=rg.genarateNormal(0,colorBlindness,gameBoard);
+        nextBrick=rg.genarateNormal(difficulty,colorBlindness,gameBoard);
         //nextBrick=new BrickI(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
 
@@ -325,8 +325,8 @@ public class GameBoardController implements Initializable {
             //gameBoard.deleteLine=0;
         }
         else{
-            //nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
-            nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
+            nextBrick=rg.genarateNormal(difficulty, colorBlindness,gameBoard);
+            //nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
         }
         gameBoard.blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
@@ -512,16 +512,19 @@ public class GameBoardController implements Initializable {
 
 
     public double changeSpeed(int difficulty, GameBoard1 gameBoard){
+        if(gameBoard.speed<=0.1){
+            return 0.1;
+        }
         if(difficulty==0){ //이지
-            gameBoard.speed=gameBoard.speed*0.92;
+            gameBoard.speed=gameBoard.speed-0.08;
             return gameBoard.speed;
         }
         else if(difficulty==1){ //노말
-            gameBoard.speed= gameBoard.speed*0.9;
+            gameBoard.speed= gameBoard.speed-0.1;
             return gameBoard.speed;
         }
         else{ //하드
-            gameBoard.speed= gameBoard.speed*0.88;
+            gameBoard.speed= gameBoard.speed-0.12;
             return gameBoard.speed;
         }
     }

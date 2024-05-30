@@ -161,8 +161,8 @@ public class GameBoard2Controller implements Initializable {
 
         //currentBrick=rg.genarateNormal(0,colorBlindness,gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
-        nextBrick=rg.genarateNormal(0,colorBlindness, gameBoard);
-        nextBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
+        nextBrick=rg.genarateNormal(difficulty,colorBlindness, gameBoard);
+        nextBrick2=rg.genarateNormal(difficulty,colorBlindness, gameBoard2);
 
         colorBlindness=getColorBliness();
         System.out.println("초기화완료");
@@ -235,15 +235,15 @@ public class GameBoard2Controller implements Initializable {
         init();
 
 
-        currentBrick=rg.genarateNormal(0,colorBlindness,gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
+        currentBrick=rg.genarateNormal(difficulty,colorBlindness,gameBoard); //일단 이지로, 여기서 모드 받아와야됨.
         //currentBrick= new BrickI(0,4,Color.GREEN );
         //currentBrick = new BrickO(0,4,Color.SKYBLUE);
-        currentBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
+        currentBrick2=rg.genarateNormal(difficulty,colorBlindness, gameBoard2);
 
-        nextBrick=rg.genarateNormal(0,colorBlindness, gameBoard);
+        nextBrick=rg.genarateNormal(difficulty,colorBlindness, gameBoard);
         //nextBrick=new BrickI(0,4,Color.GREEN );
         //nextBrick = new BrickO(0,4,Color.SKYBLUE);
-        nextBrick2=rg.genarateNormal(0,colorBlindness, gameBoard2);
+        nextBrick2=rg.genarateNormal(difficulty,colorBlindness, gameBoard2);
 
         brickController = new BrickController(SettingModel.getRotate1(),SettingModel.getMoveL1(), SettingModel.getMoveR1(),SettingModel.getMoveD1(),SettingModel.getHardDrop1()); //키 값 전부 field에 세팅
         brickController2 = new BrickController(SettingModel.getRotate2(),SettingModel.getMoveL2(), SettingModel.getMoveR2(),SettingModel.getMoveD2(),SettingModel.getHardDrop2());
@@ -577,20 +577,23 @@ public class GameBoard2Controller implements Initializable {
     }
 
     public double changeSpeed(int difficulty, GameBoard1 gameBoard){
+        if(gameBoard.speed<=0.1){
+            return 0.1;
+        }
         if(difficulty==0){ //이지
-            gameBoard.speed=gameBoard.speed*0.92;
+            gameBoard.speed=gameBoard.speed-0.08;
             System.out.println("difficulty = " + difficulty);
             System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
         }
         else if(difficulty==1){ //노말
-            gameBoard.speed= gameBoard.speed*0.9;
+            gameBoard.speed= gameBoard.speed-0.1;
             System.out.println("difficulty = " + difficulty);
             System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
         }
         else{ //하드
-            gameBoard.speed= gameBoard.speed*0.88;
+            gameBoard.speed= gameBoard.speed-0.12;
             System.out.println("difficulty = " + difficulty);
             System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
@@ -635,8 +638,8 @@ public class GameBoard2Controller implements Initializable {
                 //gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
             } else {
-                //nextBrick = rg.genarateNormal(difficulty, colorBlindness, gameBoard);
-                nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
+                nextBrick = rg.genarateNormal(difficulty, colorBlindness, gameBoard);
+                //nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
                 gameBoard.blockSpon++;
             }
         }
@@ -644,11 +647,11 @@ public class GameBoard2Controller implements Initializable {
         if(n==2) {
             if (gameBoard.deleteLine >= 10  && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick2 = rg.generateItem(difficulty, colorBlindness, gameBoard);
-                gameBoard.deleteLine = 0;
+                //gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
             } else {
                 nextBrick2 = rg.genarateNormal(difficulty, colorBlindness, gameBoard);
-                //nextBrick=rg.generateItem(difficulty,colorBlindness);
+                //nextBrick2 =rg.generateItem(difficulty,colorBlindness,gameBoard);
                 gameBoard.blockSpon++;
             }
 

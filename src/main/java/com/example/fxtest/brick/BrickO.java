@@ -45,65 +45,6 @@ public class BrickO implements Brick{
     }
     @Override
     public boolean canRotate() { // 0 > 1 > 2 > 3
-        int nextShape = (this.shape + 1) % 4; //다음 회전모양
-        List<Block> temp = new ArrayList<>();
-
-        //회전 후 a,b,c,d 임시 저장 및 세팅
-        Block Rotate_a;
-        Block Rotate_b;
-        Block Rotate_c;
-        Block Rotate_d;
-
-        if (nextShape == 0) {
-            Rotate_a = new Block(b.getX(), b.getY() - 1);
-            Rotate_b = new Block(b.getX(), b.getY()); // b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() + 1, b.getY() - 1);
-            Rotate_d = new Block(b.getX() + 1, b.getY());
-            temp.add(Rotate_a);
-            temp.add(Rotate_b);
-            temp.add(Rotate_c);
-            temp.add(Rotate_d);
-
-        } else if (nextShape == 1) {
-            Rotate_a = new Block(b.getX() - 1, b.getY());
-            Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() - 1, b.getY() - 1);
-            Rotate_d = new Block(b.getX(), b.getY() - 1);
-            temp.add(Rotate_a);
-            temp.add(Rotate_b);
-            temp.add(Rotate_c);
-            temp.add(Rotate_d);
-        } else if (nextShape == 2) {
-            Rotate_a = new Block(b.getX(), b.getY()+1);
-            Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() - 1, b.getY() + 1);
-            Rotate_d = new Block(b.getX() - 1, b.getY());
-            temp.add(Rotate_a);
-            temp.add(Rotate_b);
-            temp.add(Rotate_c);
-            temp.add(Rotate_d);
-        } else if (nextShape == 3) {
-            Rotate_a = new Block(b.getX() +1, b.getY());
-            Rotate_b = new Block(b.getX(), b.getY()); //b 중심점이라 변환 X
-            Rotate_c = new Block(b.getX() + 1, b.getY() + 1);
-            Rotate_d = new Block(b.getX(), b.getY() + 1);
-            temp.add(Rotate_a);
-            temp.add(Rotate_b);
-            temp.add(Rotate_c);
-            temp.add(Rotate_d);
-        }
-        //회전 후 a,b,c,d 임시 저장 및 세팅
-
-        //여기부터는 회전시킨 Rotate 블록 a b c d 의 좌표값과 동일한 Board 좌표값에 1이 있는지 없는지, a b c d 위치에 1이 하나라도 있으면 회전 불가 return false , 모두 없으면 회전 가능 return true
-        for (Block block : temp) {
-            int x = block.getX();
-            int y = block.getY();
-            int[][] board= gameBoard.getBoard();
-            if (!(y < gameBoard.WIDTH && y >= 0 && x<gameBoard.HEIGHT && x>=0 && gameBoard.board[x][y] == 0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
-                return false;  //이동 불가
-
-            }
-        }
         return true; //이동 가능
     }
 
@@ -208,48 +149,19 @@ public class BrickO implements Brick{
         //preChange();
 
 
-/*
-        //회전 후 a b c d 좌표 변경 + (shape+1)%4
-        this.shape = (this.shape+1)%4; //다음 회전모양
-        int x=b.getX(); // 회전 중심 x
-        int y=b.getY(); // 회전 중심 y
-        if(shape==0){ //3 > 0 회전
-            a.setX(b.getX());
-            a.setY(b.getY() - 1);
-            //b는 중심점이라 그대로
-            c.setX(b.getX() + 1);
-            c.setY(b.getY() - 1);
-            d.setX(b.getX() + 1);
-            d.setY(b.getY());
-        }
-        else if (shape==1) { //0 > 1 회전
-            a.setX(b.getX() - 1);
-            a.setY(b.getY());
-            //b는 중심점이라 그대로
-            c.setX(b.getX() - 1);
-            c.setY(b.getY() - 1);
-            d.setX(b.getX());
-            d.setY(b.getY() - 1);
-        }
-        else if (shape==2) { //1 > 2 회전
-            a.setX(b.getX());
-            a.setY(b.getY() + 1);
-            //b는 중심점이라 그대로
-            c.setX(b.getX() - 1);
-            c.setY(b.getY() + 1);
-            d.setX(b.getX() - 1);
-            d.setY(b.getY());
-        }
-        else{ //2 > 3 회전
-            a.setX(b.getX()+1);
-            a.setY(b.getY());
-            //b는 중심점이라 그대로
-            c.setX(b.getX() + 1);
-            c.setY(b.getY() + 1);
-            d.setX(b.getX());
-            d.setY(b.getY() + 1);
-        }
-        //돌린 후 1 세팅*/
+
+        // 각 블록의 현재 위치를 임시 변수에 저장
+        int aX = a.getX(), aY = a.getY();
+        int bX = b.getX(), bY = b.getY();
+        int cX = c.getX(), cY = c.getY();
+        int dX = d.getX(), dY = d.getY();
+
+        // 각 블록을 시계 방향으로 한 칸씩 이동
+        a.setX(bX); a.setY(bY); // a는 b의 위치로
+        b.setX(dX); b.setY(dY); // b는 c의 위치로
+        c.setX(aX); c.setY(aY); // c는 d의 위치로
+        d.setX(cX); d.setY(cY); // d는 a의 위치로
+        //돌린 후 1 세팅
         //postChange();
     }
 
