@@ -88,12 +88,14 @@ public class BrickW implements Brick{
             int x = block.getX();
             int y = block.getY();
             int[][] board= gameBoard.getBoard();
+
             if(!(y < gameBoard.WIDTH && y >= 0 && x< gameBoard.HEIGHT && x>=0 && board[x][y] == 0)){
                 return false;
             }
             if(possible==false){
                 return false;
             }
+
         }
         for (Block block2 : temp2) {
             int x = block2.getX()+1;
@@ -139,6 +141,7 @@ public class BrickW implements Brick{
             int x = block.getX();
             int y = block.getY();
             int[][] board= gameBoard.getBoard();
+
             if(!(y < gameBoard.WIDTH && y >= 0 && x< gameBoard.HEIGHT && x>=0 && board[x][y] == 0)){
                 return false;
             }
@@ -187,11 +190,12 @@ public class BrickW implements Brick{
             int x = block.getX();
             int y = block.getY();
             int[][] board= gameBoard.getBoard();
+
             if (!(y < gameBoard.WIDTH && y >= 0 && x< gameBoard.HEIGHT && x>=0)) {   //이동 후 각 블록에 대해 ( board 밖 혹은 이미 블록이 있을때)
                 return false;  //이동 불가
             }
-            if(board[x][y] != 0){
-                possible=false;
+            if(possible==false){
+                return false;
             }
         }
         return true; //이동 가능

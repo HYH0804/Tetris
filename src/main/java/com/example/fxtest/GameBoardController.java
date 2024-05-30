@@ -321,12 +321,12 @@ public class GameBoardController implements Initializable {
 
         //nextBrick 랜덤 뽑아와서 세팅
         if(gameBoard.deleteLine>=10 && gameBoard.deleteLine!=0 && itemMode==true ) {
-            nextBrick = rg.generateItem(0, colorBlindness,gameBoard);
+            nextBrick = rg.generateItem(difficulty, colorBlindness,gameBoard);
             //gameBoard.deleteLine=0;
         }
         else{
-            nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
-            //nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
+            //nextBrick=rg.genarateNormal(0, colorBlindness,gameBoard);
+            nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
         }
         gameBoard.blockSpon++;
         //nextBrick=new BrickZ(0,4,Color.GREEN );
@@ -421,6 +421,7 @@ public class GameBoardController implements Initializable {
                     // 아래 이동 키가 눌렸을 때의 동작
                     brickController.moveD(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.removeEmptyCells(boardView, gameBoard.board);
                     Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                     // 회전 키가 눌렸을 때의 동작
@@ -444,6 +445,7 @@ public class GameBoardController implements Initializable {
                         gameBoard.turnEnd = true;
                         //시작부터 바로 Space바
                         gameBoard.whileGame=true;
+                        Drawing.removeEmptyCells(boardView, gameBoard.board);
                         Drawing.colorFill(currentBrick, boardView,cellWidth);
                         //떨구고 바로 블록 뽑아옴
                         minute10();

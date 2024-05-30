@@ -631,23 +631,23 @@ public class GameBoard2Controller implements Initializable {
         //nextBrick 랜덤 뽑아와서 세팅
         if(n==1) {
             if (gameBoard.deleteLine >= 10  && gameBoard.deleteLine != 0 && itemMode == true) {
-                nextBrick = rg.generateItem(0, colorBlindness, gameBoard);
+                nextBrick = rg.generateItem(difficulty, colorBlindness, gameBoard);
                 //gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
             } else {
-                nextBrick = rg.genarateNormal(0, colorBlindness, gameBoard);
-                //nextBrick=rg.generateItem(difficulty,colorBlindness);
+                //nextBrick = rg.genarateNormal(difficulty, colorBlindness, gameBoard);
+                nextBrick=rg.generateItem(difficulty,colorBlindness,gameBoard);
                 gameBoard.blockSpon++;
             }
         }
 
         if(n==2) {
             if (gameBoard.deleteLine >= 10  && gameBoard.deleteLine != 0 && itemMode == true) {
-                nextBrick2 = rg.generateItem(0, colorBlindness, gameBoard);
+                nextBrick2 = rg.generateItem(difficulty, colorBlindness, gameBoard);
                 gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
             } else {
-                nextBrick2 = rg.genarateNormal(0, colorBlindness, gameBoard);
+                nextBrick2 = rg.genarateNormal(difficulty, colorBlindness, gameBoard);
                 //nextBrick=rg.generateItem(difficulty,colorBlindness);
                 gameBoard.blockSpon++;
             }
@@ -770,6 +770,7 @@ public class GameBoard2Controller implements Initializable {
                     // 아래 이동 키가 눌렸을 때의 동작
                     brickController.moveD(currentBrick);
                     printBlock(currentBrick);
+                    Drawing.removeEmptyCells(boardView, gameBoard.board);
                     Drawing.colorFill(currentBrick,boardView,cellWidth);
                 } else if (keyValue.equals(brickController.getROTATE()) || keyValue.toLowerCase().equals(brickController.getROTATE())) {
                     // 회전 키가 눌렸을 때의 동작
@@ -796,10 +797,13 @@ public class GameBoard2Controller implements Initializable {
                         Drawing.colorFill(currentBrick, boardView,cellWidth);
                         //떨구고 바로 블록 뽑아옴
                         if(player==1) {
+                            Drawing.removeEmptyCells(boardView, gameBoard.board);
                             minute10();
                         }
                         else {
+                            Drawing.removeEmptyCells(boardView2, gameBoard2.board);
                             minute10_2();
+
                         }
                         timeline.play();
                         if(gameBoard.gameOver){

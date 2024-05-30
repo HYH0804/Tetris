@@ -337,4 +337,18 @@ public class Drawing {
             nextBrickView.add(label, y, x);
         }
     }
+
+    public static void removeEmptyCells(GridPane boardView, int[][] board) {
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[0].length; x++) {
+                if (board[y][x] == 0) {
+                    Label labelToRemove = getLableAt(boardView, x, y);
+                    if (labelToRemove != null) {
+                        boardView.getChildren().remove(labelToRemove);
+                    }
+                }
+            }
+        }
+    }
+
 }
