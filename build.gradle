@@ -45,6 +45,11 @@ dependencies {
     implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+    implementation 'org.openjfx:javafx-controls:17.0.1'
+    implementation 'org.openjfx:javafx-base:17.0.1'
+    implementation 'org.openjfx:javafx-graphics:17.0.1'
+
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -63,6 +68,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+test {
+    jvmArgs '--add-exports=javafx.graphics/com.sun.javafx.application=org.testfx'
+}
+
 
 jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")

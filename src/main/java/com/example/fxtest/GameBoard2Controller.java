@@ -333,7 +333,7 @@ public class GameBoard2Controller implements Initializable {
             if (isLeftPlayerControl(event)) {
                 regiBrickEvent(brickController,currentBrick,boardView,gameBoard,nextBrickView,timeline,1,event);
             }
-            if (isRightPlayerControl(event)){
+            else if (isRightPlayerControl(event)){
                 regiBrickEvent(brickController2,currentBrick2,boardView2,gameBoard2,nextBrickView2,timeline2,2,event);
             }
             event.consume(); // Ensure the event is not propagated further unnecessarily

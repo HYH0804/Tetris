@@ -111,7 +111,7 @@ public class SettingController implements Initializable {
     public void onResetScoreBButton(){
         String[] difficulty = {"easy", "normal", "hard"};
         for(String difficult : difficulty){
-            String path = "src/main/resources/score/" + difficult + ".txt";
+            String path = System.getProperty("user.home") + File.separator + "score" + File.separator + difficult + ".txt";
             try {
                 // FileWriter를 사용하여 파일 쓰기 스트림 열기
                 FileWriter fileWriter = new FileWriter(path);
@@ -134,7 +134,7 @@ public class SettingController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            path = "src/main/resources/score/" + difficult + "(item).txt";
+            path = System.getProperty("user.home") + File.separator + "score" + File.separator + difficult + "(item).txt";
             try {
                 // FileWriter를 사용하여 파일 쓰기 스트림 열기
                 FileWriter fileWriter = new FileWriter(path);

@@ -7,6 +7,7 @@
 <AnchorPane fx:id="keySettingPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxtest.KeySettingController">
    <VBox fx:id="keySettingVbox" alignment="CENTER" spacing="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0">
       <children>
+         <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="1P" style="-fx-background-color: transparent; -fx-font-size: 16px;" disable="true" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Rotate" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true" />
          <Label fx:id="rotate1" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="rotate" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Left" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true"/>
@@ -21,6 +22,7 @@
    </VBox>
    <VBox fx:id="keySettingVbox2" alignment="CENTER" spacing="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0">
       <children>
+         <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="2P" style="-fx-background-color: transparent; -fx-font-size: 16px;" disable="true" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Rotate" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true" />
          <Label fx:id="rotate2" alignment="CENTER" prefHeight="45.0" prefWidth="110.0" style="-fx-border-width: 2; -fx-border-color: BLACK;" text="rotate" />
          <Button alignment="CENTER" prefHeight="20.0" prefWidth="110.0" text="Left" style="-fx-background-color: transparent; -fx-font-size: 14px;" disable="true"/>

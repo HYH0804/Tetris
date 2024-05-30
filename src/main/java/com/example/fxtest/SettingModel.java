@@ -1,9 +1,7 @@
 package com.example.fxtest;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -18,6 +16,7 @@ public class SettingModel {
 
     private static final String[] buttonName = {"rotate", "moveLeft", "moveRight", "moveDown", "hardDrop"};
 
+    public static final String SETTINGS_FILE = System.getProperty("user.home") + File.separator + "score" + File.separator + "setting.properties";
 
 
 
@@ -37,20 +36,30 @@ public class SettingModel {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }*/
-              ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-              if (classLoader == null) {
-                  classLoader = Class.class.getClassLoader();
+              File settingsFile = new File(SETTINGS_FILE);
+              File settingsDir = settingsFile.getParentFile();
+              if (!settingsDir.exists()) {
+                  settingsDir.mkdirs();
               }
-              try (InputStream in = classLoader.getResourceAsStream("setting.properties")) {
-                  if (in == null) {
-                      throw new IOException("Properties file not found");
+              if (!settingsFile.exists()) {
+                  try (InputStream in = Main.class.getClassLoader().getResourceAsStream("setting.properties")) {
+                      if (in == null) {
+                          throw new RuntimeException("Default settings file not found in JAR");
+                      }
+                      Files.copy(in, settingsFile.toPath());
+                      System.out.println("Default settings file copied to " + SETTINGS_FILE);
+                  } catch (IOException e) {
+                      throw new RuntimeException("Failed to create default settings file", e);
                   }
+              }
+              try {
+                  FileInputStream in = new FileInputStream(SETTINGS_FILE);
                   properties = new Properties();
                   properties.load(in);
+                  in.close();
               } catch (IOException e) {
                   throw new RuntimeException(e);
               }
-
             // keyVal
             for(int i = 0; i < buttonName.length; i++){
                 keyVal.add(properties.getProperty(buttonName[i] + "1"));
@@ -90,7 +99,7 @@ public class SettingModel {
 
 
         // save to .proeprties files
-        try (FileOutputStream out = new FileOutputStream("src/main/resources/setting.properties")) {
+        try (FileOutputStream out = new FileOutputStream(SETTINGS_FILE)) {
             properties.store(out, null);
         } catch (IOException e) {
             e.printStackTrace();

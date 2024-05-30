@@ -121,13 +121,13 @@ class BrickOTest {
         brickO.rotate();
         //then
         Assertions.assertEquals(blockA.getX(), 4);
-        Assertions.assertEquals(blockA.getY(), 3);
-        Assertions.assertEquals(blockB.getX(), 4);
+        Assertions.assertEquals(blockA.getY(), 4);
+        Assertions.assertEquals(blockB.getX(), 5);
         Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 5);
+        Assertions.assertEquals(blockC.getX(), 4);
         Assertions.assertEquals(blockC.getY(), 3);
         Assertions.assertEquals(blockD.getX(), 5);
-        Assertions.assertEquals(blockD.getY(), 4);
+        Assertions.assertEquals(blockD.getY(), 3);
     }
 
     @Test
@@ -142,13 +142,13 @@ class BrickOTest {
         brickO.rotate();
         //then
         Assertions.assertEquals(blockA.getX(), 4);
-        Assertions.assertEquals(blockA.getY(), 3);
-        Assertions.assertEquals(blockB.getX(), 4);
+        Assertions.assertEquals(blockA.getY(), 4);
+        Assertions.assertEquals(blockB.getX(), 5);
         Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 5);
+        Assertions.assertEquals(blockC.getX(), 4);
         Assertions.assertEquals(blockC.getY(), 3);
         Assertions.assertEquals(blockD.getX(), 5);
-        Assertions.assertEquals(blockD.getY(), 4);
+        Assertions.assertEquals(blockD.getY(), 3);
     }
 
     @Test
@@ -163,13 +163,13 @@ class BrickOTest {
         brickO.rotate();
         //then
         Assertions.assertEquals(blockA.getX(), 4);
-        Assertions.assertEquals(blockA.getY(), 3);
-        Assertions.assertEquals(blockB.getX(), 4);
+        Assertions.assertEquals(blockA.getY(), 4);
+        Assertions.assertEquals(blockB.getX(), 5);
         Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 5);
+        Assertions.assertEquals(blockC.getX(), 4);
         Assertions.assertEquals(blockC.getY(), 3);
         Assertions.assertEquals(blockD.getX(), 5);
-        Assertions.assertEquals(blockD.getY(), 4);
+        Assertions.assertEquals(blockD.getY(), 3);
     }
 
     @Test
@@ -183,13 +183,13 @@ class BrickOTest {
         brickO.rotate();
         //then
         Assertions.assertEquals(blockA.getX(), 4);
-        Assertions.assertEquals(blockA.getY(), 3);
-        Assertions.assertEquals(blockB.getX(), 4);
+        Assertions.assertEquals(blockA.getY(), 4);
+        Assertions.assertEquals(blockB.getX(), 5);
         Assertions.assertEquals(blockB.getY(), 4);
-        Assertions.assertEquals(blockC.getX(), 5);
+        Assertions.assertEquals(blockC.getX(), 4);
         Assertions.assertEquals(blockC.getY(), 3);
         Assertions.assertEquals(blockD.getX(), 5);
-        Assertions.assertEquals(blockD.getY(), 4);
+        Assertions.assertEquals(blockD.getY(), 3);
 
     }
 

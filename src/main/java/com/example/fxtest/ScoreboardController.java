@@ -127,8 +127,29 @@ public class ScoreboardController implements Initializable {
 
     public static void getRanking() {
         String temp = getText();
-        String path = "src/main/resources/score/" + temp + ".txt";
+        String path = System.getProperty("user.home") + File.separator + "score" + File.separator + temp + ".txt";
+        File scoreFile = new File(path);
 
+        // 파일이 존재하지 않으면 기본 값을 사용해 파일 생성
+        if (!scoreFile.exists()) {
+            try {
+                // score 디렉토리가 존재하지 않으면 생성
+                File parentDir = scoreFile.getParentFile();
+                if (!parentDir.exists()) {
+                    parentDir.mkdirs();
+                }
+
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(scoreFile))) {
+                    for (int i = 0; i < 10; i++) {
+                        bw.write("DefaultName 0");
+                        bw.newLine();
+                    }
+                }
+                System.out.println("Default score file created at " + path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         // Score.txt 파일에서 정보를 읽어와 스코어보드에 추가
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -173,8 +194,29 @@ public class ScoreboardController implements Initializable {
         // 뭐로했는지 아는 먼가가 필요함 -> static에 값 대입후 실행해야함
 
         String temp = getText();
-        String path = "src/main/resources/score/" + temp + ".txt";
-        try {
+        String path = System.getProperty("user.home") + File.separator + "score" + File.separator + temp + ".txt";
+        File scoreFile = new File(path);
+
+        // 파일이 존재하지 않으면 기본 값을 사용해 파일 생성
+        if (!scoreFile.exists()) {
+            try {
+                // score 디렉토리가 존재하지 않으면 생성
+                File parentDir = scoreFile.getParentFile();
+                if (!parentDir.exists()) {
+                    parentDir.mkdirs();
+                }
+
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(scoreFile))) {
+                    for (int i = 0; i < 10; i++) {
+                        bw.write("DefaultName 0");
+                        bw.newLine();
+                    }
+                }
+                System.out.println("Default score file created at " + path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }try {
             // FileWriter를 사용하여 파일 쓰기 스트림 열기
             FileWriter fileWriter = new FileWriter(path);
 
