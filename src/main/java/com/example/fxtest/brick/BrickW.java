@@ -305,7 +305,7 @@ public class BrickW implements Brick{
             d.setX(d.getX()+1);
             e.setX(e.getX()+1);
             f.setX(f.getX()+1);
-
+            gameBoard.updateScore(gameBoard.downScore);
         }
     }
 
