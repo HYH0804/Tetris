@@ -566,7 +566,7 @@ public class GameBoard2Controller implements Initializable {
     }
 
     private void chageTime(GameBoard1 gameBoard,int player,Timeline timeline) {
-        if((gameBoard.deleteLine>=3 && gameBoard.deleteLine!=0) || gameBoard.blockSpon%20 ==0) {
+        if((gameBoard.deleteLine>=10 && gameBoard.deleteLine!=0) || gameBoard.blockSpon%20 ==0) {
             gameBoard.deleteLine=0;
             gameBoard.blockSpon=0;
             gameBoard.downScore++;
@@ -577,19 +577,19 @@ public class GameBoard2Controller implements Initializable {
 
     public double changeSpeed(int difficulty, GameBoard1 gameBoard){
         if(difficulty==0){ //이지
-            gameBoard.speed=gameBoard.speed*0.5;
+            gameBoard.speed=gameBoard.speed*0.92;
             System.out.println("difficulty = " + difficulty);
             System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
         }
         else if(difficulty==1){ //노말
-            gameBoard.speed= gameBoard.speed*0.5;
+            gameBoard.speed= gameBoard.speed*0.9;
             System.out.println("difficulty = " + difficulty);
             System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
         }
         else{ //하드
-            gameBoard.speed= gameBoard.speed*0.5;
+            gameBoard.speed= gameBoard.speed*0.88;
             System.out.println("difficulty = " + difficulty);
             System.out.println("gameBoard.speed = " + gameBoard.speed);
             return gameBoard.speed;
@@ -629,7 +629,7 @@ public class GameBoard2Controller implements Initializable {
         }
         //nextBrick 랜덤 뽑아와서 세팅
         if(n==1) {
-            if (gameBoard.deleteLine % 1 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+            if (gameBoard.deleteLine >= 10  && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick = rg.generateItem(0, colorBlindness, gameBoard);
                 gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
@@ -641,7 +641,7 @@ public class GameBoard2Controller implements Initializable {
         }
 
         if(n==2) {
-            if (gameBoard.deleteLine % 1 == 0 && gameBoard.deleteLine != 0 && itemMode == true) {
+            if (gameBoard.deleteLine >= 10  && gameBoard.deleteLine != 0 && itemMode == true) {
                 nextBrick2 = rg.generateItem(0, colorBlindness, gameBoard);
                 gameBoard.deleteLine = 0;
                 gameBoard.blockSpon++;
