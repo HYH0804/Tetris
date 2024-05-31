@@ -2,6 +2,4 @@
 
 [https://www.notion.so/SE_Tetris-887a64a5115947afab3e1ade23c30857?pvs=4](https://www.notion.so/SE_Tetris-887a64a5115947afab3e1ade23c30857?pvs=4)
 
-
-
-![Uploading image.png…]()
+![캡처](https://github.com/HYH0804/Tetris/assets/127603139/c3227e42-8f4c-4f03-af56-b5d2620fc63d)
