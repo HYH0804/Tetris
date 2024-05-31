@@ -2,7 +2,7 @@
 
 [https://www.notion.so/SE_Tetris-887a64a5115947afab3e1ade23c30857?pvs=4](https://www.notion.so/SE_Tetris-887a64a5115947afab3e1ade23c30857?pvs=4)
 
-아이템 명세 노션 링크 : https://www.notion.so/d94c442adf34433386fdbed219c35109?pvs=4
+아이템 명세 노션 링크 : [https://www.notion.so/d94c442adf34433386fdbed219c35109?pvs=4](https://onyx-paddleboat-050.notion.site/d94c442adf34433386fdbed219c35109?pvs=4)
 
 
 
