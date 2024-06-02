@@ -4,6 +4,9 @@
 
 아이템 명세 노션 링크 : [https://www.notion.so/d94c442adf34433386fdbed219c35109?pvs=4](https://onyx-paddleboat-050.notion.site/d94c442adf34433386fdbed219c35109?pvs=4)
 
+EXE 파일 
+https://drive.google.com/file/d/1dojBrBCReYC8MGLDF81CNxNQ5K3ug-yU/view?usp=drive_link
+
 
 
 ![캡처](https://github.com/HYH0804/Tetris/assets/127603139/c3227e42-8f4c-4f03-af56-b5d2620fc63d)
