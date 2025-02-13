@@ -59,7 +59,7 @@ Software Engineering Course
 
 ## 테스트
 - 단위 테스트를 작성하였음
-- 모든 코드에 대한 테스트 커버리지 70% 달성.
+- 모든 코드에 대한 테스트 커버리지 66% 달성.
   
 ![화면 캡처 2025-02-13 115308](https://github.com/user-attachments/assets/46d13dbd-c39f-46dd-81fc-5141d81af660)
 
