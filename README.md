@@ -74,4 +74,3 @@ https://drive.google.com/file/d/1dojBrBCReYC8MGLDF81CNxNQ5K3ug-yU/view?usp=drive
 
 
 
-![캡처](https://github.com/HYH0804/Tetris/assets/127603139/c3227e42-8f4c-4f03-af56-b5d2620fc63d)
